@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Bếp Việt: Tiệm Bún Số 7 - Demo v7</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -1037,20 +1037,149 @@ button { font-family: inherit; }
   gap: 12px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
+/* ===== RESPONSIVE - MOBILE ===== */
+@media (max-width: 768px) {
   .menu-logo { font-size: 2.5em; }
   .menu-subtitle { font-size: 1.1em; }
-  .game-header { font-size: 0.85em; }
-  .stat-value { font-size: 1em; }
-  .timer-bar-container { margin: 0 8px; }
-  .customer-card { width: 145px; }
-  .customer-emoji { font-size: 40px; }
-  .pot, .grill { height: 150px; }
+  .menu-tagline { font-size: 0.9em; padding: 0 10px; }
+  
+  /* Header gọn hơn */
+  .game { padding: 8px; }
+  .game-header {
+    padding: 8px 12px;
+    gap: 6px;
+    font-size: 0.8em;
+    border-radius: 8px;
+  }
+  .stat { gap: 4px; font-size: 0.85em; }
+  .stat-icon { font-size: 1em; }
+  .stat-value { font-size: 0.95em; }
+  .timer-bar-container { 
+    width: 100%;
+    flex: 1 1 100%;
+    margin: 4px 0;
+    order: 10; /* xuống cuối */
+  }
+  .pause-btn { padding: 4px 10px; font-size: 0.8em; }
+  
+  /* Game area: stack 1 cột */
+  .game-area { 
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  /* Khách hàng nhỏ hơn */
+  .customer-card { 
+    width: calc(50% - 6px);
+    padding: 8px;
+  }
+  .customer-emoji { font-size: 35px; }
+  .customer-name { font-size: 0.9em; }
+  .customer-order { font-size: 0.75em; padding: 4px 6px; }
+  .customer-trait { font-size: 0.7em; }
+  .customers-list { gap: 8px; }
+  .customers-empty { padding: 20px; font-size: 0.9em; }
+  
+  /* Bếp + Lò nhỏ hơn */
+  .pot, .grill { height: 130px; padding: 12px; }
+  .pot-status, .grill-status { font-size: 0.85em; }
+  .cooking-area-grid { gap: 10px; }
+  
+  /* Nguyên liệu compact */
+  .ingredients-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+  .ingredient { padding: 6px 4px; }
+  .ingredient-emoji { font-size: 24px; }
+  .ingredient-name { font-size: 0.65em; line-height: 1.1; }
+  
+  /* Nút action gọn */
+  .action-btn {
+    padding: 9px 6px;
+    font-size: 0.85em;
+    min-width: 80px;
+  }
+  .action-buttons { gap: 5px; }
+  
+  /* Section padding nhỏ */
+  .section { padding: 10px; }
+  .section-title { font-size: 1em; margin-bottom: 8px; }
+  
+  /* Recipe item nhỏ */
+  .recipe-item { padding: 8px; }
+  .recipe-name { font-size: 0.9em; }
+  .recipe-ingredients { font-size: 0.75em; line-height: 1.4; }
+  
+  /* NPC info nhỏ */
+  .npc-info { padding: 6px; }
+  .npc-info-title { font-size: 0.85em; }
+  .npc-info-list { font-size: 0.78em; }
+  
+  /* Notifications: nhỏ + không che gì */
+  .notification-container {
+    top: auto;
+    bottom: 70px;
+    width: 90%;
+    max-width: 350px;
+    pointer-events: none;
+  }
+  .notification {
+    padding: 10px 16px;
+    font-size: 0.85em;
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  
+  /* End screen */
+  .end-title { font-size: 1.8em; }
+  .end-stats { padding: 18px 20px; font-size: 0.9em; }
+  .end-stat-row { padding: 7px 0; }
+  .feedback-box { padding: 15px; font-size: 0.9em; }
+  
+  /* Cutscene */
+  .cutscene-image { font-size: 100px; }
+  .dialogue-box { padding: 15px 18px; }
+  .dialogue-text { font-size: 0.95em; line-height: 1.5; }
+  .dialogue-speaker { font-size: 1em; }
+  
+  /* Tutorial */
+  .tutorial-card { padding: 20px; }
+  .tutorial-icon { font-size: 45px; }
+  .tutorial-title { font-size: 1.2em; }
+  .tutorial-text { font-size: 0.92em; }
+}
+
+/* ===== EXTRA SMALL (< 400px) ===== */
+@media (max-width: 400px) {
+  .ingredients-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .customer-card { width: 100%; }
+  .pot, .grill { height: 110px; }
+  .menu-logo { font-size: 2em; }
+}
+
+/* Mobile touch targets */
+@media (pointer: coarse) {
+  .ingredient { min-height: 44px; }
+  .action-btn { min-height: 44px; }
+  .btn { min-height: 44px; }
+  .customer-card { min-height: 44px; }
+  .pause-btn { min-height: 36px; }
 }
 </style>
 </head>
 <body>
+
+<!-- ===== ROTATE WARNING (cho mobile landscape) ===== -->
+<div id="rotateWarning" style="display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,0,0,0.95); z-index:9999; align-items:center; justify-content:center; text-align:center; padding:20px; color:#fff;">
+  <div>
+    <div style="font-size:60px; margin-bottom:20px;">📱↻</div>
+    <div style="font-size:1.3em; font-weight:700; color:#FFD700; margin-bottom:10px;">Vui lòng xoay dọc điện thoại</div>
+    <div style="opacity:0.8;">Game được tối ưu cho chế độ dọc</div>
+  </div>
+</div>
 
 <!-- ===== MENU CHÍNH ===== -->
 <div class="screen menu active" id="menuScreen">
@@ -2394,14 +2523,45 @@ window.onerror = function(msg, url, line, col, error) {
   return false;
 };
 
+// Detect mobile landscape và hiện warning
+function checkOrientation() {
+  const warning = document.getElementById('rotateWarning');
+  if (!warning) return;
+  
+  const isMobile = window.innerWidth <= 900;
+  const isLandscape = window.innerWidth > window.innerHeight;
+  const isVeryShort = window.innerHeight < 500;
+  
+  if (isMobile && isLandscape && isVeryShort) {
+    warning.style.display = 'flex';
+  } else {
+    warning.style.display = 'none';
+  }
+}
+
 window.addEventListener('DOMContentLoaded', function() {
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 - Demo v7.1 (fixed)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 - Demo v7.2 (mobile-optimized)');
   console.log('Các functions có sẵn:', {
     startGame: typeof startGame,
     startStory: typeof startStory,
     showTutorial: typeof showTutorial
   });
+  
+  checkOrientation();
 });
+
+window.addEventListener('resize', checkOrientation);
+window.addEventListener('orientationchange', () => {
+  setTimeout(checkOrientation, 200);
+});
+
+// Disable double-tap zoom trên iOS
+document.addEventListener('dblclick', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+// Disable pull-to-refresh trên mobile
+document.body.style.overscrollBehavior = 'none';
 </script>
 
 </body>
