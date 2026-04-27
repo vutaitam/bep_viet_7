@@ -71,14 +71,13 @@ button { font-family: inherit; }
 
 /* ===== MENU CHÍNH ===== */
 .screen {
-  display: none;
+  display: none !important;
   min-height: 100vh;
 }
-.screen.active { display: block; }
-.screen:not(.active) { display: none !important; }
+.screen.active { display: block !important; }
+.screen.menu.active { display: flex !important; }
 
 .menu {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -303,6 +302,10 @@ button { font-family: inherit; }
   padding: 15px;
   background: linear-gradient(180deg, #3e2723 0%, #5d4037 100%);
   min-height: 100vh;
+}
+
+.screen.game.active {
+  display: block !important;
 }
 
 .game-header {
@@ -1537,13 +1540,36 @@ let patienceTimerInterval = null;
 let grillTimerInterval = null;
 
 function startGame(skipIntro) {
-  document.getElementById('menuScreen').classList.remove('active');
-  document.getElementById('cutsceneScreen').classList.remove('active');
-  document.getElementById('gameScreen').classList.add('active');
+  console.log('[startGame] Called with skipIntro:', skipIntro);
   
-  renderIngredients();
-  renderRecipes();
-  renderNPCList();
+  try {
+    // Ẩn tất cả screen khác
+    const menuScreen = document.getElementById('menuScreen');
+    const cutsceneScreen = document.getElementById('cutsceneScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    
+    if (!menuScreen || !cutsceneScreen || !gameScreen) {
+      console.error('[startGame] Cannot find screen elements!');
+      alert('Lỗi: Không tìm thấy màn hình game. Vui lòng tải lại trang.');
+      return;
+    }
+    
+    menuScreen.classList.remove('active');
+    cutsceneScreen.classList.remove('active');
+    gameScreen.classList.add('active');
+    
+    console.log('[startGame] Screens switched. gameScreen classes:', gameScreen.className);
+    
+    renderIngredients();
+    renderRecipes();
+    renderNPCList();
+    
+    console.log('[startGame] Rendered initial UI');
+  } catch (err) {
+    console.error('[startGame] Error:', err);
+    alert('Lỗi khi bắt đầu game: ' + err.message);
+    return;
+  }
   
   // Spawn khách đầu tiên sau 1 giây
   setTimeout(() => spawnCustomer(), 1000);
@@ -2363,8 +2389,19 @@ function endLevel(reason) {
 // === KHỞI TẠO ===
 // ==============================
 
-console.log('🥢 Bếp Việt: Tiệm Bún Số 7 - Demo v7');
-console.log('Game đã sẵn sàng!');
+window.onerror = function(msg, url, line, col, error) {
+  console.error('[GAME ERROR]', msg, 'at line', line);
+  return false;
+};
+
+window.addEventListener('DOMContentLoaded', function() {
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 - Demo v7.1 (fixed)');
+  console.log('Các functions có sẵn:', {
+    startGame: typeof startGame,
+    startStory: typeof startStory,
+    showTutorial: typeof showTutorial
+  });
+});
 </script>
 
 </body>
