@@ -3,1206 +3,584 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 - Demo v7</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Bếp Việt: Tiệm Bún Số 7 — Demo v8</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-:root {
-  --color-red: #C62828;
-  --color-red-dark: #8E0E00;
-  --color-gold: #FFD700;
-  --color-gold-soft: #FFE082;
-  --color-green: #2E7D32;
-  --color-green-light: #66BB6A;
-  --color-bg-dark: #2c1810;
-  --color-bg-darker: #1a0e08;
-  --color-text: #fff;
-  --color-text-soft: rgba(255,255,255,0.85);
-  --color-text-mute: rgba(255,255,255,0.6);
+:root{
+  --red:#C62828;--red-dark:#8E0E00;--red-mid:#D32F2F;
+  --gold:#FFD700;--gold-soft:#FFE082;--gold-pale:#FFF8E1;
+  --green:#2E7D32;--green-light:#66BB6A;--green-pale:#E8F5E9;
+  --bg-dark:#1a0a04;--bg-mid:#2c1810;--bg-light:#4a2818;
+  --wood:#7B4F2E;--wood-light:#A0673A;
+  --text:#fff;--text-soft:rgba(255,255,255,.85);--text-mute:rgba(255,255,255,.5);
+  --border-gold:rgba(255,215,0,.35);
+  --shadow:0 4px 20px rgba(0,0,0,.5);
 }
 
-body {
-  font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, var(--color-bg-dark) 0%, #4a2818 100%);
-  color: var(--color-text);
-  min-height: 100vh;
-  overflow-x: hidden;
-  user-select: none;
-  -webkit-user-select: none;
+body{
+  font-family:'Be Vietnam Pro','Segoe UI',sans-serif;
+  background:var(--bg-dark);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
-button { font-family: inherit; }
+button{font-family:inherit;cursor:pointer;}
 
-/* ===== HỆ THỐNG NÚT BẤM ===== */
-.btn {
-  padding: 16px 28px;
-  font-size: 1.15em;
-  font-weight: 700;
-  background: var(--color-red);
-  color: #fff;
-  border: 3px solid var(--color-gold);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-  box-shadow: 0 4px 0 var(--color-red-dark), 0 6px 15px rgba(0,0,0,0.3);
-  font-family: inherit;
+/* ===== BUTTONS ===== */
+.btn{
+  display:block;width:100%;
+  padding:14px 24px;font-size:1.05em;font-weight:700;
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+  color:#fff;border:2px solid var(--gold);border-radius:12px;
+  transition:all .2s;text-align:center;
+  box-shadow:0 4px 0 var(--red-dark),0 6px 20px rgba(0,0,0,.4);
 }
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--red-dark),0 10px 25px rgba(0,0,0,.5);}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--red-dark);}
+.btn-green{background:linear-gradient(135deg,var(--green) 0%,#1B5E20 100%);box-shadow:0 4px 0 #1B5E20,0 6px 20px rgba(0,0,0,.4);}
+.btn-green:hover{box-shadow:0 6px 0 #1B5E20,0 10px 25px rgba(0,0,0,.5);}
+.btn-blue{background:linear-gradient(135deg,#1565C0 0%,#0D47A1 100%);border-color:#90CAF9;box-shadow:0 4px 0 #0D47A1,0 6px 20px rgba(0,0,0,.4);}
+.btn-sm{padding:10px 16px;font-size:.9em;}
 
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 0 var(--color-red-dark), 0 10px 20px rgba(0,0,0,0.4);
-  background: #D32F2F;
-}
+/* ===== SCREEN SYSTEM ===== */
+.screen{display:none !important;min-height:100vh;}
+.screen.active{display:block !important;}
+.screen.menu.active{display:flex !important;}
 
-.btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 var(--color-red-dark);
-}
-
-.btn-secondary { background: var(--color-green); border-color: var(--color-gold); }
-.btn-secondary:hover { background: #388E3C; }
-
-.btn-small {
-  padding: 10px 18px;
-  font-size: 0.95em;
-}
-
-/* ===== MENU CHÍNH ===== */
-.screen {
-  display: none !important;
-  min-height: 100vh;
-}
-.screen.active { display: block !important; }
-.screen.menu.active { display: flex !important; }
-
-.menu {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
+/* ===== MENU ===== */
+.menu{
+  flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:40px 20px;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255, 200, 100, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 100, 100, 0.1) 0%, transparent 50%);
-  position: relative;
+    radial-gradient(ellipse at 50% 0%,rgba(255,200,80,.12) 0%,transparent 60%),
+    radial-gradient(ellipse at 20% 80%,rgba(198,40,40,.1) 0%,transparent 50%),
+    linear-gradient(180deg,#1a0a04 0%,#2c1810 60%,#1a0a04 100%);
+  position:relative;overflow:hidden;
 }
 
-.menu::before {
-  content: '🏮';
-  position: absolute;
-  font-size: 80px;
-  top: 30px;
-  left: 30px;
-  opacity: 0.4;
-  animation: float 4s ease-in-out infinite;
+.menu-deco-top{
+  position:absolute;top:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 20px,var(--red) 20px,var(--red) 40px);
+  opacity:.6;
 }
+.menu-deco-bot{position:absolute;bottom:0;left:0;right:0;height:8px;
+  background:repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 20px,var(--red) 20px,var(--red) 40px);opacity:.6;}
 
-.menu::after {
-  content: '🏮';
-  position: absolute;
-  font-size: 80px;
-  top: 30px;
-  right: 30px;
-  opacity: 0.4;
-  animation: float 4s ease-in-out infinite 1s;
+.lantern{position:absolute;font-size:70px;opacity:.3;animation:float 4s ease-in-out infinite;}
+.lantern:nth-child(1){top:20px;left:30px;}
+.lantern:nth-child(2){top:20px;right:30px;animation-delay:1.2s;}
+.lantern:nth-child(3){bottom:60px;left:15%;font-size:45px;animation-delay:2s;}
+.lantern:nth-child(4){bottom:60px;right:15%;font-size:45px;animation-delay:.8s;}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+.menu-logo{
+  font-size:3.2em;font-weight:900;color:var(--gold);
+  text-shadow:3px 3px 0 var(--red-dark),6px 6px 15px rgba(0,0,0,.6);
+  margin-bottom:6px;text-align:center;animation:float 3.5s ease-in-out infinite;
+  position:relative;z-index:1;
 }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+.menu-sub{font-size:1.4em;color:var(--gold-soft);font-weight:800;margin-bottom:8px;text-align:center;letter-spacing:.05em;position:relative;z-index:1;}
+.menu-divider{width:180px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:12px auto 16px;opacity:.6;}
+.menu-tagline{
+  font-size:.95em;color:var(--text-mute);margin-bottom:36px;
+  text-align:center;max-width:520px;line-height:1.7;
+  font-style:italic;position:relative;z-index:1;
 }
-
-.menu-logo {
-  font-size: 3.5em;
-  font-weight: 900;
-  color: var(--color-gold);
-  text-shadow: 4px 4px 0 var(--color-red-dark), 8px 8px 20px rgba(0,0,0,0.5);
-  margin-bottom: 10px;
-  text-align: center;
-  animation: float 3s ease-in-out infinite;
+.menu-buttons{display:flex;flex-direction:column;gap:12px;width:300px;max-width:88%;position:relative;z-index:1;}
+.menu-credit{
+  margin-top:32px;font-size:.8em;color:var(--text-mute);
+  text-align:center;line-height:1.8;position:relative;z-index:1;
 }
-
-.menu-subtitle {
-  font-size: 1.3em;
-  color: var(--color-gold-soft);
-  margin-bottom: 10px;
-  font-style: italic;
-  text-align: center;
-}
-
-.menu-tagline {
-  font-size: 1em;
-  color: var(--color-text-mute);
-  margin-bottom: 40px;
-  text-align: center;
-  max-width: 600px;
-  line-height: 1.6;
-}
-
-.menu-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 320px;
-  max-width: 90%;
-}
-
-.menu-credit {
-  margin-top: 40px;
-  font-size: 0.85em;
-  color: var(--color-text-mute);
-  text-align: center;
-  line-height: 1.6;
+.menu-version{
+  display:inline-block;background:rgba(255,215,0,.12);border:1px solid var(--border-gold);
+  padding:3px 10px;border-radius:20px;font-size:.75em;color:var(--gold-soft);
+  margin-bottom:8px;
 }
 
 /* ===== CUTSCENE ===== */
-.cutscene {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  z-index: 100;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 40px 20px;
-  background-image:
-    radial-gradient(circle at 50% 30%, rgba(80, 50, 30, 0.7) 0%, #000 70%);
+.cutscene{
+  display:none;position:fixed;inset:0;
+  background:#000;z-index:100;
+  flex-direction:column;justify-content:flex-end;align-items:center;
+  padding:30px 20px 40px;
 }
-
-.cutscene.active { display: flex; }
-
-.cutscene-image {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 30px;
-  font-size: 180px;
-  filter: drop-shadow(0 0 30px rgba(255, 200, 100, 0.4));
-  animation: cutsceneIn 1.5s ease-out;
+.cutscene.active{display:flex;}
+.cutscene-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,rgba(100,60,20,.8) 0%,#050200 70%);
+  z-index:0;
 }
-
-@keyframes cutsceneIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+.cutscene-image{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  font-size:160px;filter:drop-shadow(0 0 40px rgba(255,200,100,.5));
+  animation:cutsceneIn 1.5s ease-out;position:relative;z-index:1;
 }
-
-.dialogue-box {
-  width: 90%;
-  max-width: 800px;
-  background: rgba(0, 0, 0, 0.85);
-  border: 3px solid var(--color-gold);
-  border-radius: 15px;
-  padding: 25px 30px;
-  box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+@keyframes cutsceneIn{from{opacity:0;transform:scale(.75);}to{opacity:1;transform:scale(1);}}
+.dialogue-box{
+  width:min(800px,92%);
+  background:rgba(5,2,0,.9);
+  border:2px solid var(--gold);border-radius:16px;
+  padding:22px 28px;
+  box-shadow:0 0 60px rgba(255,215,0,.2),inset 0 1px 0 rgba(255,215,0,.15);
+  position:relative;z-index:1;
 }
-
-.dialogue-speaker {
-  color: var(--color-gold);
-  font-size: 1.15em;
-  font-weight: 700;
-  margin-bottom: 12px;
+.dialogue-speaker{color:var(--gold);font-size:1em;font-weight:800;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;}
+.dialogue-text{color:#fff;font-size:1.05em;line-height:1.8;min-height:72px;font-style:italic;}
+.dialogue-continue{margin-top:16px;text-align:right;color:var(--gold);font-size:.85em;animation:blink 1.2s infinite;opacity:.8;}
+@keyframes blink{50%{opacity:.2;}}
+.dialogue-skip{
+  position:absolute;top:16px;right:16px;
+  background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.25);
+  color:rgba(255,255,255,.6);padding:6px 14px;border-radius:8px;font-size:.85em;font-family:inherit;
+  transition:all .2s;z-index:2;
 }
-
-.dialogue-text {
-  color: #fff;
-  font-size: 1.1em;
-  line-height: 1.7;
-  min-height: 80px;
-  font-style: italic;
-}
-
-.dialogue-continue {
-  margin-top: 20px;
-  text-align: right;
-  color: var(--color-gold);
-  font-size: 0.9em;
-  animation: blink 1.2s infinite;
-}
-
-@keyframes blink { 50% { opacity: 0.3; } }
-
-.dialogue-skip {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.7);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.7);
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-family: inherit;
-}
-
-.dialogue-skip:hover {
-  background: rgba(0,0,0,0.9);
-  color: #fff;
-}
+.dialogue-skip:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+.dialogue-dots{display:flex;gap:6px;justify-content:center;margin:16px 0 0;position:relative;z-index:1;}
+.dialogue-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,215,0,.25);transition:all .3s;}
+.dialogue-dot.active{background:var(--gold);box-shadow:0 0 8px var(--gold);}
 
 /* ===== TUTORIAL ===== */
-.tutorial-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 90;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+.tutorial-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(4px);
+  z-index:90;justify-content:center;align-items:center;padding:20px;
 }
-
-.tutorial-overlay.active { display: flex; }
-
-.tutorial-card {
-  background: linear-gradient(135deg, var(--color-bg-dark) 0%, #4a2818 100%);
-  border: 3px solid var(--color-gold);
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+.tutorial-overlay.active{display:flex;}
+.tutorial-card{
+  background:linear-gradient(160deg,var(--bg-mid) 0%,var(--bg-light) 100%);
+  border:2px solid var(--gold);border-radius:18px;
+  padding:32px 28px;max-width:480px;width:100%;
+  text-align:center;
+  box-shadow:0 0 60px rgba(255,215,0,.25),var(--shadow);
 }
-
-.tutorial-icon {
-  font-size: 60px;
-  margin-bottom: 15px;
+.tutorial-icon{font-size:58px;margin-bottom:12px;line-height:1;}
+.tutorial-progress{
+  display:flex;gap:5px;justify-content:center;margin-bottom:14px;
 }
-
-.tutorial-title {
-  color: var(--color-gold);
-  font-size: 1.5em;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.tutorial-text {
-  color: #fff;
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-.tutorial-step-counter {
-  color: var(--color-text-mute);
-  font-size: 0.9em;
-  margin-bottom: 15px;
-}
+.tutorial-pip{width:26px;height:4px;border-radius:2px;background:rgba(255,215,0,.2);transition:all .3s;}
+.tutorial-pip.done{background:var(--gold);}
+.tutorial-pip.current{background:var(--gold);box-shadow:0 0 6px var(--gold);}
+.tutorial-title{color:var(--gold);font-size:1.35em;font-weight:800;margin-bottom:10px;}
+.tutorial-text{color:var(--text-soft);line-height:1.75;margin-bottom:22px;font-size:.95em;}
+.tutorial-btns{display:flex;gap:10px;}
+.tutorial-btns .btn{flex:1;}
 
 /* ===== GAME SCREEN ===== */
-.game {
-  padding: 15px;
-  background: linear-gradient(180deg, #3e2723 0%, #5d4037 100%);
-  min-height: 100vh;
-}
-
-.screen.game.active {
-  display: block !important;
-}
-
-.game-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 12px 20px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border: 2px solid var(--color-gold);
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1em;
-}
-
-.stat-icon { font-size: 1.3em; }
-
-.stat-value {
-  font-weight: 700;
-  color: var(--color-gold);
-  font-size: 1.2em;
-}
-
-.timer-bar-container {
-  flex: 1;
-  min-width: 150px;
-  max-width: 300px;
-  margin: 0 15px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 8px;
-  height: 12px;
-  overflow: hidden;
-}
-
-.timer-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #4CAF50 0%, #FFC107 50%, #f44336 100%);
-  width: 100%;
-  transition: width 0.5s linear;
-}
-
-.pause-btn {
-  background: rgba(255,255,255,0.1);
-  border: 2px solid rgba(255,255,255,0.3);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.9em;
-}
-
-.pause-btn:hover { background: rgba(255,255,255,0.2); }
-
-/* ===== LAYOUT GAME ===== */
-.game-area {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 15px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-@media (max-width: 900px) {
-  .game-area { grid-template-columns: 1fr; }
-}
-
-.left-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* ===== KHU VỰC KHÁCH ===== */
-.section {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  padding: 15px;
-  border: 2px solid rgba(255, 215, 0, 0.3);
-}
-
-.section-title {
-  color: var(--color-gold);
-  font-size: 1.1em;
-  margin-bottom: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.customers-list {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  min-height: 200px;
-}
-
-.customer-card {
-  background: linear-gradient(180deg, var(--color-gold-soft) 0%, #FFA726 100%);
-  border-radius: 12px;
-  padding: 12px;
-  width: 175px;
-  border: 3px solid transparent;
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
-  color: #3E2723;
-}
-
-.customer-card:hover {
-  transform: translateY(-3px);
-  border-color: #fff;
-}
-
-.customer-card.selected {
-  border-color: var(--color-gold) !important;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-  transform: translateY(-5px);
-}
-
-.customer-card.served {
-  background: linear-gradient(180deg, #A5D6A7 0%, var(--color-green-light) 100%);
-  pointer-events: none;
-  animation: served 0.6s;
-}
-
-.customer-card.angry {
-  background: linear-gradient(180deg, #EF9A9A 0%, #E57373 100%);
-  pointer-events: none;
-  animation: shake 0.4s 3;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px); }
-  75% { transform: translateX(8px); }
-}
-
-@keyframes served {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-.customer-emoji {
-  font-size: 50px;
-  text-align: center;
-  margin-bottom: 6px;
-  line-height: 1;
-}
-
-.customer-name {
-  font-weight: 700;
-  text-align: center;
-  font-size: 1em;
-  margin-bottom: 5px;
-}
-
-.customer-name-special {
-  color: var(--color-red-dark);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.customer-order {
-  background: rgba(255,255,255,0.7);
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 0.85em;
-  text-align: center;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.customer-patience {
-  background: rgba(0,0,0,0.25);
-  border-radius: 6px;
-  height: 8px;
-  overflow: hidden;
-  margin-bottom: 6px;
-}
-
-.customer-patience-bar {
-  height: 100%;
-  width: 100%;
-  transition: all 1s linear;
-}
-
-.customer-trait {
-  font-size: 0.75em;
-  font-style: italic;
-  color: #5D4037;
-  text-align: center;
-  background: rgba(255,255,255,0.4);
-  padding: 3px 6px;
-  border-radius: 4px;
-}
-
-.customer-special-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: var(--color-gold);
-  color: var(--color-red-dark);
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 900;
-  border: 2px solid var(--color-red-dark);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-
-.customers-empty {
-  width: 100%;
-  text-align: center;
-  color: var(--color-text-mute);
-  padding: 40px 20px;
-  font-style: italic;
-}
-
-/* ===== KHU VỰC NẤU ===== */
-.cooking-area-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-@media (max-width: 700px) {
-  .cooking-area-grid { grid-template-columns: 1fr; }
-}
-
-.pot {
-  background: linear-gradient(180deg, #424242 0%, #212121 100%);
-  border-radius: 50% 50% 16px 16px;
-  height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border: 4px solid var(--color-gold);
-  box-shadow: inset 0 -20px 40px rgba(0,0,0,0.5);
-  padding: 20px;
-}
-
-.pot.cooking { animation: bubble 0.8s infinite; }
-.pot.done {
-  background: linear-gradient(180deg, #FFA726 0%, #F57C00 100%);
-  animation: glow 1.2s infinite alternate;
-}
-
-@keyframes bubble {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-  to { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
-}
-
-.pot-status {
-  color: var(--color-gold);
-  font-size: 1em;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-.pot-progress {
-  width: 90%;
-  background: rgba(0,0,0,0.5);
-  height: 10px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.pot-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-gold), #FFC107);
-  width: 0%;
-  transition: width 0.3s;
-}
-
-.grill {
-  background: linear-gradient(180deg, #5D4037 0%, #3E2723 100%);
-  border-radius: 16px;
-  height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid #FF6F00;
-  position: relative;
-  padding: 15px;
-  overflow: hidden;
-}
-
-.grill.grilling::before {
-  content: '🔥🔥🔥';
-  position: absolute;
-  bottom: 10px;
-  font-size: 30px;
-  animation: flame 0.3s infinite alternate;
-}
-
-@keyframes flame {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-3px) scale(1.1); }
-}
-
-.grill-status {
-  color: #FFE082;
-  font-size: 1em;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 8px;
-  z-index: 1;
-}
-
-.grill-progress {
-  width: 90%;
-  background: rgba(0,0,0,0.5);
-  height: 10px;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-}
-
-.grill-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ff5722, #ff9800, #ffc107);
-  transition: width 0.1s linear;
-}
-
-.grill-perfect-zone {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: rgba(76, 175, 80, 0.4);
-  border-left: 2px solid #4CAF50;
-  border-right: 2px solid #4CAF50;
-}
-
-.pot-ingredients {
-  display: flex;
-  gap: 4px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-}
-
-.pot-ingredient-tag {
-  background: rgba(255,255,255,0.2);
-  padding: 3px 7px;
-  border-radius: 10px;
-  font-size: 0.75em;
-  white-space: nowrap;
-}
-
-/* ===== NGUYÊN LIỆU ===== */
-.ingredients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-  gap: 8px;
-}
-
-.ingredient {
-  background: linear-gradient(180deg, #fff 0%, #FAFAFA 100%);
-  border: 3px solid var(--color-gold);
-  border-radius: 10px;
-  padding: 8px 6px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  color: #3E2723;
-}
-
-.ingredient:hover {
-  transform: scale(1.05);
-  border-color: #fff;
-  background: linear-gradient(180deg, var(--color-gold-soft) 0%, #FFC107 100%);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
-}
-
-.ingredient:active { transform: scale(0.95); }
-
-.ingredient.special {
-  border-color: var(--color-red);
-  background: linear-gradient(180deg, #FFEB3B 0%, #FFC107 100%);
-}
-
-.ingredient.special::after {
-  content: '⭐';
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  font-size: 14px;
-}
-
-.ingredient { position: relative; }
-
-.ingredient-emoji {
-  font-size: 30px;
-  display: block;
-  margin-bottom: 3px;
-  line-height: 1;
-}
-
-.ingredient-name {
-  font-size: 0.75em;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.ingredient.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-/* ===== NÚT HÀNH ĐỘNG ===== */
-.action-buttons {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  flex: 1;
-  min-width: 100px;
-  padding: 11px;
-  background: var(--color-red);
-  color: #fff;
-  border: 2px solid var(--color-gold);
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.95em;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-
-.action-btn:hover:not(:disabled) {
-  background: #D32F2F;
-  transform: translateY(-2px);
-}
-
-.action-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background: #555;
-}
-
-.action-btn.success { background: var(--color-green); }
-.action-btn.success:hover:not(:disabled) { background: #388E3C; }
-.action-btn.warn { background: #FF6F00; }
-.action-btn.warn:hover:not(:disabled) { background: #E65100; }
-
-/* ===== PANEL PHẢI ===== */
-.right-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.recipe-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.recipe-item {
-  background: rgba(255,255,255,0.08);
-  padding: 10px;
-  border-radius: 8px;
-  border-left: 4px solid var(--color-gold);
-}
-
-.recipe-item.signature {
-  border-left-color: var(--color-red);
-  background: rgba(255, 215, 0, 0.1);
-  position: relative;
-}
-
-.recipe-item.signature::before {
-  content: '⭐ MÓN ĐẶC BIỆT';
-  position: absolute;
-  top: -8px;
-  right: 5px;
-  background: var(--color-red);
-  color: var(--color-gold);
-  font-size: 0.7em;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: 700;
-}
-
-.recipe-name {
-  font-weight: 700;
-  color: var(--color-gold);
-  margin-bottom: 4px;
-  font-size: 1em;
-}
-
-.recipe-ingredients {
-  font-size: 0.8em;
-  color: var(--color-text-soft);
-  line-height: 1.5;
-}
-
-.npc-info {
-  margin-top: 5px;
-  padding: 8px;
-  background: rgba(255, 215, 0, 0.1);
-  border-radius: 6px;
-  font-size: 0.85em;
-}
-
-.npc-info-title {
-  color: var(--color-gold);
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.npc-info-list {
-  color: var(--color-text-soft);
-  line-height: 1.5;
-}
-
-/* ===== THÔNG BÁO ===== */
-.notification-container {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
-.notification {
-  background: rgba(0, 0, 0, 0.92);
-  border: 2px solid var(--color-gold);
-  padding: 12px 25px;
-  border-radius: 10px;
-  font-size: 1em;
-  font-weight: 600;
-  animation: notif-in 0.3s, notif-out 0.3s 2.7s forwards;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.notification.success { border-color: #4CAF50; background: rgba(46, 125, 50, 0.95); }
-.notification.warning { border-color: #FFC107; background: rgba(255, 152, 0, 0.95); }
-.notification.error { border-color: #f44336; background: rgba(198, 40, 40, 0.95); }
-.notification.info { border-color: #2196F3; background: rgba(13, 71, 161, 0.95); }
-
-@keyframes notif-in {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes notif-out {
-  to { opacity: 0; transform: translateY(-20px); }
-}
-
-/* ===== ĐIỂM BAY LÊN ===== */
-.score-popup {
-  position: fixed;
-  font-size: 1.5em;
-  font-weight: 900;
-  color: var(--color-gold);
-  text-shadow: 2px 2px 0 var(--color-red-dark);
-  pointer-events: none;
-  z-index: 999;
-  animation: scorePop 1.5s ease-out forwards;
-}
-
-@keyframes scorePop {
-  0% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
-}
-
-/* ===== KẾT THÚC LEVEL ===== */
-.end-screen {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 100;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.end-screen.active { display: flex; }
-
-.end-content {
-  max-width: 600px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.end-title {
-  font-size: 2.5em;
-  color: var(--color-gold);
-  margin-bottom: 20px;
-  text-shadow: 3px 3px 0 var(--color-red-dark);
-  text-align: center;
-}
-
-.end-stats {
-  background: rgba(255,255,255,0.08);
-  padding: 25px 40px;
-  border-radius: 15px;
-  border: 2px solid var(--color-gold);
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 500px;
-}
-
-.end-stat-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-  font-size: 1em;
-}
-
-.end-stat-row:last-child {
-  border-bottom: none;
-  border-top: 2px solid var(--color-gold);
-  margin-top: 10px;
-  padding-top: 15px;
-  font-weight: 700;
-  color: var(--color-gold);
-  font-size: 1.25em;
-}
-
-.end-stat-row.cost {
-  color: #ff8a80;
-}
-
-.feedback-box {
-  background: rgba(255, 215, 0, 0.08);
-  border: 2px solid var(--color-gold);
-  border-radius: 12px;
-  padding: 20px 25px;
-  max-width: 500px;
-  width: 100%;
-  margin-bottom: 25px;
-  font-style: italic;
-  text-align: center;
-  line-height: 1.7;
-}
-
-.feedback-speaker {
-  color: var(--color-gold);
-  font-weight: 700;
-  font-size: 1.05em;
-  margin-bottom: 10px;
-  font-style: normal;
-}
+.game{
+  background:linear-gradient(180deg,#231008 0%,#3e2219 50%,#2a160a 100%);
+  min-height:100vh;padding:10px;
+}
+.screen.game.active{display:block !important;}
+
+/* Chapter / Day bar */
+.chapter-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,.5);border:1px solid var(--border-gold);
+  border-radius:8px;padding:6px 14px;margin-bottom:8px;
+  font-size:.82em;color:var(--gold-soft);
+}
+.chapter-bar-name{font-weight:700;color:var(--gold);}
+.chapter-bar-day{display:flex;align-items:center;gap:8px;}
+.day-pips{display:flex;gap:4px;}
+.day-pip{width:12px;height:12px;border-radius:50%;background:rgba(255,215,0,.2);border:1px solid rgba(255,215,0,.3);}
+.day-pip.done{background:var(--gold);}
+.day-pip.current{background:var(--gold);box-shadow:0 0 6px var(--gold);}
+
+/* Header */
+.game-header{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,.7);padding:10px 16px;
+  border-radius:10px;margin-bottom:10px;
+  border:1px solid var(--border-gold);gap:10px;flex-wrap:wrap;
+}
+.stat{display:flex;align-items:center;gap:5px;}
+.stat-icon{font-size:1.15em;}
+.stat-label{font-size:.7em;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+.stat-value{font-weight:800;color:var(--gold);font-size:1.15em;line-height:1;}
+.stat-block{display:flex;flex-direction:column;align-items:flex-start;gap:1px;}
+.timer-wrap{flex:1;min-width:120px;max-width:280px;margin:0 8px;}
+.timer-bar-bg{background:rgba(255,255,255,.12);border-radius:8px;height:10px;overflow:hidden;margin-bottom:2px;}
+.timer-bar{height:100%;background:linear-gradient(90deg,#4CAF50 0%,#FFC107 55%,#f44336 100%);width:100%;transition:width .8s linear;border-radius:8px;}
+.timer-text{font-size:.7em;color:var(--text-mute);text-align:center;}
+.pause-btn{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.7);padding:6px 12px;border-radius:8px;font-family:inherit;font-size:.82em;
+  transition:all .2s;
+}
+.pause-btn:hover{background:rgba(255,255,255,.15);color:#fff;}
+.streak-badge{
+  display:none;align-items:center;gap:4px;
+  background:linear-gradient(135deg,#FF6F00,#FFA000);
+  border:1px solid #FFD54F;border-radius:20px;
+  padding:3px 10px;font-size:.78em;font-weight:700;color:#fff;
+  animation:pulseBadge 1.5s infinite;
+}
+.streak-badge.visible{display:flex;}
+@keyframes pulseBadge{0%,100%{box-shadow:0 0 0 0 rgba(255,160,0,.4);}50%{box-shadow:0 0 0 6px rgba(255,160,0,0);}}
+
+/* Game Area */
+.game-area{
+  display:grid;grid-template-columns:1fr 300px;gap:12px;
+  max-width:1400px;margin:0 auto;
+}
+@media(max-width:900px){.game-area{grid-template-columns:1fr;}}
+
+.section{
+  background:rgba(0,0,0,.45);border-radius:12px;padding:12px;
+  border:1px solid var(--border-gold);
+}
+.section-title{
+  color:var(--gold);font-size:.95em;font-weight:700;
+  margin-bottom:10px;display:flex;align-items:center;gap:6px;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+
+/* ===== CUSTOMERS ===== */
+.customers-list{display:flex;gap:10px;flex-wrap:wrap;min-height:180px;align-items:flex-start;}
+.customers-empty{
+  width:100%;text-align:center;color:var(--text-mute);
+  padding:36px 20px;font-style:italic;font-size:.9em;
+}
+
+.customer-card{
+  background:linear-gradient(160deg,#FFF8E1 0%,#FFECB3 100%);
+  border-radius:14px;padding:10px;width:168px;
+  border:3px solid transparent;transition:all .25s;
+  cursor:pointer;position:relative;color:#3E2723;
+  box-shadow:0 3px 12px rgba(0,0,0,.3);
+}
+.customer-card:hover:not(.served):not(.angry){transform:translateY(-3px) scale(1.02);border-color:rgba(255,255,255,.6);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+.customer-card.selected{border-color:var(--gold)!important;box-shadow:0 0 0 3px rgba(255,215,0,.4),0 8px 20px rgba(0,0,0,.5);transform:translateY(-4px);}
+.customer-card.served{background:linear-gradient(160deg,#E8F5E9 0%,#C8E6C9 100%);pointer-events:none;animation:servedAnim .5s ease-out;}
+.customer-card.angry{background:linear-gradient(160deg,#FFEBEE 0%,#FFCDD2 100%);pointer-events:none;animation:shakeAnim .35s 3;}
+@keyframes servedAnim{0%{transform:scale(1);}40%{transform:scale(1.12);}100%{transform:scale(1);}}
+@keyframes shakeAnim{0%,100%{transform:translateX(0);}30%{transform:translateX(-6px);}70%{transform:translateX(6px);}}
+
+.customer-badge{
+  position:absolute;top:-8px;right:-8px;
+  background:var(--gold);color:var(--red-dark);
+  border-radius:50%;width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;border:2px solid var(--red-dark);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+.customer-emoji{font-size:44px;text-align:center;margin-bottom:5px;line-height:1;}
+.customer-name{font-weight:800;text-align:center;font-size:.92em;margin-bottom:4px;}
+.customer-name.regular{color:var(--red-dark);}
+.customer-order-label{
+  background:rgba(62,39,35,.15);padding:5px 7px;
+  border-radius:7px;font-size:.8em;text-align:center;
+  margin-bottom:7px;font-weight:600;
+}
+/* Circular patience ring */
+.patience-ring-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:5px;position:relative;}
+.patience-ring{width:44px;height:44px;border-radius:50%;position:relative;
+  background:conic-gradient(var(--ring-color,#4CAF50) var(--ring-pct,100%),rgba(0,0,0,.15) 0);
+  transition:background .8s linear;
+}
+.patience-ring::after{
+  content:attr(data-sec);position:absolute;inset:5px;
+  border-radius:50%;background:rgba(255,248,225,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7em;font-weight:800;color:#4E342E;
+}
+.customer-trait{
+  font-size:.7em;font-style:italic;color:#795548;
+  text-align:center;background:rgba(255,255,255,.4);
+  padding:2px 6px;border-radius:4px;
+}
+
+/* ===== COOKING AREA ===== */
+.cooking-area-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:680px){.cooking-area-grid{grid-template-columns:1fr;}}
+
+.pot{
+  background:linear-gradient(180deg,#424242 0%,#1c1c1c 100%);
+  border-radius:50% 50% 14px 14px;height:170px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;border:4px solid var(--gold);
+  box-shadow:inset 0 -15px 30px rgba(0,0,0,.6),0 4px 20px rgba(0,0,0,.5);
+  padding:16px;overflow:hidden;
+}
+.pot::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse at 50% 20%,rgba(255,180,50,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.pot.cooking .pot-steam{display:block;}
+.pot.done{background:linear-gradient(180deg,#5D4037 0%,#3E2723 100%);border-color:#FFD54F;}
+.pot.done::after{content:'✨';position:absolute;font-size:20px;top:10px;right:12px;animation:sparkle 1.2s infinite alternate;}
+@keyframes sparkle{from{opacity:.5;transform:scale(.8);}to{opacity:1;transform:scale(1.2);}}
+
+.pot-steam{display:none;position:absolute;top:0;left:0;right:0;pointer-events:none;}
+.steam-particle{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.25);
+  animation:steamRise 2s ease-in infinite;
+  bottom:100%;
+}
+.steam-particle:nth-child(1){left:30%;animation-delay:.2s;}
+.steam-particle:nth-child(2){left:50%;animation-delay:.7s;width:6px;height:6px;}
+.steam-particle:nth-child(3){left:70%;animation-delay:1.2s;}
+@keyframes steamRise{0%{opacity:.7;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-40px) scale(2.5);}}
+
+.pot-status{color:var(--gold-soft);font-size:.88em;font-weight:700;text-align:center;margin-bottom:6px;z-index:1;line-height:1.3;}
+.pot-progress-wrap{width:88%;background:rgba(0,0,0,.5);height:8px;border-radius:4px;overflow:hidden;z-index:1;}
+.pot-progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),#FFA000);width:0%;transition:width .2s;border-radius:4px;}
+.pot-ingredients{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap;justify-content:center;max-width:100%;z-index:1;}
+.pot-ing-tag{background:rgba(255,255,255,.15);padding:2px 7px;border-radius:10px;font-size:.72em;border:1px solid rgba(255,215,0,.2);}
+
+.grill{
+  background:linear-gradient(180deg,#4E342E 0%,#1a0a04 100%);
+  border-radius:14px;height:170px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:4px solid #BF360C;position:relative;padding:14px;overflow:hidden;
+}
+.grill.grilling .grill-fire{opacity:1;}
+.grill-fire{
+  position:absolute;bottom:6px;width:100%;
+  text-align:center;font-size:22px;opacity:0;
+  animation:flame .25s infinite alternate;transition:opacity .4s;
+}
+@keyframes flame{from{transform:scaleX(1);}to{transform:scaleX(1.05) scaleY(1.06);}}
+.grill-status{color:#FFE082;font-size:.88em;font-weight:700;text-align:center;margin-bottom:7px;z-index:1;}
+.grill-progress-wrap{width:88%;position:relative;z-index:1;margin-bottom:6px;}
+.grill-bar-bg{background:rgba(0,0,0,.5);height:12px;border-radius:6px;overflow:visible;position:relative;}
+.grill-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#ff5722,#ff9800,#ffc107);transition:width .08s linear;border-radius:6px;}
+.grill-perfect-zone{position:absolute;top:0;height:100%;background:rgba(76,175,80,.35);border-left:2px solid #4CAF50;border-right:2px solid #4CAF50;z-index:1;border-radius:4px;}
+.grill-hint{color:#BCAAA4;font-size:.75em;text-align:center;z-index:1;line-height:1.4;}
+
+/* ===== INGREDIENTS ===== */
+.ingredients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:7px;}
+.ingredient{
+  background:linear-gradient(160deg,#fff 0%,#F5F5F5 100%);
+  border:2px solid rgba(255,215,0,.5);border-radius:10px;
+  padding:7px 5px;text-align:center;cursor:pointer;
+  transition:all .15s;color:#3E2723;position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.ingredient:hover{transform:scale(1.06);border-color:#fff;background:linear-gradient(160deg,var(--gold-soft) 0%,#FFC107 100%);box-shadow:0 4px 12px rgba(255,215,0,.35);}
+.ingredient:active{transform:scale(.94);}
+.ingredient.special{border-color:var(--red);background:linear-gradient(160deg,#FFFDE7 0%,#FFF176 100%);}
+.ingredient.special::after{content:'⭐';position:absolute;top:-5px;right:-5px;font-size:13px;}
+.ingredient.in-pot{opacity:.45;pointer-events:none;}
+.ingredient-emoji{font-size:28px;display:block;margin-bottom:3px;line-height:1;}
+.ingredient-name{font-size:.68em;font-weight:600;line-height:1.2;}
+
+/* ===== ACTION BUTTONS ===== */
+.action-buttons{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.action-btn{
+  flex:1;min-width:88px;padding:10px 8px;
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);
+  color:#fff;border:2px solid var(--gold);border-radius:8px;
+  font-weight:700;font-size:.88em;transition:all .2s;font-family:inherit;
+}
+.action-btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.1);}
+.action-btn:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(.5);}
+.action-btn.green{background:linear-gradient(135deg,var(--green) 0%,#1B5E20 100%);}
+.action-btn.orange{background:linear-gradient(135deg,#E65100 0%,#BF360C 100%);border-color:#FF8A65;}
+.action-btn.serve-ready{
+  background:linear-gradient(135deg,var(--green) 0%,#1B5E20 100%);
+  animation:serveGlow .9s infinite alternate;
+}
+@keyframes serveGlow{from{box-shadow:0 0 0 0 rgba(76,175,80,.4);}to{box-shadow:0 0 12px 4px rgba(76,175,80,.6);}}
+.clear-btn{flex:0 0 42px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);font-size:1.1em;}
+
+/* ===== RIGHT PANEL ===== */
+.recipe-list{display:flex;flex-direction:column;gap:8px;}
+.recipe-item{
+  background:rgba(255,255,255,.05);padding:9px 11px;
+  border-radius:9px;border-left:4px solid rgba(255,215,0,.4);
+  transition:all .25s;
+}
+.recipe-item.signature{border-left-color:var(--red);background:rgba(255,215,0,.06);}
+.recipe-item.active{border-left-color:#4CAF50;background:rgba(76,175,80,.1);box-shadow:0 0 10px rgba(76,175,80,.2);}
+.recipe-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.65em;font-weight:700;padding:2px 7px;border-radius:10px;
+  margin-bottom:5px;
+}
+.recipe-tag.sig{background:rgba(198,40,40,.8);color:var(--gold);}
+.recipe-name{font-weight:700;color:var(--gold);margin-bottom:4px;font-size:.95em;}
+.recipe-ings{font-size:.75em;color:var(--text-soft);line-height:1.6;}
+.recipe-stats{display:flex;gap:10px;margin-top:4px;font-size:.72em;}
+.recipe-stat{color:var(--text-mute);}
+
+.npc-card{
+  display:flex;align-items:center;gap:9px;padding:8px 9px;
+  background:rgba(255,215,0,.04);border-radius:9px;
+  border:1px solid rgba(255,215,0,.12);margin-bottom:7px;
+}
+.npc-emoji{font-size:26px;}
+.npc-text{flex:1;}
+.npc-name{font-weight:700;font-size:.88em;color:var(--gold);}
+.npc-detail{font-size:.72em;color:var(--text-mute);line-height:1.4;}
+
+/* ===== NOTIFICATIONS ===== */
+.notif-container{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  z-index:1000;pointer-events:none;
+  display:flex;flex-direction:column;gap:6px;align-items:center;width:min(460px,94vw);
+}
+.notif{
+  background:rgba(5,2,0,.95);border:2px solid var(--gold);
+  padding:10px 20px;border-radius:10px;font-size:.88em;font-weight:600;
+  animation:notifIn .25s,notifOut .3s 2.7s forwards;
+  box-shadow:var(--shadow);text-align:center;
+}
+.notif.success{border-color:#4CAF50;background:rgba(27,94,32,.95);}
+.notif.warning{border-color:#FFC107;background:rgba(230,81,0,.9);}
+.notif.error{border-color:#f44336;background:rgba(183,28,28,.95);}
+.notif.info{border-color:#42A5F5;background:rgba(13,71,161,.9);}
+@keyframes notifIn{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes notifOut{to{opacity:0;transform:translateY(-16px);}}
+
+.score-popup{
+  position:fixed;font-size:1.4em;font-weight:900;
+  color:var(--gold);text-shadow:2px 2px 0 var(--red-dark);
+  pointer-events:none;z-index:999;animation:scorePop 1.4s ease-out forwards;
+}
+@keyframes scorePop{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-90px) scale(1.4);}}
 
 /* ===== PAUSE OVERLAY ===== */
-.pause-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 95;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+.pause-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.88);backdrop-filter:blur(6px);
+  z-index:95;justify-content:center;align-items:center;padding:20px;
 }
-
-.pause-overlay.active { display: flex; }
-
-.pause-content {
-  background: linear-gradient(135deg, var(--color-bg-dark), #4a2818);
-  border: 3px solid var(--color-gold);
-  border-radius: 16px;
-  padding: 40px;
-  text-align: center;
-  min-width: 300px;
+.pause-overlay.active{display:flex;}
+.pause-box{
+  background:linear-gradient(160deg,var(--bg-dark) 0%,var(--bg-light) 100%);
+  border:2px solid var(--gold);border-radius:18px;
+  padding:36px 32px;text-align:center;min-width:280px;max-width:340px;width:100%;
+  box-shadow:0 0 60px rgba(255,215,0,.2);
 }
-
-.pause-title {
-  color: var(--color-gold);
-  font-size: 2em;
-  font-weight: 900;
-  margin-bottom: 20px;
+.pause-title{color:var(--gold);font-size:1.8em;font-weight:900;margin-bottom:8px;}
+.pause-subtitle{color:var(--text-mute);font-size:.85em;margin-bottom:22px;}
+.pause-stats{
+  background:rgba(255,215,0,.06);border-radius:10px;
+  padding:12px;margin-bottom:22px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
 }
+.pause-stat{text-align:center;}
+.pause-stat-val{font-size:1.3em;font-weight:800;color:var(--gold);}
+.pause-stat-lbl{font-size:.72em;color:var(--text-mute);}
+.pause-btns{display:flex;flex-direction:column;gap:10px;}
 
-.pause-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* ===== END SCREEN ===== */
+.end-screen{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.97);z-index:100;
+  flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:20px;overflow-y:auto;
 }
-
-/* ===== RESPONSIVE - MOBILE ===== */
-@media (max-width: 768px) {
-  .menu-logo { font-size: 2.5em; }
-  .menu-subtitle { font-size: 1.1em; }
-  .menu-tagline { font-size: 0.9em; padding: 0 10px; }
-  
-  /* Header gọn hơn */
-  .game { padding: 8px; }
-  .game-header {
-    padding: 8px 12px;
-    gap: 6px;
-    font-size: 0.8em;
-    border-radius: 8px;
-  }
-  .stat { gap: 4px; font-size: 0.85em; }
-  .stat-icon { font-size: 1em; }
-  .stat-value { font-size: 0.95em; }
-  .timer-bar-container { 
-    width: 100%;
-    flex: 1 1 100%;
-    margin: 4px 0;
-    order: 10; /* xuống cuối */
-  }
-  .pause-btn { padding: 4px 10px; font-size: 0.8em; }
-  
-  /* Game area: stack 1 cột */
-  .game-area { 
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  /* Khách hàng nhỏ hơn */
-  .customer-card { 
-    width: calc(50% - 6px);
-    padding: 8px;
-  }
-  .customer-emoji { font-size: 35px; }
-  .customer-name { font-size: 0.9em; }
-  .customer-order { font-size: 0.75em; padding: 4px 6px; }
-  .customer-trait { font-size: 0.7em; }
-  .customers-list { gap: 8px; }
-  .customers-empty { padding: 20px; font-size: 0.9em; }
-  
-  /* Bếp + Lò nhỏ hơn */
-  .pot, .grill { height: 130px; padding: 12px; }
-  .pot-status, .grill-status { font-size: 0.85em; }
-  .cooking-area-grid { gap: 10px; }
-  
-  /* Nguyên liệu compact */
-  .ingredients-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-  }
-  .ingredient { padding: 6px 4px; }
-  .ingredient-emoji { font-size: 24px; }
-  .ingredient-name { font-size: 0.65em; line-height: 1.1; }
-  
-  /* Nút action gọn */
-  .action-btn {
-    padding: 9px 6px;
-    font-size: 0.85em;
-    min-width: 80px;
-  }
-  .action-buttons { gap: 5px; }
-  
-  /* Section padding nhỏ */
-  .section { padding: 10px; }
-  .section-title { font-size: 1em; margin-bottom: 8px; }
-  
-  /* Recipe item nhỏ */
-  .recipe-item { padding: 8px; }
-  .recipe-name { font-size: 0.9em; }
-  .recipe-ingredients { font-size: 0.75em; line-height: 1.4; }
-  
-  /* NPC info nhỏ */
-  .npc-info { padding: 6px; }
-  .npc-info-title { font-size: 0.85em; }
-  .npc-info-list { font-size: 0.78em; }
-  
-  /* Notifications: nhỏ + không che gì */
-  .notification-container {
-    top: auto;
-    bottom: 70px;
-    width: 90%;
-    max-width: 350px;
-    pointer-events: none;
-  }
-  .notification {
-    padding: 10px 16px;
-    font-size: 0.85em;
-    border-radius: 8px;
-    border-width: 1.5px;
-  }
-  
-  /* End screen */
-  .end-title { font-size: 1.8em; }
-  .end-stats { padding: 18px 20px; font-size: 0.9em; }
-  .end-stat-row { padding: 7px 0; }
-  .feedback-box { padding: 15px; font-size: 0.9em; }
-  
-  /* Cutscene */
-  .cutscene-image { font-size: 100px; }
-  .dialogue-box { padding: 15px 18px; }
-  .dialogue-text { font-size: 0.95em; line-height: 1.5; }
-  .dialogue-speaker { font-size: 1em; }
-  
-  /* Tutorial */
-  .tutorial-card { padding: 20px; }
-  .tutorial-icon { font-size: 45px; }
-  .tutorial-title { font-size: 1.2em; }
-  .tutorial-text { font-size: 0.92em; }
+.end-screen.active{display:flex;}
+.end-content{max-width:580px;width:100%;padding-bottom:30px;}
+.end-header{text-align:center;padding:20px 0 16px;}
+.end-rating{font-size:2em;margin-bottom:8px;line-height:1;}
+.end-title{font-size:2em;color:var(--gold);font-weight:900;text-shadow:3px 3px 0 var(--red-dark);}
+.end-section{
+  background:rgba(255,255,255,.05);border-radius:14px;
+  border:1px solid var(--border-gold);
+  padding:18px 22px;margin-bottom:14px;
 }
-
-/* ===== EXTRA SMALL (< 400px) ===== */
-@media (max-width: 400px) {
-  .ingredients-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .customer-card { width: 100%; }
-  .pot, .grill { height: 110px; }
-  .menu-logo { font-size: 2em; }
+.end-section-title{color:var(--gold);font-weight:700;font-size:.85em;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.end-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.95em;}
+.end-row:last-child{border-bottom:none;}
+.end-row.total{border-top:2px solid var(--gold);margin-top:6px;padding-top:12px;font-weight:800;color:var(--gold);font-size:1.1em;}
+.end-row.cost{color:#EF9A9A;}
+.end-row.profit-pos{color:#A5D6A7;font-weight:700;}
+.end-row.profit-neg{color:#EF9A9A;font-weight:700;}
+.feedback-box{
+  background:rgba(255,215,0,.05);border:2px solid rgba(255,215,0,.3);
+  border-radius:14px;padding:18px 22px;margin-bottom:14px;
+  font-style:italic;text-align:center;line-height:1.8;font-size:.95em;
 }
+.feedback-speaker{color:var(--gold);font-weight:800;font-style:normal;font-size:.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.end-btns{display:flex;flex-direction:column;gap:10px;}
 
-/* Mobile touch targets */
-@media (pointer: coarse) {
-  .ingredient { min-height: 44px; }
-  .action-btn { min-height: 44px; }
-  .btn { min-height: 44px; }
-  .customer-card { min-height: 44px; }
-  .pause-btn { min-height: 36px; }
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .menu-logo{font-size:2.4em;}
+  .menu-sub{font-size:1.1em;}
+  .chapter-bar{font-size:.75em;}
+  .game{padding:7px;}
+  .game-header{padding:7px 12px;font-size:.85em;}
+  .stat-value{font-size:1em;}
+  .timer-wrap{width:100%;flex:1 1 100%;order:10;margin:3px 0 0;}
+  .customer-card{width:calc(50% - 5px);}
+  .customer-emoji{font-size:38px;}
+  .patience-ring{width:36px;height:36px;}
+  .pot,.grill{height:140px;}
+  .ingredients-grid{grid-template-columns:repeat(5,1fr);gap:5px;}
+  .ingredient-emoji{font-size:24px;}
+  .ingredient-name{font-size:.62em;}
+  .action-btn{padding:9px 6px;font-size:.82em;min-width:72px;}
+  .cutscene-image{font-size:110px;}
+  .dialogue-text{font-size:.95em;}
+  .end-title{font-size:1.6em;}
+  .end-section{padding:14px 16px;}
+  .lantern{font-size:50px;}
+}
+@media(max-width:400px){
+  .ingredients-grid{grid-template-columns:repeat(4,1fr);}
+  .customer-card{width:100%;}
+}
+@media(pointer:coarse){
+  .ingredient,.action-btn,.btn,.customer-card,.pause-btn{min-height:44px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== ROTATE WARNING (cho mobile landscape) ===== -->
-<div id="rotateWarning" style="display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,0,0,0.95); z-index:9999; align-items:center; justify-content:center; text-align:center; padding:20px; color:#fff;">
-  <div>
-    <div style="font-size:60px; margin-bottom:20px;">📱↻</div>
-    <div style="font-size:1.3em; font-weight:700; color:#FFD700; margin-bottom:10px;">Vui lòng xoay dọc điện thoại</div>
-    <div style="opacity:0.8;">Game được tối ưu cho chế độ dọc</div>
+<!-- ===== ROTATE WARNING ===== -->
+<div id="rotateWarning" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;align-items:center;justify-content:center;text-align:center;padding:20px;color:#fff;">
+  <div><div style="font-size:56px;margin-bottom:16px;">📱↻</div>
+    <div style="font-size:1.2em;font-weight:700;color:#FFD700;margin-bottom:8px;">Vui lòng xoay dọc điện thoại</div>
+    <div style="opacity:.7;font-size:.9em;">Game tối ưu cho chế độ dọc màn hình</div>
   </div>
 </div>
 
-<!-- ===== MENU CHÍNH ===== -->
+<!-- ===== MENU ===== -->
 <div class="screen menu active" id="menuScreen">
+  <div class="menu-deco-top"></div>
+  <span class="lantern">🏮</span>
+  <span class="lantern">🏮</span>
+  <span class="lantern">🏮</span>
+  <span class="lantern">🏮</span>
+
+  <div class="menu-version">Demo v8 · Hà Nội Chapter</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
-  <div class="menu-subtitle">Tiệm Bún Số 7</div>
+  <div class="menu-sub">Tiệm Bún Số 7</div>
+  <div class="menu-divider"></div>
   <div class="menu-tagline">
-    Cụ Ông qua đời, để lại cho cháu quán bún nhỏ trong ngõ phố cổ Hà Nội cùng cuốn sổ công thức gia truyền. Hành trình khôi phục di sản bắt đầu...
+    Cụ Ông qua đời, để lại quán bún nhỏ trong ngõ phố cổ Hà Nội cùng cuốn sổ công thức gia truyền 30 năm. Hành trình của cháu bắt đầu...
   </div>
   <div class="menu-buttons">
-    <button class="btn" onclick="startStory()">▶️ Bắt đầu câu chuyện</button>
-    <button class="btn btn-secondary" onclick="startGame(true)">⚡ Chơi luôn (bỏ qua intro)</button>
-    <button class="btn btn-small" onclick="showTutorial()" style="background:#1976D2; border-color:#90CAF9;">❓ Hướng dẫn chơi</button>
+    <button class="btn" onclick="startStory()">▶ Bắt đầu câu chuyện</button>
+    <button class="btn btn-green" onclick="startGame(true)">⚡ Chơi ngay (bỏ qua intro)</button>
+    <button class="btn btn-blue btn-sm" onclick="showTutorial()">❓ Hướng dẫn chơi</button>
   </div>
   <div class="menu-credit">
-    Demo v7 • Một slice nhỏ của câu chuyện<br>
-    Cảm ơn bạn đã ghé thăm Tiệm Bún Số 7!
+    3 món · 3 khách quen · Mini-game nướng chả<br>
+    <span style="opacity:.6">Cảm ơn bạn đã ghé Tiệm Bún Số 7!</span>
   </div>
+  <div class="menu-deco-bot"></div>
 </div>
 
 <!-- ===== CUTSCENE ===== -->
 <div class="cutscene" id="cutsceneScreen">
+  <div class="cutscene-bg"></div>
   <button class="dialogue-skip" onclick="skipCutscene()">Bỏ qua ⏭</button>
   <div class="cutscene-image" id="cutsceneImage">🕯️</div>
+  <div class="dialogue-dots" id="dialogueDots"></div>
   <div class="dialogue-box">
     <div class="dialogue-speaker" id="dialogueSpeaker">Người kể chuyện</div>
     <div class="dialogue-text" id="dialogueText"></div>
@@ -1214,1355 +592,822 @@ button { font-family: inherit; }
 <div class="tutorial-overlay" id="tutorialOverlay">
   <div class="tutorial-card">
     <div class="tutorial-icon" id="tutorialIcon">👋</div>
-    <div class="tutorial-step-counter" id="tutorialStep">Bước 1/5</div>
-    <div class="tutorial-title" id="tutorialTitle">Chào mừng đến với Bếp Việt!</div>
-    <div class="tutorial-text" id="tutorialText">
-      Bạn là chủ quán Tiệm Bún Số 7. Nhiệm vụ: nấu món đúng và phục vụ khách kịp thời.
-    </div>
-    <div class="menu-buttons" style="width:auto;">
-      <button class="btn" onclick="nextTutorial()" id="tutorialNextBtn">Tiếp theo →</button>
+    <div class="tutorial-progress" id="tutorialProgress"></div>
+    <div class="tutorial-title" id="tutorialTitle">Chào mừng!</div>
+    <div class="tutorial-text" id="tutorialText"></div>
+    <div class="tutorial-btns">
+      <button class="btn btn-green btn-sm" id="tutorialPrevBtn" onclick="prevTutorial()" style="display:none">← Quay lại</button>
+      <button class="btn btn-sm" id="tutorialNextBtn" onclick="nextTutorial()">Tiếp theo →</button>
     </div>
   </div>
 </div>
 
-<!-- ===== GAME ===== -->
+<!-- ===== GAME SCREEN ===== -->
 <div class="screen game" id="gameScreen">
+
+  <!-- Chapter / Day bar -->
+  <div class="chapter-bar">
+    <div><span class="chapter-bar-name">🏮 Chương 1: Hà Nội</span> · Khai trương Tiệm Bún</div>
+    <div class="chapter-bar-day">
+      <span style="color:var(--text-mute);font-size:.8em;">Ngày</span>
+      <div class="day-pips" id="dayPips"></div>
+    </div>
+  </div>
+
+  <!-- Header bar -->
   <div class="game-header">
     <div class="stat">
       <span class="stat-icon">💰</span>
-      <span class="stat-value" id="moneyDisplay">0đ</span>
+      <div class="stat-block">
+        <div class="stat-label">Doanh thu</div>
+        <div class="stat-value" id="moneyDisplay">0đ</div>
+      </div>
     </div>
     <div class="stat">
       <span class="stat-icon">⭐</span>
-      <span class="stat-value" id="scoreDisplay">0</span>
+      <div class="stat-block">
+        <div class="stat-label">Điểm</div>
+        <div class="stat-value" id="scoreDisplay">0</div>
+      </div>
     </div>
-    <div class="timer-bar-container">
-      <div class="timer-bar" id="timerBar"></div>
+    <div class="streak-badge" id="streakBadge">
+      <span>🔥</span><span id="streakCount">2</span> liên tiếp!
     </div>
-    <div class="stat">
-      <span class="stat-icon">⏱️</span>
-      <span class="stat-value" id="timeDisplay">3:00</span>
+    <div class="timer-wrap">
+      <div class="timer-bar-bg"><div class="timer-bar" id="timerBar"></div></div>
+      <div class="timer-text">⏱ <span id="timeDisplay">3:00</span> còn lại · <span id="servedDisplay">0</span>/<span id="totalDisplay">6</span> khách</div>
     </div>
-    <div class="stat">
-      <span class="stat-icon">👥</span>
-      <span class="stat-value">
-        <span id="servedDisplay">0</span>/<span id="totalDisplay">6</span>
-      </span>
-    </div>
-    <button class="pause-btn" onclick="togglePause()">⏸ Tạm dừng</button>
+    <button class="pause-btn" onclick="togglePause()">⏸ Dừng</button>
   </div>
 
+  <!-- Main area -->
   <div class="game-area">
-    <div class="left-panel">
+    <!-- LEFT PANEL -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <!-- Customers -->
       <div class="section">
-        <div class="section-title">👥 KHÁCH HÀNG ĐANG ĐỢI</div>
+        <div class="section-title">👥 Khách hàng đang chờ</div>
         <div class="customers-list" id="customersList">
-          <div class="customers-empty">Chưa có khách... đang đợi khách đầu tiên</div>
+          <div class="customers-empty">Đang chờ khách đầu tiên...</div>
         </div>
       </div>
 
+      <!-- Cooking -->
       <div class="section">
-        <div class="section-title">🍳 BẾP NẤU</div>
-
+        <div class="section-title">🍳 Bếp nấu</div>
         <div class="cooking-area-grid">
+          <!-- Pot -->
           <div class="pot" id="pot">
+            <div class="pot-steam"><div class="steam-particle"></div><div class="steam-particle"></div><div class="steam-particle"></div></div>
             <div class="pot-status" id="potStatus">Chờ nguyên liệu</div>
-            <div class="pot-progress">
-              <div class="pot-progress-bar" id="potProgressBar"></div>
-            </div>
+            <div class="pot-progress-wrap"><div class="pot-progress-bar" id="potProgressBar"></div></div>
             <div class="pot-ingredients" id="potIngredients"></div>
           </div>
-
+          <!-- Grill -->
           <div class="grill" id="grill">
+            <div class="grill-fire">🔥🔥🔥</div>
             <div class="grill-status" id="grillStatus">🔥 Lò than nguội</div>
-            <div class="grill-progress">
-              <div class="grill-perfect-zone" id="grillPerfectZone"></div>
-              <div class="grill-progress-bar" id="grillProgressBar"></div>
+            <div class="grill-progress-wrap">
+              <div class="grill-bar-bg">
+                <div class="grill-perfect-zone" id="grillPerfectZone" style="left:40%;width:20%"></div>
+                <div class="grill-progress-bar" id="grillProgressBar"></div>
+              </div>
             </div>
-            <div style="margin-top:10px; color:#FFE082; font-size:0.85em; text-align:center;" id="grillHint">
-              Đặt nguyên liệu vào lò để nướng
-            </div>
+            <div class="grill-hint" id="grillHint">Đặt chả vào lò để nướng</div>
           </div>
         </div>
 
+        <!-- Action buttons -->
         <div class="action-buttons">
           <button class="action-btn" id="cookBtn" onclick="startCooking()" disabled>🔥 Nấu nồi</button>
-          <button class="action-btn warn" id="grillFlipBtn" onclick="flipGrill()" disabled>🔄 Lật</button>
-          <button class="action-btn warn" id="grillTakeBtn" onclick="takeGrill()" disabled>✋ Gắp ra</button>
-          <button class="action-btn success" id="serveBtn" onclick="serveSelected()" disabled>🍽️ Phục vụ</button>
-          <button class="action-btn" onclick="resetPot()" style="flex: 0 1 auto;">🗑️</button>
+          <button class="action-btn orange" id="grillFlipBtn" onclick="flipGrill()" disabled>🔄 Lật</button>
+          <button class="action-btn orange" id="grillTakeBtn" onclick="takeGrill()" disabled>✋ Gắp</button>
+          <button class="action-btn green" id="serveBtn" onclick="serveSelected()" disabled>🍽 Phục vụ</button>
+          <button class="action-btn clear-btn" onclick="resetPot()" title="Đổ bỏ nồi">🗑</button>
         </div>
 
+        <!-- Ingredients -->
         <div>
-          <div class="section-title" style="font-size: 0.95em; margin-bottom: 8px;">
-            🥕 NGUYÊN LIỆU <span style="color: var(--color-text-mute); font-weight: 400; font-size: 0.85em;">(click để thêm vào nồi)</span>
+          <div class="section-title" style="font-size:.82em;margin-bottom:8px;">
+            🥕 Nguyên liệu <span style="color:var(--text-mute);font-weight:400;">(click để cho vào nồi)</span>
           </div>
           <div class="ingredients-grid" id="ingredientsGrid"></div>
         </div>
       </div>
     </div>
 
-    <div class="right-panel">
+    <!-- RIGHT PANEL -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <!-- Recipe book -->
       <div class="section">
-        <div class="section-title">📖 SỔ CÔNG THỨC</div>
+        <div class="section-title">📖 Sổ công thức</div>
         <div class="recipe-list" id="recipeList"></div>
       </div>
-
+      <!-- NPC list -->
       <div class="section">
-        <div class="section-title">⭐ KHÁCH QUEN</div>
-        <div id="npcList" style="font-size:0.9em; line-height:1.7;"></div>
+        <div class="section-title">⭐ Khách quen</div>
+        <div id="npcList"></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== KẾT THÚC ===== -->
+<!-- ===== END SCREEN ===== -->
 <div class="end-screen" id="endScreen">
   <div class="end-content">
-    <div class="end-title" id="endTitle">🎉 KẾT THÚC!</div>
-    <div class="end-stats" id="endStats"></div>
-    <div class="feedback-box" id="feedbackBox"></div>
-    <div class="menu-buttons">
-      <button class="btn" onclick="location.reload()">🔄 Chơi lại</button>
+    <div class="end-header">
+      <div class="end-rating" id="endRating">⭐⭐⭐</div>
+      <div class="end-title" id="endTitle">Kết thúc ngày!</div>
+    </div>
+
+    <div class="end-section">
+      <div class="end-section-title">📊 Kết quả phục vụ</div>
+      <div id="endStatsServe"></div>
+    </div>
+
+    <div class="end-section">
+      <div class="end-section-title">💰 Báo cáo tài chính</div>
+      <div id="endStatsFinance"></div>
+    </div>
+
+    <div class="feedback-box">
+      <div class="feedback-speaker">👴 Cụ Ông (di nguyện)</div>
+      <span id="feedbackText"></span>
+    </div>
+
+    <div class="end-btns">
+      <button class="btn" onclick="location.reload()">🔄 Chơi lại ngày này</button>
     </div>
   </div>
 </div>
 
 <!-- ===== PAUSE ===== -->
 <div class="pause-overlay" id="pauseOverlay">
-  <div class="pause-content">
-    <div class="pause-title">⏸ TẠM DỪNG</div>
-    <div class="pause-buttons">
-      <button class="btn btn-secondary" onclick="togglePause()">▶️ Tiếp tục</button>
-      <button class="btn" onclick="if(confirm('Thoát về menu?')) location.reload();">🏠 Về menu</button>
+  <div class="pause-box">
+    <div class="pause-title">⏸ Tạm dừng</div>
+    <div class="pause-subtitle">Tiệm bún đang nghỉ giải lao...</div>
+    <div class="pause-stats" id="pauseStats"></div>
+    <div class="pause-btns">
+      <button class="btn btn-green" onclick="togglePause()">▶ Tiếp tục nấu</button>
+      <button class="btn" onclick="if(confirm('Về menu? Tiến trình sẽ mất.')) location.reload();">🏠 Về menu</button>
     </div>
   </div>
 </div>
 
 <!-- ===== NOTIFICATIONS ===== -->
-<div class="notification-container" id="notificationContainer"></div>
+<div class="notif-container" id="notifContainer"></div>
 
 <script>
-// ==============================
-// === CẤU HÌNH GAME ===
-// ==============================
+// ─────────────────────────────────────────────
+//  DỮ LIỆU GAME
+// ─────────────────────────────────────────────
 
 const RECIPES = {
-  bun_doc_mung: {
-    name: 'Bún dọc mùng',
-    emoji: '🍜',
-    ingredients: ['bun', 'suon', 'doc_mung', 'ca_chua'],
-    cookTime: 8,
-    needsGrill: false,
-    price: 40000,
-    score: 25,
-    isSignature: true,
-    description: 'Đặc sản Hà Nội - Món tâm huyết của Cụ Ông'
+  bun_doc_mung:{
+    name:'Bún dọc mùng',emoji:'🍜',
+    ingredients:['bun','suon','doc_mung','ca_chua'],
+    cookTime:8,needsGrill:false,price:40000,score:25,
+    isSignature:true,desc:'Đặc sản Hà Nội — Món tâm huyết của Cụ Ông'
   },
-  banh_mi: {
-    name: 'Bánh mì',
-    emoji: '🥖',
-    ingredients: ['banh_mi_loaf', 'pate', 'thit_nguoi', 'rau_song'],
-    cookTime: 4,
-    needsGrill: false,
-    price: 25000,
-    score: 15,
-    description: 'Bánh mì Sài Gòn - Nhanh, gọn, ngon'
+  banh_mi:{
+    name:'Bánh mì',emoji:'🥖',
+    ingredients:['banh_mi_loaf','pate','thit_nguoi','rau_song'],
+    cookTime:4,needsGrill:false,price:25000,score:15,
+    desc:'Bánh mì Sài Gòn — Nhanh, gọn, ngon'
   },
-  bun_cha: {
-    name: 'Bún chả',
-    emoji: '🍢',
-    ingredients: ['bun', 'rau_song', 'nuoc_cham'],
-    cookTime: 6,
-    needsGrill: true,
-    grillIngredient: 'cha',
-    price: 35000,
-    score: 22,
-    description: 'Đặc sản Hà Nội - Cần nướng chả đúng độ'
+  bun_cha:{
+    name:'Bún chả',emoji:'🍢',
+    ingredients:['bun','rau_song','nuoc_cham'],
+    cookTime:6,needsGrill:true,grillIngredient:'cha',
+    price:35000,score:22,
+    desc:'Đặc sản Hà Nội — Cần nướng chả đúng độ'
   }
 };
 
 const INGREDIENTS = {
-  bun: { name: 'Bún tươi', emoji: '🍜' },
-  suon: { name: 'Sườn heo', emoji: '🥩' },
-  doc_mung: { name: 'Dọc mùng', emoji: '🌿', special: true },
-  ca_chua: { name: 'Cà chua', emoji: '🍅' },
-  banh_mi_loaf: { name: 'Bánh mì', emoji: '🥖' },
-  pate: { name: 'Pate', emoji: '🟫' },
-  thit_nguoi: { name: 'Thịt nguội', emoji: '🥓' },
-  rau_song: { name: 'Rau sống', emoji: '🥬' },
-  cha: { name: 'Chả (cần nướng)', emoji: '🍖', needsGrill: true },
-  nuoc_cham: { name: 'Nước chấm', emoji: '🥣' }
+  bun:{name:'Bún tươi',emoji:'🍜'},
+  suon:{name:'Sườn heo',emoji:'🥩'},
+  doc_mung:{name:'Dọc mùng',emoji:'🌿',special:true},
+  ca_chua:{name:'Cà chua',emoji:'🍅'},
+  banh_mi_loaf:{name:'Bánh mì',emoji:'🥖'},
+  pate:{name:'Pate',emoji:'🟫'},
+  thit_nguoi:{name:'Thịt nguội',emoji:'🥓'},
+  rau_song:{name:'Rau sống',emoji:'🥬'},
+  cha:{name:'Chả (cần nướng)',emoji:'🍖',needsGrill:true},
+  nuoc_cham:{name:'Nước chấm',emoji:'🥣'}
 };
 
-// 5 NPC khách quen
 const NPCS = {
-  bac_tam: {
-    name: 'Bác Tâm',
-    emoji: '👴',
-    favorite: 'bun_doc_mung',
-    trait: 'Bạn cũ của Cụ Ông',
-    patience: 75,
-    tipMultiplier: 1.3,
-    isRegular: true,
-    quotes: {
-      arrive: 'Cho bác một tô bún dọc mùng như mọi khi nhé!',
-      happy: 'Đúng vị Cụ rồi đấy cháu...',
-      angry: 'Bác phải đi đây, hẹn lần sau...'
-    }
-  },
-  co_lan: {
-    name: 'Cô Lan',
-    emoji: '👩‍💼',
-    favorite: 'banh_mi',
-    trait: 'Doanh nhân vội vàng',
-    patience: 40,
-    tipMultiplier: 1.5,
-    isRegular: true,
-    quotes: {
-      arrive: 'Em ơi, một bánh mì nhanh nha, cô đang vội!',
-      happy: 'Cảm ơn em nhiều!',
-      angry: 'Lâu quá, cô đi quán khác đây!'
-    }
-  },
-  john: {
-    name: 'John',
-    emoji: '🧔',
-    favorite: 'bun_cha',
-    trait: 'Tây ba lô (Mỹ)',
-    patience: 90,
-    tipMultiplier: 2.0,
-    isRegular: true,
-    quotes: {
-      arrive: 'Hi, một bún chả please!',
-      happy: 'Mmm, so good! Thank you!',
-      angry: 'Sorry, I have to go...'
-    }
-  },
-  khach_thuong: {
-    name: 'Khách lạ',
-    emoji: '🧑',
-    favorite: null,
-    trait: 'Khách qua đường',
-    patience: 60,
-    tipMultiplier: 1.0,
-    isRegular: false,
-    quotes: {
-      arrive: 'Cho tôi một suất nhé!',
-      happy: 'Cảm ơn!',
-      angry: 'Bỏ đi đây...'
-    }
-  }
+  bac_tam:{name:'Bác Tâm',emoji:'👴',favorite:'bun_doc_mung',trait:'Bạn cũ của Cụ Ông',patience:75,tip:1.3,isRegular:true,
+    quotes:{arrive:'Cho bác một tô bún dọc mùng như mọi khi nhé!',happy:'Đúng vị Cụ rồi đấy cháu...',angry:'Bác phải đi đây, hẹn lần sau...'}},
+  co_lan:{name:'Cô Lan',emoji:'👩‍💼',favorite:'banh_mi',trait:'Doanh nhân vội vàng',patience:40,tip:1.5,isRegular:true,
+    quotes:{arrive:'Em ơi, một bánh mì nhanh nha, cô đang vội!',happy:'Nhanh thật! Cảm ơn em.',angry:'Lâu quá, cô đi quán khác đây!'}},
+  john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:2.0,isRegular:true,
+    quotes:{arrive:'Hi! Một bún chả please!',happy:'Mmm, so good! Thank you!',angry:'Sorry, I have to go...'}},
+  khach_thuong:{name:'Khách lạ',emoji:'🧑',favorite:null,trait:'Khách qua đường',patience:60,tip:1.0,isRegular:false,
+    quotes:{arrive:'Cho tôi xem thực đơn nào.',happy:'Ngon đó, lần sau ghé lại!',angry:'Bỏ đi đây...'}}
 };
 
-// ==============================
-// === GAME STATE ===
-// ==============================
+const DIALOGUES=[
+  {image:'🕯️',speaker:'Người kể chuyện',text:'Hà Nội, một sáng mùa thu se lạnh... Trong ngõ nhỏ phố cổ, Cụ Ông vừa qua đời sau bao năm gắn bó với quán bún.'},
+  {image:'📜',speaker:'Cháu (bạn)',text:'Cụ ơi... Cháu đã về. Cuốn sổ công thức này, Cụ đã viết suốt 30 năm để truyền lại cho cháu.'},
+  {image:'👴',speaker:'Cụ Ông (di nguyện)',text:'Cháu của ông... Quán Tiệm Bún Số 7 này đã 30 năm. Bao nhiêu khách quen, bao nhiêu kỷ niệm. Ông tin cháu sẽ giữ được hương vị...'},
+  {image:'🍜',speaker:'Cụ Ông (di nguyện)',text:'Đặc biệt là Bún dọc mùng — đó là món ông tự hào nhất. Bí quyết nằm trong từng cọng dọc mùng cháu chọn, từng giờ ninh xương. Cố lên!'},
+  {image:'🏮',speaker:'Người kể chuyện',text:'Sáng mai, Tiệm Bún Số 7 sẽ mở cửa lần đầu sau khi Cụ mất. Bác Tâm và những người bạn cũ đang chờ cháu...'}
+];
 
-let gameState = {
-  money: 0,
-  score: 0,
-  timeRemaining: 180,
-  customersServed: 0,
-  customersLeft: 0,
-  totalCustomers: 6,
-  customersSpawned: 0,
-  customers: [],
-  pot: {
-    ingredients: [],
-    status: 'idle', // idle | cooking | done
-    finishedDish: null
-  },
-  grill: {
-    status: 'idle', // idle | grilling | flipped | done | burnt
-    progress: 0,
-    flipped: false,
-    quality: null // perfect | good | ok | bad
-  },
-  selectedCustomer: null,
-  isPaused: false,
-  isGameOver: false,
-  perfectGrills: 0,
-  burntGrills: 0,
-  npcServed: { bac_tam: 0, co_lan: 0, john: 0 }
+const TUTORIAL=[
+  {icon:'👋',title:'Chào mừng đến Tiệm Bún!',text:'Bạn là chủ quán mới. Nhiệm vụ: nấu đúng món và phục vụ khách kịp thời trong 3 phút. Sẵn sàng chưa?'},
+  {icon:'👥',title:'Hiểu về khách hàng',text:'Khách sẽ đến và gọi món. Đồng hồ tròn bên cạnh họ là độ kiên nhẫn — xanh→vàng→đỏ. Hết kiên nhẫn là khách bỏ đi, mất điểm!'},
+  {icon:'🥕',title:'Nấu món',text:'Click vào nguyên liệu để cho vào nồi. Xem Sổ công thức bên phải để biết công thức. Khi đủ nguyên liệu, nhấn "Nấu nồi".'},
+  {icon:'🔥',title:'Mini-game nướng chả',text:'Bún chả cần nướng chả riêng. Cho chả vào lò → đợi thanh tiến trình vào VÙNG XANH (40-60%) → Lật → đợi tiếp → Gắp ra đúng vùng xanh = PERFECT!'},
+  {icon:'🍽',title:'Cách phục vụ',text:'Sau khi nấu xong: CLICK chọn khách trước (viền vàng), rồi nhấn "Phục vụ". Phục vụ đúng món để được điểm. Sai món bị trừ 5 điểm!'},
+  {icon:'⭐',title:'Khách quen đặc biệt',text:'Bác Tâm, Cô Lan, John là khách quen của Cụ Ông — có badge ⭐. Phục vụ đúng món họ thích để nhận tip cao hơn (x1.3 → x2.0)!'},
+  {icon:'🎯',title:'Mục tiêu hôm nay',text:'Phục vụ ít nhất 4/6 khách để hoàn thành ngày đầu tiên. Đừng lo — Cụ Ông luôn dõi theo từ trên cao. Chúc may mắn!'}
+];
+
+// ─────────────────────────────────────────────
+//  GAME STATE
+// ─────────────────────────────────────────────
+
+let G = {
+  money:0,score:0,timeRemaining:180,
+  customersServed:0,customersLeft:0,totalCustomers:6,customersSpawned:0,
+  customers:[],
+  pot:{ingredients:[],status:'idle',finishedDish:null},
+  grill:{status:'idle',progress:0,flipped:false,quality:null,flipQuality:null},
+  selectedCustomer:null,
+  isPaused:false,isGameOver:false,
+  perfectGrills:0,burntGrills:0,
+  streak:0,maxStreak:0,
+  npcServed:{bac_tam:0,co_lan:0,john:0}
 };
 
-// ==============================
-// === CỐT TRUYỆN (CUTSCENE) ===
-// ==============================
+let timerInterval=null,spawnInterval=null,patienceInterval=null,grillInterval=null;
 
-const DIALOGUES = [
-  {
-    image: '🕯️',
-    speaker: 'Người kể chuyện',
-    text: 'Hà Nội, một sáng mùa thu se lạnh... Trong ngõ nhỏ phố cổ, Cụ Ông vừa qua đời sau bao năm gắn bó với quán bún của mình.'
-  },
-  {
-    image: '📜',
-    speaker: 'Cháu (bạn)',
-    text: 'Cụ ơi... Cháu đã về. Cuốn sổ công thức này, Cụ đã viết suốt 30 năm để truyền lại cho cháu.'
-  },
-  {
-    image: '👴',
-    speaker: 'Cụ Ông (di nguyện)',
-    text: 'Cháu của ông... Quán Tiệm Bún Số 7 này đã 30 năm rồi. Bao nhiêu khách quen, bao nhiêu kỷ niệm. Ông tin cháu sẽ giữ được hương vị của ông...'
-  },
-  {
-    image: '🍜',
-    speaker: 'Cụ Ông (di nguyện)',
-    text: 'Đặc biệt là Bún dọc mùng - đó là món ông tự hào nhất. Bí quyết nằm trong từng cọng dọc mùng cháu chọn, từng giờ ninh xương... Cố lên nhé, cháu của ông!'
-  },
-  {
-    image: '🏮',
-    speaker: 'Người kể chuyện',
-    text: 'Sáng mai, Tiệm Bún Số 7 sẽ mở cửa lần đầu sau khi Cụ mất. Khách quen của Cụ đang chờ cháu...'
-  }
-];
+// ─────────────────────────────────────────────
+//  TUTORIAL
+// ─────────────────────────────────────────────
 
-// ==============================
-// === TUTORIAL ===
-// ==============================
+let tutIdx=0;
 
-const TUTORIAL_STEPS = [
-  {
-    icon: '👋',
-    title: 'Chào mừng đến với Tiệm Bún!',
-    text: 'Bạn là chủ quán mới. Nhiệm vụ: nấu món đúng và phục vụ khách đúng giờ trong 3 phút.'
-  },
-  {
-    icon: '👥',
-    title: 'Khách hàng',
-    text: 'Khách sẽ đến và gọi món. Mỗi khách có thanh kiên nhẫn (xanh→vàng→đỏ). Hết kiên nhẫn → khách bỏ đi và bạn mất uy tín.'
-  },
-  {
-    icon: '🥕',
-    title: 'Nấu món',
-    text: 'Click vào nguyên liệu để cho vào nồi. Xem Sổ công thức bên phải để biết món nào cần gì. Khi đủ nguyên liệu → click nút "Nấu nồi".'
-  },
-  {
-    icon: '🔥',
-    title: 'Nướng (cho Bún chả)',
-    text: 'Bún chả cần nướng chả. Đặt chả vào lò → đợi đến vùng XANH → click "Lật" → tiếp tục đợi → click "Gắp ra" đúng vùng XANH để được PERFECT!'
-  },
-  {
-    icon: '🍽️',
-    title: 'Phục vụ',
-    text: 'Sau khi nấu xong: CLICK chọn khách trước, rồi click "Phục vụ". Phục vụ ĐÚNG MÓN khách gọi để được điểm. Sai món sẽ bị trừ điểm!'
-  },
-  {
-    icon: '⭐',
-    title: 'Khách quen có thưởng',
-    text: 'Bác Tâm, Cô Lan, John là khách quen của Cụ - phục vụ đúng món họ thích sẽ được tip cao hơn (1.3x đến 2x). Để ý badge ⭐ trên đầu họ!'
-  },
-  {
-    icon: '🎯',
-    title: 'Sẵn sàng chưa?',
-    text: 'Mục tiêu: phục vụ ít nhất 4/6 khách để hoàn thành ngày đầu tiên. Đừng lo, Cụ Ông luôn dõi theo bạn từ trên cao...'
-  }
-];
-
-let tutorialIndex = 0;
-let cameFromMenu = true;
-
-function showTutorial() {
-  cameFromMenu = (gameState.customersSpawned === 0);
-  tutorialIndex = 0;
+function showTutorial(){
+  tutIdx=0;
   document.getElementById('tutorialOverlay').classList.add('active');
   renderTutorial();
 }
 
-function renderTutorial() {
-  const step = TUTORIAL_STEPS[tutorialIndex];
-  document.getElementById('tutorialIcon').textContent = step.icon;
-  document.getElementById('tutorialStep').textContent = `Bước ${tutorialIndex + 1}/${TUTORIAL_STEPS.length}`;
-  document.getElementById('tutorialTitle').textContent = step.title;
-  document.getElementById('tutorialText').textContent = step.text;
-  
-  const btn = document.getElementById('tutorialNextBtn');
-  if (tutorialIndex === TUTORIAL_STEPS.length - 1) {
-    btn.textContent = '✅ Đã hiểu';
-  } else {
-    btn.textContent = 'Tiếp theo →';
-  }
+function renderTutorial(){
+  const s=TUTORIAL[tutIdx];
+  document.getElementById('tutorialIcon').textContent=s.icon;
+  document.getElementById('tutorialTitle').textContent=s.title;
+  document.getElementById('tutorialText').textContent=s.text;
+  document.getElementById('tutorialNextBtn').textContent=tutIdx===TUTORIAL.length-1?'✅ Bắt đầu chơi!':'Tiếp theo →';
+  document.getElementById('tutorialPrevBtn').style.display=tutIdx>0?'block':'none';
+  // Progress pips
+  const pBar=document.getElementById('tutorialProgress');
+  pBar.innerHTML='';
+  TUTORIAL.forEach((_,i)=>{
+    const pip=document.createElement('div');
+    pip.className='tutorial-pip'+(i<tutIdx?' done':i===tutIdx?' current':'');
+    pBar.appendChild(pip);
+  });
 }
 
-function nextTutorial() {
-  tutorialIndex++;
-  if (tutorialIndex >= TUTORIAL_STEPS.length) {
+function nextTutorial(){
+  tutIdx++;
+  if(tutIdx>=TUTORIAL.length){
     document.getElementById('tutorialOverlay').classList.remove('active');
     return;
   }
   renderTutorial();
 }
 
-// ==============================
-// === CUTSCENE ===
-// ==============================
+function prevTutorial(){
+  if(tutIdx>0){tutIdx--;renderTutorial();}
+}
 
-let dialogueIndex = 0;
-let isTyping = false;
-let typeInterval = null;
+// ─────────────────────────────────────────────
+//  CUTSCENE
+// ─────────────────────────────────────────────
 
-function startStory() {
+let dlgIdx=0,isTyping=false,typeTimer=null;
+
+function startStory(){
   document.getElementById('menuScreen').classList.remove('active');
   document.getElementById('cutsceneScreen').classList.add('active');
-  dialogueIndex = 0;
-  showDialogue();
+  dlgIdx=0;
+  buildDots();showDialogue();
 }
 
-function showDialogue() {
-  if (dialogueIndex >= DIALOGUES.length) {
-    document.getElementById('cutsceneScreen').classList.remove('active');
-    startGame();
-    return;
-  }
-  const d = DIALOGUES[dialogueIndex];
-  document.getElementById('cutsceneImage').textContent = d.image;
-  document.getElementById('dialogueSpeaker').textContent = d.speaker;
-
-  const textEl = document.getElementById('dialogueText');
-  textEl.textContent = '';
-  isTyping = true;
-  let i = 0;
-  
-  if (typeInterval) clearInterval(typeInterval);
-  
-  typeInterval = setInterval(() => {
-    if (i < d.text.length) {
-      textEl.textContent += d.text[i];
-      i++;
-    } else {
-      clearInterval(typeInterval);
-      isTyping = false;
-    }
-  }, 35);
+function buildDots(){
+  const c=document.getElementById('dialogueDots');
+  c.innerHTML='';
+  DIALOGUES.forEach((_,i)=>{
+    const d=document.createElement('div');d.className='dialogue-dot'+(i===0?' active':'');d.id='dot'+i;c.appendChild(d);
+  });
 }
 
-function skipCutscene() {
-  if (typeInterval) clearInterval(typeInterval);
+function showDialogue(){
+  if(dlgIdx>=DIALOGUES.length){document.getElementById('cutsceneScreen').classList.remove('active');startGame();return;}
+  const d=DIALOGUES[dlgIdx];
+  document.getElementById('cutsceneImage').textContent=d.image;
+  document.getElementById('dialogueSpeaker').textContent=d.speaker;
+  const el=document.getElementById('dialogueText');el.textContent='';
+  DIALOGUES.forEach((_,i)=>{
+    const dot=document.getElementById('dot'+i);
+    if(dot) dot.className='dialogue-dot'+(i===dlgIdx?' active':i<dlgIdx?' done':'');
+  });
+  isTyping=true;let i=0;
+  if(typeTimer)clearInterval(typeTimer);
+  typeTimer=setInterval(()=>{
+    if(i<d.text.length){el.textContent+=d.text[i++];}
+    else{clearInterval(typeTimer);isTyping=false;}
+  },28);
+}
+
+function skipCutscene(){
+  if(typeTimer)clearInterval(typeTimer);
   document.getElementById('cutsceneScreen').classList.remove('active');
   startGame();
 }
 
-document.getElementById('cutsceneScreen').addEventListener('click', (e) => {
-  if (e.target.classList.contains('dialogue-skip')) return;
-  
-  if (isTyping) {
-    // Nếu đang gõ, hoàn thành text ngay
-    if (typeInterval) clearInterval(typeInterval);
-    document.getElementById('dialogueText').textContent = DIALOGUES[dialogueIndex].text;
-    isTyping = false;
-  } else {
-    // Đã gõ xong, chuyển dialogue tiếp theo
-    dialogueIndex++;
-    showDialogue();
-  }
+document.getElementById('cutsceneScreen').addEventListener('click',e=>{
+  if(e.target.classList.contains('dialogue-skip'))return;
+  if(isTyping){
+    if(typeTimer)clearInterval(typeTimer);
+    document.getElementById('dialogueText').textContent=DIALOGUES[dlgIdx].text;
+    isTyping=false;
+  } else {dlgIdx++;showDialogue();}
 });
 
-// ==============================
-// === GAME LOOP ===
-// ==============================
+// ─────────────────────────────────────────────
+//  GAME INIT
+// ─────────────────────────────────────────────
 
-let gameTimerInterval = null;
-let spawnTimerInterval = null;
-let patienceTimerInterval = null;
-let grillTimerInterval = null;
-
-function startGame(skipIntro) {
-  console.log('[startGame] Called with skipIntro:', skipIntro);
-  
-  try {
-    // Ẩn tất cả screen khác
-    const menuScreen = document.getElementById('menuScreen');
-    const cutsceneScreen = document.getElementById('cutsceneScreen');
-    const gameScreen = document.getElementById('gameScreen');
-    
-    if (!menuScreen || !cutsceneScreen || !gameScreen) {
-      console.error('[startGame] Cannot find screen elements!');
-      alert('Lỗi: Không tìm thấy màn hình game. Vui lòng tải lại trang.');
-      return;
-    }
-    
-    menuScreen.classList.remove('active');
-    cutsceneScreen.classList.remove('active');
-    gameScreen.classList.add('active');
-    
-    console.log('[startGame] Screens switched. gameScreen classes:', gameScreen.className);
-    
-    renderIngredients();
-    renderRecipes();
-    renderNPCList();
-    
-    console.log('[startGame] Rendered initial UI');
-  } catch (err) {
-    console.error('[startGame] Error:', err);
-    alert('Lỗi khi bắt đầu game: ' + err.message);
-    return;
-  }
-  
-  // Spawn khách đầu tiên sau 1 giây
-  setTimeout(() => spawnCustomer(), 1000);
-  setTimeout(() => spawnCustomer(), 4500);
-  
-  // Spawn khách định kỳ
-  spawnTimerInterval = setInterval(() => {
-    if (gameState.isPaused || gameState.isGameOver) return;
-    if (gameState.customersSpawned < gameState.totalCustomers && gameState.customers.length < 3) {
-      spawnCustomer();
-    }
-  }, 11000);
-  
-  // Game timer (đếm ngược)
-  gameTimerInterval = setInterval(() => {
-    if (gameState.isPaused || gameState.isGameOver) return;
-    updateGameTimer();
-  }, 1000);
-  
-  // Patience timer (kiên nhẫn khách)
-  patienceTimerInterval = setInterval(() => {
-    if (gameState.isPaused || gameState.isGameOver) return;
-    updateCustomerPatience();
-  }, 1000);
+function startGame(skipIntro){
+  document.getElementById('menuScreen').classList.remove('active');
+  document.getElementById('cutsceneScreen').classList.remove('active');
+  document.getElementById('gameScreen').classList.add('active');
+  buildDayPips();
+  renderIngredients();renderRecipes();renderNPCList();
+  setTimeout(()=>spawnCustomer(),900);
+  setTimeout(()=>spawnCustomer(),4200);
+  spawnInterval=setInterval(()=>{
+    if(G.isPaused||G.isGameOver)return;
+    if(G.customersSpawned<G.totalCustomers&&G.customers.filter(c=>!c.served&&!c.left).length<3)spawnCustomer();
+  },10000);
+  timerInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickTimer();},1000);
+  patienceInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickPatience();},1000);
 }
 
-function updateGameTimer() {
-  gameState.timeRemaining--;
-  const min = Math.floor(gameState.timeRemaining / 60);
-  const sec = gameState.timeRemaining % 60;
-  document.getElementById('timeDisplay').textContent = `${min}:${sec.toString().padStart(2, '0')}`;
-  document.getElementById('timerBar').style.width = (gameState.timeRemaining / 180 * 100) + '%';
-  
-  if (gameState.timeRemaining <= 0) {
-    endLevel('timeout');
-    return;
-  }
-  
-  if (gameState.customersServed + gameState.customersLeft >= gameState.totalCustomers) {
-    endLevel('completed');
+function buildDayPips(){
+  const c=document.getElementById('dayPips');c.innerHTML='';
+  for(let i=0;i<5;i++){
+    const p=document.createElement('div');
+    p.className='day-pip'+(i===0?' current':i<0?' done':'');
+    c.appendChild(p);
   }
 }
 
-function spawnCustomer() {
-  if (gameState.customersSpawned >= gameState.totalCustomers) return;
-  
-  // Chọn NPC: khoảng 60% là khách quen, 40% là khách lạ
+// ─────────────────────────────────────────────
+//  GAME TIMER
+// ─────────────────────────────────────────────
+
+function tickTimer(){
+  G.timeRemaining--;
+  const m=Math.floor(G.timeRemaining/60),s=G.timeRemaining%60;
+  document.getElementById('timeDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
+  document.getElementById('timerBar').style.width=(G.timeRemaining/180*100)+'%';
+  if(G.timeRemaining<=0){endLevel('timeout');return;}
+  checkEndCondition();
+}
+
+// ─────────────────────────────────────────────
+//  SPAWN CUSTOMERS
+// ─────────────────────────────────────────────
+
+function spawnCustomer(){
+  if(G.customersSpawned>=G.totalCustomers)return;
   let npcKey;
-  const rand = Math.random();
-  
-  if (gameState.customersSpawned === 0) {
-    // Khách đầu tiên LUÔN là Bác Tâm
-    npcKey = 'bac_tam';
-  } else if (rand < 0.6) {
-    // Khách quen ngẫu nhiên
-    const regulars = ['bac_tam', 'co_lan', 'john'];
-    npcKey = regulars[Math.floor(Math.random() * regulars.length)];
-    
-    // Tránh trùng lặp khách quen đang có trong quán
-    const existingRegulars = gameState.customers
-      .filter(c => !c.served && !c.left && c.npcKey)
-      .map(c => c.npcKey);
-    
-    if (existingRegulars.includes(npcKey)) {
-      npcKey = 'khach_thuong';
-    }
-  } else {
-    npcKey = 'khach_thuong';
-  }
-  
-  const npc = NPCS[npcKey];
-  
-  // Chọn món: nếu khách quen thì luôn món yêu thích
-  let recipe;
-  if (npc.favorite) {
-    recipe = npc.favorite;
-  } else {
-    const recipeKeys = Object.keys(RECIPES);
-    recipe = recipeKeys[Math.floor(Math.random() * recipeKeys.length)];
-  }
-  
-  const customer = {
-    id: Date.now() + Math.random(),
-    npcKey: npcKey,
-    name: npc.name,
-    emoji: npc.emoji,
-    trait: npc.trait,
-    isRegular: npc.isRegular,
-    tipMultiplier: npc.tipMultiplier,
-    quotes: npc.quotes,
-    order: recipe,
-    patience: npc.patience,
-    maxPatience: npc.patience,
-    spawned: Date.now()
+  const r=Math.random();
+  const existing=G.customers.filter(c=>!c.served&&!c.left).map(c=>c.npcKey);
+  if(G.customersSpawned===0){npcKey='bac_tam';}
+  else if(r<.6){
+    const regs=['bac_tam','co_lan','john'];
+    const avail=regs.filter(k=>!existing.includes(k));
+    npcKey=avail.length?avail[Math.floor(Math.random()*avail.length)]:'khach_thuong';
+  } else {npcKey='khach_thuong';}
+  const npc=NPCS[npcKey];
+  let recipe=npc.favorite??(Object.keys(RECIPES)[Math.floor(Math.random()*3)]);
+  const c={
+    id:Date.now()+Math.random(),npcKey,
+    name:npc.name,emoji:npc.emoji,trait:npc.trait,
+    isRegular:npc.isRegular,tip:npc.tip,quotes:npc.quotes,
+    order:recipe,patience:npc.patience,maxPatience:npc.patience,
   };
-  
-  gameState.customers.push(customer);
-  gameState.customersSpawned++;
+  G.customers.push(c);G.customersSpawned++;
   renderCustomers();
-  
-  showNotification(`👥 ${npc.name} đến quán: "${npc.quotes.arrive}"`, 'info');
+  notify(`👥 ${npc.name}: "${npc.quotes.arrive}"`, 'info');
 }
 
-function updateCustomerPatience() {
-  let changed = false;
-  gameState.customers.forEach(c => {
-    if (c.served || c.left) return;
-    c.patience--;
-    changed = true;
-    if (c.patience <= 0) {
-      c.left = true;
-      gameState.customersLeft++;
-      showNotification(`😡 ${c.name}: "${c.quotes.angry}"`, 'error');
-      
-      // Nếu khách quen bỏ đi, mất nhiều điểm hơn
-      if (c.isRegular) {
-        gameState.score = Math.max(0, gameState.score - 15);
-      } else {
-        gameState.score = Math.max(0, gameState.score - 5);
-      }
-      
-      setTimeout(() => {
-        gameState.customers = gameState.customers.filter(x => x.id !== c.id);
-        renderCustomers();
-        checkEndCondition();
-      }, 1500);
+// ─────────────────────────────────────────────
+//  PATIENCE
+// ─────────────────────────────────────────────
+
+function tickPatience(){
+  let changed=false;
+  G.customers.forEach(c=>{
+    if(c.served||c.left)return;
+    c.patience--;changed=true;
+    if(c.patience<=0){
+      c.left=true;G.customersLeft++;
+      G.streak=0;updateStreak();
+      notify(`😡 ${c.name}: "${c.quotes.angry}"`, 'error');
+      G.score=Math.max(0,G.score-(c.isRegular?15:5));
+      setTimeout(()=>{G.customers=G.customers.filter(x=>x.id!==c.id);renderCustomers();checkEndCondition();},1400);
     }
   });
-  if (changed) renderCustomers();
+  if(changed)renderCustomers();
+  updateUI();
 }
 
-function checkEndCondition() {
-  if (gameState.customersServed + gameState.customersLeft >= gameState.totalCustomers) {
-    endLevel('completed');
-  }
+function checkEndCondition(){
+  if(G.customersServed+G.customersLeft>=G.totalCustomers)endLevel('done');
 }
 
-// ==============================
-// === RENDER FUNCTIONS ===
-// ==============================
+// ─────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────
 
-function renderCustomers() {
-  const list = document.getElementById('customersList');
-  
-  const activeCustomers = gameState.customers.filter(c => !c.served && !c.left);
-  if (activeCustomers.length === 0 && gameState.customersSpawned === 0) {
-    list.innerHTML = '<div class="customers-empty">Chưa có khách... đang đợi khách đầu tiên</div>';
-    return;
-  }
-  
-  list.innerHTML = '';
-  
-  gameState.customers.forEach(c => {
-    if (c.served) {
-      const card = document.createElement('div');
-      card.className = 'customer-card served';
-      card.innerHTML = `
-        <div class="customer-emoji">😊</div>
-        <div class="customer-name">${c.name}</div>
-        <div class="customer-order">"${c.quotes.happy}"</div>
-      `;
-      list.appendChild(card);
-      return;
-    }
-    
-    if (c.left) {
-      const card = document.createElement('div');
-      card.className = 'customer-card angry';
-      card.innerHTML = `
-        <div class="customer-emoji">😡</div>
-        <div class="customer-name">${c.name}</div>
-        <div class="customer-order">"${c.quotes.angry}"</div>
-      `;
-      list.appendChild(card);
-      return;
-    }
-    
-    const card = document.createElement('div');
-    card.className = 'customer-card';
-    if (gameState.selectedCustomer === c.id) {
-      card.classList.add('selected');
-    }
-    card.onclick = () => selectCustomer(c.id);
-    
-    const recipe = RECIPES[c.order];
-    const patiencePercent = (c.patience / c.maxPatience) * 100;
-    const patienceColor = patiencePercent > 50 ? '#4CAF50' : patiencePercent > 25 ? '#FFC107' : '#f44336';
-    
-    const specialBadge = c.isRegular ? '<div class="customer-special-badge">⭐</div>' : '';
-    const nameClass = c.isRegular ? 'customer-name customer-name-special' : 'customer-name';
-    
-    card.innerHTML = `
-      ${specialBadge}
+function renderCustomers(){
+  const list=document.getElementById('customersList');
+  const active=G.customers.filter(c=>!c.served&&!c.left);
+  if(active.length===0&&G.customersSpawned===0){list.innerHTML='<div class="customers-empty">Đang chờ khách đầu tiên...</div>';return;}
+  list.innerHTML='';
+  G.customers.forEach(c=>{
+    const card=document.createElement('div');
+    if(c.served){card.className='customer-card served';card.innerHTML=`<div class="customer-emoji">😊</div><div class="customer-name">${c.name}</div><div class="customer-order-label">"${c.quotes.happy}"</div>`;list.appendChild(card);return;}
+    if(c.left){card.className='customer-card angry';card.innerHTML=`<div class="customer-emoji">😡</div><div class="customer-name">${c.name}</div><div class="customer-order-label">"${c.quotes.angry}"</div>`;list.appendChild(card);return;}
+    card.className='customer-card'+(G.selectedCustomer===c.id?' selected':'');
+    card.onclick=()=>selectCustomer(c.id);
+    const pct=(c.patience/c.maxPatience)*100;
+    const ringColor=pct>60?'#4CAF50':pct>30?'#FFC107':'#f44336';
+    const badge=c.isRegular?'<div class="customer-badge">⭐</div>':'';
+    card.innerHTML=`
+      ${badge}
       <div class="customer-emoji">${c.emoji}</div>
-      <div class="${nameClass}">${c.name}</div>
-      <div class="customer-order">${recipe.emoji} ${recipe.name}</div>
-      <div class="customer-patience">
-        <div class="customer-patience-bar" style="width: ${patiencePercent}%; background: ${patienceColor}"></div>
+      <div class="customer-name${c.isRegular?' regular':''}">${c.name}</div>
+      <div class="customer-order-label">${RECIPES[c.order].emoji} ${RECIPES[c.order].name}</div>
+      <div class="patience-ring-wrap">
+        <div class="patience-ring" style="--ring-pct:${pct}%;--ring-color:${ringColor}" data-sec="${Math.ceil(c.patience)}s"></div>
       </div>
-      <div class="customer-trait">${c.trait}</div>
-    `;
+      <div class="customer-trait">${c.trait}</div>`;
     list.appendChild(card);
   });
-  
-  document.getElementById('servedDisplay').textContent = gameState.customersServed;
+  document.getElementById('servedDisplay').textContent=G.customersServed;
 }
 
-function selectCustomer(id) {
-  gameState.selectedCustomer = id;
-  renderCustomers();
-  updateServeBtn();
-  
-  const c = gameState.customers.find(x => x.id === id);
-  if (c) {
-    showNotification(`✓ Đã chọn: ${c.name} - cần ${RECIPES[c.order].name}`, 'info');
-  }
+function selectCustomer(id){
+  G.selectedCustomer=id;renderCustomers();updateServeBtn();
+  const c=G.customers.find(x=>x.id===id);
+  if(c)notify(`✓ Chọn: ${c.name} · cần ${RECIPES[c.order].name}`,'info');
 }
 
-function renderIngredients() {
-  const grid = document.getElementById('ingredientsGrid');
-  grid.innerHTML = '';
-  Object.keys(INGREDIENTS).forEach(key => {
-    const ing = INGREDIENTS[key];
-    const div = document.createElement('div');
-    div.className = 'ingredient' + (ing.special ? ' special' : '');
-    div.id = 'ing-' + key;
-    
-    if (ing.needsGrill) {
-      div.onclick = () => putOnGrill(key);
-    } else {
-      div.onclick = () => addIngredient(key);
-    }
-    
-    div.innerHTML = `
-      <span class="ingredient-emoji">${ing.emoji}</span>
-      <div class="ingredient-name">${ing.name}</div>
-    `;
+function renderIngredients(){
+  const grid=document.getElementById('ingredientsGrid');grid.innerHTML='';
+  Object.keys(INGREDIENTS).forEach(k=>{
+    const ing=INGREDIENTS[k];
+    const div=document.createElement('div');
+    div.className='ingredient'+(ing.special?' special':'');div.id='ing-'+k;
+    div.onclick=()=>ing.needsGrill?putOnGrill(k):addIngredient(k);
+    div.innerHTML=`<span class="ingredient-emoji">${ing.emoji}</span><div class="ingredient-name">${ing.name}</div>`;
     grid.appendChild(div);
   });
 }
 
-function renderRecipes() {
-  const list = document.getElementById('recipeList');
-  list.innerHTML = '';
-  Object.values(RECIPES).forEach(r => {
-    const div = document.createElement('div');
-    div.className = 'recipe-item' + (r.isSignature ? ' signature' : '');
-    
-    const ingredientsList = r.ingredients
-      .map(k => `${INGREDIENTS[k].emoji} ${INGREDIENTS[k].name}`)
-      .join(' + ');
-    
-    let extraInfo = '';
-    if (r.needsGrill) {
-      extraInfo = `<br><span style="color:#FF9800">+ ${INGREDIENTS[r.grillIngredient].emoji} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`;
-    }
-    
-    div.innerHTML = `
+function renderRecipes(){
+  const list=document.getElementById('recipeList');list.innerHTML='';
+  Object.entries(RECIPES).forEach(([key,r])=>{
+    const div=document.createElement('div');
+    div.className='recipe-item'+(r.isSignature?' signature':'');
+    div.id='recipe-'+key;
+    const ings=r.ingredients.map(k=>`${INGREDIENTS[k].emoji} ${INGREDIENTS[k].name}`).join(' + ');
+    const grillExtra=r.needsGrill?`<br><span style="color:#FF8A65">+ ${INGREDIENTS[r.grillIngredient].emoji} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`:'';
+    div.innerHTML=`
+      ${r.isSignature?'<div><span class="recipe-tag sig">⭐ Đặc biệt</span></div>':''}
       <div class="recipe-name">${r.emoji} ${r.name}</div>
-      <div class="recipe-ingredients">
-        ${ingredientsList}${extraInfo}<br>
-        <span style="color:#FFD700">💰 ${r.price.toLocaleString('vi-VN')}đ</span> • 
-        <span style="color:#90CAF9">⏱️ ${r.cookTime}s</span> • 
-        <span style="color:#A5D6A7">⭐ ${r.score}</span>
-      </div>
-    `;
+      <div class="recipe-ings">${ings}${grillExtra}</div>
+      <div class="recipe-stats">
+        <span class="recipe-stat">💰 ${r.price.toLocaleString('vi-VN')}đ</span>
+        <span class="recipe-stat">⏱ ${r.cookTime}s</span>
+        <span class="recipe-stat">⭐ ${r.score}đ</span>
+      </div>`;
     list.appendChild(div);
   });
 }
 
-function renderNPCList() {
-  const list = document.getElementById('npcList');
-  list.innerHTML = `
-    <div class="npc-info">
-      <div class="npc-info-title">👴 Bác Tâm</div>
-      <div class="npc-info-list">Thích: 🍜 Bún dọc mùng • Tip x1.3</div>
-    </div>
-    <div class="npc-info">
-      <div class="npc-info-title">👩‍💼 Cô Lan</div>
-      <div class="npc-info-list">Thích: 🥖 Bánh mì • Vội • Tip x1.5</div>
-    </div>
-    <div class="npc-info">
-      <div class="npc-info-title">🧔 John</div>
-      <div class="npc-info-list">Thích: 🍢 Bún chả • Kiên nhẫn • Tip x2</div>
-    </div>
-  `;
+function renderNPCList(){
+  document.getElementById('npcList').innerHTML=`
+    <div class="npc-card"><div class="npc-emoji">👴</div><div class="npc-text"><div class="npc-name">Bác Tâm</div><div class="npc-detail">Thích 🍜 Bún dọc mùng · Kiên nhẫn 75s · Tip ×1.3</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">👩‍💼</div><div class="npc-text"><div class="npc-name">Cô Lan</div><div class="npc-detail">Thích 🥖 Bánh mì · Vội (40s) · Tip ×1.5</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">🧔</div><div class="npc-text"><div class="npc-name">John</div><div class="npc-detail">Thích 🍢 Bún chả · Kiên nhẫn 90s · Tip ×2.0</div></div></div>`;
 }
 
-// ==============================
-// === NẤU ĂN ===
-// ==============================
+// ─────────────────────────────────────────────
+//  COOKING
+// ─────────────────────────────────────────────
 
-function addIngredient(key) {
-  if (gameState.pot.status === 'cooking' || gameState.pot.status === 'done') {
-    showNotification('Đang nấu rồi! Đợi xong đã.', 'warning');
-    return;
-  }
-  if (gameState.pot.ingredients.includes(key)) {
-    showNotification('Đã có nguyên liệu này rồi.', 'warning');
-    return;
-  }
-  if (gameState.pot.ingredients.length >= 5) {
-    showNotification('Quá nhiều nguyên liệu!', 'error');
-    return;
-  }
-  
-  gameState.pot.ingredients.push(key);
+function addIngredient(key){
+  if(G.pot.status==='cooking'||G.pot.status==='done'){notify('Đang nấu rồi!','warning');return;}
+  if(G.pot.ingredients.includes(key)){notify('Nguyên liệu đã có.','warning');return;}
+  if(G.pot.ingredients.length>=5){notify('Quá nhiều nguyên liệu!','error');return;}
+  G.pot.ingredients.push(key);
+  document.getElementById('ing-'+key).classList.add('in-pot');
   updatePot();
-  
-  const matchingRecipe = findMatchingRecipe();
-  if (matchingRecipe) {
-    document.getElementById('cookBtn').disabled = false;
-    document.getElementById('potStatus').textContent = `✅ Đủ NL cho: ${RECIPES[matchingRecipe].name}!`;
+  const match=findMatch();
+  if(match){
+    document.getElementById('cookBtn').disabled=false;
+    document.getElementById('potStatus').textContent=`✅ Đủ cho: ${RECIPES[match].name}!`;
+    highlightRecipe(match);
   }
 }
 
-function findMatchingRecipe() {
-  const ings = [...gameState.pot.ingredients].sort().join(',');
-  return Object.keys(RECIPES).find(key => {
-    const r = RECIPES[key];
-    return [...r.ingredients].sort().join(',') === ings;
+function findMatch(){
+  const ings=[...G.pot.ingredients].sort().join(',');
+  return Object.keys(RECIPES).find(k=>[...RECIPES[k].ingredients].sort().join(',')===ings)||null;
+}
+
+function highlightRecipe(key){
+  document.querySelectorAll('.recipe-item').forEach(el=>el.classList.remove('active'));
+  if(key)document.getElementById('recipe-'+key)?.classList.add('active');
+}
+
+function updatePot(){
+  const tags=document.getElementById('potIngredients');tags.innerHTML='';
+  G.pot.ingredients.forEach(k=>{
+    const t=document.createElement('span');t.className='pot-ing-tag';t.textContent=INGREDIENTS[k].emoji;t.title=INGREDIENTS[k].name;tags.appendChild(t);
   });
+  if(!G.pot.ingredients.length){document.getElementById('potStatus').textContent='Chờ nguyên liệu';document.getElementById('cookBtn').disabled=true;highlightRecipe(null);}
+  else if(!findMatch()){document.getElementById('potStatus').textContent=`${G.pot.ingredients.length} nguyên liệu — chưa khớp`;document.getElementById('cookBtn').disabled=true;}
 }
 
-function updatePot() {
-  const tags = document.getElementById('potIngredients');
-  tags.innerHTML = '';
-  gameState.pot.ingredients.forEach(key => {
-    const tag = document.createElement('span');
-    tag.className = 'pot-ingredient-tag';
-    tag.textContent = INGREDIENTS[key].emoji;
-    tag.title = INGREDIENTS[key].name;
-    tags.appendChild(tag);
-  });
-  
-  if (gameState.pot.ingredients.length === 0) {
-    document.getElementById('potStatus').textContent = 'Chờ nguyên liệu';
-    document.getElementById('cookBtn').disabled = true;
-  } else if (!findMatchingRecipe()) {
-    document.getElementById('potStatus').textContent = `${gameState.pot.ingredients.length} NL - chưa khớp công thức`;
-    document.getElementById('cookBtn').disabled = true;
-  }
-}
-
-function startCooking() {
-  const recipe = findMatchingRecipe();
-  if (!recipe) {
-    showNotification('Nguyên liệu không khớp công thức!', 'error');
-    return;
-  }
-  
-  gameState.pot.status = 'cooking';
-  gameState.pot.finishedDish = recipe;
+function startCooking(){
+  const recipe=findMatch();
+  if(!recipe){notify('Nguyên liệu chưa khớp công thức!','error');return;}
+  G.pot.status='cooking';G.pot.finishedDish=recipe;
   document.getElementById('pot').classList.add('cooking');
-  document.getElementById('cookBtn').disabled = true;
-  document.getElementById('potStatus').textContent = '🔥 Đang nấu...';
-  
-  const cookTime = RECIPES[recipe].cookTime;
-  let elapsed = 0;
-  const cookInterval = setInterval(() => {
-    if (gameState.isPaused) return;
-    elapsed += 0.1;
-    const progress = Math.min(100, (elapsed / cookTime) * 100);
-    document.getElementById('potProgressBar').style.width = progress + '%';
-    
-    if (elapsed >= cookTime) {
-      clearInterval(cookInterval);
-      gameState.pot.status = 'done';
-      document.getElementById('pot').classList.remove('cooking');
-      document.getElementById('pot').classList.add('done');
-      document.getElementById('potStatus').textContent = `✨ ${RECIPES[recipe].name} - SẴN SÀNG!`;
-      updateServeBtn();
-      showNotification(`✅ Nấu xong ${RECIPES[recipe].name}!`, 'success');
+  document.getElementById('cookBtn').disabled=true;
+  document.getElementById('potStatus').textContent='🔥 Đang nấu...';
+  const t=RECIPES[recipe].cookTime;let e=0;
+  const iv=setInterval(()=>{
+    if(G.isPaused)return;
+    e+=0.1;const p=Math.min(100,e/t*100);
+    document.getElementById('potProgressBar').style.width=p+'%';
+    if(e>=t){
+      clearInterval(iv);G.pot.status='done';
+      document.getElementById('pot').classList.remove('cooking');document.getElementById('pot').classList.add('done');
+      document.getElementById('potStatus').textContent=`✨ ${RECIPES[recipe].name} — Sẵn sàng!`;
+      updateServeBtn();notify(`✅ Nấu xong ${RECIPES[recipe].name}!`,'success');
     }
-  }, 100);
+  },100);
 }
 
-// ==============================
-// === MINI-GAME NƯỚNG ===
-// ==============================
+// ─────────────────────────────────────────────
+//  GRILL
+// ─────────────────────────────────────────────
 
-function putOnGrill(key) {
-  if (gameState.grill.status !== 'idle') {
-    showNotification('Lò đang bận!', 'warning');
-    return;
-  }
-  if (key !== 'cha') {
-    showNotification('Chỉ có chả mới cần nướng', 'warning');
-    return;
-  }
-  
-  gameState.grill.status = 'grilling';
-  gameState.grill.progress = 0;
-  gameState.grill.flipped = false;
-  
+function putOnGrill(key){
+  if(G.grill.status!=='idle'){notify('Lò đang bận!','warning');return;}
+  if(key!=='cha'){notify('Chỉ chả mới cần nướng.','warning');return;}
+  G.grill.status='grilling';G.grill.progress=0;G.grill.flipped=false;
   document.getElementById('grill').classList.add('grilling');
-  document.getElementById('grillStatus').textContent = '🔥 Đang nướng - mặt 1...';
-  document.getElementById('grillHint').textContent = 'Click "Lật" khi đến vùng XANH (40-60%)';
-  document.getElementById('grillFlipBtn').disabled = false;
-  
-  // Vẽ vùng PERFECT 40-60%
-  const zone = document.getElementById('grillPerfectZone');
-  zone.style.left = '40%';
-  zone.style.width = '20%';
-  
-  if (grillTimerInterval) clearInterval(grillTimerInterval);
-  
-  grillTimerInterval = setInterval(() => {
-    if (gameState.isPaused) return;
-    if (gameState.grill.status === 'idle') {
-      clearInterval(grillTimerInterval);
-      return;
-    }
-    
-    gameState.grill.progress += 0.8;
-    document.getElementById('grillProgressBar').style.width = gameState.grill.progress + '%';
-    
-    // Cảnh báo cháy
-    if (gameState.grill.progress > 110) {
-      gameState.grill.status = 'idle';
-      gameState.grill.quality = 'burnt';
-      gameState.burntGrills++;
+  document.getElementById('grillStatus').textContent='🔥 Mặt 1 đang nướng...';
+  document.getElementById('grillHint').textContent='Nhấn "Lật" khi vào vùng XANH (40–60%)';
+  document.getElementById('grillFlipBtn').disabled=false;
+  document.getElementById('grillPerfectZone').style.left='40%';document.getElementById('grillPerfectZone').style.width='20%';
+  if(grillInterval)clearInterval(grillInterval);
+  grillInterval=setInterval(()=>{
+    if(G.isPaused||G.grill.status==='idle'){clearInterval(grillInterval);return;}
+    G.grill.progress+=0.8;
+    document.getElementById('grillProgressBar').style.width=G.grill.progress+'%';
+    if(G.grill.progress>112){
+      G.grill.status='idle';G.grill.quality='burnt';G.burntGrills++;
+      clearInterval(grillInterval);
       document.getElementById('grill').classList.remove('grilling');
-      document.getElementById('grillStatus').textContent = '🔥 CHÁY ĐEN!';
-      document.getElementById('grillHint').textContent = '❌ Phải bỏ và làm lại';
-      document.getElementById('grillProgressBar').style.background = '#212121';
-      document.getElementById('grillFlipBtn').disabled = true;
-      document.getElementById('grillTakeBtn').disabled = false;
-      showNotification('🔥 Chả cháy đen rồi!', 'error');
-      clearInterval(grillTimerInterval);
+      document.getElementById('grillStatus').textContent='💀 CHÁY ĐEN!';
+      document.getElementById('grillHint').textContent='Nhấn Gắp để bỏ đi, làm lại.';
+      document.getElementById('grillProgressBar').style.background='#212121';
+      document.getElementById('grillFlipBtn').disabled=true;document.getElementById('grillTakeBtn').disabled=false;
+      notify('🔥 Chả bị cháy!','error');
     }
-  }, 100);
+  },100);
 }
 
-function flipGrill() {
-  if (gameState.grill.status !== 'grilling' || gameState.grill.flipped) {
-    return;
-  }
-  
-  gameState.grill.flipped = true;
-  const p = gameState.grill.progress;
-  
-  let flipQuality;
-  if (p >= 40 && p <= 60) {
-    flipQuality = 'perfect';
-    showNotification('✨ Lật PERFECT!', 'success');
-  } else if (p >= 30 && p <= 70) {
-    flipQuality = 'good';
-    showNotification('👍 Lật Good', 'info');
-  } else if (p < 30) {
-    flipQuality = 'too_early';
-    showNotification('⚠️ Lật quá sớm - chả bị sống', 'warning');
-  } else {
-    flipQuality = 'too_late';
-    showNotification('⚠️ Lật quá muộn - 1 mặt cháy', 'warning');
-  }
-  
-  gameState.grill.flipQuality = flipQuality;
-  
-  // Reset progress, đổi vùng PERFECT cho lần gắp ra
-  gameState.grill.progress = 0;
-  document.getElementById('grillProgressBar').style.width = '0%';
-  document.getElementById('grillStatus').textContent = '🔥 Đang nướng - mặt 2...';
-  document.getElementById('grillHint').textContent = 'Click "Gắp ra" khi đến vùng XANH (40-60%)';
-  document.getElementById('grillFlipBtn').disabled = true;
-  document.getElementById('grillTakeBtn').disabled = false;
+function flipGrill(){
+  if(G.grill.status!=='grilling'||G.grill.flipped)return;
+  G.grill.flipped=true;const p=G.grill.progress;
+  let q;
+  if(p>=40&&p<=60){q='perfect';notify('✨ Lật PERFECT!','success');}
+  else if(p>=30&&p<=70){q='good';notify('👍 Lật tốt','info');}
+  else if(p<30){q='too_early';notify('⚠️ Lật quá sớm','warning');}
+  else{q='too_late';notify('⚠️ Lật quá muộn','warning');}
+  G.grill.flipQuality=q;G.grill.progress=0;
+  document.getElementById('grillProgressBar').style.width='0%';
+  document.getElementById('grillStatus').textContent='🔥 Mặt 2 đang nướng...';
+  document.getElementById('grillHint').textContent='Nhấn "Gắp" khi vào vùng XANH (40–60%)';
+  document.getElementById('grillFlipBtn').disabled=true;document.getElementById('grillTakeBtn').disabled=false;
 }
 
-function takeGrill() {
-  if (gameState.grill.status === 'idle' && gameState.grill.quality === 'burnt') {
-    // Bỏ chả cháy
-    resetGrill();
-    return;
-  }
-  
-  if (gameState.grill.status !== 'grilling' || !gameState.grill.flipped) {
-    showNotification('Chưa lật chả!', 'warning');
-    return;
-  }
-  
-  if (grillTimerInterval) clearInterval(grillTimerInterval);
-  
-  const p = gameState.grill.progress;
-  let takeQuality;
-  
-  if (p >= 40 && p <= 60) {
-    takeQuality = 'perfect';
-  } else if (p >= 30 && p <= 70) {
-    takeQuality = 'good';
-  } else if (p < 30) {
-    takeQuality = 'undercooked';
-  } else {
-    takeQuality = 'overcooked';
-  }
-  
-  // Tính chất lượng tổng
-  const flipQ = gameState.grill.flipQuality;
-  let finalQuality;
-  
-  if (flipQ === 'perfect' && takeQuality === 'perfect') {
-    finalQuality = 'perfect';
-    gameState.perfectGrills++;
-    showNotification('🌟 PERFECT! Chả vàng ruộm!', 'success');
-    gameState.score += 5;
-  } else if ((flipQ === 'perfect' || flipQ === 'good') && (takeQuality === 'perfect' || takeQuality === 'good')) {
-    finalQuality = 'good';
-    showNotification('👍 Chả nướng tốt', 'success');
-    gameState.score += 2;
-  } else if (flipQ === 'too_early' || takeQuality === 'undercooked') {
-    finalQuality = 'undercooked';
-    showNotification('⚠️ Chả còn sống - khách không thích', 'warning');
-  } else {
-    finalQuality = 'overcooked';
-    showNotification('⚠️ Chả cháy - khách không thích', 'warning');
-  }
-  
-  gameState.grill.status = 'done';
-  gameState.grill.quality = finalQuality;
-  
+function takeGrill(){
+  if(G.grill.status==='idle'&&G.grill.quality==='burnt'){resetGrill();return;}
+  if(G.grill.status!=='grilling'||!G.grill.flipped){notify('Chưa lật chả!','warning');return;}
+  if(grillInterval)clearInterval(grillInterval);
+  const p=G.grill.progress;
+  let tq=p>=40&&p<=60?'perfect':p>=30&&p<=70?'good':p<30?'undercooked':'overcooked';
+  const fq=G.grill.flipQuality;
+  let final;
+  if(fq==='perfect'&&tq==='perfect'){final='perfect';G.perfectGrills++;G.score+=5;notify('🌟 PERFECT! Chả vàng ruộm!','success');}
+  else if((fq==='perfect'||fq==='good')&&(tq==='perfect'||tq==='good')){final='good';G.score+=2;notify('👍 Chả nướng tốt!','success');}
+  else if(fq==='too_early'||tq==='undercooked'){final='undercooked';notify('⚠️ Chả còn sống','warning');}
+  else{final='overcooked';notify('⚠️ Chả hơi cháy','warning');}
+  G.grill.status='done';G.grill.quality=final;
   document.getElementById('grill').classList.remove('grilling');
-  document.getElementById('grillStatus').textContent = `🍖 Chả ${finalQuality.toUpperCase()} - sẵn sàng!`;
-  document.getElementById('grillHint').textContent = 'Tự động dùng khi phục vụ Bún chả';
-  document.getElementById('grillTakeBtn').disabled = true;
-  
-  updateUI();
+  document.getElementById('grillStatus').textContent=`🍖 Chả ${final.toUpperCase()} — sẵn sàng!`;
+  document.getElementById('grillHint').textContent='Tự động dùng khi phục vụ Bún chả';
+  document.getElementById('grillTakeBtn').disabled=true;updateUI();
 }
 
-function resetGrill() {
-  gameState.grill.status = 'idle';
-  gameState.grill.progress = 0;
-  gameState.grill.flipped = false;
-  gameState.grill.quality = null;
-  gameState.grill.flipQuality = null;
-  
+function resetGrill(){
+  G.grill={status:'idle',progress:0,flipped:false,quality:null,flipQuality:null};
+  if(grillInterval)clearInterval(grillInterval);
   document.getElementById('grill').classList.remove('grilling');
-  document.getElementById('grillProgressBar').style.width = '0%';
-  document.getElementById('grillProgressBar').style.background = 'linear-gradient(90deg, #ff5722, #ff9800, #ffc107)';
-  document.getElementById('grillStatus').textContent = '🔥 Lò than nguội';
-  document.getElementById('grillHint').textContent = 'Đặt nguyên liệu vào lò để nướng';
-  document.getElementById('grillFlipBtn').disabled = true;
-  document.getElementById('grillTakeBtn').disabled = true;
-  
-  if (grillTimerInterval) clearInterval(grillTimerInterval);
+  document.getElementById('grillProgressBar').style.width='0%';
+  document.getElementById('grillProgressBar').style.background='linear-gradient(90deg,#ff5722,#ff9800,#ffc107)';
+  document.getElementById('grillStatus').textContent='🔥 Lò than nguội';
+  document.getElementById('grillHint').textContent='Đặt chả vào lò để nướng';
+  document.getElementById('grillFlipBtn').disabled=true;document.getElementById('grillTakeBtn').disabled=true;
 }
 
-// ==============================
-// === PHỤC VỤ ===
-// ==============================
+// ─────────────────────────────────────────────
+//  SERVE
+// ─────────────────────────────────────────────
 
-function updateServeBtn() {
-  const btn = document.getElementById('serveBtn');
-  if (gameState.pot.status === 'done' && gameState.selectedCustomer) {
-    btn.disabled = false;
-  } else {
-    btn.disabled = true;
-  }
+function updateServeBtn(){
+  const btn=document.getElementById('serveBtn');
+  const ready=G.pot.status==='done'&&G.selectedCustomer;
+  btn.disabled=!ready;
+  if(ready)btn.classList.add('serve-ready');else btn.classList.remove('serve-ready');
 }
 
-function serveSelected() {
-  if (gameState.pot.status !== 'done') {
-    showNotification('Chưa có món sẵn sàng', 'warning');
-    return;
+function serveSelected(){
+  if(G.pot.status!=='done'){notify('Chưa có món!','warning');return;}
+  if(!G.selectedCustomer){notify('Chọn khách trước!','warning');return;}
+  const c=G.customers.find(x=>x.id===G.selectedCustomer);
+  if(!c||c.served||c.left){notify('Khách không còn ở quán.','error');return;}
+  const ordered=RECIPES[c.order],finished=G.pot.finishedDish;
+  if(c.order!==finished){
+    notify(`❌ Khách cần ${ordered.name}, không phải món này!`,'error');
+    G.score=Math.max(0,G.score-5);G.streak=0;updateStreak();updateUI();return;
   }
-  if (!gameState.selectedCustomer) {
-    showNotification('Hãy chọn khách trước!', 'warning');
-    return;
+  if(ordered.needsGrill&&(G.grill.status!=='done'||!G.grill.quality||G.grill.quality==='burnt'||G.grill.quality==='undercooked')){
+    notify('⚠️ Bún chả cần chả nướng tốt!','warning');return;
   }
-  
-  const customer = gameState.customers.find(c => c.id === gameState.selectedCustomer);
-  if (!customer || customer.served || customer.left) {
-    showNotification('Khách không tồn tại', 'error');
-    return;
-  }
-  
-  const orderRecipe = RECIPES[customer.order];
-  const finishedRecipe = gameState.pot.finishedDish;
-  
-  // Kiểm tra món có khớp không
-  if (customer.order !== finishedRecipe) {
-    showNotification(`❌ Khách gọi ${orderRecipe.name}, không phải món này!`, 'error');
-    gameState.score = Math.max(0, gameState.score - 5);
-    updateUI();
-    return;
-  }
-  
-  // Kiểm tra món có cần grill không
-  if (orderRecipe.needsGrill) {
-    if (gameState.grill.status !== 'done' || !gameState.grill.quality || gameState.grill.quality === 'burnt' || gameState.grill.quality === 'undercooked') {
-      showNotification(`⚠️ Bún chả cần chả nướng tốt!`, 'warning');
-      return;
-    }
-  }
-  
-  // Tính tiền + điểm
-  let earned = orderRecipe.price;
-  let scoreEarned = orderRecipe.score;
-  let bonusText = '';
-  
-  // Bonus signature dish
-  if (orderRecipe.isSignature) {
-    earned = Math.floor(earned * 1.2);
-    scoreEarned += 5;
-    bonusText += ' [Signature +20%]';
-  }
-  
-  // Bonus khách quen
-  if (customer.isRegular && customer.tipMultiplier > 1) {
-    earned = Math.floor(earned * customer.tipMultiplier);
-    scoreEarned = Math.floor(scoreEarned * 1.2);
-    bonusText += ` [Tip x${customer.tipMultiplier}]`;
-  }
-  
-  // Bonus chả nướng PERFECT
-  if (orderRecipe.needsGrill && gameState.grill.quality === 'perfect') {
-    earned = Math.floor(earned * 1.15);
-    bonusText += ' [Grill PERFECT +15%]';
-  }
-  
-  // Bonus speed (kiên nhẫn còn nhiều)
-  const patiencePercent = customer.patience / customer.maxPatience;
-  if (patiencePercent > 0.7) {
-    scoreEarned += 3;
-    bonusText += ' [Nhanh +3⭐]';
-  }
-  
-  gameState.money += earned;
-  gameState.score += scoreEarned;
-  customer.served = true;
-  gameState.customersServed++;
-  
-  // Đếm phục vụ NPC
-  if (customer.npcKey && gameState.npcServed[customer.npcKey] !== undefined) {
-    gameState.npcServed[customer.npcKey]++;
-  }
-  
-  showNotification(
-    `🎉 +${earned.toLocaleString('vi-VN')}đ • +${scoreEarned}⭐${bonusText}`,
-    'success'
-  );
-  
-  // Tạo popup điểm bay lên
-  showScorePopup(`+${earned.toLocaleString('vi-VN')}đ`);
-  
-  // Reset bếp
-  resetPot();
-  if (orderRecipe.needsGrill) {
-    resetGrill();
-  }
-  
-  setTimeout(() => {
-    gameState.customers = gameState.customers.filter(c => c.id !== customer.id);
-    gameState.selectedCustomer = null;
-    renderCustomers();
-    checkEndCondition();
-  }, 1500);
-  
-  updateUI();
-  renderCustomers();
+  // Calculate earnings
+  let earned=ordered.price,sc=ordered.score,bonuses=[];
+  if(ordered.isSignature){earned=Math.floor(earned*1.2);sc+=5;bonuses.push('Signature +20%');}
+  if(c.isRegular&&c.tip>1){earned=Math.floor(earned*c.tip);sc=Math.floor(sc*1.15);bonuses.push(`Tip ×${c.tip}`);}
+  if(ordered.needsGrill&&G.grill.quality==='perfect'){earned=Math.floor(earned*1.15);bonuses.push('Grill PERFECT +15%');}
+  const pp=c.patience/c.maxPatience;
+  if(pp>0.7){sc+=3;bonuses.push('Nhanh +3⭐');}
+  G.money+=earned;G.score+=sc;c.served=true;G.customersServed++;
+  if(G.npcServed[c.npcKey]!==undefined)G.npcServed[c.npcKey]++;
+  G.streak++;if(G.streak>G.maxStreak)G.maxStreak=G.streak;
+  updateStreak();
+  const bonusStr=bonuses.length?' · '+bonuses.join(', '):'';
+  notify(`🎉 +${earned.toLocaleString('vi-VN')}đ · +${sc}⭐${bonusStr}`,'success');
+  scorePopup('+'+earned.toLocaleString('vi-VN')+'đ');
+  resetPot();if(ordered.needsGrill)resetGrill();
+  setTimeout(()=>{G.customers=G.customers.filter(x=>x.id!==c.id);G.selectedCustomer=null;renderCustomers();checkEndCondition();},1400);
+  updateUI();renderCustomers();
 }
 
-function resetPot() {
-  gameState.pot.ingredients = [];
-  gameState.pot.status = 'idle';
-  gameState.pot.finishedDish = null;
-  document.getElementById('pot').classList.remove('cooking', 'done');
-  document.getElementById('potProgressBar').style.width = '0%';
-  document.getElementById('cookBtn').disabled = true;
-  document.getElementById('serveBtn').disabled = true;
-  updatePot();
+function resetPot(){
+  G.pot={ingredients:[],status:'idle',finishedDish:null};
+  document.getElementById('pot').classList.remove('cooking','done');
+  document.getElementById('potProgressBar').style.width='0%';
+  document.getElementById('cookBtn').disabled=true;
+  document.getElementById('serveBtn').disabled=true;
+  document.getElementById('serveBtn').classList.remove('serve-ready');
+  document.getElementById('potIngredients').innerHTML='';
+  document.getElementById('potStatus').textContent='Chờ nguyên liệu';
+  document.querySelectorAll('.ingredient.in-pot').forEach(el=>el.classList.remove('in-pot'));
+  highlightRecipe(null);
 }
 
-// ==============================
-// === UI HELPERS ===
-// ==============================
+// ─────────────────────────────────────────────
+//  UI HELPERS
+// ─────────────────────────────────────────────
 
-function updateUI() {
-  document.getElementById('moneyDisplay').textContent = gameState.money.toLocaleString('vi-VN') + 'đ';
-  document.getElementById('scoreDisplay').textContent = gameState.score;
-  document.getElementById('servedDisplay').textContent = gameState.customersServed;
+function updateUI(){
+  document.getElementById('moneyDisplay').textContent=G.money.toLocaleString('vi-VN')+'đ';
+  document.getElementById('scoreDisplay').textContent=G.score;
+  document.getElementById('servedDisplay').textContent=G.customersServed;
 }
 
-function showNotification(text, type) {
-  const container = document.getElementById('notificationContainer');
-  const n = document.createElement('div');
-  n.className = 'notification ' + (type || '');
-  n.textContent = text;
-  container.appendChild(n);
-  setTimeout(() => n.remove(), 3000);
+function updateStreak(){
+  const el=document.getElementById('streakBadge');
+  const cnt=document.getElementById('streakCount');
+  if(G.streak>=2){el.classList.add('visible');cnt.textContent=G.streak;}
+  else{el.classList.remove('visible');}
 }
 
-function showScorePopup(text) {
-  const popup = document.createElement('div');
-  popup.className = 'score-popup';
-  popup.textContent = text;
-  popup.style.left = (Math.random() * 60 + 20) + '%';
-  popup.style.top = '40%';
-  document.body.appendChild(popup);
-  setTimeout(() => popup.remove(), 1500);
+function notify(text,type){
+  const c=document.getElementById('notifContainer');
+  const n=document.createElement('div');n.className='notif '+(type||'');n.textContent=text;
+  c.appendChild(n);setTimeout(()=>n.remove(),3000);
 }
 
-// ==============================
-// === PAUSE ===
-// ==============================
-
-function togglePause() {
-  gameState.isPaused = !gameState.isPaused;
-  const overlay = document.getElementById('pauseOverlay');
-  if (gameState.isPaused) {
-    overlay.classList.add('active');
-  } else {
-    overlay.classList.remove('active');
-  }
+function scorePopup(text){
+  const p=document.createElement('div');p.className='score-popup';p.textContent=text;
+  p.style.left=(20+Math.random()*60)+'%';p.style.top='45%';
+  document.body.appendChild(p);setTimeout(()=>p.remove(),1400);
 }
 
-// ==============================
-// === KẾT THÚC LEVEL ===
-// ==============================
+// ─────────────────────────────────────────────
+//  PAUSE
+// ─────────────────────────────────────────────
 
-function endLevel(reason) {
-  if (gameState.isGameOver) return;
-  gameState.isGameOver = true;
-  
-  if (gameTimerInterval) clearInterval(gameTimerInterval);
-  if (spawnTimerInterval) clearInterval(spawnTimerInterval);
-  if (patienceTimerInterval) clearInterval(patienceTimerInterval);
-  if (grillTimerInterval) clearInterval(grillTimerInterval);
-  
+function togglePause(){
+  G.isPaused=!G.isPaused;
+  const ov=document.getElementById('pauseOverlay');
+  if(G.isPaused){
+    ov.classList.add('active');
+    document.getElementById('pauseStats').innerHTML=`
+      <div class="pause-stat"><div class="pause-stat-val">${G.money.toLocaleString('vi-VN')}đ</div><div class="pause-stat-lbl">Doanh thu</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.score}</div><div class="pause-stat-lbl">Điểm số</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.customersServed}/${G.totalCustomers}</div><div class="pause-stat-lbl">Đã phục vụ</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.streak}</div><div class="pause-stat-lbl">Streak</div></div>`;
+  } else {ov.classList.remove('active');}
+}
+
+// ─────────────────────────────────────────────
+//  END LEVEL
+// ─────────────────────────────────────────────
+
+function endLevel(reason){
+  if(G.isGameOver)return;G.isGameOver=true;
+  [timerInterval,spawnInterval,patienceInterval,grillInterval].forEach(iv=>{if(iv)clearInterval(iv);});
   document.getElementById('gameScreen').classList.remove('active');
   document.getElementById('endScreen').classList.add('active');
-  
-  // Tính P&L
-  const totalRevenue = gameState.money;
-  const operatingCost = 200000; // mặt bằng + điện nước (chương 1)
-  const profit = totalRevenue - operatingCost;
-  
-  // Đánh giá chất lượng phục vụ
-  const successRate = gameState.customersServed / gameState.totalCustomers;
-  let rating, title, feedback;
-  
-  if (successRate >= 1.0) {
-    rating = '⭐⭐⭐⭐⭐';
-    title = '🏆 HOÀN HẢO!';
-    feedback = 'Cháu của ông... cháu đã làm rất tốt! Tất cả khách đều hài lòng. Ông tự hào lắm. Tiếp tục phát huy nhé, cháu trai/gái yêu quý của ông.';
-  } else if (successRate >= 0.66) {
-    rating = '⭐⭐⭐⭐';
-    title = '🎉 RẤT TỐT!';
-    feedback = 'Cháu đã cố gắng tốt rồi. Còn vài khách bỏ đi nhưng đó là chuyện thường ngày. Quan trọng là cháu đã có lãi sau khi trừ chi phí. Ông tin cháu sẽ giỏi hơn nữa.';
-  } else if (successRate >= 0.5) {
-    rating = '⭐⭐⭐';
-    title = '👍 ĐẠT YÊU CẦU';
-    feedback = 'Ngày đầu tiên... khó khăn là điều tất yếu. Cháu đã phục vụ được hơn nửa khách - đó là một khởi đầu. Mai cháu nhớ chú ý hơn đến khách quen của ông nhé.';
-  } else if (successRate >= 0.33) {
-    rating = '⭐⭐';
-    title = '😅 CẦN CỐ GẮNG';
-    feedback = 'Khó khăn ngày đầu là bình thường, cháu ạ. Ông cũng từng vậy. Quan trọng là cháu không bỏ cuộc. Ngày mai làm lại nhé. Hãy nhớ: phục vụ khách quen trước - họ là người ủng hộ quán mình.';
-  } else {
-    rating = '⭐';
-    title = '😢 NGÀY KHÓ KHĂN';
-    feedback = 'Cháu của ông... đừng nản lòng. Mọi đầu bếp giỏi đều từng có ngày như vậy. Hãy thử lại - lần này chú ý đến công thức và thanh kiên nhẫn của khách. Ông luôn ở bên cháu.';
-  }
-  
-  document.getElementById('endTitle').textContent = title;
-  
-  // Hiển thị stats
-  let statsHTML = `
-    <div class="end-stat-row">
-      <span>👥 Khách phục vụ</span>
-      <span><strong>${gameState.customersServed}/${gameState.totalCustomers}</strong></span>
-    </div>
-    <div class="end-stat-row">
-      <span>😡 Khách bỏ đi</span>
-      <span>${gameState.customersLeft}</span>
-    </div>
-    <div class="end-stat-row">
-      <span>⭐ Điểm số</span>
-      <span><strong>${gameState.score}</strong></span>
-    </div>`;
-  
-  if (gameState.perfectGrills > 0) {
-    statsHTML += `<div class="end-stat-row"><span>🌟 Nướng PERFECT</span><span>${gameState.perfectGrills} lần</span></div>`;
-  }
-  
-  // NPC stats
-  const totalNPCsServed = Object.values(gameState.npcServed).reduce((a, b) => a + b, 0);
-  if (totalNPCsServed > 0) {
-    statsHTML += `<div class="end-stat-row"><span>⭐ Phục vụ khách quen</span><span>${totalNPCsServed} lần</span></div>`;
-  }
-  
-  statsHTML += `
-    <div class="end-stat-row" style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 12px; margin-top: 8px;">
-      <span>💰 Doanh thu</span>
-      <span>${totalRevenue.toLocaleString('vi-VN')}đ</span>
-    </div>
-    <div class="end-stat-row cost">
-      <span>💸 Chi phí ngày</span>
-      <span>-${operatingCost.toLocaleString('vi-VN')}đ</span>
-    </div>
-    <div class="end-stat-row">
-      <span>${profit >= 0 ? '✅ LỢI NHUẬN' : '❌ THUA LỖ'}</span>
+  const sr=G.customersServed/G.totalCustomers;
+  let rating,title,fb;
+  if(sr>=1){rating='⭐⭐⭐⭐⭐';title='🏆 Hoàn hảo!';fb='Cháu của ông... tất cả khách đều hài lòng. Ông tự hào lắm. Tiếp tục phát huy nhé!';}
+  else if(sr>=.67){rating='⭐⭐⭐⭐';title='🎉 Rất tốt!';fb='Còn vài khách bỏ đi nhưng điều đó bình thường. Quan trọng là cháu đã có lãi. Ông tin cháu sẽ giỏi hơn!';}
+  else if(sr>=.5){rating='⭐⭐⭐';title='👍 Đạt yêu cầu';fb='Ngày đầu tiên, khó khăn là tất yếu. Phục vụ được hơn nửa khách là khởi đầu tốt. Mai chú ý khách quen của ông nhé.';}
+  else if(sr>=.33){rating='⭐⭐';title='😅 Cần cố gắng';fb='Ông cũng từng có ngày như vậy cháu ơi. Đừng nản lòng — ngày mai làm lại, nhớ phục vụ khách quen trước.';}
+  else{rating='⭐';title='😢 Ngày khó khăn';fb='Cháu của ông... đừng bỏ cuộc. Mọi đầu bếp giỏi đều có ngày thất bại. Thử lại, chú ý công thức và kiên nhẫn khách nhé!';}
+  document.getElementById('endRating').textContent=rating;
+  document.getElementById('endTitle').textContent=title;
+  document.getElementById('feedbackText').textContent=fb;
+  const npcTotal=Object.values(G.npcServed).reduce((a,b)=>a+b,0);
+  document.getElementById('endStatsServe').innerHTML=`
+    <div class="end-row"><span>👥 Đã phục vụ</span><span><b>${G.customersServed} / ${G.totalCustomers}</b></span></div>
+    <div class="end-row"><span>😡 Khách bỏ đi</span><span>${G.customersLeft}</span></div>
+    ${npcTotal?`<div class="end-row"><span>⭐ Phục vụ khách quen</span><span>${npcTotal} lần</span></div>`:''}
+    ${G.perfectGrills?`<div class="end-row"><span>🌟 Nướng PERFECT</span><span>${G.perfectGrills} lần</span></div>`:''}
+    ${G.maxStreak>=3?`<div class="end-row"><span>🔥 Chuỗi dài nhất</span><span>${G.maxStreak} lần liên tiếp</span></div>`:''}
+    <div class="end-row"><span>⭐ Điểm số</span><span><b>${G.score}</b></span></div>`;
+  const rev=G.money,cost=200000,profit=rev-cost;
+  document.getElementById('endStatsFinance').innerHTML=`
+    <div class="end-row"><span>💰 Doanh thu</span><span>${rev.toLocaleString('vi-VN')}đ</span></div>
+    <div class="end-row cost"><span>💸 Chi phí cố định</span><span>−${cost.toLocaleString('vi-VN')}đ</span></div>
+    <div class="end-row total ${profit>=0?'profit-pos':'profit-neg'}">
+      <span>${profit>=0?'✅ Lợi nhuận':'❌ Thua lỗ'}</span>
       <span>${profit.toLocaleString('vi-VN')}đ</span>
-    </div>
-    <div class="end-stat-row">
-      <span>Đánh giá</span>
-      <span>${rating}</span>
-    </div>
-  `;
-  
-  document.getElementById('endStats').innerHTML = statsHTML;
-  
-  document.getElementById('feedbackBox').innerHTML = `
-    <div class="feedback-speaker">👴 Cụ Ông (di nguyện)</div>
-    "${feedback}"
-  `;
+    </div>`;
 }
 
-// ==============================
-// === KHỞI TẠO ===
-// ==============================
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
 
-window.onerror = function(msg, url, line, col, error) {
-  console.error('[GAME ERROR]', msg, 'at line', line);
-  return false;
-};
+window.onerror=(msg,u,line)=>{console.error('[GAME]',msg,'line',line);return false;};
 
-// Detect mobile landscape và hiện warning
-function checkOrientation() {
-  const warning = document.getElementById('rotateWarning');
-  if (!warning) return;
-  
-  const isMobile = window.innerWidth <= 900;
-  const isLandscape = window.innerWidth > window.innerHeight;
-  const isVeryShort = window.innerHeight < 500;
-  
-  if (isMobile && isLandscape && isVeryShort) {
-    warning.style.display = 'flex';
-  } else {
-    warning.style.display = 'none';
-  }
+function checkOrientation(){
+  const w=document.getElementById('rotateWarning');if(!w)return;
+  w.style.display=(window.innerWidth<=900&&window.innerWidth>window.innerHeight&&window.innerHeight<500)?'flex':'none';
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 - Demo v7.2 (mobile-optimized)');
-  console.log('Các functions có sẵn:', {
-    startGame: typeof startGame,
-    startStory: typeof startStory,
-    showTutorial: typeof showTutorial
-  });
-  
+window.addEventListener('DOMContentLoaded',()=>{
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v8');
   checkOrientation();
 });
-
-window.addEventListener('resize', checkOrientation);
-window.addEventListener('orientationchange', () => {
-  setTimeout(checkOrientation, 200);
-});
-
-// Disable double-tap zoom trên iOS
-document.addEventListener('dblclick', function(e) {
-  e.preventDefault();
-}, { passive: false });
-
-// Disable pull-to-refresh trên mobile
-document.body.style.overscrollBehavior = 'none';
+window.addEventListener('resize',checkOrientation);
+window.addEventListener('orientationchange',()=>setTimeout(checkOrientation,200));
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+document.body.style.overscrollBehavior='none';
 </script>
-
 </body>
 </html>
