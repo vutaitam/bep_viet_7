@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 — Demo v8</title>
+<title>Bếp Việt: Tiệm Bún Số 7 — Demo v9</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -51,6 +51,8 @@ button{font-family:inherit;cursor:pointer;}
 .screen{display:none !important;min-height:100vh;}
 .screen.active{display:block !important;}
 .screen.menu.active{display:flex !important;}
+.screen.level-select-screen.active{display:flex !important;}
+.screen.upgrade-shop-screen.active{display:flex !important;}
 
 /* ===== MENU ===== */
 .menu{
@@ -536,6 +538,61 @@ button{font-family:inherit;cursor:pointer;}
 @media(pointer:coarse){
   .ingredient,.action-btn,.btn,.customer-card,.pause-btn{min-height:44px;}
 }
+
+/* ===== STORY OVERLAY (pre-level) ===== */
+.story-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:110;align-items:center;justify-content:center;padding:20px;}
+.story-overlay.active{display:flex;}
+.story-box{background:linear-gradient(160deg,#1a0a04 0%,#2c1810 100%);border:2px solid var(--gold);border-radius:20px;padding:30px 28px;max-width:520px;width:100%;text-align:center;box-shadow:0 0 60px rgba(255,215,0,.2);}
+.story-chapter{font-size:.8em;color:var(--text-mute);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.story-title{font-size:1.5em;font-weight:900;color:var(--gold);margin-bottom:16px;text-shadow:2px 2px 8px rgba(0,0,0,.6);}
+.story-icon{font-size:3em;margin-bottom:12px;animation:float 2.5s ease-in-out infinite;}
+.story-text{color:var(--text-soft);font-size:.9em;line-height:1.8;margin-bottom:18px;font-style:italic;text-align:left;border-left:3px solid rgba(255,215,0,.4);padding-left:14px;}
+.story-objective{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:.85em;}
+.story-obj-title{color:var(--gold);font-weight:800;font-size:.8em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.story-obj-list{color:var(--text-soft);line-height:1.8;text-align:left;}
+/* ===== LEVEL SELECT ===== */
+.level-select-screen{flex-direction:column;background:linear-gradient(180deg,#1a0a04 0%,#2c1810 60%,#1a0a04 100%);overflow-y:auto;}
+.ls-header{padding:20px 24px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.ls-title{font-size:1.5em;font-weight:900;color:var(--gold);}
+.ls-money{display:flex;align-items:center;gap:6px;background:rgba(255,215,0,.1);border:1px solid var(--border-gold);padding:6px 14px;border-radius:20px;font-size:.9em;font-weight:700;color:var(--gold-soft);}
+.ch-tabs{display:flex;padding:6px 24px;gap:8px;flex-wrap:wrap;}
+.ch-tab{padding:8px 16px;border-radius:20px;font-size:.82em;font-weight:700;border:2px solid rgba(255,255,255,.15);cursor:pointer;background:rgba(255,255,255,.05);color:var(--text-soft);transition:all .2s;font-family:inherit;}
+.ch-tab.active{background:var(--red);border-color:var(--gold);color:#fff;}
+.ch-tab.ch-locked{opacity:.4;cursor:not-allowed;}
+.ch-subtitle{padding:0 24px 10px;color:var(--text-mute);font-size:.83em;font-style:italic;}
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:0 24px 16px;}
+.level-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 10px;cursor:pointer;transition:all .2s;text-align:center;}
+.level-card:hover:not(.lc-locked){border-color:var(--gold);background:rgba(255,215,0,.07);transform:translateY(-2px);}
+.level-card.lc-locked{opacity:.4;cursor:not-allowed;pointer-events:none;}
+.level-card.lc-current{border-color:var(--gold);box-shadow:0 0 18px rgba(255,215,0,.2);}
+.level-card.lc-boss{border-color:#E91E63;}
+.level-card-num{font-size:.7em;color:var(--text-mute);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.level-card-name{font-size:.83em;font-weight:700;margin-bottom:10px;line-height:1.3;min-height:38px;display:flex;align-items:center;justify-content:center;}
+.level-card-stars{font-size:1.05em;min-height:20px;line-height:1;}
+.ls-footer{padding:8px 24px 24px;display:flex;flex-direction:column;gap:8px;}
+
+/* ===== UPGRADE SHOP ===== */
+.upgrade-shop-screen{flex-direction:column;background:linear-gradient(180deg,#1a0a04 0%,#2c1810 100%);overflow-y:auto;}
+.us-header{padding:20px 24px 12px;}
+.us-title{font-size:1.5em;font-weight:900;color:var(--gold);margin-bottom:10px;}
+.us-money{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,.1);border:1px solid var(--border-gold);padding:8px 16px;border-radius:20px;}
+.us-money-label{font-size:.8em;color:var(--text-mute);}
+.us-money-val{font-size:1.1em;font-weight:800;color:var(--gold);}
+.upgrade-list{padding:10px 24px;display:flex;flex-direction:column;gap:10px;}
+.upgrade-card{background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s;}
+.upgrade-card.is-owned{border-color:var(--green);background:rgba(46,125,50,.08);}
+.upgrade-card.cant-afford{opacity:.5;}
+.upgrade-emoji{font-size:1.9em;min-width:38px;text-align:center;line-height:1;}
+.upgrade-info{flex:1;min-width:0;}
+.upgrade-name{font-weight:800;font-size:.92em;margin-bottom:3px;}
+.upgrade-desc{font-size:.8em;color:var(--text-soft);line-height:1.4;}
+.upgrade-price{font-size:.78em;color:var(--gold);font-weight:700;margin-top:3px;}
+.upgrade-action{flex-shrink:0;}
+.upgrade-buy-btn{padding:8px 14px;font-size:.82em;font-weight:700;border-radius:10px;border:1px solid var(--gold);background:rgba(255,215,0,.12);color:var(--gold);font-family:inherit;cursor:pointer;transition:all .2s;}
+.upgrade-buy-btn:hover{background:rgba(255,215,0,.22);}
+.upgrade-buy-btn:disabled{opacity:.5;cursor:not-allowed;}
+.upgrade-owned-badge{padding:6px 12px;font-size:.8em;font-weight:700;color:var(--green-light);background:rgba(46,125,50,.2);border-radius:8px;}
+.us-footer{padding:10px 24px 24px;display:flex;flex-direction:column;gap:8px;}
 </style>
 </head>
 <body>
@@ -556,7 +613,7 @@ button{font-family:inherit;cursor:pointer;}
   <span class="lantern">🏮</span>
   <span class="lantern">🏮</span>
 
-  <div class="menu-version">Demo v8 · Hà Nội Chapter</div>
+  <div class="menu-version">Demo v9 · 3 Chương · 15 Levels</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
   <div class="menu-sub">Tiệm Bún Số 7</div>
   <div class="menu-divider"></div>
@@ -564,12 +621,14 @@ button{font-family:inherit;cursor:pointer;}
     Cụ Ông qua đời, để lại quán bún nhỏ trong ngõ phố cổ Hà Nội cùng cuốn sổ công thức gia truyền 30 năm. Hành trình của cháu bắt đầu...
   </div>
   <div class="menu-buttons">
-    <button class="btn" onclick="startStory()">▶ Bắt đầu câu chuyện</button>
-    <button class="btn btn-green" onclick="startGame(true)">⚡ Chơi ngay (bỏ qua intro)</button>
+    <button class="btn" id="menuBtnContinue" style="display:none;background:linear-gradient(135deg,#1B5E20,#2E7D32);border-color:#66BB6A;" onclick="showLevelSelect()">▶ Tiếp tục hành trình</button>
+    <button class="btn" onclick="newGameWithStory()">▶ Bắt đầu câu chuyện</button>
+    <button class="btn btn-green" onclick="quickStart()">⚡ Chơi ngay (bỏ qua intro)</button>
     <button class="btn btn-blue btn-sm" onclick="showTutorial()">❓ Hướng dẫn chơi</button>
+    <button class="btn btn-sm" id="menuBtnReset" style="display:none;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);font-size:.78em;" onclick="if(confirm('Xóa tất cả tiến trình và bắt đầu lại?')){resetProg();}">🗑 Reset tiến trình</button>
   </div>
   <div class="menu-credit">
-    3 món · 3 khách quen · Mini-game nướng chả<br>
+    3 chương · 15 levels · 5 nâng cấp · Mini-game nướng chả<br>
     <span style="opacity:.6">Cảm ơn bạn đã ghé Tiệm Bún Số 7!</span>
   </div>
   <div class="menu-deco-bot"></div>
@@ -607,7 +666,7 @@ button{font-family:inherit;cursor:pointer;}
 
   <!-- Chapter / Day bar -->
   <div class="chapter-bar">
-    <div><span class="chapter-bar-name">🏮 Chương 1: Hà Nội</span> · Khai trương Tiệm Bún</div>
+    <div id="chapterBarInfo"><span class="chapter-bar-name">🏮 Chương 1: Hà Nội</span> · Khai trương Tiệm Bún</div>
     <div class="chapter-bar-day">
       <span style="color:var(--text-mute);font-size:.8em;">Ngày</span>
       <div class="day-pips" id="dayPips"></div>
@@ -737,7 +796,10 @@ button{font-family:inherit;cursor:pointer;}
     </div>
 
     <div class="end-btns">
-      <button class="btn" onclick="location.reload()">🔄 Chơi lại ngày này</button>
+      <button class="btn btn-green" id="nextLevelBtn" onclick="goNextLevel()">▶ Ngày tiếp theo →</button>
+      <button class="btn btn-blue btn-sm" onclick="goToUpgradeShop()">🛒 Cửa hàng nâng cấp</button>
+      <button class="btn btn-sm" onclick="startGame()" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);">🔄 Thử lại ngày này</button>
+      <button class="btn btn-sm" onclick="showLevelSelect()" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);font-size:.82em;">📋 Chọn level khác</button>
     </div>
   </div>
 </div>
@@ -750,13 +812,60 @@ button{font-family:inherit;cursor:pointer;}
     <div class="pause-stats" id="pauseStats"></div>
     <div class="pause-btns">
       <button class="btn btn-green" onclick="togglePause()">▶ Tiếp tục nấu</button>
-      <button class="btn" onclick="if(confirm('Về menu? Tiến trình sẽ mất.')) location.reload();">🏠 Về menu</button>
+      <button class="btn" onclick="if(confirm('Về menu? Tiến trình ngày này sẽ mất.')){G.isGameOver=true;[timerInterval,spawnInterval,patienceInterval,grillInterval].forEach(iv=>{if(iv)clearInterval(iv);});goToMenu();}">🏠 Về menu</button>
     </div>
   </div>
 </div>
 
 <!-- ===== NOTIFICATIONS ===== -->
 <div class="notif-container" id="notifContainer"></div>
+
+<!-- ===== STORY OVERLAY ===== -->
+<div class="story-overlay" id="storyOverlay">
+  <div class="story-box">
+    <div class="story-icon" id="storyIcon">📖</div>
+    <div class="story-chapter" id="storyChapterLabel">Chương 1</div>
+    <div class="story-title" id="storyTitleEl"></div>
+    <div class="story-text" id="storyTextEl"></div>
+    <div class="story-objective">
+      <div class="story-obj-title">🎯 Mục tiêu ngày hôm nay</div>
+      <div class="story-obj-list" id="storyObjList"></div>
+    </div>
+    <button class="btn btn-green" onclick="dismissStoryAndStart()">Bắt đầu nấu →</button>
+  </div>
+</div>
+
+<!-- ===== LEVEL SELECT ===== -->
+<div class="screen level-select-screen" id="levelSelectScreen">
+  <div class="ls-header">
+    <div class="ls-title">🏮 Chọn ngày chơi</div>
+    <div class="ls-money">💰 <span id="lsMoneyDisplay">0đ</span></div>
+  </div>
+  <div class="ch-tabs">
+    <button class="ch-tab" id="chTab1" onclick="switchChapter(1)">Ch.1: Hà Nội</button>
+    <button class="ch-tab" id="chTab2" onclick="switchChapter(2)">Ch.2: Hội An</button>
+    <button class="ch-tab" id="chTab3" onclick="switchChapter(3)">Ch.3: Sài Gòn</button>
+  </div>
+  <div class="ch-subtitle" id="chSubtitle"></div>
+  <div class="ch-grid" id="chGrid"></div>
+  <div class="ls-footer">
+    <button class="btn btn-blue btn-sm" onclick="goToUpgradeShop()">🛒 Cửa hàng nâng cấp</button>
+    <button class="btn btn-sm" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);" onclick="goToMenu()">🏠 Về menu</button>
+  </div>
+</div>
+
+<!-- ===== UPGRADE SHOP ===== -->
+<div class="screen upgrade-shop-screen" id="upgradeShopScreen">
+  <div class="us-header">
+    <div class="us-title">🛒 Cửa hàng nâng cấp</div>
+    <div class="us-money"><span class="us-money-label">Ngân sách:</span><span class="us-money-val" id="usMoneyDisplay">0đ</span></div>
+  </div>
+  <div class="upgrade-list" id="upgradeList"></div>
+  <div class="us-footer">
+    <button class="btn btn-green" onclick="showLevelSelect()">✅ Xong — Chọn level tiếp</button>
+    <button class="btn btn-sm" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);" onclick="goToMenu()">🏠 Về menu</button>
+  </div>
+</div>
 
 <script>
 // ─────────────────────────────────────────────
@@ -782,6 +891,20 @@ const RECIPES = {
     cookTime:6,needsGrill:true,grillIngredient:'cha',
     price:35000,score:22,
     desc:'Đặc sản Hà Nội — Cần nướng chả đúng độ'
+  },
+  mi_quang:{
+    name:'Mì Quảng',emoji:'🍝',
+    ingredients:['mi_quang_noodle','thit_heo','tom','rau_song'],
+    cookTime:7,needsGrill:false,price:45000,score:28,
+    availableFrom:6,
+    desc:'Đặc sản Quảng Nam — Mì vàng nghệ béo ngậy'
+  },
+  hu_tieu:{
+    name:'Hủ tiếu Nam Vang',emoji:'🍜',
+    ingredients:['hu_tieu_noodle','thit_heo','tom','nuoc_dung'],
+    cookTime:6,needsGrill:false,price:50000,score:30,
+    availableFrom:11,
+    desc:'Đặc sản Sài Gòn — Nước dùng trong ngọt thanh'
   }
 };
 
@@ -795,7 +918,12 @@ const INGREDIENTS = {
   thit_nguoi:{name:'Thịt nguội',emoji:'🥓'},
   rau_song:{name:'Rau sống',emoji:'🥬'},
   cha:{name:'Chả (cần nướng)',emoji:'🍖',needsGrill:true},
-  nuoc_cham:{name:'Nước chấm',emoji:'🥣'}
+  nuoc_cham:{name:'Nước chấm',emoji:'🥣'},
+  mi_quang_noodle:{name:'Mì Quảng',emoji:'🍝'},
+  thit_heo:{name:'Thịt heo',emoji:'🥩'},
+  tom:{name:'Tôm',emoji:'🦐'},
+  hu_tieu_noodle:{name:'Hủ tiếu',emoji:'🍜'},
+  nuoc_dung:{name:'Nước dùng',emoji:'🫕'}
 };
 
 const NPCS = {
@@ -806,8 +934,98 @@ const NPCS = {
   john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:2.0,isRegular:true,
     quotes:{arrive:'Hi! Một bún chả please!',happy:'Mmm, so good! Thank you!',angry:'Sorry, I have to go...'}},
   khach_thuong:{name:'Khách lạ',emoji:'🧑',favorite:null,trait:'Khách qua đường',patience:60,tip:1.0,isRegular:false,
-    quotes:{arrive:'Cho tôi xem thực đơn nào.',happy:'Ngon đó, lần sau ghé lại!',angry:'Bỏ đi đây...'}}
+    quotes:{arrive:'Cho tôi xem thực đơn nào.',happy:'Ngon đó, lần sau ghé lại!',angry:'Bỏ đi đây...'}},
+  // Boss NPCs
+  tuan_pb:{name:'Nhà phê bình Tuấn',emoji:'🧐',favorite:'bun_doc_mung',trait:'Nhà phê bình ẩm thực',patience:35,tip:0,isRegular:false,isBoss:true,failOnLeave:true,
+    quotes:{arrive:'Tôi nghe danh quán này. Bún dọc mùng gia truyền — thật hay hư?',happy:'Xuất sắc. Tôi sẽ viết bài khen.',angry:'Thất vọng. Quán chưa xứng danh.'}},
+  khang:{name:'Đầu bếp Khang',emoji:'👨‍🍳',favorite:'bun_cha',trait:'Đối thủ cũ của Cụ Ông',patience:45,tip:0,isRegular:false,isBoss:true,
+    quotes:{arrive:'Hm. Xem cậu nấu có bằng Cụ không nhé.',happy:'Được rồi. Tôi công nhận tài năng.',angry:'Thua kém Cụ rồi cậu ơi.'}},
+  iron_chef:{name:'Iron Chef Việt',emoji:'🏆',favorite:'bun_doc_mung',trait:'Đầu bếp số 1 cả nước',patience:50,tip:3.0,isRegular:false,isBoss:true,failOnLeave:true,
+    quotes:{arrive:'Bún dọc mùng 30 năm gia truyền — thật sự đặc biệt hay chỉ là tin đồn?',happy:'Xuất sắc! Cháu của Cụ Ông xứng đáng danh hiệu "Đầu bếp 3 miền"!',angry:'Chưa đủ tốt. Tiếp tục rèn luyện.'}}
 };
+
+// ─────────────────────────────────────────────
+//  LEVEL + UPGRADE DATA
+// ─────────────────────────────────────────────
+
+const LEVELS=[
+  // ── Ch.1: HÀ NỘI ──
+  {ch:1,lv:1,overall:1,name:'Khai trương Tiệm Bún',customers:6,time:180,cost:200000,npcRate:0.45,
+    icon:'🕯️',story:'Cụ Ông vừa qua đời. Hôm nay là ngày đầu tiên bạn mở lại Tiệm Bún Số 7. Bác Tâm đứng chờ trước cổng từ sớm — ông muốn xem cháu Cụ có giữ được hương vị không.',
+    objective:'Phục vụ ít nhất 4 khách · Doanh thu > 150.000đ'},
+  {ch:1,lv:2,overall:2,name:'Khách quen trở lại',customers:7,time:190,cost:200000,npcRate:0.5,
+    icon:'👴',story:'Tin đồn lan nhanh trong ngõ phố. Bác Tâm kể với hàng xóm về tô Bún dọc mùng "đúng vị Cụ". Hôm nay có thêm Cô Lan — doanh nhân hay ăn bánh mì buổi sáng.',
+    objective:'Phục vụ ít nhất 5 khách · Phục vụ Bác Tâm 1 lần'},
+  {ch:1,lv:3,overall:3,name:'Sáng có mưa rào',customers:8,time:200,cost:200000,npcRate:0.45,event:'rain',
+    icon:'🌧️',story:'Mưa rào bất chợt ập đến. Khách ít hơn nhưng ai đến đều thật sự muốn ăn. Mưa làm bếp than khó nướng hơn — chú ý kỹ lò nướng.',
+    objective:'Phục vụ ít nhất 5 khách · Doanh thu > 200.000đ'},
+  {ch:1,lv:4,overall:4,name:'Bác Tâm dẫn bạn bè',customers:9,time:210,cost:200000,npcRate:0.6,
+    icon:'🤝',story:'Bác Tâm tự hào dẫn cả nhóm bạn cũ của Cụ Ông đến ăn. Họ đã ăn ở đây cách đây 15 năm — tiêu chuẩn cao lắm đó. Phục vụ tốt để giữ tiếng quán.',
+    objective:'Phục vụ ít nhất 6 khách · Streak >= 3 lần liên tiếp'},
+  {ch:1,lv:5,overall:5,name:'Boss: Nhà phê bình Tuấn',customers:10,time:240,cost:200000,npcRate:0.65,isBoss:true,bossNpc:'tuan_pb',
+    icon:'🧐',story:'Nhà phê bình ẩm thực Tuấn nghe tiếng. Ông ta nổi tiếng khắt khe — một bài đánh giá của ông có thể làm quán đóng cửa hoặc nổi tiếng rầm rộ. Đừng để ông chờ!',
+    objective:'Phục vụ ít nhất 7 khách · KHÔNG để Tuấn bỏ đi'},
+  // ── Ch.2: HỘI AN ──
+  {ch:2,lv:1,overall:6,name:'Hội An: Ngày đầu mở quán',customers:8,time:200,cost:500000,npcRate:0.45,
+    icon:'🏮',story:'Bác Tâm giới thiệu, bạn quyết định mang hương vị Hà Nội vào Hội An. Phố cổ nhỏ nhưng ấm áp. Khách du lịch nhiều hơn Hà Nội, họ tò mò và dễ tính hơn.',
+    objective:'Phục vụ ít nhất 5 khách · Mì Quảng mở khóa',unlocks:'mi_quang'},
+  {ch:2,lv:2,overall:7,name:'Phố Hội mùa lễ hội',customers:9,time:200,cost:500000,npcRate:0.5,event:'festival',
+    icon:'🎑',story:'Hội An đang vào mùa lễ hội Trung Thu. Đèn lồng rực rỡ khắp phố cổ. Khách đến đông hơn bình thường — chuẩn bị tốt nguyên liệu!',
+    objective:'Phục vụ ít nhất 6 khách · Doanh thu > 350.000đ'},
+  {ch:2,lv:3,overall:8,name:'Đoàn khách du lịch Hàn Quốc',customers:10,time:210,cost:500000,npcRate:0.5,
+    icon:'🌏',story:'Một đoàn 5 người Hàn Quốc đến tham quan. Họ không nói tiếng Việt nhưng dùng điện thoại dịch menu — đặt món bằng cách chỉ tay. Kiên nhẫn với họ nhé!',
+    objective:'Phục vụ ít nhất 7 khách · Speed bonus >= 3 lần'},
+  {ch:2,lv:4,overall:9,name:'Cuối tuần đông khách',customers:11,time:220,cost:500000,npcRate:0.6,event:'rush',
+    icon:'📈',story:'Cuối tuần Hội An luôn đông. Quán bún đã có tiếng — người xếp hàng dài hơn bao giờ hết. Cần phục vụ nhanh, không được để khách chờ lâu.',
+    objective:'Phục vụ ít nhất 8 khách · Streak >= 4 lần liên tiếp'},
+  {ch:2,lv:5,overall:10,name:'Boss: Đầu bếp Khang thách đấu',customers:12,time:260,cost:500000,npcRate:0.65,isBoss:true,bossNpc:'khang',
+    icon:'👨‍🍳',story:'Đầu bếp Khang — đối thủ cũ của Cụ Ông — nghe tin bạn vào Hội An. Ông thách đấu công khai. Cẩn thận: Khang rất ghét chả cháy!',
+    objective:'Phục vụ ít nhất 9 khách · KHÔNG để cháy chả · Doanh thu > 500.000đ'},
+  // ── Ch.3: SÀI GÒN ──
+  {ch:3,lv:1,overall:11,name:'Sài Gòn: Buổi sáng náo nhiệt',customers:9,time:200,cost:800000,npcRate:0.45,
+    icon:'🌆',story:'Sài Gòn về sáng — khói xe, tiếng còi, quán xá chen chúc. Người ta ăn nhanh để kịp đi làm. Hủ tiếu mở khóa — thêm vũ khí mới!',
+    objective:'Phục vụ ít nhất 6 khách · Hủ tiếu mở khóa',unlocks:'hu_tieu'},
+  {ch:3,lv:2,overall:12,name:'Khách Tây ba lô',customers:10,time:200,cost:800000,npcRate:0.5,
+    icon:'🧔',story:'John gặp lại nhóm bạn cũ từ thời du học — 2 người Mỹ và 1 người Pháp. Họ đã ăn bún ở Sài Gòn nhiều lần nhưng muốn thử quán mới. Phục vụ tốt, tip sẽ rất cao!',
+    objective:'Phục vụ John + ít nhất 5 khách khác · John phải happy'},
+  {ch:3,lv:3,overall:13,name:'Giờ cao điểm buổi trưa',customers:11,time:210,cost:800000,npcRate:0.55,event:'peak',
+    icon:'☀️',story:'12h trưa Sài Gòn — nhân viên văn phòng, học sinh, shipper... tất cả ùa vào quán cùng lúc. Nhanh tay, nhanh mắt — mỗi giây đều quý.',
+    objective:'Phục vụ ít nhất 8 khách · Streak >= 5 lần liên tiếp'},
+  {ch:3,lv:4,overall:14,name:'Cuộc thi Ẩm thực 3 miền',customers:12,time:220,cost:800000,npcRate:0.6,
+    icon:'🏅',story:'Cuộc thi "Ẩm thực 3 miền" tại TP.HCM. Bạn đại diện miền Bắc với Bún dọc mùng. Ban giám khảo khắt khe, đặc biệt quan tâm đến kỹ thuật nướng chả.',
+    objective:'Phục vụ ít nhất 9 khách · 3 lần nướng PERFECT · Doanh thu > 600.000đ'},
+  {ch:3,lv:5,overall:15,name:'FINALE: Iron Chef Việt',customers:15,time:300,cost:800000,npcRate:0.7,isBoss:true,bossNpc:'iron_chef',
+    icon:'🏆',story:'Đêm chung kết. Iron Chef Việt — đầu bếp số 1 cả nước — đích thân đến thưởng thức. Cụ Ông đang nhìn từ trên cao... Đây là thời khắc quyết định sự nghiệp của bạn.',
+    objective:'Phục vụ ít nhất 11 khách · Iron Chef không được bỏ đi · Doanh thu > 800.000đ'},
+];
+
+const UPGRADES=[
+  {id:'faster_cook',name:'Bếp ga cao áp',emoji:'🔥',desc:'Thời gian nấu -25%',price:200000,ch:1},
+  {id:'price_boost',name:'Menu in đẹp',emoji:'📋',desc:'Giá mỗi món +10%',price:250000,ch:1},
+  {id:'extra_time',name:'Quạt mát công nghiệp',emoji:'🌀',desc:'Thêm 30 giây mỗi ngày',price:180000,ch:1},
+  {id:'extra_seat',name:'Thêm bàn ghế',emoji:'🪑',desc:'Nhận thêm 1 khách cùng lúc',price:150000,ch:1},
+  {id:'grill_wide',name:'Lò nướng nâng cấp',emoji:'🏆',desc:'Vùng PERFECT nướng rộng hơn (35-65%)',price:300000,ch:1},
+  {id:'neon_sign',name:'Biển hiệu neon',emoji:'✨',desc:'Spawn thêm 1 khách mỗi ngày',price:400000,ch:2},
+  {id:'loyal_card',name:'Thẻ khách quen',emoji:'💳',desc:'Khách quen kiên nhẫn +25%',price:350000,ch:2},
+];
+
+// ─────────────────────────────────────────────
+//  PROGRESS STATE (localStorage)
+// ─────────────────────────────────────────────
+
+const PROG_KEY='bv_prog_v9';
+let PROG={levelIdx:0,totalMoney:0,ownedUpgrades:[],levelStars:{},unlocked:1};
+
+function saveProg(){try{localStorage.setItem(PROG_KEY,JSON.stringify(PROG));}catch(e){}}
+function loadProg(){
+  try{const d=localStorage.getItem(PROG_KEY);if(d)PROG=Object.assign({levelIdx:0,totalMoney:0,ownedUpgrades:[],levelStars:{},unlocked:1},JSON.parse(d));}
+  catch(e){}
+}
+function resetProg(){
+  PROG={levelIdx:0,totalMoney:0,ownedUpgrades:[],levelStars:{},unlocked:1};
+  saveProg();location.reload();
+}
+function hasUpgrade(id){return PROG.ownedUpgrades.includes(id);}
 
 const DIALOGUES=[
   {image:'🕯️',speaker:'Người kể chuyện',text:'Hà Nội, một sáng mùa thu se lạnh... Trong ngõ nhỏ phố cổ, Cụ Ông vừa qua đời sau bao năm gắn bó với quán bún.'},
@@ -895,7 +1113,7 @@ function prevTutorial(){
 let dlgIdx=0,isTyping=false,typeTimer=null;
 
 function startStory(){
-  document.getElementById('menuScreen').classList.remove('active');
+  document.querySelectorAll('.screen,.end-screen').forEach(el=>el.classList.remove('active'));
   document.getElementById('cutsceneScreen').classList.add('active');
   dlgIdx=0;
   buildDots();showDialogue();
@@ -946,27 +1164,61 @@ document.getElementById('cutsceneScreen').addEventListener('click',e=>{
 //  GAME INIT
 // ─────────────────────────────────────────────
 
-function startGame(skipIntro){
-  document.getElementById('menuScreen').classList.remove('active');
-  document.getElementById('cutsceneScreen').classList.remove('active');
+function startGame(){
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  // clear old intervals
+  [timerInterval,spawnInterval,patienceInterval,grillInterval].forEach(iv=>{if(iv)clearInterval(iv);});
+  timerInterval=spawnInterval=patienceInterval=grillInterval=null;
+  // reset state
+  const tTime=lv.time+(hasUpgrade('extra_time')?30:0);
+  const tCustomers=lv.customers+(hasUpgrade('extra_seat')?1:0)+(hasUpgrade('neon_sign')?1:0);
+  G.money=0;G.score=0;G.timeRemaining=tTime;G._levelTime=tTime;G._npcRate=lv.npcRate;G._cost=lv.cost;
+  G.customersServed=0;G.customersLeft=0;G.totalCustomers=tCustomers;G.customersSpawned=0;G.customers=[];
+  G.pot={ingredients:[],status:'idle',finishedDish:null};
+  G.grill={status:'idle',progress:0,flipped:false,quality:null,flipQuality:null};
+  G.selectedCustomer=null;G.isPaused=false;G.isGameOver=false;
+  G.perfectGrills=0;G.burntGrills=0;G.streak=0;G.maxStreak=0;
+  G.npcServed={bac_tam:0,co_lan:0,john:0};
+  // hide all, show game
+  document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));
   document.getElementById('gameScreen').classList.add('active');
-  buildDayPips();
-  renderIngredients();renderRecipes();renderNPCList();
-  setTimeout(()=>spawnCustomer(),900);
-  setTimeout(()=>spawnCustomer(),4200);
-  spawnInterval=setInterval(()=>{
-    if(G.isPaused||G.isGameOver)return;
-    if(G.customersSpawned<G.totalCustomers&&G.customers.filter(c=>!c.served&&!c.left).length<3)spawnCustomer();
-  },10000);
-  timerInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickTimer();},1000);
-  patienceInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickPatience();},1000);
+  // update chapter bar
+  const chNames=['','🏮 Chương 1: Hà Nội','🌸 Chương 2: Hội An','⭐ Chương 3: Sài Gòn'];
+  document.getElementById('chapterBarInfo').innerHTML=`<span class="chapter-bar-name">${chNames[lv.ch]}</span> · Chương ${lv.overall||PROG.levelIdx+1}: ${lv.name}`;
+  document.getElementById('totalDisplay').textContent=tCustomers;
+  const mm=Math.floor(tTime/60),ss=tTime%60;
+  document.getElementById('timeDisplay').textContent=`${mm}:${ss.toString().padStart(2,'0')}`;
+  document.getElementById('timerBar').style.width='100%';
+  buildDayPips();resetPot();resetGrill();
+  renderIngredients();renderRecipes();renderNPCList();updateUI();
+  G._event=lv.event||null;
+  G._bossNpc=lv.bossNpc||null;
+  G._burnPenalty=false;
+  showStoryOverlay(lv,()=>{
+    setTimeout(()=>spawnCustomer(),900);
+    if(lv.event==='festival'){setTimeout(()=>spawnCustomer(),1200);setTimeout(()=>spawnCustomer(),1500);}
+    else{setTimeout(()=>spawnCustomer(),4200);}
+    const maxActive=3+(hasUpgrade('extra_seat')?1:0);
+    const spawnMs=lv.event==='rush'||lv.event==='peak'?7000:10000;
+    spawnInterval=setInterval(()=>{
+      if(G.isPaused||G.isGameOver)return;
+      if(G.customersSpawned<G.totalCustomers&&G.customers.filter(c=>!c.served&&!c.left).length<maxActive)spawnCustomer();
+    },spawnMs);
+    timerInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickTimer();},1000);
+    patienceInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickPatience();},1000);
+  });
 }
 
 function buildDayPips(){
   const c=document.getElementById('dayPips');c.innerHTML='';
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  const chStart=(lv.ch-1)*5;
   for(let i=0;i<5;i++){
+    const idx=chStart+i;
+    const done=PROG.levelStars[idx]!==undefined;
+    const cur=idx===PROG.levelIdx;
     const p=document.createElement('div');
-    p.className='day-pip'+(i===0?' current':i<0?' done':'');
+    p.className='day-pip'+(cur?' current':done?' done':'');
     c.appendChild(p);
   }
 }
@@ -979,7 +1231,7 @@ function tickTimer(){
   G.timeRemaining--;
   const m=Math.floor(G.timeRemaining/60),s=G.timeRemaining%60;
   document.getElementById('timeDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
-  document.getElementById('timerBar').style.width=(G.timeRemaining/180*100)+'%';
+  document.getElementById('timerBar').style.width=(G.timeRemaining/(G._levelTime||180)*100)+'%';
   if(G.timeRemaining<=0){endLevel('timeout');return;}
   checkEndCondition();
 }
@@ -993,23 +1245,35 @@ function spawnCustomer(){
   let npcKey;
   const r=Math.random();
   const existing=G.customers.filter(c=>!c.served&&!c.left).map(c=>c.npcKey);
-  if(G.customersSpawned===0){npcKey='bac_tam';}
-  else if(r<.6){
+  const bossAt=Math.floor(G.totalCustomers*0.4);
+  if(G._bossNpc&&G.customersSpawned===bossAt&&!G._bossSpawned&&!existing.includes(G._bossNpc)){
+    npcKey=G._bossNpc;G._bossSpawned=true;
+  } else if(G.customersSpawned===0){npcKey='bac_tam';}
+  else if(r<(G._npcRate||0.6)){
     const regs=['bac_tam','co_lan','john'];
     const avail=regs.filter(k=>!existing.includes(k));
     npcKey=avail.length?avail[Math.floor(Math.random()*avail.length)]:'khach_thuong';
   } else {npcKey='khach_thuong';}
   const npc=NPCS[npcKey];
-  let recipe=npc.favorite??(Object.keys(RECIPES)[Math.floor(Math.random()*3)]);
+  // Filter recipe to available dishes for current chapter
+  const curCh=LEVELS[PROG.levelIdx]?.ch||1;
+  const availRecipes=Object.keys(RECIPES).filter(k=>!(RECIPES[k].availableFrom)||(RECIPES[k].availableFrom<=LEVELS[PROG.levelIdx]?.overall));
+  let recipe=npc.favorite&&availRecipes.includes(npc.favorite)?npc.favorite:availRecipes[Math.floor(Math.random()*availRecipes.length)];
+  let pat=npc.patience;
+  if(npc.isRegular&&hasUpgrade('loyal_card'))pat=Math.floor(pat*1.25);
+  if(G._event==='peak')pat=Math.floor(pat*0.8);  // rush/peak: shorter patience
   const c={
     id:Date.now()+Math.random(),npcKey,
     name:npc.name,emoji:npc.emoji,trait:npc.trait,
-    isRegular:npc.isRegular,tip:npc.tip,quotes:npc.quotes,
-    order:recipe,patience:npc.patience,maxPatience:npc.patience,
+    isRegular:npc.isRegular,isBoss:npc.isBoss||false,
+    failOnLeave:npc.failOnLeave||false,
+    tip:npc.tip,quotes:npc.quotes,
+    order:recipe,patience:pat,maxPatience:pat,
   };
   G.customers.push(c);G.customersSpawned++;
   renderCustomers();
-  notify(`👥 ${npc.name}: "${npc.quotes.arrive}"`, 'info');
+  const bossTag=npc.isBoss?'⚠️ BOSS — ':'';
+  notify(`👥 ${bossTag}${npc.name}: "${npc.quotes.arrive}"`,npc.isBoss?'error':'info');
 }
 
 // ─────────────────────────────────────────────
@@ -1026,6 +1290,7 @@ function tickPatience(){
       G.streak=0;updateStreak();
       notify(`😡 ${c.name}: "${c.quotes.angry}"`, 'error');
       G.score=Math.max(0,G.score-(c.isRegular?15:5));
+      if(c.failOnLeave){endLevel('boss_fled');return;}
       setTimeout(()=>{G.customers=G.customers.filter(x=>x.id!==c.id);renderCustomers();checkEndCondition();},1400);
     }
   });
@@ -1089,7 +1354,8 @@ function renderIngredients(){
 
 function renderRecipes(){
   const list=document.getElementById('recipeList');list.innerHTML='';
-  Object.entries(RECIPES).forEach(([key,r])=>{
+  const overall=LEVELS[PROG.levelIdx]?.overall||1;
+  Object.entries(RECIPES).filter(([,r])=>!r.availableFrom||r.availableFrom<=overall).forEach(([key,r])=>{
     const div=document.createElement('div');
     div.className='recipe-item'+(r.isSignature?' signature':'');
     div.id='recipe-'+key;
@@ -1160,7 +1426,7 @@ function startCooking(){
   document.getElementById('pot').classList.add('cooking');
   document.getElementById('cookBtn').disabled=true;
   document.getElementById('potStatus').textContent='🔥 Đang nấu...';
-  const t=RECIPES[recipe].cookTime;let e=0;
+  const t=RECIPES[recipe].cookTime*(hasUpgrade('faster_cook')?0.75:1);let e=0;
   const iv=setInterval(()=>{
     if(G.isPaused)return;
     e+=0.1;const p=Math.min(100,e/t*100);
@@ -1186,7 +1452,9 @@ function putOnGrill(key){
   document.getElementById('grillStatus').textContent='🔥 Mặt 1 đang nướng...';
   document.getElementById('grillHint').textContent='Nhấn "Lật" khi vào vùng XANH (40–60%)';
   document.getElementById('grillFlipBtn').disabled=false;
-  document.getElementById('grillPerfectZone').style.left='40%';document.getElementById('grillPerfectZone').style.width='20%';
+  const pzW=hasUpgrade('grill_wide')?'30%':'20%',pzL=hasUpgrade('grill_wide')?'35%':'40%';
+  document.getElementById('grillPerfectZone').style.left=pzL;document.getElementById('grillPerfectZone').style.width=pzW;
+  document.getElementById('grillHint').textContent=`Nhấn "Lật" khi vào vùng XANH (${hasUpgrade('grill_wide')?'35–65%':'40–60%'})`;
   if(grillInterval)clearInterval(grillInterval);
   grillInterval=setInterval(()=>{
     if(G.isPaused||G.grill.status==='idle'){clearInterval(grillInterval);return;}
@@ -1201,6 +1469,7 @@ function putOnGrill(key){
       document.getElementById('grillProgressBar').style.background='#212121';
       document.getElementById('grillFlipBtn').disabled=true;document.getElementById('grillTakeBtn').disabled=false;
       notify('🔥 Chả bị cháy!','error');
+      if(G._bossNpc==='khang'){G.money=Math.max(0,G.money-100000);notify('👨‍🍳 Khang phạt: -100.000đ vì cháy chả!','error');updateUI();}
     }
   },100);
 }
@@ -1208,8 +1477,9 @@ function putOnGrill(key){
 function flipGrill(){
   if(G.grill.status!=='grilling'||G.grill.flipped)return;
   G.grill.flipped=true;const p=G.grill.progress;
+  const gMin=hasUpgrade('grill_wide')?35:40,gMax=hasUpgrade('grill_wide')?65:60;
   let q;
-  if(p>=40&&p<=60){q='perfect';notify('✨ Lật PERFECT!','success');}
+  if(p>=gMin&&p<=gMax){q='perfect';notify('✨ Lật PERFECT!','success');}
   else if(p>=30&&p<=70){q='good';notify('👍 Lật tốt','info');}
   else if(p<30){q='too_early';notify('⚠️ Lật quá sớm','warning');}
   else{q='too_late';notify('⚠️ Lật quá muộn','warning');}
@@ -1225,7 +1495,8 @@ function takeGrill(){
   if(G.grill.status!=='grilling'||!G.grill.flipped){notify('Chưa lật chả!','warning');return;}
   if(grillInterval)clearInterval(grillInterval);
   const p=G.grill.progress;
-  let tq=p>=40&&p<=60?'perfect':p>=30&&p<=70?'good':p<30?'undercooked':'overcooked';
+  const tMin=hasUpgrade('grill_wide')?35:40,tMax=hasUpgrade('grill_wide')?65:60;
+  let tq=p>=tMin&&p<=tMax?'perfect':p>=30&&p<=70?'good':p<30?'undercooked':'overcooked';
   const fq=G.grill.flipQuality;
   let final;
   if(fq==='perfect'&&tq==='perfect'){final='perfect';G.perfectGrills++;G.score+=5;notify('🌟 PERFECT! Chả vàng ruộm!','success');}
@@ -1276,6 +1547,7 @@ function serveSelected(){
   }
   // Calculate earnings
   let earned=ordered.price,sc=ordered.score,bonuses=[];
+  if(hasUpgrade('price_boost')){earned=Math.floor(earned*1.1);bonuses.push('Menu +10%');}
   if(ordered.isSignature){earned=Math.floor(earned*1.2);sc+=5;bonuses.push('Signature +20%');}
   if(c.isRegular&&c.tip>1){earned=Math.floor(earned*c.tip);sc=Math.floor(sc*1.15);bonuses.push(`Tip ×${c.tip}`);}
   if(ordered.needsGrill&&G.grill.quality==='perfect'){earned=Math.floor(earned*1.15);bonuses.push('Grill PERFECT +15%');}
@@ -1361,16 +1633,41 @@ function endLevel(reason){
   [timerInterval,spawnInterval,patienceInterval,grillInterval].forEach(iv=>{if(iv)clearInterval(iv);});
   document.getElementById('gameScreen').classList.remove('active');
   document.getElementById('endScreen').classList.add('active');
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
   const sr=G.customersServed/G.totalCustomers;
+  // Stars: 3=100%, 2=67%+, 1=50%+, 0=fail
+  let stars=0;
+  if(sr>=1)stars=3;else if(sr>=0.67)stars=2;else if(sr>=0.5)stars=1;
+  // Save progress if level passed
+  if(stars>0){
+    const prev=PROG.levelStars[PROG.levelIdx]||0;
+    if(stars>prev)PROG.levelStars[PROG.levelIdx]=stars;
+    // Unlock next level
+    if(PROG.levelIdx+1>=PROG.unlocked)PROG.unlocked=PROG.levelIdx+2;
+    // Add profit to bank
+    const profit=Math.max(0,G.money-lv.cost);
+    PROG.totalMoney+=profit;
+    saveProg();
+  }
+  // Rating display
   let rating,title,fb;
-  if(sr>=1){rating='⭐⭐⭐⭐⭐';title='🏆 Hoàn hảo!';fb='Cháu của ông... tất cả khách đều hài lòng. Ông tự hào lắm. Tiếp tục phát huy nhé!';}
-  else if(sr>=.67){rating='⭐⭐⭐⭐';title='🎉 Rất tốt!';fb='Còn vài khách bỏ đi nhưng điều đó bình thường. Quan trọng là cháu đã có lãi. Ông tin cháu sẽ giỏi hơn!';}
-  else if(sr>=.5){rating='⭐⭐⭐';title='👍 Đạt yêu cầu';fb='Ngày đầu tiên, khó khăn là tất yếu. Phục vụ được hơn nửa khách là khởi đầu tốt. Mai chú ý khách quen của ông nhé.';}
-  else if(sr>=.33){rating='⭐⭐';title='😅 Cần cố gắng';fb='Ông cũng từng có ngày như vậy cháu ơi. Đừng nản lòng — ngày mai làm lại, nhớ phục vụ khách quen trước.';}
-  else{rating='⭐';title='😢 Ngày khó khăn';fb='Cháu của ông... đừng bỏ cuộc. Mọi đầu bếp giỏi đều có ngày thất bại. Thử lại, chú ý công thức và kiên nhẫn khách nhé!';}
+  if(reason==='boss_fled'){rating='😢';title='Boss bỏ đi!';stars=0;fb='Ông biết cháu có thể làm tốt hơn. Lần sau đừng để khách quan trọng chờ nhé!';}
+  else if(stars===3){rating='⭐⭐⭐';title='🏆 Hoàn hảo!';fb=lv.isBoss?'Cháu đã vượt qua thử thách lớn nhất! Ông tự hào lắm. Hành trình tiếp tục...':'Cháu của ông... tất cả khách đều hài lòng. Ông tự hào lắm!';}
+  else if(stars===2){rating='⭐⭐';title='🎉 Rất tốt!';fb='Còn vài khách bỏ đi nhưng điều đó bình thường. Quan trọng là cháu đã có lãi!';}
+  else if(stars===1){rating='⭐';title='👍 Đạt yêu cầu';fb='Phục vụ được hơn nửa khách là khởi đầu tốt. Mai chú ý khách quen của ông nhé.';}
+  else if(sr>=0.33){rating='💔';title='😅 Cần cố gắng thêm';fb='Ông cũng từng có ngày như vậy cháu ơi. Đừng nản lòng — thử lại nhé!';}
+  else{rating='😢';title='Ngày khó khăn';fb='Cháu của ông... đừng bỏ cuộc. Mọi đầu bếp giỏi đều có ngày thất bại. Thử lại nhé!';}
   document.getElementById('endRating').textContent=rating;
   document.getElementById('endTitle').textContent=title;
   document.getElementById('feedbackText').textContent=fb;
+  // Show unlock notification
+  if(stars>0&&lv.unlocks){
+    const unlockNames={mi_quang:'🍝 Mì Quảng',hu_tieu:'🍜 Hủ tiếu Nam Vang'};
+    document.getElementById('feedbackText').textContent+=`\n\n🎉 MỞ KHÓA: ${unlockNames[lv.unlocks]||lv.unlocks}!`;
+  }
+  if(stars>0&&lv.overall===15){
+    document.getElementById('feedbackText').textContent='🎉🎉🎉 CHÚC MỪNG! Cháu đã hoàn thành hành trình "Đầu bếp 3 miền"! Danh hiệu đã thuộc về cháu. Cụ Ông an nghỉ thật sự rồi...';
+  }
   const npcTotal=Object.values(G.npcServed).reduce((a,b)=>a+b,0);
   document.getElementById('endStatsServe').innerHTML=`
     <div class="end-row"><span>👥 Đã phục vụ</span><span><b>${G.customersServed} / ${G.totalCustomers}</b></span></div>
@@ -1379,19 +1676,153 @@ function endLevel(reason){
     ${G.perfectGrills?`<div class="end-row"><span>🌟 Nướng PERFECT</span><span>${G.perfectGrills} lần</span></div>`:''}
     ${G.maxStreak>=3?`<div class="end-row"><span>🔥 Chuỗi dài nhất</span><span>${G.maxStreak} lần liên tiếp</span></div>`:''}
     <div class="end-row"><span>⭐ Điểm số</span><span><b>${G.score}</b></span></div>`;
-  const rev=G.money,cost=200000,profit=rev-cost;
+  const rev=G.money,cost=lv.cost,profit=rev-cost;
   document.getElementById('endStatsFinance').innerHTML=`
     <div class="end-row"><span>💰 Doanh thu</span><span>${rev.toLocaleString('vi-VN')}đ</span></div>
     <div class="end-row cost"><span>💸 Chi phí cố định</span><span>−${cost.toLocaleString('vi-VN')}đ</span></div>
+    ${stars>0?`<div class="end-row"><span>💼 Vào ngân sách</span><span style="color:var(--gold)">+${Math.max(0,profit).toLocaleString('vi-VN')}đ</span></div>`:''}
     <div class="end-row total ${profit>=0?'profit-pos':'profit-neg'}">
       <span>${profit>=0?'✅ Lợi nhuận':'❌ Thua lỗ'}</span>
       <span>${profit.toLocaleString('vi-VN')}đ</span>
     </div>`;
+  // Show/hide next level button
+  const hasNext=PROG.levelIdx+1<LEVELS.length;
+  document.getElementById('nextLevelBtn').style.display=(stars>0&&hasNext)?'block':'none';
 }
 
 // ─────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+//  NAVIGATION HELPERS
+// ─────────────────────────────────────────────
+
+function hideAll(){document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));}
+
+function goToMenu(){hideAll();document.getElementById('menuScreen').classList.add('active');}
+
+function showLevelSelect(){
+  hideAll();
+  lsChapter=LEVELS[PROG.levelIdx]?.ch||1;
+  document.getElementById('levelSelectScreen').classList.add('active');
+  renderLevelSelect();
+}
+
+function goToUpgradeShop(){hideAll();document.getElementById('upgradeShopScreen').classList.add('active');renderUpgradeShop();}
+
+function newGameWithStory(){PROG.levelIdx=0;saveProg();startStory();}
+function quickStart(){PROG.levelIdx=0;saveProg();startGame();}
+
+// ─────────────────────────────────────────────
+//  STORY OVERLAY
+// ─────────────────────────────────────────────
+
+let _storyCallback=null;
+function showStoryOverlay(lv,callback){
+  _storyCallback=callback;
+  const ov=document.getElementById('storyOverlay');
+  const chNames=['','Chương 1: Hà Nội','Chương 2: Hội An','Chương 3: Sài Gòn'];
+  document.getElementById('storyIcon').textContent=lv.icon||'📖';
+  document.getElementById('storyChapterLabel').textContent=`${chNames[lv.ch]} · Ngày ${lv.lv}${lv.isBoss?' · BOSS 🏆':''}`;
+  document.getElementById('storyTitleEl').textContent=lv.name;
+  document.getElementById('storyTextEl').textContent=lv.story||'Hành trình tiếp tục...';
+  const objLines=lv.objective?lv.objective.split('·').map(s=>`• ${s.trim()}`).join('\n'):'• Phục vụ khách tốt nhất có thể';
+  document.getElementById('storyObjList').style.whiteSpace='pre-line';
+  document.getElementById('storyObjList').textContent=objLines;
+  // Add event badge if applicable
+  const eventLabels={rain:'🌧️ Sự kiện: Mưa rào — khách đến chậm hơn',festival:'🎑 Sự kiện: Lễ hội — 3 khách xuất hiện cùng lúc',rush:'⚡ Sự kiện: Giờ cao điểm — khách đến liên tục',peak:'☀️ Sự kiện: Giờ cao điểm — kiên nhẫn ngắn hơn'};
+  if(lv.event&&eventLabels[lv.event]){document.getElementById('storyObjList').textContent+='\n'+eventLabels[lv.event];}
+  ov.classList.add('active');
+}
+function dismissStoryAndStart(){
+  document.getElementById('storyOverlay').classList.remove('active');
+  if(_storyCallback){_storyCallback();_storyCallback=null;}
+}
+
+function goNextLevel(){
+  if(PROG.levelIdx+1>=LEVELS.length){notify('Bạn đã hoàn thành tất cả levels!','success');return;}
+  PROG.levelIdx++;saveProg();showLevelSelect();
+}
+
+// ─────────────────────────────────────────────
+//  LEVEL SELECT
+// ─────────────────────────────────────────────
+
+let lsChapter=1;
+const CH_DESCS=['','Khai trương Tiệm Bún Số 7 trong ngõ phố cổ Hà Nội','Mang hương vị ra miền Trung — Phố cổ Hội An','Chinh phục Sài Gòn — Thành phố sôi động nhất'];
+
+function switchChapter(ch){lsChapter=ch;renderLevelSelect();}
+
+function renderLevelSelect(){
+  document.getElementById('lsMoneyDisplay').textContent=PROG.totalMoney.toLocaleString('vi-VN')+'đ';
+  const chLabels=['Ch.1: Hà Nội','Ch.2: Hội An','Ch.3: Sài Gòn'];
+  [1,2,3].forEach(i=>{
+    const tab=document.getElementById('chTab'+i);
+    const chUnlocked=PROG.unlocked>(i-1)*5;
+    tab.classList.toggle('active',i===lsChapter);
+    tab.classList.toggle('ch-locked',!chUnlocked);
+    tab.textContent=chLabels[i-1]+(chUnlocked?'':' 🔒');
+    tab.disabled=!chUnlocked;
+  });
+  document.getElementById('chSubtitle').textContent=CH_DESCS[lsChapter];
+  const grid=document.getElementById('chGrid');grid.innerHTML='';
+  const startIdx=(lsChapter-1)*5;
+  for(let i=0;i<5;i++){
+    const idx=startIdx+i;const lv=LEVELS[idx];
+    const isUnlocked=idx<PROG.unlocked;
+    const stars=PROG.levelStars[idx];
+    const isCurrent=idx===PROG.levelIdx;
+    const card=document.createElement('div');
+    card.className='level-card'+(lv.isBoss?' lc-boss':'')+(isCurrent&&isUnlocked?' lc-current':'')+(isUnlocked?'':' lc-locked');
+    if(isUnlocked)card.onclick=()=>startLevelByIdx(idx);
+    card.innerHTML=`<div class="level-card-num">Chương ${lv.overall||idx+1}${lv.isBoss?' · BOSS 🏆':''}</div>
+      <div class="level-card-name">${lv.name}</div>
+      <div class="level-card-stars">${stars?'⭐'.repeat(stars):(isUnlocked?'<span style="color:var(--text-mute);font-size:.72em;">Chưa chơi</span>':'🔒')}</div>`;
+    grid.appendChild(card);
+  }
+}
+
+function startLevelByIdx(idx){PROG.levelIdx=idx;saveProg();startGame();}
+
+// ─────────────────────────────────────────────
+//  UPGRADE SHOP
+// ─────────────────────────────────────────────
+
+function renderUpgradeShop(){
+  document.getElementById('usMoneyDisplay').textContent=PROG.totalMoney.toLocaleString('vi-VN')+'đ';
+  const list=document.getElementById('upgradeList');list.innerHTML='';
+  const curCh=LEVELS[PROG.levelIdx]?.ch||1;
+  const avail=UPGRADES.filter(u=>u.ch<=curCh);
+  avail.forEach(u=>{
+    const owned=hasUpgrade(u.id);
+    const canAfford=PROG.totalMoney>=u.price;
+    const card=document.createElement('div');
+    card.className='upgrade-card'+(owned?' is-owned':canAfford?'':' cant-afford');
+    card.innerHTML=`<div class="upgrade-emoji">${u.emoji}</div>
+      <div class="upgrade-info">
+        <div class="upgrade-name">${u.name}</div>
+        <div class="upgrade-desc">${u.desc}</div>
+        ${owned?'':'<div class="upgrade-price">💰 '+u.price.toLocaleString('vi-VN')+'đ</div>'}
+      </div>
+      <div class="upgrade-action">
+        ${owned?'<span class="upgrade-owned-badge">✅ Đã mua</span>':`<button class="upgrade-buy-btn"${!canAfford?' disabled':''} onclick="buyUpgrade('${u.id}')">Mua ngay</button>`}
+      </div>`;
+    list.appendChild(card);
+  });
+  if(!avail.some(u=>!hasUpgrade(u.id))){
+    list.innerHTML+='<div style="text-align:center;color:var(--text-mute);padding:16px;font-style:italic;">Tất cả nâng cấp khả dụng đã được mua!</div>';
+  }
+}
+
+function buyUpgrade(id){
+  const u=UPGRADES.find(x=>x.id===id);
+  if(!u||hasUpgrade(u.id))return;
+  if(PROG.totalMoney<u.price){notify('Không đủ tiền!','error');return;}
+  PROG.totalMoney-=u.price;PROG.ownedUpgrades.push(id);saveProg();
+  notify(`✅ Đã mua ${u.name}!`,'success');
+  renderUpgradeShop();
+}
 
 window.onerror=(msg,u,line)=>{console.error('[GAME]',msg,'line',line);return false;};
 
@@ -1401,7 +1832,13 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v8');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v9');
+  loadProg();
+  const hasSave=Object.keys(PROG.levelStars).length>0||PROG.totalMoney>0||PROG.ownedUpgrades.length>0;
+  if(hasSave){
+    document.getElementById('menuBtnContinue').style.display='block';
+    document.getElementById('menuBtnReset').style.display='block';
+  }
   checkOrientation();
 });
 window.addEventListener('resize',checkOrientation);
