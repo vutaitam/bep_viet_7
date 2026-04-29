@@ -13,11 +13,13 @@ Nguyen tac moi:
 - Chat luong gameplay quan trong hon viec giu dung scope cu.
 - Neu mot yeu cau cu lam game lap lai, nong, thieu vui hoac kho mo rong, duoc phep bo.
 - Neu can them he thong moi de game hay hon, duoc phep them.
+- Neu mot tinh nang trong danh sach "co the lam" co the implement gon va khong pha game, hay lam luon thay vi de sau.
 - Neu can tach file de code de bao tri hon, duoc phep tach file.
 - Neu can thay doi cau truc chuong, kinh te, mon an, khach hang, nang cap, UI hoac story, duoc phep thay doi.
 - Ban sac Viet Nam, cam xuc ve quan an gia dinh va do vui khi choi la uu tien cao nhat.
 - Khong hy sinh trai nghiem nguoi choi chi de giu mot quyet dinh thiet ke cu.
 - Moi thay doi nen phuc vu mot trong ba muc tieu: vui hon, sau hon, Viet Nam hon.
+- Khong can doi den "ban sau" cho cac y tuong ro rang tot hon neu co the lam ngay trong pham vi code hien tai.
 
 Nhung rang buoc cu khong con bat buoc:
 
@@ -95,6 +97,8 @@ Can co luu tien trinh that su, cho phep tiep tuc game va reset save.
 
 ### Co the lam neu giup game tot hon
 
+Tinh than: muc nay khong phai backlog xa. Neu lam duoc trong luc implement v1.10 ma khong gay vo game, hay lam luon.
+
 - Challenge Mode day du.
 - Festival Mode rieng.
 - Mini game phuc tap.
@@ -104,6 +108,11 @@ Can co luu tien trinh that su, cho phep tiep tuc game va reset save.
 - He thong danh tieng cua quan.
 - He thong nguyen lieu va ton kho.
 - He thong nhan vien/phu bep neu duoc lam gon va vui.
+- He thong do uong co gameplay rieng, khong chi la item cong tien.
+- He thong tinh cach khach hang: moi khach co cau noi, thoi quen, cam xuc, ky niem, phan ung khi vui/buon.
+- He thong tin don khu pho: khach hai long se ke ban be den, khach that vong lam giam danh tieng.
+- He thong su kien nho bat ngo trong ca choi: het da, thieu rau, mua lon, khach quen ghe tham, food blogger quay clip.
+- He thong so tay quan: ghi lai mon da mo khoa, khach da gap, cau chuyen da mo.
 
 ## 4. Thiet Ke Kinh Te Moi
 
@@ -208,6 +217,29 @@ Quy tac:
 
 ## 6. Khach Hang Va Khach Bi An
 
+### 6.0 Muc tieu moi cho customer
+
+Khach hien tai bi nhat vi chu yeu la mot avatar + mon goi + thanh kien nhan. v1.10 can bien khach thanh nguoi co tinh cach, thoi quen va cau chuyen nho.
+
+Moi khach quan trong nen co:
+
+- Ten rieng.
+- Vai tro trong doi song Viet Nam: sinh vien, xe om, co giao, viet kieu, food blogger, nguoi lao dong, khach du lich.
+- Mon thich va mon ghe.
+- Kieu goi mon: noi thang, noi vong, goi combo, doi it cay, doi them rau, doi khong mam tom.
+- 2-4 cau thoai ngan theo trang thai: moi vao, sap het kien nhan, duoc phuc vu dung, bi phuc vu sai.
+- Mot "hook" ca nhan: nho nha, di lam muon, an mon cu cua me, quay review, tim ky uc cu, tiec tien, an rat kho tinh.
+- Phan thuong/anh huong neu phuc vu tot: tip, tang danh tieng, mo khoa cau chuyen, ke them khach moi.
+
+Khach khong nen chi khac nhau bang emoji. Moi nhom khach phai tao cam giac khac khi choi:
+
+- Khach van phong: it kien nhan, thuong goi combo nhanh.
+- Sinh vien: it tien, tip thap nhung hay quay lai neu duoc doi xu tot.
+- Nguoi lao dong: thich phan nhieu, mon nong, kien nhan vua.
+- Khach du lich: tra cao hon, hay yeu cau it cay/khong mam tom.
+- Khach quen: co cau chuyen tang dan qua nhieu lan gap.
+- Khach bi an: it xuat hien nhung moi lan gap phai dang nho.
+
 ### 6.1 Khach Tay moi
 
 Them danh sach khach Tay co ten va khau vi:
@@ -219,6 +251,14 @@ Them danh sach khach Tay co ten va khau vi:
 - Kenji: thich mon nong, hay goi bun bo Hue nhung yeu cau it cay.
 
 Khach Tay khong nen chi la "John" lap lai.
+
+Them reaction rieng:
+
+- Anna: hay hoi "mon nay co cay khong?", neu dung y se tang review tot.
+- Marco: thich mon nuong, neu cha perfect se tip cao.
+- Sophie: thich do uong mat va mon thanh, hop voi goi cuon/tra tac.
+- David: goi combo lon, neu cham se mat kien nhan rat nhanh.
+- Kenji: thich vi dam nhung khong an cay qua, phu hop bun bo Hue it sa te.
 
 ### 6.2 Khach Viet moi
 
@@ -232,6 +272,17 @@ Khach Tay khong nen chi la "John" lap lai.
 - Anh shipper.
 
 Moi nguoi co mot cau noi ngan, mon thich va muc kien nhan khac nhau.
+
+Them chieu sau cho khach Viet:
+
+- Co ban hoa: den som, thich tra da va banh mi, neu phuc vu tot se tang khach buoi sang.
+- Chu xe om: goi nhanh, kien nhan thap, tip nho nhung xuat hien thuong.
+- Bac cong nhan: thich com tam/bun bo, phan nhieu, neu sai mon tru danh tieng it vi de tinh.
+- Sinh vien xa nha: thich mon re, co chuoi cau chuyen nho ve nho nha.
+- Nhan vien van phong: goi combo, tra cao hon, rat mat kien nhan gio trua.
+- Ba cu di cho: thich vi truyen thong, neu dung mon se mo ky uc ve Cu Ong.
+- Co giao ve huu: cham rai, kien nhan cao, co the cho loi khuyen/cau chuyen.
+- Anh shipper: goi mang di, can toc do, neu nhanh se tang combo delivery.
 
 ### 6.3 Khach bi an
 
@@ -329,6 +380,51 @@ Them it nhat 3:
 - Nuoc chanh
 - Sua dau nanh
 - Rau ma
+
+Nuoc uong khong nen chi la "them tien". Can co cam giac rieng va anh huong gameplay.
+
+Nhom nuoc uong de xuat:
+
+- Tra da: re, nhanh, di kem hau het mon; tang nhe kien nhan khach Viet.
+- Tra tac: re-vua, hop ngay nong; combo tot voi banh mi, bun thit nuong.
+- Nuoc mia: ban chay ngay nong/le hoi; loi nhuan tot nhung mat thoi gian ep.
+- Ca phe sua da: dat hon, hop khach van phong/khach Tay; neu pha dung tang tip.
+- Bac xiu: bien the ca phe nhe hon, hop khach tre/khach it uong dang.
+- Sua dau nanh: hop buoi sang, khach lon tuoi, combo voi banh mi.
+- Nuoc chanh: giai nhiet, giam tac dong su kien ngay nong.
+- Rau ma: thuc uong dac san via he, hop khach thich do mat.
+- Sam dua: mo khoa ve sau, ban tot trong le hoi/chuong mien Nam.
+- Che dau xanh: gan giua mon trang mieng va do uong, co the la combo dac biet.
+
+Co che pha nuoc:
+
+- Do uong nhanh: tra da, sua dau nanh - bam la xong, tien it.
+- Do uong can canh ti le: ca phe sua da, bac xiu - can chon ty le sua/ca phe/da de dat "ngon".
+- Do uong can thoi gian may: nuoc mia - bat may ep, cho tien trinh, co nguy co bi cham.
+- Do uong theo su kien: nuoc chanh/rau ma/tra tac ban manh ngay nong.
+
+Trang thai do uong:
+
+- normal: dung duoc.
+- ngon: tang tip/combo bonus.
+- nhat: khach van nhan nhung mat bonus.
+- qua ngot/qua dang: khach khong vui, tru nhe danh tieng.
+
+Combo mon + nuoc nen co ban sac:
+
+- Banh mi + ca phe sua da.
+- Bun cha + tra da.
+- Bun bo Hue + nuoc chanh/tra tac.
+- Com tam + tra da/nuoc mia.
+- Goi cuon + rau ma.
+- Bun dau mam tom + tra tac.
+- Hu tieu + sua dau nanh buoi sang.
+
+Mini game do uong uu tien:
+
+- Pha ca phe sua da: canh 3 thanh ca phe/sua/da.
+- Ep nuoc mia: giu may trong vung xanh, qua lau se ket may.
+- Pha tra tac: can bang chua/ngot/da.
 
 ### 8.4 Combo
 
@@ -519,10 +615,11 @@ Mini game chi nen xuat hien o chuong dac biet hoac de lay bonus, khong bat nguoi
 ### Sprint 4 - Mon, nuoc, combo
 
 1. Them 5 mon an moi.
-2. Them 3 nuoc uong.
-3. Them combo mon + nuoc.
-4. Cap nhat UI don hang.
-5. Cap nhat scoring va reward.
+2. Them 6-10 nuoc uong neu co the lam gon, it nhat 3 nuoc phai co gameplay/bonus rieng.
+3. Them combo mon + nuoc co ban sac Viet, khong chi cong tien thuan tuy.
+4. Them reaction khach theo do uong dung/sai/qua cham.
+5. Cap nhat UI don hang de hien mon chinh, nuoc, yeu cau dac biet.
+6. Cap nhat scoring, tip, danh tieng va reward.
 
 ### Sprint 5 - Nang cap va su kien chuong
 
@@ -536,6 +633,8 @@ Mini game chi nen xuat hien o chuong dac biet hoac de lay bonus, khong bat nguoi
 1. Them Endless Mode co ban.
 2. Them 2 challenge nho.
 3. Them 1 mini game uu tien: nuong cha hoac pha nuoc mam.
+4. Neu lam duoc them ma khong vo game, lam tiep Festival Mode, Achievement, Gallery ky uc.
+5. Neu co the, them mini game do uong: pha ca phe sua da hoac ep nuoc mia.
 
 ## 14. Tieu Chi Kiem Thu
 
