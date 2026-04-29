@@ -1,5 +1,31 @@
 # Bep Viet: Tiem Bun So 7 - Ke Hoach Cap Nhat v1.10
 
+## 0. Dinh Huong Moi - Uu Tien Chat Luong Tuyet Doi
+
+Tu thoi diem nay, bo tat ca rang buoc va muc tieu goc neu chung lam game kem hay hon.
+
+Muc tieu duy nhat:
+
+> Lam "Bep Viet: Tiem Bun So 7" tro thanh game hay nhat, hap dan nhat, co ban sac Viet Nam ro nhat va dang choi lau dai nhat co the trong kha nang hien tai.
+
+Nguyen tac moi:
+
+- Chat luong gameplay quan trong hon viec giu dung scope cu.
+- Neu mot yeu cau cu lam game lap lai, nong, thieu vui hoac kho mo rong, duoc phep bo.
+- Neu can them he thong moi de game hay hon, duoc phep them.
+- Neu can tach file de code de bao tri hon, duoc phep tach file.
+- Neu can thay doi cau truc chuong, kinh te, mon an, khach hang, nang cap, UI hoac story, duoc phep thay doi.
+- Ban sac Viet Nam, cam xuc ve quan an gia dinh va do vui khi choi la uu tien cao nhat.
+- Khong hy sinh trai nghiem nguoi choi chi de giu mot quyet dinh thiet ke cu.
+- Moi thay doi nen phuc vu mot trong ba muc tieu: vui hon, sau hon, Viet Nam hon.
+
+Nhung rang buoc cu khong con bat buoc:
+
+- Khong con bi gioi han boi pham vi 3 mon, 3 chuong, 3 NPC hay vanilla one-file neu dieu do lam game kem hon.
+- Khong con bat buoc giu Bun doc mung la trung tam moi chuong neu dieu do gay lap lai.
+- Khong con bat buoc giu gameplay don gian neu viec them he thong moi lam game hap dan hon.
+- Khong con uu tien "ship nhanh" hon chat luong tong the.
+
 ## 1. Muc Tieu Ban v1.10
 
 Ban v1.10 tap trung bien v9 tu mot ban co 15 chuong co the choi duoc thanh mot ban co chieu sau hon, it lap lai hon, can bang kinh te tot hon va the hien ro ban sac Viet Nam hon.
@@ -48,14 +74,15 @@ Can co luu tien trinh that su, cho phep tiep tuc game va reset save.
 
 ### Bat buoc co
 
-- Can bang lai kinh te 15 chuong.
-- Sua logic bo cha chay va huy mon.
-- Save/load bang localStorage.
-- Khach Tay moi va khach bi an co ti le xuat hien.
-- Giam lap Cu ong an bun doc mung.
-- Them it nhat 5 mon an, 3 nuoc uong, 5 nguyen lieu.
-- Nang cap nhieu cap.
-- Moi nhom chuong co chu de/variation rieng.
+- Can bang lai kinh te 15 chuong de game cong bang, co tien trien va khong phat nguoi choi qua muc.
+- Sua logic bo cha chay, huy mon va trang thai bep de gameplay bot uc che.
+- Save/load that su bang localStorage hoac mot co che local tuong duong.
+- Khach hang da dang hon, co khach Tay, khach Viet, khach bi an va cau chuyen phu.
+- Giam lap Cu ong va Bun doc mung; bien Cu ong thanh yeu to cam xuc, khong phai mot noi dung bi lap.
+- Mo rong mon an, nuoc uong, nguyen lieu va combo neu giup game phong phu hon.
+- Nang cap nhieu cap, tao duong phat trien dai han.
+- Moi nhom chuong phai co chu de, su kien hoac co che rieng de khong lap lai.
+- Uu tien bat ky thay doi nao lam game hay hon, ke ca khi vuot ngoai pham vi ban dau.
 
 ### Nen co
 
@@ -63,14 +90,20 @@ Can co luu tien trinh that su, cho phep tiep tuc game va reset save.
 - Nhiem vu phu cua khach bi an.
 - Su kien theo chuong: mua, le hoi, doan du khach, ngay nong, ngay mat dien.
 - Endless Mode co ban.
+- UI/UX tot hon neu giao dien hien tai can tro trai nghiem.
+- Tach code thanh nhieu file neu index.html qua kho bao tri.
 
-### De sau neu thieu thoi gian
+### Co the lam neu giup game tot hon
 
 - Challenge Mode day du.
 - Festival Mode rieng.
 - Mini game phuc tap.
 - Achievement system.
 - Gallery ky uc.
+- He thong thanh pho/vung mien rong hon.
+- He thong danh tieng cua quan.
+- He thong nguyen lieu va ton kho.
+- He thong nhan vien/phu bep neu duoc lam gon va vui.
 
 ## 4. Thiet Ke Kinh Te Moi
 
@@ -558,4 +591,3 @@ Pham vi lan nay:
 
 Tu kiem tra bang cach mo index.html hoac chay server tinh.
 ```
-
