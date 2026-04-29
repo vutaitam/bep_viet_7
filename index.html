@@ -396,7 +396,13 @@ button{font-family:inherit;cursor:pointer;}
 .clear-btn{flex:0 0 42px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);font-size:1.1em;}
 
 /* ===== RIGHT PANEL ===== */
-.recipe-list{display:flex;flex-direction:column;gap:8px;}
+.recipe-list{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;padding-right:2px;}
+.recipe-list::-webkit-scrollbar{width:4px;}
+.recipe-list::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:2px;}
+.recipe-list::-webkit-scrollbar-thumb{background:rgba(255,215,0,.3);border-radius:2px;}
+.drink-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.82em;}
+.drink-row:last-of-type{border-bottom:none;}
+.drink-auto-note{font-size:.72em;color:var(--text-mute);font-style:italic;margin-top:6px;}
 .recipe-item{
   background:rgba(255,255,255,.05);padding:9px 11px;
   border-radius:9px;border-left:4px solid rgba(255,215,0,.4);
@@ -766,6 +772,12 @@ button{font-family:inherit;cursor:pointer;}
       <div class="section">
         <div class="section-title">📖 Sổ công thức</div>
         <div class="recipe-list" id="recipeList"></div>
+      </div>
+      <!-- Drinks -->
+      <div class="section" id="drinkSection">
+        <div class="section-title">🥤 Đồ uống hôm nay</div>
+        <div id="drinkList"></div>
+        <div class="drink-auto-note">Tự động phục vụ khi khách gọi — cộng thẳng vào doanh thu</div>
       </div>
       <!-- NPC list -->
       <div class="section">
@@ -1304,7 +1316,7 @@ function startGame(){
   document.getElementById('timeDisplay').textContent=`${mm}:${ss.toString().padStart(2,'0')}`;
   document.getElementById('timerBar').style.width='100%';
   buildDayPips();resetPot();resetGrill();
-  renderIngredients();renderRecipes();renderNPCList();updateUI();
+  renderIngredients();renderRecipes();renderDrinks();renderNPCList();updateUI();
   G._event=lv.event||null;
   G._bossNpc=lv.bossNpc||null;
   G._bossSpawned=false;
@@ -1531,6 +1543,19 @@ function renderRecipes(){
         <span class="recipe-stat">⭐ ${r.score}đ</span>
       </div>`;
     list.appendChild(div);
+  });
+}
+
+function renderDrinks(){
+  const keys=availableDrinkKeys();
+  const sec=document.getElementById('drinkSection');
+  sec.style.display=keys.length?'':'none';
+  const list=document.getElementById('drinkList');list.innerHTML='';
+  keys.forEach(k=>{
+    const d=DRINKS[k];
+    const row=document.createElement('div');row.className='drink-row';
+    row.innerHTML=`<span>${d.emoji} ${d.name}</span><span style="color:var(--gold)">${d.price.toLocaleString('vi-VN')}đ <span style="color:var(--text-mute);font-size:.85em;">+${d.patienceBoost}s kiên nhẫn</span></span>`;
+    list.appendChild(row);
   });
 }
 
