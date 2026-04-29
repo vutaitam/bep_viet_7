@@ -1298,14 +1298,33 @@ function tickTimer(){
 //  SPAWN CUSTOMERS
 // ─────────────────────────────────────────────
 
+function currentOverall(){
+  return LEVELS[PROG.levelIdx]?.overall||1;
+}
+
+function isUnlockedItem(item){
+  return !item.availableFrom||item.availableFrom<=currentOverall();
+}
+
+function availableRecipeEntries(){
+  return Object.entries(RECIPES).filter(([,r])=>isUnlockedItem(r));
+}
+
 function availableRecipeKeys(){
-  const overall=LEVELS[PROG.levelIdx]?.overall||1;
-  return Object.keys(RECIPES).filter(k=>!RECIPES[k].availableFrom||RECIPES[k].availableFrom<=overall);
+  return availableRecipeEntries().map(([k])=>k);
 }
 
 function availableDrinkKeys(){
-  const overall=LEVELS[PROG.levelIdx]?.overall||1;
-  return Object.keys(DRINKS).filter(k=>!DRINKS[k].availableFrom||DRINKS[k].availableFrom<=overall);
+  return Object.keys(DRINKS).filter(k=>isUnlockedItem(DRINKS[k]));
+}
+
+function visibleIngredientKeys(){
+  const keys=new Set();
+  availableRecipeEntries().forEach(([,r])=>{
+    r.ingredients.forEach(k=>keys.add(k));
+    if(r.needsGrill&&r.grillIngredient)keys.add(r.grillIngredient);
+  });
+  return [...keys].filter(k=>INGREDIENTS[k]);
 }
 
 function chooseNpcKey(existing){
@@ -1426,7 +1445,7 @@ function selectCustomer(id){
 
 function renderIngredients(){
   const grid=document.getElementById('ingredientsGrid');grid.innerHTML='';
-  Object.keys(INGREDIENTS).forEach(k=>{
+  visibleIngredientKeys().forEach(k=>{
     const ing=INGREDIENTS[k];
     const div=document.createElement('div');
     div.className='ingredient'+(ing.special?' special':'');div.id='ing-'+k;
@@ -1438,8 +1457,7 @@ function renderIngredients(){
 
 function renderRecipes(){
   const list=document.getElementById('recipeList');list.innerHTML='';
-  const overall=LEVELS[PROG.levelIdx]?.overall||1;
-  Object.entries(RECIPES).filter(([,r])=>!r.availableFrom||r.availableFrom<=overall).forEach(([key,r])=>{
+  availableRecipeEntries().forEach(([key,r])=>{
     const div=document.createElement('div');
     div.className='recipe-item'+(r.isSignature?' signature':'');
     div.id='recipe-'+key;
@@ -1488,7 +1506,7 @@ function addIngredient(key){
 
 function findMatch(){
   const ings=[...G.pot.ingredients].sort().join(',');
-  return Object.keys(RECIPES).find(k=>[...RECIPES[k].ingredients].sort().join(',')===ings)||null;
+  return availableRecipeKeys().find(k=>[...RECIPES[k].ingredients].sort().join(',')===ings)||null;
 }
 
 function highlightRecipe(key){
