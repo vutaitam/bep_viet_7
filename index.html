@@ -953,11 +953,11 @@ const INGREDIENTS = {
 };
 
 const DRINKS = {
-  tra_da:{name:'Trà đá',emoji:'🧊',price:8000,score:2,patienceBoost:3,availableFrom:1},
-  tra_tac:{name:'Trà tắc',emoji:'🍋',price:15000,score:4,patienceBoost:5,availableFrom:4},
-  nuoc_mia:{name:'Nước mía',emoji:'🥤',price:20000,score:5,patienceBoost:4,availableFrom:6},
-  ca_phe_sua_da:{name:'Cà phê sữa đá',emoji:'☕',price:25000,score:6,patienceBoost:2,availableFrom:9},
-  rau_ma:{name:'Rau má',emoji:'🌿',price:18000,score:5,patienceBoost:5,availableFrom:11}
+  tra_da:{name:'Trà đá',emoji:'🧊',price:5000,score:2,patienceBoost:3,availableFrom:1},
+  tra_tac:{name:'Trà tắc',emoji:'🍋',price:10000,score:4,patienceBoost:5,availableFrom:4},
+  nuoc_mia:{name:'Nước mía',emoji:'🥤',price:14000,score:5,patienceBoost:4,availableFrom:6},
+  ca_phe_sua_da:{name:'Cà phê sữa đá',emoji:'☕',price:18000,score:6,patienceBoost:2,availableFrom:9},
+  rau_ma:{name:'Rau má',emoji:'🌿',price:12000,score:5,patienceBoost:5,availableFrom:11}
 };
 
 const NPCS = {
@@ -965,23 +965,23 @@ const NPCS = {
     quotes:{arrive:'Cho bác một tô bún dọc mùng như mọi khi nhé!',happy:'Đúng vị Cụ rồi đấy cháu...',angry:'Bác phải đi đây, hẹn lần sau...'}},
   co_lan:{name:'Cô Lan',emoji:'👩‍💼',favorite:'banh_mi',trait:'Doanh nhân vội vàng',patience:40,tip:1.5,isRegular:true,
     quotes:{arrive:'Em ơi, một bánh mì nhanh nha, cô đang vội!',happy:'Nhanh thật! Cảm ơn em.',angry:'Lâu quá, cô đi quán khác đây!'}},
-  john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:2.0,isRegular:true,
+  john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:1.7,isRegular:true,
     quotes:{arrive:'Hi! Một bún chả please!',happy:'Mmm, so good! Thank you!',angry:'Sorry, I have to go...'}},
-  anna:{name:'Anna',emoji:'👱‍♀️',favorite:'pho_bo',trait:'Du khách Pháp thích món ít cay',patience:72,tip:1.8,isRegular:false,drink:'tra_tac',
+  anna:{name:'Anna',emoji:'👱‍♀️',favorite:'pho_bo',trait:'Du khách Pháp thích món ít cay',patience:72,tip:1.45,isRegular:false,drink:'tra_tac',
     quotes:{arrive:'Món nào thơm mà không quá cay vậy?',happy:'Tuyệt quá, rất Việt Nam!',angry:'Xin lỗi, tôi phải đi tiếp...'}},
-  marco:{name:'Marco',emoji:'🤌',favorite:'bun_cha',trait:'Khách Ý mê món nướng',patience:68,tip:1.7,isRegular:false,drink:'tra_da',
+  marco:{name:'Marco',emoji:'🤌',favorite:'bun_cha',trait:'Khách Ý mê món nướng',patience:68,tip:1.4,isRegular:false,drink:'tra_da',
     quotes:{arrive:'Tôi muốn thử món nướng ngon nhất của quán!',happy:'Chả nướng rất thơm, bravo!',angry:'Tôi đói quá, hẹn dịp khác.'}},
-  kenji:{name:'Kenji',emoji:'🧑‍💼',favorite:'bun_bo_hue',trait:'Khách Nhật thích vị đậm nhưng ít cay',patience:76,tip:1.6,isRegular:false,drink:'tra_tac',
+  kenji:{name:'Kenji',emoji:'🧑‍💼',favorite:'bun_bo_hue',trait:'Khách Nhật thích vị đậm nhưng ít cay',patience:76,tip:1.35,isRegular:false,drink:'tra_tac',
     quotes:{arrive:'Cho tôi món nóng, nhưng đừng cay quá nhé.',happy:'Nước dùng rất sâu vị. Cảm ơn!',angry:'Tôi phải quay lại đoàn rồi.'}},
   sinh_vien:{name:'Minh',emoji:'🎒',favorite:'banh_mi',trait:'Sinh viên xa nhà, thích món rẻ mà ấm bụng',patience:58,tip:1.1,isRegular:false,drink:'tra_da',
     quotes:{arrive:'Cho em món nào nhanh nhanh, còn kịp ca học ạ.',happy:'Ngon như ở nhà nấu vậy!',angry:'Em trễ giờ mất rồi...'}},
   bac_cong_nhan:{name:'Bác Hòa',emoji:'👷',favorite:'com_tam',trait:'Người lao động thích phần chắc bụng',patience:70,tip:1.25,isRegular:false,drink:'nuoc_mia',
     quotes:{arrive:'Cho bác phần nào no no chút nhé.',happy:'Đã bụng! Chiều làm khỏe rồi.',angry:'Bác phải ra công trình đây.'}},
-  food_blogger:{name:'Linh Review',emoji:'📱',favorite:'bun_bo_hue',trait:'Khách bí ẩn: quay review cho quán',patience:55,tip:2.2,isRegular:false,isMystery:true,drink:'ca_phe_sua_da',
+  food_blogger:{name:'Linh Review',emoji:'📱',favorite:'bun_bo_hue',trait:'Khách bí ẩn: quay review cho quán',patience:55,tip:1.65,isRegular:false,isMystery:true,drink:'ca_phe_sua_da',
     quotes:{arrive:'Hôm nay mình review quán này nha mọi người!',happy:'Món này lên clip chắc viral đó!',angry:'Clip hôm nay chắc phải nói thật rồi...'}},
-  viet_kieu:{name:'Chú Phúc',emoji:'🧳',favorite:'pho_bo',trait:'Khách bí ẩn: Việt kiều tìm lại vị quê',patience:85,tip:2.0,isRegular:false,isMystery:true,drink:'tra_da',
+  viet_kieu:{name:'Chú Phúc',emoji:'🧳',favorite:'pho_bo',trait:'Khách bí ẩn: Việt kiều tìm lại vị quê',patience:85,tip:1.6,isRegular:false,isMystery:true,drink:'tra_da',
     quotes:{arrive:'Chú xa nhà lâu rồi, cho chú món nào có vị Hà Nội nhé.',happy:'Đúng rồi... vị này chú nhớ mấy chục năm.',angry:'Chắc hôm nay chưa có duyên rồi.'}},
-  khach_im_lang:{name:'Khách im lặng',emoji:'🎩',favorite:null,trait:'Khách bí ẩn: chỉ gọi món bằng gợi ý',patience:65,tip:2.5,isRegular:false,isMystery:true,drink:'rau_ma',
+  khach_im_lang:{name:'Khách im lặng',emoji:'🎩',favorite:null,trait:'Khách bí ẩn: chỉ gọi món bằng gợi ý',patience:65,tip:1.8,isRegular:false,isMystery:true,drink:'rau_ma',
     quotes:{arrive:'Tôi muốn một món có khói bếp và ký ức phố cổ.',happy:'Bạn hiểu món ăn hơn lời nói.',angry:'Có lẽ bạn chưa hiểu ý tôi.'}},
   khach_thuong:{name:'Khách lạ',emoji:'🧑',favorite:null,trait:'Khách qua đường',patience:60,tip:1.0,isRegular:false,
     quotes:{arrive:'Cho tôi xem thực đơn nào.',happy:'Ngon đó, lần sau ghé lại!',angry:'Bỏ đi đây...'}},
@@ -1000,63 +1000,63 @@ const NPCS = {
 
 const LEVELS=[
   // ── Ch.1: HÀ NỘI ──
-  {ch:1,lv:1,overall:1,name:'Khai trương Tiệm Bún',customers:6,time:180,cost:120000,npcRate:0.45,
+  {ch:1,lv:1,overall:1,name:'Khai trương Tiệm Bún',customers:6,time:180,cost:150000,npcRate:0.45,
     icon:'🕯️',story:'Cụ Ông vừa qua đời. Hôm nay là ngày đầu tiên bạn mở lại Tiệm Bún Số 7. Bác Tâm đứng chờ trước cổng từ sớm — ông muốn xem cháu Cụ có giữ được hương vị không.',
     objective:'Phục vụ ít nhất 4 khách · Doanh thu > 150.000đ'},
-  {ch:1,lv:2,overall:2,name:'Khách quen trở lại',customers:7,time:190,cost:130000,npcRate:0.5,
+  {ch:1,lv:2,overall:2,name:'Khách quen trở lại',customers:7,time:190,cost:165000,npcRate:0.5,
     icon:'👴',story:'Tin đồn lan nhanh trong ngõ phố. Bác Tâm kể với hàng xóm về tô Bún dọc mùng "đúng vị Cụ". Hôm nay có thêm Cô Lan — doanh nhân hay ăn bánh mì buổi sáng.',
     objective:'Phục vụ ít nhất 5 khách · Phục vụ Bác Tâm 1 lần'},
-  {ch:1,lv:3,overall:3,name:'Sáng có mưa rào',customers:8,time:200,cost:140000,npcRate:0.45,event:'rain',
+  {ch:1,lv:3,overall:3,name:'Sáng có mưa rào',customers:8,time:200,cost:180000,npcRate:0.45,event:'rain',
     icon:'🌧️',story:'Mưa rào bất chợt ập đến. Khách ít hơn nhưng ai đến đều thật sự muốn ăn. Mưa làm bếp than khó nướng hơn — chú ý kỹ lò nướng.',
     objective:'Phục vụ ít nhất 5 khách · Doanh thu > 200.000đ'},
-  {ch:1,lv:4,overall:4,name:'Bác Tâm dẫn bạn bè',customers:9,time:210,cost:150000,npcRate:0.6,
+  {ch:1,lv:4,overall:4,name:'Bác Tâm dẫn bạn bè',customers:9,time:210,cost:205000,npcRate:0.6,
     icon:'🤝',story:'Bác Tâm tự hào dẫn cả nhóm bạn cũ của Cụ Ông đến ăn. Họ đã ăn ở đây cách đây 15 năm — tiêu chuẩn cao lắm đó. Phục vụ tốt để giữ tiếng quán.',
     objective:'Phục vụ ít nhất 6 khách · Streak >= 3 lần liên tiếp'},
-  {ch:1,lv:5,overall:5,name:'Boss: Nhà phê bình Tuấn',customers:10,time:240,cost:170000,npcRate:0.65,isBoss:true,bossNpc:'tuan_pb',
+  {ch:1,lv:5,overall:5,name:'Boss: Nhà phê bình Tuấn',customers:10,time:240,cost:240000,npcRate:0.65,isBoss:true,bossNpc:'tuan_pb',
     icon:'🧐',story:'Nhà phê bình ẩm thực Tuấn nghe tiếng. Ông ta nổi tiếng khắt khe — một bài đánh giá của ông có thể làm quán đóng cửa hoặc nổi tiếng rầm rộ. Đừng để ông chờ!',
     objective:'Phục vụ ít nhất 7 khách · KHÔNG để Tuấn bỏ đi'},
   // ── Ch.2: HỘI AN ──
-  {ch:2,lv:1,overall:6,name:'Hội An: Ngày đầu mở quán',customers:8,time:200,cost:220000,npcRate:0.45,
+  {ch:2,lv:1,overall:6,name:'Hội An: Ngày đầu mở quán',customers:8,time:200,cost:300000,npcRate:0.45,
     icon:'🏮',story:'Bác Tâm giới thiệu, bạn quyết định mang hương vị Hà Nội vào Hội An. Phố cổ nhỏ nhưng ấm áp. Khách du lịch nhiều hơn Hà Nội, họ tò mò và dễ tính hơn.',
     objective:'Phục vụ ít nhất 5 khách · Mì Quảng mở khóa',unlocks:'mi_quang'},
-  {ch:2,lv:2,overall:7,name:'Phố Hội mùa lễ hội',customers:9,time:200,cost:240000,npcRate:0.5,event:'festival',
+  {ch:2,lv:2,overall:7,name:'Phố Hội mùa lễ hội',customers:9,time:200,cost:330000,npcRate:0.5,event:'festival',
     icon:'🎑',story:'Hội An đang vào mùa lễ hội Trung Thu. Đèn lồng rực rỡ khắp phố cổ. Khách đến đông hơn bình thường — chuẩn bị tốt nguyên liệu!',
     objective:'Phục vụ ít nhất 6 khách · Doanh thu > 350.000đ'},
-  {ch:2,lv:3,overall:8,name:'Đoàn khách du lịch Hàn Quốc',customers:10,time:210,cost:260000,npcRate:0.5,
+  {ch:2,lv:3,overall:8,name:'Đoàn khách du lịch Hàn Quốc',customers:10,time:210,cost:360000,npcRate:0.5,
     icon:'🌏',story:'Một đoàn 5 người Hàn Quốc đến tham quan. Họ không nói tiếng Việt nhưng dùng điện thoại dịch menu — đặt món bằng cách chỉ tay. Kiên nhẫn với họ nhé!',
     objective:'Phục vụ ít nhất 7 khách · Speed bonus >= 3 lần'},
-  {ch:2,lv:4,overall:9,name:'Cuối tuần đông khách',customers:11,time:220,cost:290000,npcRate:0.6,event:'rush',
+  {ch:2,lv:4,overall:9,name:'Cuối tuần đông khách',customers:11,time:220,cost:400000,npcRate:0.6,event:'rush',
     icon:'📈',story:'Cuối tuần Hội An luôn đông. Quán bún đã có tiếng — người xếp hàng dài hơn bao giờ hết. Cần phục vụ nhanh, không được để khách chờ lâu.',
     objective:'Phục vụ ít nhất 8 khách · Streak >= 4 lần liên tiếp'},
-  {ch:2,lv:5,overall:10,name:'Boss: Đầu bếp Khang thách đấu',customers:12,time:260,cost:330000,npcRate:0.65,isBoss:true,bossNpc:'khang',
+  {ch:2,lv:5,overall:10,name:'Boss: Đầu bếp Khang thách đấu',customers:12,time:260,cost:460000,npcRate:0.65,isBoss:true,bossNpc:'khang',
     icon:'👨‍🍳',story:'Đầu bếp Khang — đối thủ cũ của Cụ Ông — nghe tin bạn vào Hội An. Ông thách đấu công khai. Cẩn thận: Khang rất ghét chả cháy!',
     objective:'Phục vụ ít nhất 9 khách · KHÔNG để cháy chả · Doanh thu > 500.000đ'},
   // ── Ch.3: SÀI GÒN ──
-  {ch:3,lv:1,overall:11,name:'Sài Gòn: Buổi sáng náo nhiệt',customers:9,time:200,cost:360000,npcRate:0.45,
+  {ch:3,lv:1,overall:11,name:'Sài Gòn: Buổi sáng náo nhiệt',customers:9,time:200,cost:500000,npcRate:0.45,
     icon:'🌆',story:'Sài Gòn về sáng — khói xe, tiếng còi, quán xá chen chúc. Người ta ăn nhanh để kịp đi làm. Hủ tiếu mở khóa — thêm vũ khí mới!',
     objective:'Phục vụ ít nhất 6 khách · Hủ tiếu mở khóa',unlocks:'hu_tieu'},
-  {ch:3,lv:2,overall:12,name:'Khách Tây ba lô',customers:10,time:200,cost:390000,npcRate:0.5,
+  {ch:3,lv:2,overall:12,name:'Khách Tây ba lô',customers:10,time:200,cost:540000,npcRate:0.5,
     icon:'🧔',story:'John gặp lại nhóm bạn cũ từ thời du học — 2 người Mỹ và 1 người Pháp. Họ đã ăn bún ở Sài Gòn nhiều lần nhưng muốn thử quán mới. Phục vụ tốt, tip sẽ rất cao!',
     objective:'Phục vụ John + ít nhất 5 khách khác · John phải happy'},
-  {ch:3,lv:3,overall:13,name:'Giờ cao điểm buổi trưa',customers:11,time:210,cost:430000,npcRate:0.55,event:'peak',
+  {ch:3,lv:3,overall:13,name:'Giờ cao điểm buổi trưa',customers:11,time:210,cost:590000,npcRate:0.55,event:'peak',
     icon:'☀️',story:'12h trưa Sài Gòn — nhân viên văn phòng, học sinh, shipper... tất cả ùa vào quán cùng lúc. Nhanh tay, nhanh mắt — mỗi giây đều quý.',
     objective:'Phục vụ ít nhất 8 khách · Streak >= 5 lần liên tiếp'},
-  {ch:3,lv:4,overall:14,name:'Cuộc thi Ẩm thực 3 miền',customers:12,time:220,cost:470000,npcRate:0.6,
+  {ch:3,lv:4,overall:14,name:'Cuộc thi Ẩm thực 3 miền',customers:12,time:220,cost:650000,npcRate:0.6,
     icon:'🏅',story:'Cuộc thi "Ẩm thực 3 miền" tại TP.HCM. Bạn đại diện miền Bắc với Bún dọc mùng. Ban giám khảo khắt khe, đặc biệt quan tâm đến kỹ thuật nướng chả.',
     objective:'Phục vụ ít nhất 9 khách · 3 lần nướng PERFECT · Doanh thu > 600.000đ'},
-  {ch:3,lv:5,overall:15,name:'FINALE: Iron Chef Việt',customers:15,time:300,cost:520000,npcRate:0.7,isBoss:true,bossNpc:'iron_chef',
+  {ch:3,lv:5,overall:15,name:'FINALE: Iron Chef Việt',customers:15,time:300,cost:760000,npcRate:0.7,isBoss:true,bossNpc:'iron_chef',
     icon:'🏆',story:'Đêm chung kết. Iron Chef Việt — đầu bếp số 1 cả nước — đích thân đến thưởng thức. Cụ Ông đang nhìn từ trên cao... Đây là thời khắc quyết định sự nghiệp của bạn.',
     objective:'Phục vụ ít nhất 11 khách · Iron Chef không được bỏ đi · Doanh thu > 800.000đ'},
 ];
 
 const UPGRADES=[
-  {id:'faster_cook',name:'Bếp ga cao áp',emoji:'🔥',desc:'Thời gian nấu -25%',price:200000,ch:1},
-  {id:'price_boost',name:'Menu in đẹp',emoji:'📋',desc:'Giá mỗi món +10%',price:250000,ch:1},
-  {id:'extra_time',name:'Quạt mát công nghiệp',emoji:'🌀',desc:'Thêm 30 giây mỗi ngày',price:180000,ch:1},
-  {id:'extra_seat',name:'Thêm bàn ghế',emoji:'🪑',desc:'Nhận thêm 1 khách cùng lúc',price:150000,ch:1},
-  {id:'grill_wide',name:'Lò nướng nâng cấp',emoji:'🏆',desc:'Vùng PERFECT nướng rộng hơn (35-65%)',price:300000,ch:1},
-  {id:'neon_sign',name:'Biển hiệu neon',emoji:'✨',desc:'Spawn thêm 1 khách mỗi ngày',price:400000,ch:2},
-  {id:'loyal_card',name:'Thẻ khách quen',emoji:'💳',desc:'Khách quen kiên nhẫn +25%',price:350000,ch:2},
+  {id:'faster_cook',name:'Bếp ga cao áp',emoji:'🔥',desc:'Thời gian nấu -25%',price:350000,ch:1},
+  {id:'price_boost',name:'Menu in đẹp',emoji:'📋',desc:'Giá mỗi món +10%',price:420000,ch:1},
+  {id:'extra_time',name:'Quạt mát công nghiệp',emoji:'🌀',desc:'Thêm 30 giây mỗi ngày',price:300000,ch:1},
+  {id:'extra_seat',name:'Thêm bàn ghế',emoji:'🪑',desc:'Nhận thêm 1 khách cùng lúc',price:280000,ch:1},
+  {id:'grill_wide',name:'Lò nướng nâng cấp',emoji:'🏆',desc:'Vùng PERFECT nướng rộng hơn (35-65%)',price:500000,ch:1},
+  {id:'neon_sign',name:'Biển hiệu neon',emoji:'✨',desc:'Spawn thêm 1 khách mỗi ngày',price:650000,ch:2},
+  {id:'loyal_card',name:'Thẻ khách quen',emoji:'💳',desc:'Khách quen kiên nhẫn +25%',price:550000,ch:2},
 ];
 
 // ─────────────────────────────────────────────
@@ -1356,7 +1356,7 @@ function spawnCustomer(){
   let recipe=npc.favorite&&availRecipes.includes(npc.favorite)?npc.favorite:availRecipes[Math.floor(Math.random()*availRecipes.length)];
   if(npcKey==='khach_im_lang'&&availRecipes.includes('bun_cha'))recipe='bun_cha';
   const drinkKeys=availableDrinkKeys();
-  const wantsDrink=drinkKeys.length&&(Math.random()<0.38||npc.drink);
+  const wantsDrink=drinkKeys.length&&(Math.random()<0.25||npc.drink);
   const drink=wantsDrink&&(npc.drink&&drinkKeys.includes(npc.drink)?npc.drink:drinkKeys[Math.floor(Math.random()*drinkKeys.length)]);
   let pat=npc.patience;
   if(drink&&DRINKS[drink]?.patienceBoost)pat+=DRINKS[drink].patienceBoost;
@@ -1664,8 +1664,8 @@ function serveSelected(){
     bonuses.push(`${d.name} +${d.price.toLocaleString('vi-VN')}đ`);
   }
   if(c.isMystery){
-    earned=Math.floor(earned*1.25);sc+=8;PROG.reputation=(PROG.reputation||0)+2;
-    bonuses.push('Khách bí ẩn +25%');
+    earned=Math.floor(earned*1.15);sc+=8;PROG.reputation=(PROG.reputation||0)+2;
+    bonuses.push('Khách bí ẩn +15%');
   }
   if(ordered.needsGrill&&G.grill.quality==='perfect'){earned=Math.floor(earned*1.15);bonuses.push('Grill PERFECT +15%');}
   const pp=c.patience/c.maxPatience;
@@ -1775,8 +1775,8 @@ function endLevel(reason){
   // Stars: 3=100%, 2=67%+, 1=50%+, 0=fail
   let stars=0;
   if(sr>=1)stars=3;else if(sr>=0.67)stars=2;else if(sr>=0.5)stars=1;
-  const missionReward=stars>0?Math.round((50000+(lv.overall||1)*15000)*stars):0;
-  const noWasteReward=stars>0&&G.burntGrills===0?Math.round(20000+(lv.overall||1)*5000):0;
+  const missionReward=stars>0?Math.round((12000+(lv.overall||1)*3000)*stars):0;
+  const noWasteReward=stars>0&&G.burntGrills===0?Math.round(5000+(lv.overall||1)*1000):0;
   const bankedProfit=stars>0?Math.max(0,G.money-lv.cost)+missionReward+noWasteReward:0;
   // Save progress if level passed
   if(stars>0){
