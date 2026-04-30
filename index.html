@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03</title>
+<title>Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04 (SVG portrait)</title>
 <meta name="description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội. 15 ngày, 3 chương, 21 nhân vật, lễ hội mode endless. Vanilla JS, chơi trực tiếp trình duyệt.">
 <meta name="theme-color" content="#C62828">
 <!-- Open Graph (Facebook, Reddit) -->
@@ -685,7 +685,8 @@ body.boss-active .chapter-bar{
   border-radius:14px;padding:18px 22px;margin-bottom:14px;
   font-style:italic;text-align:center;line-height:1.8;font-size:.95em;
 }
-.feedback-speaker{color:var(--gold);font-weight:800;font-style:normal;font-size:.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.feedback-speaker{color:var(--gold);font-weight:800;font-style:normal;font-size:.9em;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px;}
+.feedback-portrait{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);background:#FFF8E1;object-fit:cover;}
 .end-btns{display:flex;flex-direction:column;gap:10px;}
 
 /* ===== MOBILE ===== */
@@ -797,7 +798,7 @@ body.boss-active .chapter-bar{
   <span class="lantern">🏮</span>
   <span class="lantern">🏮</span>
 
-  <div class="menu-version">Demo v1.11.03 · Confetti · Texture giấy dó · Favicon · OG card</div>
+  <div class="menu-version">🧪 Beta v1.11.04 · Cụ Ông SVG portrait · Confetti · Giấy dó · Lễ hội</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
   <div class="menu-sub">Tiệm Bún Số 7</div>
   <div class="menu-divider"></div>
@@ -997,7 +998,7 @@ body.boss-active .chapter-bar{
     </div>
 
     <div class="feedback-box">
-      <div class="feedback-speaker">👴 Cụ Ông (di nguyện)</div>
+      <div class="feedback-speaker"><img src="assets/portraits/cu-ong-old.svg" alt="" class="feedback-portrait" id="feedbackPortrait"> Cụ Ông (di nguyện)</div>
       <span id="feedbackText"></span>
     </div>
 
@@ -1476,8 +1477,8 @@ function hasStoryFlag(flag){return !!PROG.storyFlags[flag];}
 const DIALOGUES=[
   {image:'🕯️',speaker:'Người kể chuyện',text:'Hà Nội, một sáng mùa thu se lạnh... Trong ngõ nhỏ phố cổ, Cụ Ông vừa qua đời sau bao năm gắn bó với quán bún.'},
   {image:'📜',speaker:'Cháu (bạn)',text:'Cụ ơi... Cháu đã về. Cuốn sổ công thức này, Cụ đã viết suốt 30 năm để truyền lại cho cháu.'},
-  {image:'👴',speaker:'Cụ Ông (di nguyện)',text:'Cháu của ông... Quán Tiệm Bún Số 7 này đã 30 năm. Bao nhiêu khách quen, bao nhiêu kỷ niệm. Ông tin cháu sẽ giữ được hương vị...'},
-  {image:'🍜',speaker:'Cụ Ông (di nguyện)',text:'Đặc biệt là Bún dọc mùng — đó là món ông tự hào nhất. Bí quyết nằm trong từng cọng dọc mùng cháu chọn, từng giờ ninh xương. Cố lên!'},
+  {image:'svg:cu-ong-old',speaker:'Cụ Ông (di nguyện)',text:'Cháu của ông... Quán Tiệm Bún Số 7 này đã 30 năm. Bao nhiêu khách quen, bao nhiêu kỷ niệm. Ông tin cháu sẽ giữ được hương vị...'},
+  {image:'svg:cu-ong-young',speaker:'Cụ Ông (di nguyện)',text:'Đặc biệt là Bún dọc mùng — đó là món ông tự hào nhất. Bí quyết nằm trong từng cọng dọc mùng cháu chọn, từng giờ ninh xương. Cố lên!'},
   {image:'🏮',speaker:'Người kể chuyện',text:'Sáng mai, Tiệm Bún Số 7 sẽ mở cửa lần đầu sau khi Cụ mất. Bác Tâm và những người bạn cũ đang chờ cháu...'}
 ];
 
@@ -1633,7 +1634,12 @@ function buildDots(){
 function showDialogue(){
   if(dlgIdx>=DIALOGUES.length){document.getElementById('cutsceneScreen').classList.remove('active');startGame();return;}
   const d=DIALOGUES[dlgIdx];
-  document.getElementById('cutsceneImage').textContent=d.image;
+  const imgEl=document.getElementById('cutsceneImage');
+  if(d.image&&d.image.startsWith('svg:')){
+    imgEl.innerHTML=`<img src="assets/portraits/${d.image.slice(4)}.svg" alt="${d.speaker}" style="width:280px;height:280px;object-fit:contain;animation:cutsceneIn 1.5s ease-out;">`;
+  } else {
+    imgEl.textContent=d.image;
+  }
   document.getElementById('dialogueSpeaker').textContent=d.speaker;
   const el=document.getElementById('dialogueText');el.textContent='';
   DIALOGUES.forEach((_,i)=>{
@@ -2519,6 +2525,9 @@ function endLevel(reason){
   }
   if(stars>0&&lv.overall===15){
     document.getElementById('feedbackText').textContent='🎉🎉🎉 CHÚC MỪNG! Cháu đã hoàn thành hành trình "Đầu bếp 3 miền"! Danh hiệu đã thuộc về cháu. Cụ Ông an nghỉ thật sự rồi...';
+    const fp=document.getElementById('feedbackPortrait');if(fp)fp.src='assets/portraits/cu-ong-spirit.svg';
+  } else {
+    const fp=document.getElementById('feedbackPortrait');if(fp)fp.src='assets/portraits/cu-ong-old.svg';
   }
   const npcTotal=Object.values(G.npcServed).reduce((a,b)=>a+b,0);
   document.getElementById('endStatsServe').innerHTML=`
@@ -2897,7 +2906,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04 (SVG portrait)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){
