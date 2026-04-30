@@ -325,3 +325,99 @@ Khi làm việc tiếp với dự án này, lưu ý:
 
 *File này được tạo tự động từ context conversation. Cập nhật khi có thay đổi lớn.*
 *Phiên bản: 1.0 — Tạo bởi Claude*
+---
+
+## HANDOFF HIỆN TẠI - HƯỚNG v1.10+
+
+Đây là phần mới nhất cần ưu tiên đọc. Các phần cũ bên dưới có thể đã lỗi thời hoặc bị lỗi encoding.
+
+### Mục Tiêu Hiện Tại
+
+Bỏ các giới hạn scope cũ nếu chúng làm game kém hay hơn. Mục tiêu duy nhất là làm “Bếp Việt: Tiệm Bún Số 7” trở thành game hay hơn, sâu hơn, Việt Nam hơn và đáng chơi lâu hơn.
+
+### Trạng Thái Repo Hiện Tại
+
+- File chơi chính: `index.html`.
+- Version đang hiển thị trong game: Demo v1.10.
+- Công nghệ: vanilla HTML/CSS/JS, deploy một file qua GitHub Pages.
+- Repo live: `https://github.com/vutaitam/bep_viet_7`.
+- Demo live: `https://vutaitam.github.io/bep_viet_7/`.
+- `PLAN_v1.10.md` là spec cải tiến chính.
+- Có file local untracked tên `test`; không stage/push file này nếu không được yêu cầu.
+
+### Đã Làm Gần Đây
+
+- Đã có cấu trúc 15 level.
+- Đã có save/load bằng localStorage, có migrate từ v9 sang v1.10.
+- Đã có shop nâng cấp.
+- Đã có story overlay và chọn level.
+- Đã có mini-game nướng chả.
+- Chả cháy/non/quá lửa có thể bỏ và làm lại.
+- Không thể đổ nồi khi đang nấu.
+- Nguyên liệu chỉ hiện nếu thuộc công thức đã mở khóa.
+- Đã thêm món/nguyên liệu mới: phở bò, bún bò Huế, cơm tấm, thịt bò, rau thơm, sa tế, v.v.
+- Đồ uống hiện đang tồn tại như add-on trong đơn hàng: trà đá, trà tắc, nước mía, cà phê sữa đá, rau má.
+- Đã thêm khách mới: Anna, Marco, Kenji, sinh viên, bác công nhân.
+- Đã thêm khách bí ẩn: food blogger, Việt kiều, khách im lặng.
+- Economy đã được cân lại để giảm dư tiền.
+
+### Phản Hồi Quan Trọng Của Người Dùng
+
+- Ngân sách từng quá dư; cần giữ tiền có ý nghĩa.
+- Trà đá và đồ uống không nên chỉ là bonus tự động. Cần có công thức/gameplay pha chế thật.
+- Khách hàng còn nhạt. Cần có tính cách, thoại, cảm xúc, story hook và reaction rõ hơn.
+- Làm được gì giúp game hay hơn thì làm luôn, miễn là không phá game.
+- Sau mỗi thay đổi phải giữ game chạy được.
+
+### Việc Ưu Tiên Cao Cho Claude
+
+1. Biến đồ uống thành gameplay thật: công thức, nguyên liệu, UI/khu pha nước, trạng thái đồ uống đã pha, logic phục vụ món + nước.
+2. Thêm công thức đồ uống:
+   - Trà đá = trà + đá.
+   - Trà tắc = trà + tắc + đá.
+   - Nước mía = mía + đá.
+   - Cà phê sữa đá = cà phê + sữa đặc + đá.
+   - Rau má = rau má + đá.
+3. Sai món chính vẫn fail. Sai/thiếu nước không fail toàn bộ đơn, nhưng mất bonus/tip và có thể giảm hài lòng.
+4. Tăng chiều sâu khách hàng bằng thoại theo trạng thái: mới vào, mất kiên nhẫn, vui, sai món, sai nước, bỏ đi.
+5. Thêm event cho late-game nếu an toàn: ngày nóng, lễ hội, mất điện, đoàn du khách, giờ cao điểm.
+6. Nếu khả thi, đổi nâng cấp thành nhiều cấp. Nếu chưa, thêm nhiều nâng cấp mới với giá có ý nghĩa.
+7. Cân lại economy sau khi thêm đồ uống/khách/nâng cấp.
+
+### Kiểm Tra Bắt Buộc
+
+- Parse JS bằng Node/new Function hoặc tương đương.
+- Kiểm tra `onclick` trỏ đến function có thật.
+- Kiểm tra static `getElementById` có id tương ứng.
+- Kiểm tra nguyên liệu của công thức chưa mở khóa không xuất hiện sớm.
+- Nếu có browser/Playwright, test flow: menu -> level -> nấu -> nướng -> pha nước -> phục vụ -> kết thúc level.
+- Không stage file `test` untracked.
+
+### Prompt Tiết Kiệm Token Cho Claude
+
+```text
+Đọc PLAN_v1.10.md, phần handoff mới nhất trong CLAUDE.md và các phần liên quan của index.html. Tiếp tục v1.10.
+
+Mục tiêu: làm game hay hơn, không giữ scope cũ nếu scope cũ làm game kém hơn.
+
+Làm tiếp:
+1. Biến đồ uống từ add-on tự động thành gameplay thật với công thức, nguyên liệu, UI/state pha nước và logic phục vụ.
+2. Thêm công thức: trà đá = trà + đá; trà tắc = trà + tắc + đá; nước mía = mía + đá; cà phê sữa đá = cà phê + sữa đặc + đá; rau má = rau má + đá.
+3. Sai nước chỉ mất bonus/tip, không fail toàn bộ đơn.
+4. Thêm thoại/reaction cho khách khi đúng/sai món, đúng/sai nước, mất kiên nhẫn, bỏ đi.
+5. Thêm hoặc cải thiện event late-game nếu an toàn.
+6. Cân lại economy sau thay đổi để tiền vẫn có ý nghĩa.
+
+Ràng buộc:
+- Vanilla HTML/CSS/JS.
+- Sửa index.html trực tiếp trừ khi tách file thật sự đáng.
+- Không rewrite toàn bộ file.
+- Không stage/push file test untracked.
+- Sau khi xong chỉ báo file đã sửa, tính năng đã làm, test đã chạy.
+
+Kiểm tra bắt buộc:
+- JS parse check.
+- onclick/function check.
+- getElementById id check.
+- ingredient unlock check.
+```

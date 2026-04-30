@@ -665,28 +665,49 @@ Mini game chi nen xuat hien o chuong dac biet hoac de lay bonus, khong bat nguoi
 - It nhat 3 khach bi an co reward rieng.
 - Cac chuong 7-15 co su kien/chu de khac nhau.
 
-## 15. Prompt Ngan Cho Claude Trien Khai v1.10
+## 15. Prompt Tối Ưu Cho Claude Làm Tiếp
 
-Dung prompt sau neu muon Claude implement tiep tiet kiem token:
+Dùng prompt sau để Claude tiếp tục làm phần còn lại, tối ưu token:
 
 ```text
-Doc PLAN_v1.10.md va index.html. Hay implement v1.10 theo thu tu uu tien Sprint 1 -> Sprint 3 truoc.
+Đọc PLAN_v1.10.md, phần handoff mới nhất trong CLAUDE.md và các phần liên quan của index.html. Tiếp tục hoàn thiện game “Bếp Việt: Tiệm Bún Số 7” theo mục tiêu mới: bỏ ràng buộc cũ, ưu tiên duy nhất là làm game hay hơn, sâu hơn, Việt Nam hơn.
 
-Yeu cau:
-- Giu vanilla HTML/CSS/JS, khong them dependency.
-- Khong rewrite toan bo neu khong can.
-- Sua truc tiep index.html.
-- Khong in lai toan bo file.
-- Truoc khi sua, tom tat ke hoach toi da 8 bullet.
-- Sau khi sua, chi bao file da sua, tinh nang da xong, cach test.
+Trạng thái hiện tại:
+- index.html là bản Demo v1.10, vanilla HTML/CSS/JS một file.
+- Đã có 15 level, save/load bằng localStorage, shop nâng cấp, story overlay, mini-game nướng chả, khách mới, khách bí ẩn, món mới.
+- Đồ uống hiện mới là add-on trong đơn hàng, chưa có công thức và gameplay pha chế thật.
+- Đã sửa: chả cháy/non/quá lửa có thể bỏ làm lại; không được đổ nồi khi đang nấu; nguyên liệu chỉ hiện theo công thức đã mở khóa; economy đã được cân lại bớt dư tiền.
+- Có file test untracked, không động vào nếu không cần.
 
-Pham vi lan nay:
-1. Can bang lai kinh te 15 chuong de khong am tien qua som.
-2. Sua bo cha chay/overcooked.
-3. Khong cho bo mon khi dang nau.
-4. Them save/load localStorage.
-5. Them khach Tay moi va 3 khach bi an dau tien.
-6. Giam lap Cu Ong va bun doc mung.
+Yêu cầu:
+- Giữ vanilla HTML/CSS/JS, không thêm dependency nếu không thật sự cần.
+- Không rewrite toàn bộ file nếu không cần.
+- Sửa trực tiếp index.html.
+- Làm được phần nào giúp game hay hơn thì làm luôn, nhưng mỗi bước phải giữ game chạy được.
+- Không in lại toàn bộ file. Sau khi xong chỉ báo file đã sửa, tính năng đã xong, cách test.
 
-Tu kiem tra bang cach mo index.html hoac chay server tinh.
+Việc ưu tiên cao:
+1. Biến đồ uống thành gameplay thật: có công thức, nguyên liệu, UI/khu pha nước, trạng thái đồ uống đã pha, phục vụ món + nước.
+2. Thêm công thức đồ uống: Trà đá = trà + đá; Trà tắc = trà + tắc + đá; Nước mía = mía + đá; Cà phê sữa đá = cà phê + sữa đặc + đá; Rau má = rau má + đá.
+3. Cập nhật order: khách gọi món chính + nước. Sai nước không fail món chính nhưng mất bonus/tip.
+4. Làm khách có cảm giác hơn: thêm 2-4 câu thoại theo nhóm khách, reaction khi đúng/sai/quá chậm, khách bí ẩn có reward/story flag riêng.
+5. Nâng cấp shop thành multi-level nếu làm được gọn, hoặc ít nhất thêm nhiều upgrade mới có giá cao hơn để tiền có ý nghĩa.
+6. Thêm event/variation cho chương sau để giảm lặp: ngày nóng bán nước chạy hơn, lễ hội combo nhiều hơn, mất điện nấu chậm hơn, du khách yêu cầu ít cay.
+7. Kiểm tra lại economy sau khi thêm đồ uống gameplay để không quá giàu và không âm vô lý.
+
+Kiểm tra bắt buộc:
+- Parse JS bằng Node/new Function hoặc tương đương.
+- Kiểm tra onclick function và getElementById không thiếu.
+- Kiểm tra nguyên liệu chỉ hiện theo công thức đã mở khóa.
+- Nếu có Playwright/browser thì test flow: menu -> level -> thêm nguyên liệu -> nấu -> nướng -> pha nước -> phục vụ -> end level.
+- Không stage/push file test untracked.
 ```
+
+## 16. Ghi Chú Trao Đổi Mới Nhất
+
+- Người dùng muốn bỏ tất cả yêu cầu gốc nếu chúng cản trở chất lượng. Mục tiêu duy nhất: làm game tốt nhất có thể.
+- Người dùng muốn “làm được gì thì làm luôn” với các hệ thống có ích: Challenge, Festival, mini game, achievement, gallery ký ức, thành phố/vùng miền, danh tiếng quán, tồn kho, phụ bếp.
+- Người dùng nhận xét khách hàng còn nhạt, cần có tính cách, câu nói, cảm xúc, câu chuyện và reaction riêng.
+- Người dùng nhận xét đồ uống như trà đá đã có trong order nhưng chưa có công thức/gameplay. Cần biến đồ uống thành hệ thống thật.
+- Người dùng nhận xét ngân sách đang có quá nhiều tiền. Đã cân lại: giảm thưởng, giảm tip/bonus đồ uống/khách bí ẩn, tăng chi phí và giá nâng cấp.
+- Người dùng muốn Claude làm tiếp phần còn lại sau khi Codex xử lý các phần chắc tay.
