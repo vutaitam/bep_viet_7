@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.01</title>
+<title>Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.02</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -152,8 +152,8 @@ button{font-family:inherit;cursor:pointer;}
 /* ===== TUTORIAL ===== */
 .tutorial-overlay{
   display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.8);backdrop-filter:blur(4px);
-  z-index:90;justify-content:center;align-items:center;padding:20px;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(6px);
+  z-index:200;justify-content:center;align-items:center;padding:20px;
 }
 .tutorial-overlay.active{display:flex;}
 .tutorial-card{
@@ -163,17 +163,34 @@ button{font-family:inherit;cursor:pointer;}
   text-align:center;
   box-shadow:0 0 60px rgba(255,215,0,.25),var(--shadow);
 }
-.tutorial-icon{font-size:58px;margin-bottom:12px;line-height:1;}
+.tutorial-icon{font-size:54px;margin-bottom:8px;line-height:1;}
 .tutorial-progress{
-  display:flex;gap:5px;justify-content:center;margin-bottom:14px;
+  display:flex;gap:3px;justify-content:center;margin-bottom:10px;flex-wrap:wrap;max-width:100%;
 }
-.tutorial-pip{width:26px;height:4px;border-radius:2px;background:rgba(255,215,0,.2);transition:all .3s;}
+.tutorial-pip{width:18px;height:4px;border-radius:2px;background:rgba(255,215,0,.2);transition:all .3s;}
 .tutorial-pip.done{background:var(--gold);}
-.tutorial-pip.current{background:var(--gold);box-shadow:0 0 6px var(--gold);}
-.tutorial-title{color:var(--gold);font-size:1.35em;font-weight:800;margin-bottom:10px;}
-.tutorial-text{color:var(--text-soft);line-height:1.75;margin-bottom:22px;font-size:.95em;}
-.tutorial-btns{display:flex;gap:10px;}
-.tutorial-btns .btn{flex:1;}
+.tutorial-pip.current{background:var(--gold);box-shadow:0 0 6px var(--gold);width:24px;}
+.tutorial-section{
+  font-size:.7em;color:var(--gold-soft);text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:6px;font-weight:700;opacity:.8;
+}
+.tutorial-title{color:var(--gold);font-size:1.25em;font-weight:800;margin-bottom:10px;line-height:1.3;}
+.tutorial-text{
+  color:var(--text-soft);line-height:1.75;margin-bottom:18px;font-size:.92em;
+  white-space:pre-line;text-align:left;max-height:46vh;overflow-y:auto;
+  padding:0 4px;
+}
+.tutorial-text::-webkit-scrollbar{width:4px;}
+.tutorial-text::-webkit-scrollbar-thumb{background:rgba(255,215,0,.3);border-radius:2px;}
+.tutorial-counter{font-size:.72em;color:var(--text-mute);margin-bottom:10px;}
+.tutorial-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.tutorial-btns .btn{flex:1;min-width:90px;padding:10px 12px;font-size:.92em;}
+.tutorial-skip-all{
+  margin-top:8px;background:transparent;border:1px solid rgba(255,255,255,.15);
+  color:var(--text-mute);padding:6px 12px;border-radius:8px;
+  font-family:inherit;font-size:.78em;cursor:pointer;transition:all .2s;
+}
+.tutorial-skip-all:hover{color:#fff;border-color:rgba(255,255,255,.35);}
 
 /* ===== GAME SCREEN ===== */
 .game{
@@ -337,12 +354,16 @@ body.boss-active .chapter-bar{
 }
 /* Speech bubble for arrival quote */
 .customer-bubble{
-  position:absolute;top:-32px;left:50%;transform:translateX(-50%);
+  position:absolute;top:-44px;left:50%;transform:translateX(-50%);
   background:#fff;color:#3E2723;padding:6px 12px;border-radius:14px;
-  font-size:.75em;white-space:nowrap;font-weight:600;
-  animation:bubbleFade 3.5s forwards;
+  font-size:.74em;font-weight:600;line-height:1.35;
+  animation:bubbleFade 4s forwards;
   box-shadow:0 2px 10px rgba(0,0,0,.4);
-  max-width:200px;overflow:hidden;text-overflow:ellipsis;z-index:5;pointer-events:none;
+  width:max-content;max-width:240px;
+  white-space:normal;word-break:break-word;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;text-overflow:ellipsis;
+  z-index:5;pointer-events:none;text-align:center;
 }
 .customer-bubble::after{
   content:'';position:absolute;bottom:-7px;left:50%;
@@ -351,7 +372,7 @@ body.boss-active .chapter-bar{
 }
 @keyframes bubbleFade{
   0%{opacity:0;transform:translateX(-50%) translateY(-8px) scale(.9);}
-  10%,75%{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
+  8%,80%{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
   100%{opacity:0;transform:translateX(-50%) translateY(-4px) scale(.95);}
 }
 
@@ -744,7 +765,7 @@ body.boss-active .chapter-bar{
   <span class="lantern">🏮</span>
   <span class="lantern">🏮</span>
 
-  <div class="menu-version">Demo v1.11.01 · Polish patch · Lễ hội · Sổ tay quán</div>
+  <div class="menu-version">Demo v1.11.02 · Tutorial 17 bước · Polish patch · Lễ hội · Sổ tay quán</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
   <div class="menu-sub">Tiệm Bún Số 7</div>
   <div class="menu-divider"></div>
@@ -785,12 +806,15 @@ body.boss-active .chapter-bar{
   <div class="tutorial-card">
     <div class="tutorial-icon" id="tutorialIcon">👋</div>
     <div class="tutorial-progress" id="tutorialProgress"></div>
+    <div class="tutorial-counter" id="tutorialCounter">Bước 1 / 17</div>
+    <div class="tutorial-section" id="tutorialSection">Bắt đầu</div>
     <div class="tutorial-title" id="tutorialTitle">Chào mừng!</div>
     <div class="tutorial-text" id="tutorialText"></div>
     <div class="tutorial-btns">
       <button class="btn btn-green btn-sm" id="tutorialPrevBtn" onclick="prevTutorial()" style="display:none">← Quay lại</button>
       <button class="btn btn-sm" id="tutorialNextBtn" onclick="nextTutorial()">Tiếp theo →</button>
     </div>
+    <button class="tutorial-skip-all" onclick="closeTutorial()">⏭ Bỏ qua tất cả</button>
   </div>
 </div>
 
@@ -962,6 +986,7 @@ body.boss-active .chapter-bar{
     <div class="pause-stats" id="pauseStats"></div>
     <div class="pause-btns">
       <button class="btn btn-green" onclick="togglePause()">▶ Tiếp tục nấu</button>
+      <button class="btn btn-blue btn-sm" onclick="showTutorial()">📖 Xem lại hướng dẫn</button>
       <button class="btn" onclick="if(confirm('Về menu? Tiến trình ngày này sẽ mất.')){G.isGameOver=true;[timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});goToMenu();}">🏠 Về menu</button>
     </div>
   </div>
@@ -1211,9 +1236,8 @@ function unlockAchievement(id){
   if(PROG.achievements[id])return false;
   const a=ACHIEVEMENTS.find(x=>x.id===id);if(!a)return false;
   PROG.achievements[id]=Date.now();saveProg();
-  // Queue: stagger 800ms apart so multiple unlocks don't pile up
-  const baseDelay=1200+pendingNotifyTimers.length*800;
-  notifyDelayed(baseDelay,()=>notify(`🏅 Thành tựu: ${a.emoji} ${a.name}`,'success'));
+  // Defer the notify to end-of-level — popping mid-rush breaks focus
+  _sessionAchievementQueue.push(a);
   return true;
 }
 
@@ -1426,15 +1450,40 @@ const DIALOGUES=[
 ];
 
 const TUTORIAL=[
-  {icon:'👋',title:'Chào mừng đến Tiệm Bún!',text:'Bạn là chủ quán mới. Nhiệm vụ: nấu đúng món và phục vụ khách kịp thời trong 3 phút. Sẵn sàng chưa?'},
-  {icon:'👥',title:'Hiểu về khách hàng',text:'Khách sẽ đến và gọi món. Đồng hồ tròn bên cạnh họ là độ kiên nhẫn — xanh→vàng→đỏ. Hết kiên nhẫn là khách bỏ đi, mất điểm!'},
-  {icon:'🥕',title:'Nấu món',text:'Click vào nguyên liệu để cho vào nồi. Xem Sổ công thức bên phải để biết công thức. Khi đủ nguyên liệu, nhấn "Nấu nồi".'},
-  {icon:'🔥',title:'Mini-game nướng chả',text:'Bún chả cần nướng chả riêng. Cho chả vào lò → đợi thanh tiến trình vào VÙNG XANH (40-60%) → Lật → đợi tiếp → Gắp ra đúng vùng xanh = PERFECT!'},
-  {icon:'🍽',title:'Cách phục vụ',text:'Sau khi nấu xong: CLICK chọn khách trước (viền vàng), rồi nhấn "Phục vụ". Phục vụ đúng món để được điểm. Sai món bị trừ 5 điểm!'},
-  {icon:'⭐',title:'Khách quen đặc biệt',text:'Bác Tâm, Cô Lan, John là khách quen của Cụ Ông — có badge ⭐. Phục vụ đúng món họ thích để nhận tip cao hơn (x1.3 → x2.0)!'},
-  {icon:'🥤',title:'Khu pha nước',text:'Khách thường gọi món + một loại nước. Click vào nguyên liệu pha (trà, đá, mía, tắc...) ở khu pha nước bên phải để cho vào cốc, rồi nhấn "Pha nước". Đúng nước cộng combo bonus, sai/thiếu chỉ mất bonus chứ KHÔNG hỏng món chính.'},
-  {icon:'📔',title:'Sổ tay quán',text:'Ở menu chính có "Sổ tay quán" — xem 20 thành tựu, khách đã gặp, câu chuyện đã unlock và thống kê tổng. Có "Lễ hội ẩm thực" mode endless để săn best score.'},
-  {icon:'🎯',title:'Mục tiêu hôm nay',text:'Phục vụ ít nhất 4/6 khách để hoàn thành ngày đầu tiên. Đừng lo — Cụ Ông luôn dõi theo từ trên cao. Chúc may mắn!'}
+  {icon:'👋',section:'Bắt đầu',title:'Chào mừng đến Tiệm Bún Số 7!',
+    text:'Bạn vừa thừa kế quán bún của Cụ Ông trong ngõ phố cổ. Hành trình: 15 ngày qua 3 chương Hà Nội → Hội An → Sài Gòn. Cuối hành trình là danh hiệu "Đầu bếp 3 miền".\n\nHướng dẫn này gồm 15 phần — bạn có thể bỏ qua bất cứ lúc nào và xem lại từ menu chính.'},
+  {icon:'👀',section:'Khách hàng',title:'1. Đọc card khách',
+    text:'Mỗi khách hiện một card vàng có:\n• Tên (đỏ = khách quen) + emoji nhân vật\n• Món gọi (món chính, đôi khi + nước)\n• Vòng kiên nhẫn (số giây + màu)\n• Đặc điểm ngắn (vai trò trong đời sống Việt)\n• Badge ⭐ nếu là khách quen của Cụ Ông\n\nClick vào card để CHỌN khách trước khi phục vụ — viền vàng = đang chọn.'},
+  {icon:'⏱',section:'Khách hàng',title:'2. Vòng kiên nhẫn',
+    text:'Vòng tròn quanh số giây cho biết thời gian khách sẽ chờ:\n• 🟢 Xanh (>60%): thoải mái\n• 🟡 Vàng (30–60%): nên nhanh tay\n• 🔴 Đỏ (<30%): cấp bách — header sẽ NHÁY ĐỎ\n\nHết kiên nhẫn = khách bỏ đi, mất danh tiếng + điểm. Khách quen mất 2 danh tiếng, khách bí ẩn mất 3.'},
+  {icon:'📖',section:'Nấu ăn',title:'3. Sổ công thức',
+    text:'Panel bên phải có "Sổ công thức" liệt kê các món đã mở khóa:\n• Tên + emoji\n• Nguyên liệu cần\n• Giá bán + thời gian nấu + điểm\n\nMón "Bún dọc mùng" có ⭐ đỏ — đây là món signature gia truyền của Cụ Ông, thưởng +20% giá. Nhiều món mở dần qua chương (Phở từ ch.4, Bún bò Huế từ ch.8, Cơm tấm từ ch.12...).'},
+  {icon:'🥕',section:'Nấu ăn',title:'4. Cho nguyên liệu vào nồi',
+    text:'Bên dưới sổ công thức là nguyên liệu — chỉ hiện những thứ thuộc món đã mở khóa.\n\nCách dùng:\n• Click nguyên liệu → vào nồi (tag emoji hiện trên nồi)\n• Tối đa 5 nguyên liệu/lần, không trùng\n• Đủ + đúng công thức → nút "🔥 Nấu nồi" sáng + công thức tương ứng được highlight xanh\n• Nhấn "Nấu" → nồi bắt đầu chạy progress bar\n\n⚠️ Đang nấu KHÔNG được đổ nồi — phải đợi xong rồi mới quyết. Nếu đổ món đã nấu xong → mất 10k chi phí.'},
+  {icon:'🔥',section:'Nấu ăn',title:'5. Mini-game Nướng chả',
+    text:'Bún chả cần CẢ nồi nước chấm + chả nướng. Lò than ở bên phải nồi:\n\n1. Click 🍖 chả → vào lò (lò bốc lửa)\n2. Đợi thanh đỏ vào VÙNG XANH (40–60%) → bấm "🔄 Lật" — đúng = PERFECT, lệch = good/early/late\n3. Đợi thanh quay lại vùng xanh → bấm "✋ Gắp"\n4. Cả 2 lần đều PERFECT → chả vàng ruộm + thưởng +15% giá\n\n💀 Quá 100% = CHÁY ĐEN. Bấm "🗑 Bỏ chả" để hủy mất 8k và làm lại.\n\n💡 Tip: Nâng cấp Lò nướng làm vùng PERFECT rộng hơn (37–63% rồi 33–67%).'},
+  {icon:'🍽',section:'Phục vụ',title:'6. Phục vụ đúng cách',
+    text:'Quy trình ĐÚNG:\n1. CLICK chọn khách (viền vàng)\n2. Đảm bảo món trong nồi khớp đơn khách\n3. Pha nước nếu khách gọi (xem mục 7)\n4. Nhấn "🍽 Phục vụ"\n\nKết quả:\n• Đúng món: tiền + điểm + tip (nếu khách quen) + speed bonus (nếu kiên nhẫn còn >70%)\n• Sai món: -5 điểm, reset streak, khách báo "không phải món tôi gọi"\n• Khách bí ẩn lần đầu: +30k bonus + mở khóa câu chuyện'},
+  {icon:'🥤',section:'Pha nước',title:'7. Khu pha nước',
+    text:'Khu pha nước (gradient xanh) ở panel phải, bên dưới sổ công thức.\n\n5 công thức cơ bản:\n• Trà đá = 🍵 Trà + 🧊 Đá (2s)\n• Trà tắc = 🍵 + 🍋 Tắc + 🧊 (3s)\n• Nước mía = 🎋 Mía + 🧊 (4s)\n• Cà phê sữa đá = ☕ Cà phê + 🥛 Sữa đặc + 🧊 (4s)\n• Rau má = 🌿 Lá rau má + 🧊 (3s)\n\nMỗi nước mở khóa theo chương. Click công thức để xem nguyên liệu cần.'},
+  {icon:'🥃',section:'Pha nước',title:'8. Đúng/sai/thiếu nước',
+    text:'Khách thường gọi món + 1 nước. Cách xử lý:\n\n✅ Đúng nước (pha + match đơn): cộng giá nước + combo bonus 5% giá món + tip cao hơn. Lễ hội cộng thêm.\n❌ Sai nước (đã pha nhưng không khớp): MẤT 3.000đ chi phí, -2 điểm, KHÔNG bonus. Món chính vẫn được tính đúng.\n⚪ Thiếu nước (không pha): -1 điểm, mất bonus. Món chính vẫn OK.\n\n💡 Sai nước không fail toàn đơn — đừng panic, tiếp tục phục vụ. Tốt nhất: kiểm tra đơn khách kỹ trước khi cho nguyên liệu vào cốc.'},
+  {icon:'⭐',section:'Khách đặc biệt',title:'9. Khách quen & khách Tây',
+    text:'Khách quen có badge ⭐, tip cao + thoại riêng:\n• 👴 Bác Tâm (bún dọc mùng, ×1.3) — bạn cũ Cụ Ông\n• 👩‍💼 Cô Lan (bánh mì, ×1.5) — doanh nhân vội\n• 🧔 John (bún chả, ×1.7) — Tây ba lô Mỹ\n\nKhách Tây mở dần (Anna, Marco, Kenji, Sophie, David) — tip 1.3-1.8, có sở thích vùng miền riêng.\n\nKhách Việt vai phụ: sinh viên, công nhân, cô bán hoa, xe ôm, bà cụ chợ, shipper — mỗi người một câu chuyện nhỏ.'},
+  {icon:'🌟',section:'Khách đặc biệt',title:'10. Khách bí ẩn',
+    text:'Hiếm khi xuất hiện (5–12% rate, cao hơn ở chương sau):\n• 📱 Linh Review — food blogger, gợi ý món hot\n• 🧳 Chú Phúc — Việt kiều tìm vị quê, kiên nhẫn cao\n• 🎩 Khách im lặng — gọi món bằng câu thơ, mặc định = bún chả\n\nPhục vụ đúng LẦN ĐẦU mỗi khách → mở khóa câu chuyện riêng (xem trong Sổ tay quán) + bonus 30.000đ + 20⭐.'},
+  {icon:'⚠',section:'Khách đặc biệt',title:'11. Boss Level',
+    text:'Cuối mỗi chương có Boss với viền HỒNG nháy + ribbon "⚠️ BOSS":\n• Ch.1: 🧐 Nhà phê bình Tuấn — kén ăn, kiên nhẫn 35s\n• Ch.2: 👨‍🍳 Đầu bếp Khang — đối thủ Cụ Ông, ghét chả cháy (-100k mỗi lần cháy!)\n• Ch.3: 🏆 Iron Chef Việt — finale, tip ×3.0 nếu happy\n\n🚨 ĐỪNG để Boss bỏ đi — sẽ thua CẢ ngày bất kể đã phục vụ bao nhiêu khách khác. Khi Boss spawn: header glow hồng, ưu tiên xử lý ngay.'},
+  {icon:'🌧',section:'Sự kiện',title:'12. Sự kiện ngày',
+    text:'Một số ngày có sự kiện đặc biệt (hiện trong story overlay):\n• 🌧 Mưa rào — khách đến chậm, hợp món nóng\n• 🎑 Lễ hội — 3 khách spawn cùng lúc, combo +20%\n• ⚡ Giờ cao điểm — khách đến liên tục\n• ☀️ Peak — kiên nhẫn -20%\n• 🌡 Ngày nóng — giá nước +30% (cơ hội kiếm tiền)\n• ⚡ Mất điện — cookTime ×1.5\n• 🌏 Đoàn du khách — chủ yếu khách Tây\n\nMỗi sự kiện đòi chiến lược khác. Đọc story trước ngày để chuẩn bị.'},
+  {icon:'🛒',section:'Tiến trình',title:'13. Cửa hàng nâng cấp',
+    text:'Cuối ngày → "🛒 Cửa hàng nâng cấp". 7 nâng cấp đa cấp (2-3 cấp/loại):\n• 🔥 Bếp ga — nấu nhanh -15→38%\n• 📋 Bảng menu — giá +8→22%\n• 🌀 Quạt mát — thêm 20→50s mỗi ngày\n• 🪑 Bàn ghế — thêm 1-2 khách cùng lúc\n• 🏆 Lò nướng — vùng PERFECT rộng hơn\n• ✨ Biển hiệu — thêm khách/ngày\n• 💳 Thẻ khách quen — kiên nhẫn quen +20→52%\n\n💡 Nâng cấp cấp cao mở theo chương — đừng cố mua hết ở ch.1. Ưu tiên Bếp ga + Bảng menu trước.'},
+  {icon:'🎑',section:'Mode khác',title:'14. Lễ hội ẩm thực (endless)',
+    text:'Menu chính → "🎑 Lễ hội ẩm thực":\n• Khách đến vô hạn\n• Mỗi 60s tăng độ khó (spawn nhanh hơn)\n• Mở khóa toàn bộ món + nước\n• Combo bonus +20%\n• Khi 5 khách bỏ đi → end. Có warning ở strike 3 và 4\n• Best score được lưu, 30% doanh thu vào ngân sách\n• Khách bí ẩn xuất hiện gấp đôi (18% rate)\n\n💡 Tốt cho luyện tay + cày tiền nâng cấp + săn thành tựu "🎑 Vua lễ hội".'},
+  {icon:'📔',section:'Mode khác',title:'15. Sổ tay quán',
+    text:'Menu chính → "📔 Sổ tay quán" có 4 tab:\n• 🏅 Thành tựu — 20 thành tựu để săn (1 ẩn)\n• 👥 Khách đã gặp — 21 NPC + số lần gặp\n• 📖 Câu chuyện — mở khi phục vụ khách bí ẩn lần đầu\n• 📊 Thống kê — tổng tiền, danh tiếng, sao, nước pha đúng, etc.\n\nKhám phá để biết bạn đang đứng ở đâu trong hành trình.'},
+  {icon:'🏆',section:'Bắt đầu',title:'Bắt đầu hành trình',
+    text:'Mục tiêu Ngày 1: phục vụ ít nhất 4/6 khách. Mỗi ngày Cụ Ông nhận xét cuối ngày qua mục di nguyện.\n\nNguyên tắc vàng:\n• Khách quen + bí ẩn ưu tiên\n• Boss tuyệt đối không để bỏ đi\n• Streak liên tục cho điểm cộng\n• Sai nước không fail — đừng hoảng\n• Tiết kiệm chi phí: ít cháy chả + ít đổ nồi\n\nCụ Ông luôn dõi theo từ trên cao. Chúc may mắn cháu!'}
 ];
 
 // ─────────────────────────────────────────────
@@ -1459,6 +1508,7 @@ let G = {
 
 let timerInterval=null,spawnInterval=null,patienceInterval=null,grillInterval=null,drinkInterval=null,blackoutInterval=null;
 let pendingNotifyTimers=[];
+let _sessionAchievementQueue=[];
 
 function notifyDelayed(ms,fn){
   const id=setTimeout(()=>{fn();pendingNotifyTimers=pendingNotifyTimers.filter(x=>x!==id);},ms);
@@ -1468,6 +1518,15 @@ function notifyDelayed(ms,fn){
 function clearPendingNotifyTimers(){
   pendingNotifyTimers.forEach(id=>clearTimeout(id));
   pendingNotifyTimers=[];
+}
+
+// Defer achievement popups to end-of-level so they don't break focus mid-rush
+function flushAchievementQueue(){
+  if(!_sessionAchievementQueue.length)return;
+  _sessionAchievementQueue.forEach((a,i)=>{
+    notifyDelayed(800+i*1100,()=>notify(`🏅 Thành tựu mới: ${a.emoji} ${a.name}`,'success'));
+  });
+  _sessionAchievementQueue=[];
 }
 
 // ─────────────────────────────────────────────
@@ -1485,8 +1544,13 @@ function showTutorial(){
 function renderTutorial(){
   const s=TUTORIAL[tutIdx];
   document.getElementById('tutorialIcon').textContent=s.icon;
+  const secEl=document.getElementById('tutorialSection');
+  if(secEl){secEl.textContent=s.section||'';secEl.style.display=s.section?'':'none';}
+  const cntEl=document.getElementById('tutorialCounter');
+  if(cntEl)cntEl.textContent=`Bước ${tutIdx+1} / ${TUTORIAL.length}`;
   document.getElementById('tutorialTitle').textContent=s.title;
   document.getElementById('tutorialText').textContent=s.text;
+  document.getElementById('tutorialText').scrollTop=0;
   document.getElementById('tutorialNextBtn').textContent=tutIdx===TUTORIAL.length-1?'✅ Bắt đầu chơi!':'Tiếp theo →';
   document.getElementById('tutorialPrevBtn').style.display=tutIdx>0?'block':'none';
   // Progress pips
@@ -1501,15 +1565,16 @@ function renderTutorial(){
 
 function nextTutorial(){
   tutIdx++;
-  if(tutIdx>=TUTORIAL.length){
-    document.getElementById('tutorialOverlay').classList.remove('active');
-    return;
-  }
+  if(tutIdx>=TUTORIAL.length){closeTutorial();return;}
   renderTutorial();
 }
 
 function prevTutorial(){
   if(tutIdx>0){tutIdx--;renderTutorial();}
+}
+
+function closeTutorial(){
+  document.getElementById('tutorialOverlay').classList.remove('active');
 }
 
 // ─────────────────────────────────────────────
@@ -1572,9 +1637,11 @@ document.getElementById('cutsceneScreen').addEventListener('click',e=>{
 
 function startGame(){
   const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
-  // clear old intervals
+  // clear old intervals + any leftover notify timers + achievement queue
   [timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});
   timerInterval=spawnInterval=patienceInterval=grillInterval=drinkInterval=blackoutInterval=null;
+  clearPendingNotifyTimers();
+  _sessionAchievementQueue=[];
   // reset state
   const tTime=lv.time+[0,20,35,50][upgradeLevel('extra_time')];
   const tCustomers=lv.customers+upgradeLevel('extra_seat')+upgradeLevel('neon_sign');
@@ -2415,6 +2482,8 @@ function endLevel(reason){
   // Show/hide next level button
   const hasNext=PROG.levelIdx+1<LEVELS.length;
   document.getElementById('nextLevelBtn').style.display=(stars>0&&hasNext)?'block':'none';
+  // Flush deferred achievement notifications (queued during gameplay)
+  flushAchievementQueue();
 }
 
 // ─────────────────────────────────────────────
@@ -2610,6 +2679,8 @@ function startFestival(){
   G._festivalStart=Date.now();
   // Force unlock everything via in-memory override (does not touch PROG)
   G.recipeOverallOverride=15;
+  clearPendingNotifyTimers();
+  _sessionAchievementQueue=[];
   [timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});
   timerInterval=spawnInterval=patienceInterval=grillInterval=drinkInterval=blackoutInterval=null;
   document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));
@@ -2674,7 +2745,8 @@ function endFestival(reason){
     <div class="end-row"><span>🏆 Best</span><span>${(PROG.bestFestival||0).toLocaleString('vi-VN')}đ</span></div>
     <div class="end-row total profit-pos"><span>💼 Vào ngân sách (30%)</span><span>+${Math.floor(earned*0.3).toLocaleString('vi-VN')}đ</span></div>`;
   document.getElementById('nextLevelBtn').style.display='none';
-  // Disable retry button (festival has its own entry)
+  // Flush deferred achievement notifications
+  flushAchievementQueue();
 }
 
 // Override checkEndCondition for festival mode
@@ -2757,7 +2829,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.01');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.02');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){
