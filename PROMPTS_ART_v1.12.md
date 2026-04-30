@@ -35,9 +35,216 @@ Khi prompt một mục cụ thể, hãy **paste khối ART STYLE LOCK ở trên 
 
 ---
 
+## 0.5 ⚠️ Bài học từ lần gen đầu — RULE BỔ SUNG cho PORTRAIT in-game
+
+Sau khi gen thử 3 portrait (Bác Tâm, Cụ Ông trẻ, Linh Review) với prompt gốc, phát hiện:
+
+| Vấn đề | Nguyên nhân | Fix |
+|---|---|---|
+| Background quá chi tiết (bamboo awning, kệ bát, hoa sen lớn) | Prompt gốc mô tả setting rich | Đổi background → cream paper trống, max 1 motif nhỏ corner |
+| Nhân vật chỉ chiếm 50% frame | Background cạnh tranh | Yêu cầu character chiếm 70-80% canvas |
+| Recipe book có chữ Vietnamese giả (gibberish) | Gemini hallucinate text | Cấm "readable text" / "writing" trong prompt; nếu cần book/phone screen → "abstract shapes only, no text" |
+| Watermark Gemini ✨ ở góc | Imagen luôn có | Crop tay sau khi gen (10s) |
+| Background không transparent thật | Gemini không reliable | Workflow đúng: gen với cream BG → dùng [remove.bg](https://remove.bg) cắt nền sau |
+
+### 🔁 ART STYLE LOCK PORTRAIT MODE (dùng riêng cho 12 portrait dùng trong customer card)
+
+Khi cần portrait dùng trong UI customer card (96-256px), **paste khối này thay cho ART STYLE LOCK gốc**:
+
+```text
+ART STYLE LOCK — PORTRAIT MODE (for in-game character cards):
+- Style: flat 2D hand-drawn Vietnamese illustration with clean ink
+  outlines and soft watercolor washes. Inspired by Đông Hồ folk art
+  with modern minimal geometry. NOT anime, NOT pixel art, NOT
+  photorealistic, NOT 3D, NOT manga.
+- Color palette: Vietnamese red #C62828, imperial gold #FFD700,
+  wood brown #7B4F2E, cream paper #FFF8E1, soft sage green for
+  bamboo. Slightly desaturated, warm tone overall.
+- BACKGROUND RULE FOR PORTRAITS: keep background extremely simple
+  — flat warm cream paper #FFF8E1 or very soft watercolor wash.
+  No detailed scenery, no furniture, no recipe books, no shelves.
+  At most ONE small motif accent in a corner (e.g., a single
+  bamboo leaf top-right, or a small lantern top-left, faded 60%
+  opacity). Character must occupy 70-80% of the frame.
+- NO READABLE TEXT anywhere in the image (no signs, no books with
+  legible writing, no phone screens with text). If a book or
+  phone is shown, render only abstract lines/shapes inside.
+- Vietnamese motifs allowed as small accents (lantern, bamboo
+  leaf, lotus, conical hat) but secondary to subject.
+- Era: contemporary Vietnam 2020s with old-quarter nostalgia.
+- Lighting: soft warm even illumination, no harsh shadows, no
+  studio backlight.
+- Avoid: anime eyes, manga style, K-pop polished face, generic
+  Asian elder/woman caricature, Chinese imperial style, neon,
+  saturated rainbow colors, Western fashion magazine pose.
+```
+
+### 🛠 Workflow xử lý sau gen
+
+1. **Gen 4 variation** trong Gemini (default)
+2. **Pick 1** ưng nhất
+3. **Crop watermark Gemini ✨** (góc phải dưới) bằng Paint/Photoshop/Pixelmator
+4. **Remove background** bằng [remove.bg](https://remove.bg) (free 1 ảnh/ngày, chất lượng tốt) hoặc [Pixelcut](https://pixelcut.ai) (free unlimited, mobile app)
+5. **Resize** xuống 256×256 hoặc 512×512 PNG (cho game card 96-128px)
+6. **Lưu** vào `assets/portraits/<character-name>.png`
+
+---
+
+## A.0 PORTRAIT REVISED — 3 prompt đã refined sau lần gen đầu
+
+Đây là 3 prompt đã được tinh chỉnh, **dùng thay** cho prompt A.1.1 / A.2.1 / A.3.1 gốc khi gen portrait dùng trong customer card. Mỗi prompt nhấn:
+
+- Background TRỐNG (cream paper) + max 1 motif corner
+- Character 70-80% frame
+- Cấm text readable
+- Tuổi/clothing/expression cụ thể hơn
+
+### A.0.1 — Bác Tâm (revised)
+
+```text
+[ART STYLE LOCK PORTRAIT MODE]
+
+Subject: A Vietnamese elderly man, exactly 68 years old, with a
+slightly stooped shoulder and a kind quiet face. Salt-and-pepper
+hair, slightly thinning on top, neatly combed. Soft crow's feet,
+gentle age spots on cheekbones. Eyes warm, patient, looking
+directly toward the viewer with a small almost-smile.
+
+Clothing: a traditional Vietnamese cotton pyjama shirt with thin
+vertical grey-and-cream stripes, slightly loose fit, long sleeves
+rolled to mid-forearm, top button open, breast pocket. Simple
+dark loose trousers (only top portion visible).
+
+In his hands, held at chest level: a small worn brown leather
+wallet, edges fraying, held gently with both hands as if about
+to pay. Hands have visible blue veins and a slight tremor
+suggested by line work.
+
+Composition: 3/4 portrait, character framed from chest to top of
+head, occupying 75% of canvas height, centered slightly right.
+Soft warm even lighting, no harsh shadows.
+
+Background: flat cream paper #FFF8E1, completely empty except a
+single small red Vietnamese lantern in the upper-left corner at
+30% opacity (decorative accent only, not detailed). NO awning,
+NO shop, NO furniture, NO bamboo, NO ceramic bowls.
+
+Output: 1024×1024 PNG, ready to be cut out via remove.bg.
+
+Avoid: photorealism, anime, dress shirt, sunglasses, smartphone,
+detailed shop background, awning, shelves with bowls, K-pop look,
+overly cheerful smile, military uniform, full-length suit.
+```
+
+### A.0.2 — Cụ Ông trẻ (revised)
+
+```text
+[ART STYLE LOCK PORTRAIT MODE]
+
+Subject: A Vietnamese man, exactly 45 years old, owner of a small
+neighborhood noodle shop in 1990s Hanoi. Visibly mature face: slight
+crow's feet around eyes, faint forehead lines, lean cheeks, light
+beard stubble (3-day growth), tan weathered skin from decades over
+a hot stove. Black hair with two strands of grey at temples,
+slightly disheveled. Honest hopeful eyes, mouth in a small genuine
+half-smile, NOT a beaming grin.
+
+Clothing: a faded white cotton short-sleeve button-up shirt, top
+button open, slightly rumpled. Over it, a cream cotton apron with
+faint rice-flour stains and one small darker brown stain. Sleeves
+showing forearms with subtle vein detail.
+
+Holding in front of him at chest level with both hands: a steaming
+ceramic Bát Tràng bowl (white with classic blue lotus motif on rim)
+of bún dọc mùng noodle soup. Visible inside the bowl: green dọc
+mùng (taro stem) leaves, red tomato slice, white noodles, two pork
+ribs. Three soft white steam swirls rise from the bowl.
+
+Composition: 3/4 portrait, character framed from waist to top of
+head, occupying 80% of canvas, centered. Soft warm afternoon
+lighting.
+
+Background: flat cream paper #FFF8E1, completely empty except a
+single tiny red lantern in upper-left at 25% opacity (suggestion
+only). ABSOLUTELY NO recipe book visible. NO shelves. NO altar.
+NO bamboo leaves. NO lotus flowers visible. Just empty cream
+backdrop.
+
+Output: 1024×1024 PNG, isolated character ready for removal of
+background.
+
+Avoid: photorealism, anime, K-pop perfect face, character looking
+under 35 years old, recipe book or any book with text, lotus
+visible in scene, detailed kitchen interior, shelves with bowls,
+incense altar, K-drama style smile, formal portrait pose.
+```
+
+### A.0.3 — Linh Review (revised)
+
+```text
+[ART STYLE LOCK PORTRAIT MODE]
+
+Subject: A Vietnamese woman, exactly 26 years old, food blogger
+and TikTok content creator. Trendy contemporary Hanoi millennial
+look. Long straight black hair to mid-back with subtle warm brown
+highlights, parted center. Round oversized tortoiseshell glasses
+(prominent feature). Subtle natural makeup, gentle warm smile
+toward camera. Small gold hoop earrings. Two thin gold layered
+necklaces.
+
+Clothing: an oversized soft pastel-pink cropped knit sweater,
+sleeves slightly pushed up. High-waist light-wash denim wide-leg
+jeans visible. Slung across body: a small woven raffia (NOT
+rainbow stripe) bag in natural beige with a single embroidered
+red Vietnamese lotus motif.
+
+Action: holding her smartphone vertically up at chest level with
+both hands, framing a shot of a Vietnamese food bowl off-screen
+(the food is OUTSIDE the frame, viewer's POV is the food). Phone
+screen shows ABSTRACT colored shapes only (no text, no readable
+content) — small swirls of red and brown suggesting a Vietnamese
+noodle soup viewed from above, but stylized abstract not literal.
+
+Composition: 3/4 portrait, framed from waist to top of head,
+character occupies 75% of canvas, centered slightly left. Soft
+warm even lighting.
+
+Background: flat cream paper #FFF8E1 background, otherwise EMPTY.
+NO ring light. NO lotus flowers visible. NO bamboo plants. NO
+food bowl visible. NO lantern. Just clean cream backdrop.
+
+Output: 1024×1024 PNG, character isolated for easy bg removal.
+
+Avoid: K-pop idol aesthetic, plasticky CGI face, anime, generic
+Vietnamese girl stereotype, rainbow stripe bag, ring light visible
+in frame, food visible in frame, busy background with multiple
+objects, phone screen showing legible text, dim sum or pizza shape
+on phone (must be Vietnamese soup if anything), Western fashion
+magazine pose.
+```
+
+### 📝 Pattern để revise các portrait còn lại
+
+Dùng cùng cấu trúc cho 9 portrait còn lại (Cô Lan, John, Chú Phúc, Khách im lặng, Tuấn, Khang, Iron Chef, Cụ Ông già, Cụ Ông spirit):
+
+1. Bắt đầu với `[ART STYLE LOCK PORTRAIT MODE]`
+2. **Subject**: tuổi cụ thể, vóc dáng, biểu cảm cụ thể (KHÔNG dùng tính từ chung "kind", "elegant" — phải có chi tiết visual: "crow's feet", "lean cheeks", "small almost-smile")
+3. **Clothing**: liệt kê từng item cụ thể, có chỉ dấu Việt Nam (motif, vải, kiểu áo Vietnamese specific)
+4. **Action/Pose**: hành động cụ thể với props (đang cầm gì, ở vị trí nào)
+5. **Composition**: ghi 3/4 portrait, character 70-80% frame, vị trí trong canvas
+6. **Background**: lặp lại RULE — flat cream + max 1 motif accent corner. Liệt kê các thứ KHÔNG được có
+7. **Output**: 1024×1024 PNG ready for bg removal
+8. **Avoid**: list dài các thứ tránh (anime, K-pop, photorealism, busy BG, text in image, etc.)
+
+Đặc biệt với Cụ Ông spirit (A.1.3) và Iron Chef (A.4.3): những nhân vật này có "glow" hoặc "ethereal" — yêu cầu glow vẫn đơn giản, không hào quang Hollywood.
+
+---
+
 ## SPRINT A — Essential (làm trước, ~10 portrait + 5 cutscene + 3 BG + logo)
 
 ### A.1 Portrait — Cụ Ông (3 trạng thái)
+
+> ⚠️ **Note**: Các prompt A.1.1 / A.2.1 / A.3.1 dưới đây giữ background chi tiết — phù hợp cho **cutscene panel rộng** hoặc **feedback box** lớn. Để dùng portrait trong **customer card UI** (96-256px), dùng prompt revised ở mục **A.0** ở trên (background trống cream + character 75% frame).
 
 **Use case**: Cutscene chính + feedback box cuối ngày. Đây là nhân vật cảm xúc số 1 của game.
 
