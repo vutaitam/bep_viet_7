@@ -533,7 +533,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.2 (NPC portraits)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.3 (Portrait Integration)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){

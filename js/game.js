@@ -437,11 +437,19 @@ function resetDrinkStation(){
   highlightDrinkRecipe(null);
 }
 
+function npcCardAvatar(npcKey,fallbackEmoji){
+  const npc=NPCS[npcKey];
+  if(!npc||!npc.portrait)return `<div class="npc-emoji">${fallbackEmoji}</div>`;
+  return `<div class="npc-emoji has-portrait">
+    <img class="npc-portrait" src="${npc.portrait}" alt="${npc.name}" loading="lazy" width="52" height="52" onerror="this.parentElement.classList.remove('has-portrait');this.remove();">
+    <span class="portrait-fallback">${fallbackEmoji}</span>
+  </div>`;
+}
 function renderNPCList(){
   document.getElementById('npcList').innerHTML=`
-    <div class="npc-card"><div class="npc-emoji">👴</div><div class="npc-text"><div class="npc-name">Bác Tâm</div><div class="npc-detail">Thích 🍜 Bún dọc mùng · Kiên nhẫn 75s · Tip ×1.3</div></div></div>
-    <div class="npc-card"><div class="npc-emoji">👩‍💼</div><div class="npc-text"><div class="npc-name">Cô Lan</div><div class="npc-detail">Thích 🥖 Bánh mì · Vội (40s) · Tip ×1.5</div></div></div>
-    <div class="npc-card"><div class="npc-emoji">🧔</div><div class="npc-text"><div class="npc-name">John</div><div class="npc-detail">Thích 🍢 Bún chả · Kiên nhẫn 90s · Tip ×2.0</div></div></div>
+    <div class="npc-card">${npcCardAvatar('bac_tam','👴')}<div class="npc-text"><div class="npc-name">Bác Tâm</div><div class="npc-detail">Thích 🍜 Bún dọc mùng · Kiên nhẫn 75s · Tip ×1.3</div></div></div>
+    <div class="npc-card">${npcCardAvatar('co_lan','👩‍💼')}<div class="npc-text"><div class="npc-name">Cô Lan</div><div class="npc-detail">Thích 🥖 Bánh mì · Vội (40s) · Tip ×1.5</div></div></div>
+    <div class="npc-card">${npcCardAvatar('john','🧔')}<div class="npc-text"><div class="npc-name">John</div><div class="npc-detail">Thích 🍢 Bún chả · Kiên nhẫn 90s · Tip ×2.0</div></div></div>
     <div class="npc-card"><div class="npc-emoji">👱‍♀️</div><div class="npc-text"><div class="npc-name">Khách du lịch</div><div class="npc-detail">Anna, Marco, Kenji · khẩu vị riêng · tip tốt hơn khách thường</div></div></div>
     <div class="npc-card"><div class="npc-emoji">📱</div><div class="npc-text"><div class="npc-name">Khách bí ẩn</div><div class="npc-detail">Tỉ lệ thấp · thưởng danh tiếng, tiền và câu chuyện nếu phục vụ tốt</div></div></div>`;
 }

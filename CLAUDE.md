@@ -22,7 +22,7 @@
 
 **Demo live**: https://vutaitam.github.io/bep_viet_7/ (GitHub Pages)
 
-**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.2 (NPC Portraits)** (3 NPC portrait WebP + balance fixes round 5 + SVG Cụ Ông portrait + modular refactor)
+**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.3 (Portrait Integration)** (Bác Tâm/Cô Lan/John portrait tích hợp vào tutorial NPC list + giữ toàn bộ v1.11.03.2)
 
 ---
 
@@ -324,7 +324,7 @@ Khi làm việc tiếp với dự án này, lưu ý:
 
 ### Trạng thái hiện tại (cập nhật cuối — 2026-04-30)
 
-**Phiên bản đang chạy: 🎨 Demo v1.11.03.2 (NPC Portraits)**
+**Phiên bản đang chạy: 🎨 Demo v1.11.03.3 (Portrait Integration)**
 
 - ✅ 15 level / 3 chương đầy đủ (Hà Nội → Hội An → Sài Gòn)
 - ✅ Drink station gameplay thật: 5 công thức (trà đá, trà tắc, nước mía, cà phê sữa đá, rau má)
@@ -339,7 +339,7 @@ Khi làm việc tiếp với dự án này, lưu ý:
 - ✅ Texture giấy dó overlay · favicon SVG inline · Open Graph meta · confetti effect
 - ✅ Festival save corruption FIXED (G.recipeOverallOverride thay vì PROG hijack)
 - ✅ 3 SVG portrait Cụ Ông tự vẽ (young/old/spirit) — replace emoji 👴 trong cutscene + feedback box
-- ✅ 3 portrait NPC chính tự tạo bằng WebP: Bác Tâm, Cô Lan, John — render trong customer card và gallery với sizing cố định
+- ✅ 3 portrait NPC chính tự tạo bằng WebP: Bác Tâm, Cô Lan, John — render trong customer card, gallery VÀ tutorial NPC list (v1.11.03.3) với sizing cố định + onerror fallback emoji
 - ✅ Refactor runtime: HTML / CSS / 4 JS (data, state, game, screens) — không còn monolithic
 - ✅ Balance fixes round 5: bản balance nền là `Beta v1.11.04.1 (Balance)`
 
@@ -349,7 +349,8 @@ Khi làm việc tiếp với dự án này, lưu ý:
 - 🟡 Nếu tiếp tục planning, soạn `PLAN_v1.11.05.md` dựa trên playtest/balance thật
 - 🟡 Marketing phase: Plausible analytics + 3 TikTok clip + Reddit/FB posts (per `MARKETING_v1.11.md`)
 - 🟡 Gemini Imagen quota reset → gen 33 art assets còn lại (per `PROMPTS_ART_v1.12.md`)
-- 🟡 Tích hợp Bác Tâm + Cô Lan + John portrait (chưa làm; emoji 👴/👩‍💼/🧔 vẫn dùng)
+- ✅ Tích hợp Bác Tâm + Cô Lan + John portrait vào tutorial NPC list (v1.11.03.3); boss/mystery/sinh viên NPC vẫn dùng emoji vì chưa có ảnh
+- 🟡 Bước tiếp theo (v1.11.03.4+): vẽ/gen portrait cho boss (Tuấn/Khang/Iron Chef), sinh viên, food blogger Linh — replace emoji ở customer-card khi spawn
 
 ### Nếu user yêu cầu code mới
 - Luôn check syntax bằng `node --check`
