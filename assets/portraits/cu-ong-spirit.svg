@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Cụ Ông (linh hồn) — dõi theo cháu, kết thúc xúc động</title>
+  <defs>
+    <!-- Twilight gradient background: gold top → rose bottom -->
+    <linearGradient id="bg-spirit" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FFE5A8"/>
+      <stop offset="50%" stop-color="#FFD0A0"/>
+      <stop offset="100%" stop-color="#FFC4C0"/>
+    </linearGradient>
+    <!-- Halo radial -->
+    <radialGradient id="halo" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#FFE082" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#FFD54F" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFB300" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Body fade gradient (top opaque, bottom transparent into mist) -->
+    <linearGradient id="fade-body" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="80%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fade-cardigan" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#C8B68C" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#C8B68C" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#C8B68C" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#C8B68C" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Mist trails -->
+    <radialGradient id="mist" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE5A8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FFE5A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Twilight sky background -->
+  <rect width="256" height="256" fill="url(#bg-spirit)"/>
+  <!-- Soft cloud bands -->
+  <ellipse cx="60" cy="80" rx="50" ry="6" fill="#FFFFFF" opacity="0.15"/>
+  <ellipse cx="200" cy="100" rx="60" ry="8" fill="#FFFFFF" opacity="0.12"/>
+  <ellipse cx="180" cy="60" rx="40" ry="5" fill="#FFFFFF" opacity="0.18"/>
+
+  <!-- Golden halo around figure -->
+  <circle cx="128" cy="108" r="105" fill="url(#halo)"/>
+
+  <!-- Sparkle dots (spirit dust) -->
+  <g fill="#FFD700" opacity="0.85">
+    <circle cx="55" cy="70" r="1.5"/><circle cx="200" cy="55" r="2"/>
+    <circle cx="220" cy="120" r="1.2"/><circle cx="40" cy="130" r="1.8"/>
+    <circle cx="65" cy="180" r="1.3"/><circle cx="195" cy="195" r="1.5"/>
+    <circle cx="170" cy="40" r="1"/><circle cx="90" cy="40" r="1.2"/>
+    <circle cx="225" cy="170" r="1.5"/><circle cx="35" cy="200" r="1.3"/>
+  </g>
+  <!-- Cross sparkles (4-pointed) -->
+  <g fill="#FFFFFF">
+    <path d="M100 50 l1 4 l4 1 l-4 1 l-1 4 l-1 -4 l-4 -1 l4 -1z" opacity="0.9"/>
+    <path d="M180 130 l1 5 l5 1 l-5 1 l-1 5 l-1 -5 l-5 -1 l5 -1z" opacity="0.85"/>
+    <path d="M70 165 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1z" opacity="0.85"/>
+  </g>
+
+  <!-- Mist trails at base of figure -->
+  <ellipse cx="128" cy="240" rx="80" ry="20" fill="url(#mist)"/>
+  <ellipse cx="100" cy="230" rx="40" ry="12" fill="url(#mist)" opacity="0.7"/>
+  <ellipse cx="160" cy="232" rx="40" ry="12" fill="url(#mist)" opacity="0.7"/>
+
+  <!-- ===== SPIRIT FIGURE (semi-transparent) ===== -->
+  <g opacity="0.9">
+    <!-- Shoulders / cardigan, fading down -->
+    <path d="M68 215 L70 175 Q72 160 95 154 L161 154 Q184 160 186 175 L188 215 Q188 240 128 246 Q68 240 68 215 Z"
+          fill="url(#fade-cardigan)" stroke="#A8956C" stroke-width="1" stroke-opacity="0.5"/>
+    <!-- V-neck collar -->
+    <path d="M104 154 L128 178 L152 154" fill="none" stroke="#A8956C" stroke-width="1.2" opacity="0.5"/>
+
+    <!-- Cream shirt under cardigan (translucent) -->
+    <path d="M110 156 L110 185 L146 185 L146 156 Z" fill="#FFFFFF" opacity="0.6"/>
+
+    <!-- BLESSING HANDS raised at chest, palms outward -->
+    <!-- Left hand -->
+    <g opacity="0.85">
+      <path d="M88 200 Q82 195 80 188 Q80 180 86 178 Q92 178 96 184 L100 192 L100 205 Z" fill="#E5C9A0" stroke="#A8855E" stroke-width="0.8"/>
+      <!-- Fingers indicated by lines -->
+      <line x1="86" y1="186" x2="86" y2="180" stroke="#A8855E" stroke-width="0.6"/>
+      <line x1="91" y1="183" x2="91" y2="177" stroke="#A8855E" stroke-width="0.6"/>
+      <line x1="96" y1="184" x2="96" y2="178" stroke="#A8855E" stroke-width="0.6"/>
+    </g>
+    <!-- Right hand -->
+    <g opacity="0.85">
+      <path d="M168 200 Q174 195 176 188 Q176 180 170 178 Q164 178 160 184 L156 192 L156 205 Z" fill="#E5C9A0" stroke="#A8855E" stroke-width="0.8"/>
+      <line x1="170" y1="186" x2="170" y2="180" stroke="#A8855E" stroke-width="0.6"/>
+      <line x1="165" y1="183" x2="165" y2="177" stroke="#A8855E" stroke-width="0.6"/>
+      <line x1="160" y1="184" x2="160" y2="178" stroke="#A8855E" stroke-width="0.6"/>
+    </g>
+
+    <!-- Neck -->
+    <path d="M118 154 L118 144 Q118 136 128 135 Q138 136 138 144 L138 154 Z" fill="#E5C9A0" stroke="#A8855E" stroke-width="0.8"/>
+
+    <!-- Head -->
+    <path d="M92 92 Q92 67 128 62 Q164 67 164 92 L164 124 Q164 144 128 146 Q92 144 92 124 Z" fill="#E5C9A0" stroke="#A8855E" stroke-width="1.2"/>
+    <!-- White hair -->
+    <path d="M88 90 Q86 62 110 58 Q128 55 146 58 Q170 62 168 90 L164 90 Q164 66 145 62 Q128 60 111 62 Q92 66 92 90 Z" fill="#FFFFFF" opacity="0.95"/>
+    <ellipse cx="128" cy="70" rx="14" ry="4" fill="#E5C9A0" opacity="0.4"/>
+    <!-- White beard -->
+    <path d="M106 132 Q110 150 128 156 Q146 150 150 132 Q148 140 128 144 Q108 140 106 132 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Mustache -->
+    <path d="M116 126 Q128 130 140 126 Q137 132 128 132 Q119 132 116 126 Z" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Eyes (warm proud, slightly open) -->
+    <g>
+      <path d="M104 107 q7 -3 14 0" stroke="#3E2723" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <ellipse cx="111" cy="106" rx="2" ry="1.2" fill="#FFFFFF" opacity="0.9"/>
+      <circle cx="111" cy="106" r="0.8" fill="#3E2723" opacity="0.85"/>
+
+      <path d="M138 107 q7 -3 14 0" stroke="#3E2723" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <ellipse cx="145" cy="106" rx="2" ry="1.2" fill="#FFFFFF" opacity="0.9"/>
+      <circle cx="145" cy="106" r="0.8" fill="#3E2723" opacity="0.85"/>
+    </g>
+    <!-- Eyebrows white -->
+    <path d="M100 98 q5 -1 14 0" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.95"/>
+    <path d="M142 98 q5 -1 14 0" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.95"/>
+    <!-- Crow's feet (subtle) -->
+    <path d="M97 108 q-3 2 -5 4" stroke="#A8855E" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M159 108 q3 2 5 4" stroke="#A8855E" stroke-width="0.6" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <!-- Nose -->
+    <path d="M128 112 q-2 7 -1 12 q1 1 2 0" fill="none" stroke="#A8855E" stroke-width="0.8" stroke-linecap="round"/>
+    <!-- Peaceful proud smile -->
+    <path d="M120 137 Q128 141 136 137" stroke="#5D2F1A" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <!-- Forehead lines -->
+    <path d="M106 78 q22 -2 44 0" stroke="#A8855E" stroke-width="0.5" fill="none" opacity="0.45"/>
+  </g>
+
+  <!-- Light rays from above (3 soft beams) -->
+  <g opacity="0.45">
+    <path d="M128 0 L100 100 L156 100 Z" fill="#FFFFFF" opacity="0.18"/>
+    <path d="M128 0 L80 90 L176 90 Z" fill="#FFFFFF" opacity="0.1"/>
+  </g>
+</svg>

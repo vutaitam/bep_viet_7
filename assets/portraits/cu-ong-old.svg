@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Cụ Ông (75 tuổi) — di nguyện, ôm sổ công thức</title>
+  <defs>
+    <radialGradient id="bg-old" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#EDE0BE"/>
+    </radialGradient>
+    <linearGradient id="cardigan" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#C8B68C"/>
+      <stop offset="100%" stop-color="#A8956C"/>
+    </linearGradient>
+    <linearGradient id="book-cover" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8D5524"/>
+      <stop offset="100%" stop-color="#5D3A1F"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="url(#bg-old)"/>
+  <!-- Lantern accent top-left -->
+  <g opacity="0.45" transform="translate(28,28)">
+    <line x1="10" y1="0" x2="10" y2="6" stroke="#7B4F2E" stroke-width="1.2"/>
+    <ellipse cx="10" cy="14" rx="8" ry="9" fill="#C62828" stroke="#8E0E00" stroke-width="1"/>
+    <path d="M10 23l-2 6h4z" fill="#FFD700"/>
+  </g>
+
+  <!-- Body -->
+  <!-- Cream shirt under cardigan -->
+  <path d="M76 246 L76 175 Q80 158 105 156 L151 156 Q176 158 180 175 L180 246 Z" fill="#FFFFFF" stroke="#D4C8A0" stroke-width="1"/>
+  <!-- Cardigan beige with knit texture -->
+  <path d="M50 246 L50 178 Q52 158 78 152 L100 152 L100 165 L156 165 L156 152 L178 152 Q204 158 206 178 L206 246 Z" fill="url(#cardigan)" stroke="#7E6B42" stroke-width="1.5"/>
+  <!-- Cardigan collar (V-neck) -->
+  <path d="M100 152 L128 178 L156 152" fill="none" stroke="#7E6B42" stroke-width="1.6"/>
+  <!-- Knit texture lines -->
+  <g stroke="#8B7948" stroke-width="0.5" opacity="0.5" fill="none">
+    <path d="M55 200 q150 0 150 0" stroke-dasharray="2 2"/>
+    <path d="M55 215 q150 0 150 0" stroke-dasharray="2 2"/>
+    <path d="M55 230 q150 0 150 0" stroke-dasharray="2 2"/>
+  </g>
+  <!-- Buttons -->
+  <circle cx="128" cy="200" r="2" fill="#5D4A28"/>
+  <circle cx="128" cy="218" r="2" fill="#5D4A28"/>
+  <circle cx="128" cy="236" r="2" fill="#5D4A28"/>
+  <!-- Neck -->
+  <path d="M118 152 L118 142 Q118 134 128 133 Q138 134 138 142 L138 152 Z" fill="#C49066" stroke="#8B6440" stroke-width="0.8"/>
+
+  <!-- Recipe book held to chest -->
+  <g transform="translate(0,2)">
+    <!-- Book main body (held angled) -->
+    <path d="M93 188 L93 235 Q108 240 128 240 Q148 240 163 235 L163 188 Q148 184 128 184 Q108 184 93 188 Z"
+          fill="url(#book-cover)" stroke="#3E2723" stroke-width="1.5"/>
+    <!-- Book spine -->
+    <line x1="128" y1="184" x2="128" y2="240" stroke="#5D3A1F" stroke-width="1" opacity="0.4"/>
+    <!-- Worn edges -->
+    <path d="M93 196 L93 232" stroke="#3E2723" stroke-width="1" opacity="0.4"/>
+    <path d="M163 196 L163 232" stroke="#3E2723" stroke-width="1" opacity="0.4"/>
+    <!-- Embossed lotus motif on cover (gold) -->
+    <g transform="translate(128,212)" opacity="0.85">
+      <ellipse cx="0" cy="0" rx="14" ry="3" fill="#FFD700" opacity="0.3"/>
+      <!-- Lotus petals -->
+      <path d="M0 -8 Q-4 -2 0 2 Q4 -2 0 -8z" fill="#FFD700"/>
+      <path d="M-9 -4 Q-7 1 -3 1 Q-3 -3 -9 -4z" fill="#E6BE3C"/>
+      <path d="M9 -4 Q7 1 3 1 Q3 -3 9 -4z" fill="#E6BE3C"/>
+      <path d="M-12 0 Q-8 4 -4 3 Q-3 -1 -12 0z" fill="#C9A437"/>
+      <path d="M12 0 Q8 4 4 3 Q3 -1 12 0z" fill="#C9A437"/>
+    </g>
+    <!-- Bookmark sticking out top -->
+    <rect x="146" y="180" width="4" height="14" fill="#C62828"/>
+    <rect x="118" y="180" width="3" height="11" fill="#FFD700"/>
+  </g>
+  <!-- Wrinkled hands holding book -->
+  <g>
+    <!-- left hand -->
+    <ellipse cx="92" cy="210" rx="9" ry="7" fill="#C49066" stroke="#8B6440" stroke-width="0.8"/>
+    <line x1="88" y1="208" x2="94" y2="208" stroke="#8B6440" stroke-width="0.5" opacity="0.6"/>
+    <line x1="88" y1="212" x2="94" y2="212" stroke="#8B6440" stroke-width="0.5" opacity="0.6"/>
+    <!-- right hand -->
+    <ellipse cx="164" cy="210" rx="9" ry="7" fill="#C49066" stroke="#8B6440" stroke-width="0.8"/>
+    <line x1="162" y1="208" x2="168" y2="208" stroke="#8B6440" stroke-width="0.5" opacity="0.6"/>
+    <line x1="162" y1="212" x2="168" y2="212" stroke="#8B6440" stroke-width="0.5" opacity="0.6"/>
+  </g>
+  <!-- Sleeves cardigan -->
+  <path d="M50 178 Q38 184 34 200 L34 235 Q38 246 50 248 L72 248 Q82 245 84 220 L84 180 Z" fill="url(#cardigan)" stroke="#7E6B42" stroke-width="1.5"/>
+  <path d="M206 178 Q218 184 222 200 L222 235 Q218 246 206 248 L184 248 Q174 245 172 220 L172 180 Z" fill="url(#cardigan)" stroke="#7E6B42" stroke-width="1.5"/>
+
+  <!-- Head -->
+  <!-- Face (slightly thinner / sunken cheeks suggested by shading) -->
+  <path d="M90 90 Q90 65 128 60 Q166 65 166 90 L166 122 Q166 142 128 144 Q90 142 90 122 Z" fill="#C49066" stroke="#8B6440" stroke-width="1.4"/>
+  <!-- Sunken cheek shading -->
+  <path d="M97 110 Q98 124 105 130" stroke="#8B6440" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M159 110 Q158 124 151 130" stroke="#8B6440" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <!-- Hair (white) -->
+  <path d="M86 88 Q84 60 110 56 Q128 53 146 56 Q172 60 170 88 L166 88 Q166 64 145 60 Q128 58 111 60 Q90 64 90 88 Z" fill="#F0EFEC" stroke="#BBB" stroke-width="0.8"/>
+  <!-- Subtle scalp showing through thinning hair -->
+  <ellipse cx="128" cy="68" rx="14" ry="4" fill="#D4A574" opacity="0.35"/>
+  <!-- White beard (full) -->
+  <path d="M104 130 Q108 148 128 154 Q148 148 152 130 Q150 138 128 142 Q106 138 104 130 Z" fill="#F5F4F1" stroke="#BBB" stroke-width="0.7"/>
+  <!-- Mustache -->
+  <path d="M115 124 Q128 128 141 124 Q138 130 128 130 Q118 130 115 124 Z" fill="#F5F4F1" stroke="#BBB" stroke-width="0.6"/>
+  <!-- Eyes (half-closed peaceful) -->
+  <g>
+    <path d="M100 105 q8 -3 16 0" stroke="#3E2723" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M140 105 q8 -3 16 0" stroke="#3E2723" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <!-- Eyelash hint -->
+    <path d="M104 102 v-1.5" stroke="#3E2723" stroke-width="0.6"/>
+    <path d="M110 100 v-1.5" stroke="#3E2723" stroke-width="0.6"/>
+    <path d="M144 100 v-1.5" stroke="#3E2723" stroke-width="0.6"/>
+    <path d="M150 102 v-1.5" stroke="#3E2723" stroke-width="0.6"/>
+  </g>
+  <!-- Deep crow's feet -->
+  <path d="M93 105 q-4 2 -7 5" stroke="#8B6440" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M93 110 q-5 1 -8 2" stroke="#8B6440" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M93 115 q-4 0 -7 0" stroke="#8B6440" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M163 105 q4 2 7 5" stroke="#8B6440" stroke-width="0.9" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M163 110 q5 1 8 2" stroke="#8B6440" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M163 115 q4 0 7 0" stroke="#8B6440" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Eyebrows (white) -->
+  <path d="M97 96 q5 -1 14 0" stroke="#D8D5C8" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M145 96 q5 -1 14 0" stroke="#D8D5C8" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Nose -->
+  <path d="M128 110 q-2 8 -1 14 q1 2 3 1" fill="none" stroke="#8B6440" stroke-width="1" stroke-linecap="round"/>
+  <!-- Mouth — peaceful contemplative slight smile under mustache -->
+  <path d="M120 134 Q128 137 136 134" stroke="#5D2F1A" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Forehead lines (multiple) -->
+  <path d="M104 76 q24 -2 48 0" stroke="#8B6440" stroke-width="0.6" fill="none" opacity="0.55"/>
+  <path d="M105 81 q23 -2 46 0" stroke="#8B6440" stroke-width="0.5" fill="none" opacity="0.45"/>
+  <!-- Age spots on temples -->
+  <circle cx="98" cy="92" r="1" fill="#7B4F2E" opacity="0.5"/>
+  <circle cx="158" cy="92" r="1.2" fill="#7B4F2E" opacity="0.5"/>
+  <circle cx="155" cy="98" r="0.8" fill="#7B4F2E" opacity="0.4"/>
+</svg>

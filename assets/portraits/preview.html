@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Bếp Việt — Cụ Ông Portrait Preview</title>
+<style>
+  body{
+    font-family:'Be Vietnam Pro','Segoe UI',sans-serif;
+    background:linear-gradient(180deg,#1a0a04,#2c1810);
+    color:#fff;min-height:100vh;margin:0;padding:32px;
+  }
+  h1{color:#FFD700;text-align:center;margin-bottom:8px;}
+  .sub{text-align:center;color:#aaa;font-style:italic;margin-bottom:32px;}
+  .row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto 28px;
+  }
+  .card{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,215,0,.3);
+    border-radius:14px;padding:18px;text-align:center;
+  }
+  .card-name{color:#FFD700;font-weight:800;font-size:1.05em;margin-bottom:4px;}
+  .card-desc{color:#bbb;font-size:.78em;margin-bottom:12px;font-style:italic;}
+  .scales{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .scale-block{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .scale-label{font-size:.68em;color:#888;}
+  .scale-block img{display:block;border-radius:8px;background:#FFF8E1;}
+  .ingame-card{
+    margin-top:14px;background:linear-gradient(160deg,#FFF8E1,#FFECB3);
+    border-radius:12px;padding:8px;color:#3E2723;width:160px;margin-left:auto;margin-right:auto;
+    border:3px solid transparent;box-shadow:0 3px 12px rgba(0,0,0,.3);
+  }
+  .ingame-card img{width:96px;height:96px;display:block;margin:0 auto 4px;border-radius:6px;}
+  .ingame-card .ig-name{font-weight:800;font-size:.92em;}
+  .ingame-card .ig-order{font-size:.78em;background:rgba(62,39,35,.15);padding:4px 6px;border-radius:6px;margin-top:6px;}
+  .note{
+    max-width:760px;margin:30px auto;background:rgba(255,215,0,.08);
+    border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:16px 20px;
+    font-size:.9em;line-height:1.7;
+  }
+  .note b{color:#FFD700;}
+</style>
+</head>
+<body>
+<h1>🥢 Bếp Việt — Preview Portrait Cụ Ông (SVG)</h1>
+<p class="sub">3 portrait vector tự vẽ — thay thế Gemini khi hết quota. Scale từ 64px đến 256px.</p>
+
+<div class="row">
+  <div class="card">
+    <div class="card-name">A.0.2 · Cụ Ông trẻ (45t)</div>
+    <div class="card-desc">"Đang nấu, khởi đầu tâm huyết"</div>
+    <div class="scales">
+      <div class="scale-block"><img src="cu-ong-young.svg" width="64" height="64"><span class="scale-label">64px</span></div>
+      <div class="scale-block"><img src="cu-ong-young.svg" width="96" height="96"><span class="scale-label">96px</span></div>
+      <div class="scale-block"><img src="cu-ong-young.svg" width="128" height="128"><span class="scale-label">128px</span></div>
+      <div class="scale-block"><img src="cu-ong-young.svg" width="256" height="256"><span class="scale-label">256px</span></div>
+    </div>
+    <div class="ingame-card">
+      <img src="cu-ong-young.svg">
+      <div class="ig-name">Cụ Ông</div>
+      <div class="ig-order">🍜 Bún dọc mùng</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-name">A.0.4 · Cụ Ông già (75t)</div>
+    <div class="card-desc">"Di nguyện, ôm sổ công thức"</div>
+    <div class="scales">
+      <div class="scale-block"><img src="cu-ong-old.svg" width="64" height="64"><span class="scale-label">64px</span></div>
+      <div class="scale-block"><img src="cu-ong-old.svg" width="96" height="96"><span class="scale-label">96px</span></div>
+      <div class="scale-block"><img src="cu-ong-old.svg" width="128" height="128"><span class="scale-label">128px</span></div>
+      <div class="scale-block"><img src="cu-ong-old.svg" width="256" height="256"><span class="scale-label">256px</span></div>
+    </div>
+    <div class="ingame-card">
+      <img src="cu-ong-old.svg">
+      <div class="ig-name">Cụ Ông</div>
+      <div class="ig-order">📖 Sổ gia truyền</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-name">A.0.5 · Cụ Ông spirit</div>
+    <div class="card-desc">"Dõi theo cháu, ending xúc động"</div>
+    <div class="scales">
+      <div class="scale-block"><img src="cu-ong-spirit.svg" width="64" height="64"><span class="scale-label">64px</span></div>
+      <div class="scale-block"><img src="cu-ong-spirit.svg" width="96" height="96"><span class="scale-label">96px</span></div>
+      <div class="scale-block"><img src="cu-ong-spirit.svg" width="128" height="128"><span class="scale-label">128px</span></div>
+      <div class="scale-block"><img src="cu-ong-spirit.svg" width="256" height="256"><span class="scale-label">256px</span></div>
+    </div>
+    <div class="ingame-card">
+      <img src="cu-ong-spirit.svg">
+      <div class="ig-name">Cụ Ông</div>
+      <div class="ig-order">🌟 Linh hồn</div>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  <b>📐 Style choice</b>: vector flat 2D với palette cố định Việt Nam (đỏ #C62828, vàng #FFD700, nâu #7B4F2E, kem #FFF8E1).
+  Mỗi portrait phân biệt rõ: <b>trẻ</b> (cầm bát + tạp dề) · <b>già</b> (cardigan + ôm sổ) · <b>spirit</b> (translucent + halo + tay ban phước).
+  <br><br>
+  <b>📦 File size</b>: ~3-5 KB mỗi SVG (ít hơn 1 ảnh PNG nhiều). Scale từ 16px (favicon) lên 1024px không vỡ.
+  <br><br>
+  <b>🔁 So với Gemini Imagen</b>: kém chi tiết hơn nhưng <i>nhất quán style</i>, <i>không có watermark</i>, <i>không có chữ giả</i>, <i>không có background phức tạp</i> chiếm chỗ. Phù hợp customer card 96px.
+  <br><br>
+  <b>✏️ Có thể tinh chỉnh</b>: nếu muốn cụ thể hơn (mặt vuông hơn, mắt to hơn, beard dài hơn...), tôi có thể edit từng path SVG. Báo điểm cần sửa.
+</div>
+
+</body>
+</html>

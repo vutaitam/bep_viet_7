@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Cụ Ông (45 tuổi) — đang nấu, khởi đầu tâm huyết</title>
+  <defs>
+    <radialGradient id="bg-young" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#F4E5C2"/>
+    </radialGradient>
+    <linearGradient id="apron-young" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#E8D9B8"/>
+    </linearGradient>
+    <radialGradient id="steam-young" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="256" height="256" fill="url(#bg-young)"/>
+  <!-- Lantern accent top-left (60% opacity) -->
+  <g opacity="0.55" transform="translate(28,28)">
+    <line x1="10" y1="0" x2="10" y2="6" stroke="#7B4F2E" stroke-width="1.2"/>
+    <ellipse cx="10" cy="14" rx="8" ry="9" fill="#C62828" stroke="#8E0E00" stroke-width="1"/>
+    <line x1="10" y1="6" x2="10" y2="22" stroke="#7B4F2E" stroke-width="0.6" opacity="0.4"/>
+    <path d="M10 23l-2 6h4z" fill="#FFD700"/>
+  </g>
+  <!-- Bamboo leaf accent top-right (40% opacity) -->
+  <g opacity="0.4" transform="translate(210,30) rotate(35)">
+    <path d="M0 0 q-5 -8 -14 -10 q9 4 14 14z" fill="#7CB342"/>
+    <path d="M0 0 q-3 -7 -10 -8 q6 3 10 10z" fill="#558B2F"/>
+  </g>
+
+  <!-- Body / shoulders (apron + shirt) -->
+  <!-- Apron back -->
+  <path d="M50 246 L50 175 Q50 155 80 150 L176 150 Q206 155 206 175 L206 246 Z" fill="url(#apron-young)" stroke="#C9B58E" stroke-width="1.5"/>
+  <!-- Stains on apron -->
+  <ellipse cx="100" cy="200" rx="6" ry="3" fill="#7B4F2E" opacity="0.18"/>
+  <ellipse cx="160" cy="215" rx="4" ry="2.5" fill="#7B4F2E" opacity="0.14"/>
+  <!-- White shirt collar -->
+  <path d="M95 152 L128 168 L161 152 L161 145 Q156 138 128 138 Q100 138 95 145 Z" fill="#FFFFFF" stroke="#D4C8A0" stroke-width="1"/>
+  <!-- Neck -->
+  <path d="M115 140 L115 132 Q115 125 128 124 Q141 125 141 132 L141 140 Z" fill="#D4A574" stroke="#A87C56" stroke-width="0.8"/>
+
+  <!-- Bowl with bún dọc mùng held at chest -->
+  <g transform="translate(0,4)">
+    <!-- Steam (3 swirls) -->
+    <ellipse cx="115" cy="155" rx="8" ry="14" fill="url(#steam-young)"/>
+    <ellipse cx="128" cy="148" rx="9" ry="16" fill="url(#steam-young)"/>
+    <ellipse cx="142" cy="155" rx="8" ry="14" fill="url(#steam-young)"/>
+    <!-- Bowl body -->
+    <ellipse cx="128" cy="195" rx="40" ry="8" fill="#F5F5F5"/>
+    <path d="M88 195 Q88 220 128 222 Q168 220 168 195 Z" fill="#FFFFFF" stroke="#888" stroke-width="1.2"/>
+    <!-- Bowl rim with blue lotus motif -->
+    <ellipse cx="128" cy="195" rx="40" ry="6" fill="none" stroke="#1565C0" stroke-width="1.5"/>
+    <circle cx="105" cy="195" r="2" fill="#1565C0"/>
+    <circle cx="128" cy="193" r="2" fill="#1565C0"/>
+    <circle cx="151" cy="195" r="2" fill="#1565C0"/>
+    <!-- Soup contents -->
+    <ellipse cx="128" cy="194" rx="35" ry="4" fill="#E8B66C" opacity="0.7"/>
+    <!-- Dọc mùng (green leaves) -->
+    <ellipse cx="115" cy="192" rx="6" ry="2" fill="#7CB342"/>
+    <ellipse cx="138" cy="193" rx="5" ry="2" fill="#558B2F"/>
+    <!-- Tomato slice (red) -->
+    <circle cx="125" cy="194" r="3" fill="#C62828"/>
+    <!-- Pork rib -->
+    <ellipse cx="142" cy="194" rx="4" ry="2" fill="#8D5524"/>
+  </g>
+  <!-- Hands holding bowl -->
+  <ellipse cx="92" cy="200" rx="9" ry="6" fill="#D4A574" stroke="#A87C56" stroke-width="0.8"/>
+  <ellipse cx="164" cy="200" rx="9" ry="6" fill="#D4A574" stroke="#A87C56" stroke-width="0.8"/>
+  <!-- Sleeves -->
+  <path d="M50 175 Q40 180 36 195 L36 220 Q40 235 50 240 L70 240 Q80 235 82 215 L82 178 Z" fill="#FFFFFF" stroke="#D4C8A0" stroke-width="1.2"/>
+  <path d="M206 175 Q216 180 220 195 L220 220 Q216 235 206 240 L186 240 Q176 235 174 215 L174 178 Z" fill="#FFFFFF" stroke="#D4C8A0" stroke-width="1.2"/>
+
+  <!-- Head -->
+  <!-- Face -->
+  <path d="M88 90 Q88 65 128 60 Q168 65 168 90 L168 118 Q168 138 128 142 Q88 138 88 118 Z" fill="#D4A574" stroke="#A87C56" stroke-width="1.4"/>
+  <!-- Hair (black with grey temples) -->
+  <path d="M82 90 Q80 60 105 53 Q128 50 151 53 Q176 60 174 90 L168 88 Q168 65 145 60 Q128 58 111 60 Q88 65 88 88 Z" fill="#222"/>
+  <!-- Grey temple hint -->
+  <path d="M84 80 Q86 70 95 67" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M172 80 Q170 70 161 67" fill="none" stroke="#999" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Eyes -->
+  <g>
+    <!-- left eye -->
+    <ellipse cx="108" cy="100" rx="4" ry="2.5" fill="#FFFFFF"/>
+    <circle cx="108" cy="100" r="1.5" fill="#3E2723"/>
+    <!-- right eye -->
+    <ellipse cx="148" cy="100" rx="4" ry="2.5" fill="#FFFFFF"/>
+    <circle cx="148" cy="100" r="1.5" fill="#3E2723"/>
+    <!-- crow's feet (subtle age lines) -->
+    <path d="M99 102 q-3 1 -5 3" stroke="#A87C56" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+    <path d="M99 105 q-3 0 -5 1" stroke="#A87C56" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+    <path d="M157 102 q3 1 5 3" stroke="#A87C56" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+    <path d="M157 105 q3 0 5 1" stroke="#A87C56" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Eyebrows -->
+  <path d="M100 92 q4 -2 12 -1" stroke="#222" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M144 91 q4 -1 12 1" stroke="#222" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <!-- Nose (subtle) -->
+  <path d="M128 105 q-2 6 -1 12 q1 2 3 1" fill="none" stroke="#A87C56" stroke-width="1" stroke-linecap="round"/>
+  <!-- Mouth — small genuine half-smile -->
+  <path d="M118 124 Q128 130 138 124" stroke="#5D2F1A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <!-- Stubble (3-day growth as dots) -->
+  <g fill="#3E2723" opacity="0.45">
+    <circle cx="113" cy="130" r="0.7"/><circle cx="118" cy="132" r="0.7"/>
+    <circle cx="123" cy="133" r="0.7"/><circle cx="128" cy="134" r="0.7"/>
+    <circle cx="133" cy="133" r="0.7"/><circle cx="138" cy="132" r="0.7"/>
+    <circle cx="143" cy="130" r="0.7"/>
+    <circle cx="116" cy="135" r="0.6"/><circle cx="125" cy="137" r="0.6"/>
+    <circle cx="131" cy="137" r="0.6"/><circle cx="140" cy="135" r="0.6"/>
+  </g>
+  <!-- Forehead line (subtle 1) -->
+  <path d="M108 78 q20 -2 40 0" stroke="#A87C56" stroke-width="0.5" fill="none" opacity="0.5"/>
+</svg>
