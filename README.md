@@ -5,7 +5,7 @@
 
 **Chơi ngay**: <https://vutaitam.github.io/bep_viet_7/>
 
-[![Demo v1.11.03](https://img.shields.io/badge/demo-v1.11.03-gold)](https://vutaitam.github.io/bep_viet_7/)
+[![Demo v1.11.03.2](https://img.shields.io/badge/demo-v1.11.03.2-gold)](https://vutaitam.github.io/bep_viet_7/)
 [![Vanilla JS](https://img.shields.io/badge/stack-vanilla_HTML%2FCSS%2FJS-blue)](#)
 [![No build step](https://img.shields.io/badge/build-none-green)](#)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
@@ -63,7 +63,7 @@ Tutorial có thể mở lại từ menu chính hoặc pause overlay.
 ├── PLAN_v1.11.01.md        # Tài liệu lịch sử/patch plan đã áp dụng
 ├── MARKETING_v1.11.md      # Marketing playbook
 ├── PROMPTS_ART_v1.12.md    # Prompt pack tạo art asset
-├── GRAPHICS_PLAN_demo_v1.11.03.md
+├── GRAPHICS_PLAN_demo_v1.11.03.2.md
 └── README.md
 ```
 
@@ -82,7 +82,7 @@ Repo publish bằng **GitHub Pages** từ branch `main`, folder `/ (root)`. Sau 
 
 ## Trạng Thái Hiện Tại
 
-Hiện tại: **Demo v1.11.03 (NPC Portraits)**.
+Hiện tại: **Demo v1.11.03.2 (NPC Portraits)**.
 
 Commit mốc balance:
 
@@ -98,7 +98,7 @@ Các mốc gần đây:
 - **v1.11.03**: favicon, Open Graph, giấy dó texture, confetti.
 - **v1.11.04**: SVG portrait Cụ Ông + refactor 6-file.
 - **v1.11.04.1**: balance fixes round 5.
-- **Demo v1.11.03**: 3 portrait NPC chính bằng WebP, sizing cố định, kiểm tra Chromium desktop/mobile/gallery.
+- **Demo v1.11.03.2**: 3 portrait NPC chính bằng WebP, sizing cố định, kiểm tra Chromium desktop/mobile/gallery.
 
 ## Roadmap
 

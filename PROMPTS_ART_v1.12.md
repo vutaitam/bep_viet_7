@@ -1,6 +1,6 @@
 # 🎨 Prompt Pack — Đồ họa Bếp Việt v1.12
 
-> **Trạng thái 2026-04-30**: bản code hiện tại là **Demo v1.11.03 (NPC Portraits)**. Đã có 3 SVG portrait Cụ Ông và 3 portrait WebP cho Bác Tâm, Cô Lan, John; tài liệu này dùng cho vòng asset tiếp theo, đặc biệt portrait NPC và background/UI art v1.12.
+> **Trạng thái 2026-04-30**: bản code hiện tại là **Demo v1.11.03.2 (NPC Portraits)**. Đã có 3 SVG portrait Cụ Ông và 3 portrait WebP cho Bác Tâm, Cô Lan, John; tài liệu này dùng cho vòng asset tiếp theo, đặc biệt portrait NPC và background/UI art v1.12.
 
 > Tài liệu này chứa prompt chi tiết để dán vào **Gemini (Imagen 3/4)**, **Midjourney**, hoặc bất kỳ image generator nào tương tự. Tổ chức theo độ ưu tiên: Sprint A (essential, làm trước) → Sprint B (nice-to-have, làm sau).
 >

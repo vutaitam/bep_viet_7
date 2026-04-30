@@ -1,7 +1,7 @@
-# Ke Hoach Do Hoa - Demo v1.11.03
+# Ke Hoach Do Hoa - Demo v1.11.03.2
 
 > Ngay lap: 2026-04-30  
-> Ten ban theo yeu cau: **Demo v1.11.03**  
+> Ten ban theo yeu cau: **Demo v1.11.03.2**  
 > Pham vi: ke hoach cap nhat do hoa va dot tich hop dau tien cho portrait NPC.
 
 Tai lieu nay chot huong do hoa moi cho Bep Viet: Tiem Bun So 7 sau khi ban thay emoji bang SVG runtime bi go bo vi gay loi hinh qua lon. Ban nay uu tien art co kiem soat kich thuoc, tai nguyen that trong `assets/`, va tich hop tung phan nho de khong pha layout.
@@ -89,13 +89,13 @@ Canh bao:
 
 ## 2. Quyet Dinh Chung
 
-1. **Ten ban do hoa moi la Demo v1.11.03.**
+1. **Ten ban do hoa moi la Demo v1.11.03.2.**
 2. **Khong hoi sinh runtime thay emoji hang loat va khong thay tat ca emoji bang anh.**
 3. **Lam art theo asset co dinh**, chen vao dung vi tri co kich thuoc rang buoc.
 4. **Uu tien portrait NPC truoc**, sau do moi den food icon, background va UI decoration.
 5. **Moi dot tich hop phai co test layout desktop/mobile** de tranh loi anh qua lon.
 
-## 3. Pham Vi Demo v1.11.03
+## 3. Pham Vi Demo v1.11.03.2
 
 ### Bat buoc
 
@@ -115,7 +115,7 @@ Canh bao:
 - CSS khung portrait co kich thuoc co dinh cho card/gallery/cutscene.
 - Tai lieu QA asset va quy tac file size.
 
-### Khong lam trong Demo v1.11.03
+### Khong lam trong Demo v1.11.03.2
 
 - Khong thay toan bo emoji mon an/nguyen lieu.
 - Khong them animation nang hoac canvas moi.
@@ -206,7 +206,7 @@ Muc tieu: chot 1 trang style guide va danh sach asset.
 Viec lam:
 - Kiem tra kich thuoc hien tai cua menu, customer card, gallery, cutscene.
 - Tao class CSS portrait chuan: `.npc-portrait`, `.customer-portrait`, `.gallery-portrait`.
-- Chot prompt base tu `PROMPTS_ART_v1.12.md`, rut gon thanh style lock cho Demo v1.11.03.
+- Chot prompt base tu `PROMPTS_ART_v1.12.md`, rut gon thanh style lock cho Demo v1.11.03.2.
 
 Definition of Done:
 - Co style guide.
@@ -308,6 +308,6 @@ Definition of Done:
 
 ## 11. Ket Luan Hoi Dong
 
-Demo v1.11.03 nen la ban **do hoa co kiem soat**, khong phai ban thay icon hang loat. Diem manh nhat cua Bep Viet la cau chuyen, khach quen va mon Viet; do hoa phai lam cac yeu to do ro hon trong khi giu game nhe, doc nhanh va khong vo layout.
+Demo v1.11.03.2 nen la ban **do hoa co kiem soat**, khong phai ban thay icon hang loat. Diem manh nhat cua Bep Viet la cau chuyen, khach quen va mon Viet; do hoa phai lam cac yeu to do ro hon trong khi giu game nhe, doc nhanh va khong vo layout.
 
 Huong trien khai tot nhat: bat dau bang portrait NPC co kich thuoc co dinh, sau do moi mo rong sang menu/background/food icon.

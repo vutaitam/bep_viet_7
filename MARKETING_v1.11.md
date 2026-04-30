@@ -1,6 +1,6 @@
 # Marketing Phase — Bếp Việt v1.11.x
 
-> Cập nhật 2026-04-30: bản code hiện tại là **Demo v1.11.03 (NPC Portraits)**. Tài liệu này là playbook marketing pilot, không phải trạng thái kỹ thuật mới nhất. Trạng thái kỹ thuật hiện tại xem `PROJECT_REQUIREMENTS_CURRENT.md` và `README.md`.
+> Cập nhật 2026-04-30: bản code hiện tại là **Demo v1.11.03.2 (NPC Portraits)**. Tài liệu này là playbook marketing pilot, không phải trạng thái kỹ thuật mới nhất. Trạng thái kỹ thuật hiện tại xem `PROJECT_REQUIREMENTS_CURRENT.md` và `README.md`.
 
 > Tài liệu này là playbook 1 tuần marketing sau khi ship nhánh v1.11.x. Mục tiêu: BIẾN GAME → PRODUCT bằng cách có audience thật trước khi quay lại code.
 
