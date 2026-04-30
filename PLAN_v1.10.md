@@ -1,5 +1,7 @@
 # Bếp Việt: Tiệm Bún Số 7 - Kế Hoạch Cập Nhật v1.10
 
+> **Trạng thái 2026-04-30**: tài liệu này là spec lịch sử cho hướng v1.10. Bản code hiện tại đã đi xa hơn: **Beta v1.11.04.1 (Balance)**, đã có drink gameplay thật, 21 NPC, festival, gallery, portrait SVG và refactor 6-file. Trạng thái hiện tại xem `PROJECT_REQUIREMENTS_CURRENT.md` và `README.md`.
+
 ## 0. Định Hướng Mới - Ưu Tiên Chất Lượng Tuyệt Đối
 
 Từ thời điểm này, bỏ tất cả ràng buộc và mục tiêu gốc nếu chúng làm game kém hay hơn.
@@ -694,15 +696,15 @@ Mini game chỉ nên xuất hiện ở chương đặc biệt hoặc để lấy
 
 ## 15. Prompt Tối Ưu Cho Claude Làm Tiếp
 
-Dùng prompt sau để Claude tiếp tục làm phần còn lại, tối ưu token:
+Dùng prompt sau để Claude tiếp tục làm phần còn lại, tối ưu token. **Lưu ý 2026-04-30: prompt này là lịch sử và đã lỗi thời; với bản hiện tại hãy dùng prompt trong `PROJECT_REQUIREMENTS_CURRENT.md`.**
 
 ```text
-Đọc PLAN_v1.10.md, phần handoff mới nhất trong CLAUDE.md và các phần liên quan của index.html. Tiếp tục hoàn thiện game “Bếp Việt: Tiệm Bún Số 7” theo mục tiêu mới: bỏ ràng buộc cũ, ưu tiên duy nhất là làm game hay hơn, sâu hơn, Việt Nam hơn.
+Đọc PROJECT_REQUIREMENTS_CURRENT.md, README.md, phần handoff mới nhất trong CLAUDE.md và các file runtime liên quan. Tiếp tục hoàn thiện game “Bếp Việt: Tiệm Bún Số 7” theo mục tiêu mới: bỏ ràng buộc cũ, ưu tiên duy nhất là làm game hay hơn, sâu hơn, Việt Nam hơn.
 
 Trạng thái hiện tại:
-- index.html là bản Demo v1.10, vanilla HTML/CSS/JS một file.
+- Bản hiện tại là Beta v1.11.04.1, vanilla HTML/CSS/JS, đã tách thành `index.html`, `css/styles.css` và 4 file JS trong `js/`.
 - Đã có 15 level, save/load bằng localStorage, shop nâng cấp, story overlay, mini-game nướng chả, khách mới, khách bí ẩn, món mới.
-- Đồ uống hiện mới là add-on trong đơn hàng, chưa có công thức và gameplay pha chế thật.
+- Đồ uống đã là gameplay thật trong khu pha nước, có công thức, nguyên liệu, thời gian pha và logic đúng/sai.
 - Đã sửa: chả cháy/non/quá lửa có thể bỏ làm lại; không được đổ nồi khi đang nấu; nguyên liệu chỉ hiện theo công thức đã mở khóa; economy đã được cân lại bớt dư tiền.
 - Có file test untracked, không động vào nếu không cần.
 

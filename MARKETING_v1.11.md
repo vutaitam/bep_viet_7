@@ -1,6 +1,8 @@
 # Marketing Phase — Bếp Việt v1.11.x
 
-> Tài liệu này là playbook 1 tuần marketing sau khi ship v1.11.02. Mục tiêu: BIẾN GAME → PRODUCT bằng cách có audience thật trước khi quay lại code.
+> Cập nhật 2026-04-30: bản code hiện tại là **Beta v1.11.04.2 (Art)**. Tài liệu này là playbook marketing pilot, không phải trạng thái kỹ thuật mới nhất. Trạng thái kỹ thuật hiện tại xem `PROJECT_REQUIREMENTS_CURRENT.md` và `README.md`.
+
+> Tài liệu này là playbook 1 tuần marketing sau khi ship nhánh v1.11.x. Mục tiêu: BIẾN GAME → PRODUCT bằng cách có audience thật trước khi quay lại code.
 
 ## 0. Vì sao pause coding
 
@@ -37,7 +39,7 @@ Khi có data này → bạn biết pain point thật để code v1.12.
   - "festival_started"
   - "gallery_opened"
   - "boss_won_<bossNpc>" — khi serve thành công cho boss
-- [ ] Push v1.11.03 chỉ với 1 thay đổi: Plausible snippet
+- [ ] Nếu bật analytics, push một patch nhỏ riêng chỉ chứa Plausible/Umami snippet + event hooks
 
 Ưu điểm Plausible/Umami: privacy-friendly, không cần GDPR consent banner, không làm chậm trang.
 
@@ -84,7 +86,7 @@ Cháu giữ được vị quán không? 👴
 3 subreddit, 3 post khác nhau (KHÔNG copy-paste — tự viết riêng):
 
 - [ ] **r/IndieGaming** — Title: `[Browser, Free] I made a Vietnamese cooking game about inheriting my grandfather's noodle shop` — 200-300 từ về cảm hứng + 3 screenshot + link demo. Best time: 10am-1pm UTC weekdays.
-- [ ] **r/WebGames** — Title: `Bếp Việt — vanilla JS cooking sim with Vietnamese identity (15 levels, festival mode, no ads)` — kỹ thuật hơn, single file 117KB, vanilla JS, no deps, GitHub Pages.
+- [ ] **r/WebGames** — Title: `Bếp Việt — vanilla JS cooking sim with Vietnamese identity (15 levels, festival mode, no ads)` — kỹ thuật hơn, vanilla JS, no deps, no build step, GitHub Pages.
 - [ ] **r/Vietnamese** — Title: `Mình làm game online về quán bún Việt — mời mọi người chơi thử` — tiếng Việt hoàn toàn, cảm xúc, kêu gọi feedback chân thành. **Post quan trọng nhất**.
 
 ### Ngày 4 — Facebook nhóm Việt Nam (2h)
@@ -111,7 +113,7 @@ Cháu giữ được vị quán không? 👴
 - [ ] Tạo Discord server "Bếp Việt — Tiệm Bún Số 7"
 - [ ] 5 channel: #welcome, #feedback, #bug-report, #dev-log, #fanart
 - [ ] Mời 5 bạn thân vào trước
-- [ ] Thêm Discord button vào menu game (v1.11.04 micro-patch nếu cần)
+- [ ] Thêm Discord button vào menu game bằng một micro-patch riêng nếu server thật sự hoạt động
 - [ ] DM/email 5 food/game YouTuber Việt:
   - Vương Khang (food review)
   - Sam Sam Dim (food review)
@@ -176,7 +178,7 @@ Không quá 30 phút/ngày, chỉ khi cần thiết:
 
 ## 6. Action ngay hôm nay (90 phút)
 
-- [ ] **[20 phút]** Đăng ký Plausible/Umami → paste snippet → push v1.11.03 chỉ với analytics
+- [ ] **[20 phút]** Đăng ký Plausible/Umami → paste snippet → push một patch riêng chỉ với analytics
 - [ ] **[40 phút]** Quay 3 clip với Win+G hoặc OBS
 - [ ] **[30 phút]** Đăng 1 post Facebook nhóm "Yêu Hà Nội" — bài đầu tiên
 

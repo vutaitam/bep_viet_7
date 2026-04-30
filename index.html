@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04.1 (Balance)</title>
+<title>Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04.2 (Art)</title>
 <meta name="description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội. 15 ngày, 3 chương, 21 nhân vật, lễ hội mode endless. Vanilla JS, chơi trực tiếp trình duyệt.">
 <meta name="theme-color" content="#C62828">
 <!-- Open Graph (Facebook, Reddit) -->
-<meta property="og:title" content="🥢 Bếp Việt: Tiệm Bún Số 7">
+<meta property="og:title" content="Bếp Việt: Tiệm Bún Số 7">
 <meta property="og:description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội. 15 ngày · 3 chương · 21 nhân vật · Lễ hội endless.">
 <meta property="og:url" content="https://vutaitam.github.io/bep_viet_7/">
 <meta property="og:type" content="website">
@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Bếp Việt">
 <!-- Twitter card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="🥢 Bếp Việt: Tiệm Bún Số 7">
+<meta name="twitter:title" content="Bếp Việt: Tiệm Bún Số 7">
 <meta name="twitter:description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội.">
 <!-- Inline SVG favicon: red bowl + chopsticks -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%23FFD700' width='64' height='64' rx='10'/%3E%3Cline x1='14' y1='8' x2='38' y2='32' stroke='%237B4F2E' stroke-width='3.5' stroke-linecap='round'/%3E%3Cline x1='26' y1='8' x2='50' y2='32' stroke='%237B4F2E' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M10 32h44v18a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6z' fill='%23C62828' stroke='%238E0E00' stroke-width='1.5'/%3E%3Cpath d='M16 38c2-2 6-2 8 0s6 2 8 0 6-2 8 0 6 2 8 0' stroke='%23FFF8E1' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E">
@@ -40,7 +40,7 @@
   <span class="lantern">🏮</span>
   <span class="lantern">🏮</span>
 
-  <div class="menu-version">🧪 Beta v1.11.04.1 · Balance fix · SVG portrait · Confetti · Lễ hội</div>
+  <div class="menu-version">🧪 Beta v1.11.04.2 · Art icons · SVG portrait · Confetti · Lễ hội</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
   <div class="menu-sub">Tiệm Bún Số 7</div>
   <div class="menu-divider"></div>
@@ -57,7 +57,7 @@
     <button class="btn btn-sm" id="menuBtnReset" style="display:none;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);font-size:.78em;" onclick="if(confirm('Xóa tất cả tiến trình và bắt đầu lại?')){resetProg();}">🗑 Reset tiến trình</button>
   </div>
   <div class="menu-credit">
-    3 chương · 15 levels · 5 nâng cấp · Mini-game nướng chả<br>
+    3 chương · 15 levels · 7 nâng cấp đa cấp · Mini-game nướng chả<br>
     <span style="opacity:.6">Cảm ơn bạn đã ghé Tiệm Bún Số 7!</span>
   </div>
   <div class="menu-deco-bot"></div>
@@ -319,7 +319,7 @@
       <li>Cứ mỗi 60 giây độ khó tăng (kiên nhẫn ngắn hơn, spawn nhanh hơn).</li>
       <li>Mở khóa toàn bộ món + nước uống.</li>
       <li>Combo món + nước được +20% bonus suốt mode.</li>
-      <li>Khi 3 khách bỏ đi → kết thúc lễ hội. Best score được lưu lại.</li>
+      <li>Khi 5 khách bỏ đi → kết thúc lễ hội. Có cảnh báo ở lượt lỡ thứ 3 và 4.</li>
       <li>Khách bí ẩn xuất hiện thường xuyên hơn (tip cao!)</li>
     </ul>
   </div>
@@ -363,6 +363,7 @@
 <!-- Load order matters: data (pure constants) → state (PROG/G/helpers) → game (core gameplay) → screens (UI + festival override + DOMContentLoaded init) -->
 <script src="js/data.js"></script>
 <script src="js/state.js"></script>
+<script src="js/emoji-art.js"></script>
 <script src="js/game.js"></script>
 <script src="js/screens.js"></script>
 </body>

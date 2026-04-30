@@ -40,6 +40,27 @@ body{
 
 button{font-family:inherit;cursor:pointer;}
 
+.art-emoji{
+  display:inline-block;
+  width:1.28em;
+  height:1.28em;
+  object-fit:contain;
+  vertical-align:-.22em;
+  margin:0 .08em;
+  border-radius:.24em;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.28));
+}
+.menu-logo .art-emoji{width:1em;height:1em;vertical-align:-.12em;}
+.lantern .art-emoji,.tutorial-icon .art-emoji,.story-icon .art-emoji,.fest-banner .art-emoji{
+  width:1em;height:1em;margin:0;
+}
+.customer-emoji .art-emoji,.gal-card-emoji .art-emoji,.npc-emoji .art-emoji,.upgrade-emoji .art-emoji{
+  width:1.05em;height:1.05em;margin:0;
+}
+.ingredient-emoji .art-emoji,.drink-ing-emoji .art-emoji{
+  width:1.15em;height:1.15em;margin:0;
+}
+
 /* ===== BUTTONS ===== */
 .btn{
   display:block;width:100%;
@@ -278,7 +299,7 @@ body.boss-active .chapter-bar{
   animation:bossPulse 1.4s infinite;
 }
 .customer-card[data-boss="1"]::before{
-  content:'⚠️ BOSS';position:absolute;top:-10px;left:50%;
+  content:'BOSS';position:absolute;top:-10px;left:50%;
   transform:translateX(-50%);
   background:#E91E63;color:#fff;font-size:.65em;font-weight:800;
   padding:2px 10px;border-radius:10px;letter-spacing:.05em;
@@ -404,7 +425,7 @@ body.boss-active .chapter-bar{
 }
 .pot.cooking .pot-steam{display:block;}
 .pot.done{background:linear-gradient(180deg,#5D4037 0%,#3E2723 100%);border-color:#FFD54F;}
-.pot.done::after{content:'✨';position:absolute;font-size:20px;top:10px;right:12px;animation:sparkle 1.2s infinite alternate;}
+.pot.done::after{content:'';position:absolute;top:10px;right:12px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#FFF8E1 0,#FFD700 45%,transparent 68%);animation:sparkle 1.2s infinite alternate;}
 @keyframes sparkle{from{opacity:.5;transform:scale(.8);}to{opacity:1;transform:scale(1.2);}}
 
 .pot-steam{display:none;position:absolute;top:0;left:0;right:0;pointer-events:none;}

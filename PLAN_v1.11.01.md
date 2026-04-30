@@ -1,5 +1,7 @@
 # Bếp Việt: Tiệm Bún Số 7 — Kế hoạch v1.11.01
 
+> **Trạng thái 2026-04-30**: tài liệu này là patch plan lịch sử và phần lớn đã được áp dụng. Bản code hiện tại là **Beta v1.11.04.1 (Balance)**, gồm thêm các patch sau v1.11.01: tutorial 17 bước, art polish, SVG portrait Cụ Ông, refactor 6-file và balance fixes round 5. Trạng thái hiện tại xem `PROJECT_REQUIREMENTS_CURRENT.md` và `README.md`.
+
 > Patch sau hội đồng đánh giá 3 chuyên gia (Dev / Gamer / CEO). Tập trung sửa các vấn đề **trùng nhau** + **bug có rủi ro** với save/UX. Không thêm tính năng lớn — đó là scope v1.12.
 
 ## 1. Bối cảnh
