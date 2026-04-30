@@ -5,7 +5,7 @@
 
 **Chơi ngay**: <https://vutaitam.github.io/bep_viet_7/>
 
-[![Beta v1.11.04.2](https://img.shields.io/badge/beta-v1.11.04.2-gold)](https://vutaitam.github.io/bep_viet_7/)
+[![Beta v1.11.04.1](https://img.shields.io/badge/beta-v1.11.04.1-gold)](https://vutaitam.github.io/bep_viet_7/)
 [![Vanilla JS](https://img.shields.io/badge/stack-vanilla_HTML%2FCSS%2FJS-blue)](#)
 [![No build step](https://img.shields.io/badge/build-none-green)](#)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
@@ -15,7 +15,6 @@
 ## Điểm Nổi Bật
 
 - **Cốt truyện Cụ Ông**: cutscene, di nguyện, feedback cuối ngày và 3 portrait SVG tự vẽ.
-- **Icon art tự tạo**: emoji hiển thị trong game được thay bằng ảnh SVG nội bộ, không dùng emoji hệ điều hành/CDN.
 - **3 chương, 15 ngày**: Hà Nội -> Hội An -> Sài Gòn, kết thúc với danh hiệu "Đầu bếp 3 miền".
 - **10 món Việt**: bún dọc mùng signature, phở bò, bún bò Huế, bún chả, cơm tấm, mì Quảng, hủ tiếu, gỏi cuốn, bún riêu, bánh mì.
 - **5 đồ uống là gameplay thật**: trà đá, trà tắc, nước mía, cà phê sữa đá, rau má, có công thức, nguyên liệu, thời gian pha và logic đúng/sai.
@@ -42,8 +41,8 @@ Tutorial có thể mở lại từ menu chính hoặc pause overlay.
 - **HTML + CSS + Vanilla JavaScript**, không framework, không build step.
 - **GitHub Pages**, chạy trực tiếp từ root repo.
 - **localStorage save**, key hiện tại `bv_prog_v111`, có migration từ `bv_prog_v110` và `bv_prog_v9`.
-- **Code runtime đã tách 7 file** để dễ bảo trì, không còn monolithic single-file.
-- **Kiểm tra hiện tại**: `node --check` pass cho 5 file JS.
+- **Code runtime đã tách 6 file** để dễ bảo trì, không còn monolithic single-file.
+- **Kiểm tra hiện tại**: `node --check` pass cho 4 file JS.
 
 ```text
 .
@@ -53,7 +52,6 @@ Tutorial có thể mở lại từ menu chính hoặc pause overlay.
 ├── js/
 │   ├── data.js             # RECIPES, INGREDIENTS, DRINKS, NPCS, LEVELS, UPGRADES, TUTORIAL
 │   ├── state.js            # PROG/G state, save/load, achievement queue, notify timers
-│   ├── emoji-art.js        # Thay emoji hiển thị bằng ảnh SVG tự tạo
 │   ├── game.js             # Core gameplay: spawn, cook, grill, drink, serve, end level
 │   └── screens.js          # Menu, tutorial, cutscene, level select, shop, festival, gallery
 ├── assets/
@@ -64,7 +62,6 @@ Tutorial có thể mở lại từ menu chính hoặc pause overlay.
 ├── PLAN_v1.11.01.md        # Tài liệu lịch sử/patch plan đã áp dụng
 ├── MARKETING_v1.11.md      # Marketing playbook
 ├── PROMPTS_ART_v1.12.md    # Prompt pack tạo art asset
-├── ART_REVIEW_v1.12.md     # Đánh giá đồ họa nhiều góc nhìn
 └── README.md
 ```
 
@@ -83,9 +80,9 @@ Repo publish bằng **GitHub Pages** từ branch `main`, folder `/ (root)`. Sau 
 
 ## Trạng Thái Hiện Tại
 
-Hiện tại: **Beta v1.11.04.2 (Art)**.
+Hiện tại: **Beta v1.11.04.1 (Balance)**.
 
-Commit nền gần nhất trước patch art:
+Commit mốc balance:
 
 ```text
 072a058 beta v1.11.04.1: balance fixes from expert round 5
@@ -99,7 +96,6 @@ Các mốc gần đây:
 - **v1.11.03**: favicon, Open Graph, giấy dó texture, confetti.
 - **v1.11.04**: SVG portrait Cụ Ông + refactor 6-file.
 - **v1.11.04.1**: balance fixes round 5.
-- **v1.11.04.2**: thay emoji hiển thị bằng ảnh SVG tự tạo + đánh giá art review.
 
 ## Roadmap
 
@@ -109,7 +105,7 @@ Các mốc gần đây:
 
 ## Số Liệu
 
-- Khoảng 1.900+ dòng JavaScript tách trong 5 file.
+- Khoảng 1.800+ dòng JavaScript tách trong 4 file.
 - 30 nguyên liệu, 10 món, 5 nước, 21 NPC.
 - 15 level campaign + endless festival mode.
 - 17 bước tutorial, 20 thành tựu.

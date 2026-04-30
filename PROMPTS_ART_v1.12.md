@@ -1,6 +1,6 @@
 # 🎨 Prompt Pack — Đồ họa Bếp Việt v1.12
 
-> **Trạng thái 2026-04-30**: bản code hiện tại là **Beta v1.11.04.2 (Art)**. Đã có 3 SVG portrait Cụ Ông và hệ thống emoji art SVG runtime; tài liệu này dùng cho vòng asset tiếp theo, đặc biệt portrait NPC và background/UI art v1.12.
+> **Trạng thái 2026-04-30**: bản code hiện tại là **Beta v1.11.04.1 (Balance)**. Đã có 3 SVG portrait Cụ Ông; tài liệu này dùng cho vòng asset tiếp theo, đặc biệt portrait NPC và background/UI art v1.12.
 
 > Tài liệu này chứa prompt chi tiết để dán vào **Gemini (Imagen 3/4)**, **Midjourney**, hoặc bất kỳ image generator nào tương tự. Tổ chức theo độ ưu tiên: Sprint A (essential, làm trước) → Sprint B (nice-to-have, làm sau).
 >

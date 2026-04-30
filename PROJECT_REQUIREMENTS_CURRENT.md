@@ -10,10 +10,10 @@ Các ràng buộc scope cũ như số món, số NPC, single-file hay phạm vi 
 
 ## 2. Trạng Thái Hiện Tại
 
-- Version trong game: **Beta v1.11.04.2 (Art)**.
-- Commit nền trước patch art: `072a058 beta v1.11.04.1: balance fixes from expert round 5`.
+- Version trong game: **Beta v1.11.04.1 (Balance)**.
+- Commit nền balance: `072a058 beta v1.11.04.1: balance fixes from expert round 5`.
 - File chơi chính: `index.html`.
-- Code runtime: `css/styles.css`, `js/data.js`, `js/state.js`, `js/emoji-art.js`, `js/game.js`, `js/screens.js`.
+- Code runtime: `css/styles.css`, `js/data.js`, `js/state.js`, `js/game.js`, `js/screens.js`.
 - Công nghệ: HTML/CSS/JavaScript thuần, không framework, không build step.
 - Deploy: GitHub Pages từ branch `main`, folder `/`.
 - Repo: `https://github.com/vutaitam/bep_viet_7`.
@@ -28,7 +28,6 @@ index.html          HTML markup, meta, screen containers, load order
 css/styles.css      Toàn bộ giao diện, responsive, animation, portrait styling
 js/data.js          Pure data: món, nguyên liệu, nước, NPC, level, upgrade, tutorial
 js/state.js         Progress state, save/load/migration, achievement queue, timers
-js/emoji-art.js     Runtime thay emoji hiển thị bằng ảnh SVG tự tạo
 js/game.js          Core loop: spawn khách, nấu, nướng, pha nước, phục vụ, kết ngày
 js/screens.js       Menu, tutorial, cutscene, story overlay, level select, shop, festival, gallery
 assets/portraits/   3 SVG portrait Cụ Ông + preview
@@ -39,7 +38,6 @@ Load order bắt buộc:
 ```html
 <script src="js/data.js"></script>
 <script src="js/state.js"></script>
-<script src="js/emoji-art.js"></script>
 <script src="js/game.js"></script>
 <script src="js/screens.js"></script>
 ```
@@ -69,8 +67,7 @@ Load order bắt buộc:
 - Sổ tay quán 4 tab: thành tựu, khách đã gặp, câu chuyện, thống kê.
 - 7 nâng cấp đa cấp: bếp ga, bảng menu, quạt mát, bàn ghế, lò nướng, biển hiệu, thẻ khách quen.
 - 3 SVG portrait Cụ Ông: young, old, spirit.
-- Emoji hiển thị trong UI được thay bằng icon ảnh SVG tự tạo qua `js/emoji-art.js`.
-- Refactor khỏi single-file sang cấu trúc runtime 7 file.
+- Refactor khỏi single-file sang cấu trúc runtime 6 file.
 
 ## 5. Vấn Đề Cần Theo Dõi
 
@@ -80,7 +77,7 @@ Một số tài liệu cũ từng bị lệch version hoặc mojibake khi đọc
 
 ### 5.2 Balance
 
-Round balance gần nhất là **v1.11.04.1 balance fixes**; round UI/art mới nhất là **v1.11.04.2 art icons**. Sau mỗi thay đổi gameplay cần kiểm tra:
+Round balance gần nhất là **v1.11.04.1 balance fixes**. Sau mỗi thay đổi gameplay cần kiểm tra:
 
 - Người chơi không dư tiền quá sớm.
 - Không bị âm tiền vô lý.
@@ -100,7 +97,7 @@ Round balance gần nhất là **v1.11.04.1 balance fixes**; round UI/art mới 
 
 1. Smoke test flow thực tế: menu -> level -> nấu -> nướng -> pha nước -> phục vụ -> kết ngày.
 2. Đồng bộ README/CLAUDE/requirements sau mỗi commit lớn.
-3. Playtest Chương 1 full để bắt regression sau refactor runtime và emoji art.
+3. Playtest Chương 1 full để bắt regression sau refactor runtime.
 4. Cân lại economy sau v1.11.04.1 bằng vài run level 1, 5, 10, 15 và festival 2 phút.
 5. Tích hợp portrait NPC chính nếu asset đủ tốt.
 6. Cân nhắc analytics nhẹ, privacy-friendly, sau khi demo ổn.
@@ -122,7 +119,6 @@ Tối thiểu:
 ```bash
 node --check js/data.js
 node --check js/state.js
-node --check js/emoji-art.js
 node --check js/game.js
 node --check js/screens.js
 ```
@@ -140,7 +136,7 @@ Nên kiểm thêm:
 ```text
 Đọc PROJECT_REQUIREMENTS_CURRENT.md, phần handoff mới nhất trong CLAUDE.md, README.md và các file runtime liên quan.
 
-Trạng thái hiện tại: Bếp Việt Beta v1.11.04.2 (Art), vanilla HTML/CSS/JS, đã tách 7 file runtime: index.html, css/styles.css, js/data.js, js/state.js, js/emoji-art.js, js/game.js, js/screens.js.
+Trạng thái hiện tại: Bếp Việt Beta v1.11.04.1 (Balance), vanilla HTML/CSS/JS, đã tách 6 file runtime: index.html, css/styles.css, js/data.js, js/state.js, js/game.js, js/screens.js.
 
 Mục tiêu: làm game hay hơn, sâu hơn, Việt Nam hơn, nhưng không phá save và không rewrite lớn nếu chưa cần.
 
@@ -158,7 +154,7 @@ Ràng buộc:
 - Sau khi sửa code, báo file đã sửa, tính năng đã làm, test đã chạy.
 
 Kiểm tra bắt buộc:
-- node --check cho 5 file JS.
+- node --check cho 4 file JS.
 - onclick/function check.
 - getElementById/id check.
 - recipe/drink ingredient integrity.
