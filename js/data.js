@@ -4,68 +4,68 @@
 
 const RECIPES = {
   bun_doc_mung:{
-    name:'Bún dọc mùng',emoji:'🍜',
+    name:'Bún dọc mùng',emoji:'🍜',image:'assets/icons/recipes/bun_doc_mung.svg',
     ingredients:['bun','suon','doc_mung','ca_chua'],
     cookTime:8,needsGrill:false,price:40000,score:25,
     isSignature:true,desc:'Đặc sản Hà Nội — Món tâm huyết của Cụ Ông'
   },
   banh_mi:{
-    name:'Bánh mì',emoji:'🥖',
+    name:'Bánh mì',emoji:'🥖',image:'assets/icons/recipes/banh_mi.svg',
     ingredients:['banh_mi_loaf','pate','thit_nguoi','rau_song'],
     cookTime:4,needsGrill:false,price:25000,score:15,
     desc:'Bánh mì Sài Gòn — Nhanh, gọn, ngon'
   },
   bun_cha:{
-    name:'Bún chả',emoji:'🍢',
+    name:'Bún chả',emoji:'🍢',image:'assets/icons/recipes/bun_cha.svg',
     ingredients:['bun','rau_song','nuoc_cham'],
     cookTime:6,needsGrill:true,grillIngredient:'cha',
     price:35000,score:22,
     desc:'Đặc sản Hà Nội — Cần nướng chả đúng độ'
   },
   mi_quang:{
-    name:'Mì Quảng',emoji:'🍝',
+    name:'Mì Quảng',emoji:'🍝',image:'assets/icons/recipes/mi_quang.svg',
     ingredients:['mi_quang_noodle','thit_heo','tom','rau_song'],
     cookTime:7,needsGrill:false,price:45000,score:28,
     availableFrom:6,
     desc:'Đặc sản Quảng Nam — Mì vàng nghệ béo ngậy'
   },
   hu_tieu:{
-    name:'Hủ tiếu Nam Vang',emoji:'🍜',
+    name:'Hủ tiếu Nam Vang',emoji:'🍜',image:'assets/icons/recipes/hu_tieu.svg',
     ingredients:['hu_tieu_noodle','thit_heo','tom','nuoc_dung'],
     cookTime:6,needsGrill:false,price:50000,score:30,
     availableFrom:11,
     desc:'Đặc sản Sài Gòn — Nước dùng trong ngọt thanh'
   },
   pho_bo:{
-    name:'Phở bò',emoji:'🍲',
+    name:'Phở bò',emoji:'🍲',image:'assets/icons/recipes/pho_bo.svg',
     ingredients:['pho_noodle','thit_bo','rau_thom','nuoc_dung'],
     cookTime:7,needsGrill:false,price:60000,score:34,
     availableFrom:4,
     desc:'Tô phở nóng, thơm quế hồi — hợp ngày mưa và khách du lịch'
   },
   bun_bo_hue:{
-    name:'Bún bò Huế',emoji:'🌶️',
+    name:'Bún bò Huế',emoji:'🌶️',image:'assets/icons/recipes/bun_bo_hue.svg',
     ingredients:['bun','thit_bo','sa_te','rau_thom'],
     cookTime:8,needsGrill:false,price:65000,score:38,
     availableFrom:8,
     desc:'Vị cay nồng miền Trung — bán rất tốt ở chương lễ hội'
   },
   com_tam:{
-    name:'Cơm tấm',emoji:'🍚',
+    name:'Cơm tấm',emoji:'🍚',image:'assets/icons/recipes/com_tam.svg',
     ingredients:['com_tam_rice','thit_heo','nuoc_cham','rau_song'],
     cookTime:6,needsGrill:false,price:70000,score:40,
     availableFrom:12,
     desc:'Món Sài Gòn chắc bụng, hợp khách văn phòng và người lao động'
   },
   goi_cuon:{
-    name:'Gỏi cuốn',emoji:'🌯',
+    name:'Gỏi cuốn',emoji:'🌯',image:'assets/icons/recipes/goi_cuon.svg',
     ingredients:['banh_trang','tom','rau_song','bun'],
     cookTime:5,needsGrill:false,price:32000,score:19,
     availableFrom:6,
     desc:'Đặc sản miền Nam — Thanh mát, không dầu mỡ, hợp khách Tây và khách ăn chay nhẹ'
   },
   bun_rieu:{
-    name:'Bún riêu',emoji:'🍛',
+    name:'Bún riêu',emoji:'🍛',image:'assets/icons/recipes/bun_rieu.svg',
     ingredients:['bun','rieu_cua','ca_chua','rau_thom'],
     cookTime:7,needsGrill:false,price:48000,score:27,
     availableFrom:3,
@@ -108,15 +108,15 @@ const INGREDIENTS = {
 };
 
 const DRINKS = {
-  tra_da:{name:'Trà đá',emoji:'🧊',price:5000,score:2,patienceBoost:3,availableFrom:1,
+  tra_da:{name:'Trà đá',emoji:'🧊',image:'assets/icons/drinks/tra_da.svg',price:5000,score:2,patienceBoost:3,availableFrom:1,
     ingredients:['tra_la','da'],mixTime:2,desc:'Vỉa hè Việt Nam — đơn giản mà mát'},
-  tra_tac:{name:'Trà tắc',emoji:'🍋',price:10000,score:4,patienceBoost:5,availableFrom:4,
+  tra_tac:{name:'Trà tắc',emoji:'🍋',image:'assets/icons/drinks/tra_tac.svg',price:10000,score:4,patienceBoost:5,availableFrom:4,
     ingredients:['tra_la','tac','da'],mixTime:3,desc:'Chua ngọt — hợp ngày nóng và bánh mì'},
-  nuoc_mia:{name:'Nước mía',emoji:'🥤',price:14000,score:5,patienceBoost:4,availableFrom:6,
+  nuoc_mia:{name:'Nước mía',emoji:'🥤',image:'assets/icons/drinks/nuoc_mia.svg',price:14000,score:5,patienceBoost:4,availableFrom:6,
     ingredients:['mia','da'],mixTime:4,desc:'Ép tay — cần thời gian nhưng lợi nhuận cao'},
-  ca_phe_sua_da:{name:'Cà phê sữa đá',emoji:'☕',price:18000,score:6,patienceBoost:2,availableFrom:9,
+  ca_phe_sua_da:{name:'Cà phê sữa đá',emoji:'☕',image:'assets/icons/drinks/ca_phe_sua_da.svg',price:18000,score:6,patienceBoost:2,availableFrom:9,
     ingredients:['ca_phe_bot','sua_dac','da'],mixTime:4,desc:'Đậm đà — khách Tây và dân văn phòng mê'},
-  rau_ma:{name:'Rau má',emoji:'🌿',price:12000,score:5,patienceBoost:5,availableFrom:11,
+  rau_ma:{name:'Rau má',emoji:'🌿',image:'assets/icons/drinks/rau_ma.svg',price:12000,score:5,patienceBoost:5,availableFrom:11,
     ingredients:['rau_ma_la','da'],mixTime:3,desc:'Mát thanh — đặc sản miền Nam'}
 };
 

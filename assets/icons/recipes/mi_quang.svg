@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="Mi Quang">
+  <path d="M6 32 Q32 42 58 32 L54 50 Q32 54 10 50 Z" fill="#fff3e0" stroke="#3e2723" stroke-width="2.5" stroke-linejoin="round"/>
+  <ellipse cx="32" cy="32" rx="26" ry="6" fill="#ffd54f" stroke="#3e2723" stroke-width="2.5"/>
+  <path d="M10 30 q5 -2 9 0 t9 0 t9 0 t9 0 t9 0" stroke="#fbc02d" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M12 34 q5 -2 9 0 t9 0 t9 0 t9 0 t9 0" stroke="#f57f17" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M22 28 q4 -3 8 0 q-1 4 -4 4 q-3 0 -4 -4 z" fill="#ff7043" stroke="#3e2723" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="26" cy="29" r="1" fill="#3e2723"/>
+  <path d="M38 30 q3 -4 6 -2 q1 3 -2 4 q-3 0 -4 -2 z" fill="#ff7043" stroke="#3e2723" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M16 26 l2 -5" stroke="#4caf50" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M48 27 l-2 -5" stroke="#4caf50" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <ellipse cx="32" cy="50" rx="22" ry="2.5" fill="#ffe082" stroke="#3e2723" stroke-width="2"/>
+</svg>

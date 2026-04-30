@@ -256,14 +256,14 @@ function renderCustomers(){
     const pct=(c.patience/c.maxPatience)*100;
     const ringColor=pct>60?'#4CAF50':pct>30?'#FFC107':'#f44336';
     const badge=c.isRegular?'<div class="customer-badge">⭐</div>':'';
-    const drinkLine=c.drink?`<br><span style="color:#1976D2">${DRINKS[c.drink].emoji} ${DRINKS[c.drink].name}</span>`:'';
+    const drinkLine=c.drink?`<br><span style="color:#1976D2">${iconHTML(DRINKS[c.drink],18)} ${DRINKS[c.drink].name}</span>`:'';
     const bubble=c.justSpawned&&c.quotes&&c.quotes.arrive?`<div class="customer-bubble">${c.quotes.arrive}</div>`:'';
     card.innerHTML=`
       ${bubble}
       ${badge}
       ${customerVisual(c)}
       <div class="customer-name${c.isRegular?' regular':''}">${c.name}</div>
-      <div class="customer-order-label">${RECIPES[c.order].emoji} ${RECIPES[c.order].name}${drinkLine}</div>
+      <div class="customer-order-label">${iconHTML(RECIPES[c.order],20)} ${RECIPES[c.order].name}${drinkLine}</div>
       <div class="patience-ring-wrap">
         <div class="patience-ring" style="--ring-pct:${pct}%;--ring-color:${ringColor}" data-sec="${Math.ceil(c.patience)}s"></div>
       </div>
@@ -279,6 +279,18 @@ function customerVisual(c){
     <img class="customer-portrait" src="${c.portrait}" alt="${c.name}" loading="lazy" width="68" height="68" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
     <span class="portrait-fallback">${c.emoji}</span>
   </div>`;
+}
+
+// Render an SVG icon if the data item has an `image` field, else fall back to its emoji.
+// Used for recipes/drinks/ingredients in HTML contexts (cards, labels, lists).
+function iconHTML(item, size){
+  size = size || 20;
+  if(!item) return '';
+  if(item.image){
+    const safeAlt = (item.name||'').replace(/"/g,'&quot;');
+    return `<span class="icon-wrap" style="width:${size}px;height:${size}px;"><img class="icon-img" src="${item.image}" alt="${safeAlt}" loading="lazy" onerror="this.parentElement.classList.add('img-fail');this.remove();"><span class="icon-fallback">${item.emoji||''}</span></span>`;
+  }
+  return item.emoji || '';
 }
 
 function selectCustomer(id){
@@ -310,7 +322,7 @@ function renderRecipes(){
     const grillExtra=r.needsGrill?`<br><span style="color:#FF8A65">+ ${INGREDIENTS[r.grillIngredient].emoji} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`:'';
     div.innerHTML=`
       ${r.isSignature?'<div><span class="recipe-tag sig">⭐ Đặc biệt</span></div>':''}
-      <div class="recipe-name">${r.emoji} ${r.name}</div>
+      <div class="recipe-name">${iconHTML(r,28)} ${r.name}</div>
       <div class="recipe-ings">${ings}${grillExtra}</div>
       <div class="recipe-stats">
         <span class="recipe-stat">💰 ${r.price.toLocaleString('vi-VN')}đ</span>
@@ -331,7 +343,7 @@ function renderDrinks(){
     const ingsLabel=(d.ingredients||[]).map(ing=>INGREDIENTS[ing]?INGREDIENTS[ing].emoji+' '+INGREDIENTS[ing].name:ing).join(' + ');
     const row=document.createElement('div');row.className='drink-row';row.id='drink-row-'+k;
     row.onclick=()=>highlightDrinkRecipe(k);
-    row.innerHTML=`<div style="flex:1;min-width:0;"><div style="font-weight:600;">${d.emoji} ${d.name} <span style="color:var(--gold);font-weight:700;">${d.price.toLocaleString('vi-VN')}đ</span></div><div class="drink-row-recipe">${ingsLabel}</div></div>`;
+    row.innerHTML=`<div style="flex:1;min-width:0;"><div style="font-weight:600;display:flex;align-items:center;gap:6px;">${iconHTML(d,26)} ${d.name} <span style="color:var(--gold);font-weight:700;">${d.price.toLocaleString('vi-VN')}đ</span></div><div class="drink-row-recipe">${ingsLabel}</div></div>`;
     list.appendChild(row);
   });
 }

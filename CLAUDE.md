@@ -22,7 +22,7 @@
 
 **Demo live**: https://vutaitam.github.io/bep_viet_7/ (GitHub Pages)
 
-**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.3 (Portrait Integration)** (Bác Tâm/Cô Lan/John portrait tích hợp vào tutorial NPC list + giữ toàn bộ v1.11.03.2)
+**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.4 (Hand-drawn Icons P1)** (15 SVG hand-drawn icons cho 10 món + 5 đồ uống thay emoji ở customer-card / recipe book / drink list; Phase 2-4 còn 30 ingredients + 7 NPC + 20 UI icons)
 
 ---
 
@@ -324,7 +324,7 @@ Khi làm việc tiếp với dự án này, lưu ý:
 
 ### Trạng thái hiện tại (cập nhật cuối — 2026-04-30)
 
-**Phiên bản đang chạy: 🎨 Demo v1.11.03.3 (Portrait Integration)**
+**Phiên bản đang chạy: 🎨 Demo v1.11.03.4 (Hand-drawn Icons Phase 1)**
 
 - ✅ 15 level / 3 chương đầy đủ (Hà Nội → Hội An → Sài Gòn)
 - ✅ Drink station gameplay thật: 5 công thức (trà đá, trà tắc, nước mía, cà phê sữa đá, rau má)
@@ -350,7 +350,10 @@ Khi làm việc tiếp với dự án này, lưu ý:
 - 🟡 Marketing phase: Plausible analytics + 3 TikTok clip + Reddit/FB posts (per `MARKETING_v1.11.md`)
 - 🟡 Gemini Imagen quota reset → gen 33 art assets còn lại (per `PROMPTS_ART_v1.12.md`)
 - ✅ Tích hợp Bác Tâm + Cô Lan + John portrait vào tutorial NPC list (v1.11.03.3); boss/mystery/sinh viên NPC vẫn dùng emoji vì chưa có ảnh
-- 🟡 Bước tiếp theo (v1.11.03.4+): vẽ/gen portrait cho boss (Tuấn/Khang/Iron Chef), sinh viên, food blogger Linh — replace emoji ở customer-card khi spawn
+- ✅ **Hand-drawn icons Phase 1** (v1.11.03.4): 15 SVG (10 món + 5 đồ uống) thay emoji ở customer-order / recipe book / drink list — outline #3e2723, watercolor fill, viewBox 64×64, file ~10-30 dòng/icon
+- 🟡 **Hand-drawn icons Phase 2** (~30 nguyên liệu): bún, sườn, dọc mùng, cà chua, pate, thịt nguội, rau sống, chả, nước chấm, mì quảng, thịt heo, tôm, hủ tiếu, nước dùng, bánh phở, thịt bò, rau thơm, sa tế, cơm tấm, bánh tráng, riêu cua, gà xé, trà, đá viên, tắc, mía, cà phê bột, sữa đặc, lá rau má — render trong cooking pot / grill / drink station
+- 🟡 **Hand-drawn icons Phase 3** (NPC portrait còn lại): Tuấn (boss critic), Khang (boss đầu bếp), Iron Chef Việt, sinh viên, bác công nhân, Linh Review, Việt kiều Phúc, Khách im lặng — replace emoji ở customer-card khi spawn
+- 🟡 **Hand-drawn icons Phase 4** (UI/event/achievement, ~20 icons)
 
 ### Nếu user yêu cầu code mới
 - Luôn check syntax bằng `node --check`

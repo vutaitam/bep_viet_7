@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-label="Bun doc mung">
+  <g fill="none" stroke="#9e9e9e" stroke-width="1.6" stroke-linecap="round" opacity="0.65">
+    <path d="M22 14 q-3 -4 0 -8"/>
+    <path d="M32 10 q-3 -5 0 -9"/>
+    <path d="M42 14 q-3 -4 0 -8"/>
+  </g>
+  <path d="M9 30 Q32 41 55 30 L51 56 Q32 59 13 56 Z" fill="#c62828" stroke="#3e2723" stroke-width="2.5" stroke-linejoin="round"/>
+  <ellipse cx="32" cy="30" rx="23" ry="5.5" fill="#fff8e1" stroke="#3e2723" stroke-width="2.5"/>
+  <ellipse cx="32" cy="30" rx="19" ry="3.5" fill="#f3a55b" opacity="0.85"/>
+  <path d="M16 30 q4 -2 7 0 t7 0 t7 0 t7 0" stroke="#fff8e1" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M18 33 q4 -2 7 0 t7 0 t7 0 t7 0" stroke="#fff8e1" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  <path d="M22 28 q1 -4 3 -7 q1 -1 2 1 q-1 4 -3 7 z" fill="#4caf50" stroke="#3e2723" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M40 28 q1 -4 3 -8 q1 -1 2 1 q-1 4 -3 8 z" fill="#4caf50" stroke="#3e2723" stroke-width="1.2" stroke-linejoin="round"/>
+  <ellipse cx="32" cy="28" rx="5.5" ry="3" fill="#8d6e63" stroke="#3e2723" stroke-width="1.5"/>
+  <ellipse cx="32" cy="56" rx="18" ry="2.5" fill="#a01b1b" stroke="#3e2723" stroke-width="2"/>
+</svg>

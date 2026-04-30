@@ -601,6 +601,13 @@ body.boss-active .chapter-bar{
 }
 .npc-emoji.has-portrait{font-size:0;}
 .npc-emoji.has-portrait .portrait-fallback{display:none;}
+
+/* ===== HAND-DRAWN ICON SYSTEM (recipes/drinks/etc) ===== */
+.icon-wrap{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex-shrink:0;}
+.icon-wrap .icon-img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18));}
+.icon-wrap .icon-fallback{display:none;font-size:1.1em;line-height:1;}
+.icon-wrap.img-fail{font-size:1.1em;}
+.icon-wrap.img-fail .icon-fallback{display:inline-block;}
 .npc-text{flex:1;}
 .npc-name{font-weight:700;font-size:.88em;color:var(--gold);}
 .npc-detail{font-size:.72em;color:var(--text-mute);line-height:1.4;}
