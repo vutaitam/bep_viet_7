@@ -533,7 +533,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.4 (Hand-drawn Icons Phase 1)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.5 (Hand-drawn Icons Phase 2+3)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){

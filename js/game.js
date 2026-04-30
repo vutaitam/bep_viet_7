@@ -307,7 +307,7 @@ function renderIngredients(){
     const div=document.createElement('div');
     div.className='ingredient'+(ing.special?' special':'');div.id='ing-'+k;
     div.onclick=()=>ing.needsGrill?putOnGrill(k):addIngredient(k);
-    div.innerHTML=`<span class="ingredient-emoji">${ing.emoji}</span><div class="ingredient-name">${ing.name}</div>`;
+    div.innerHTML=`<span class="ingredient-emoji">${iconHTML(ing,28)}</span><div class="ingredient-name">${ing.name}</div>`;
     grid.appendChild(div);
   });
 }
@@ -318,8 +318,8 @@ function renderRecipes(){
     const div=document.createElement('div');
     div.className='recipe-item'+(r.isSignature?' signature':'');
     div.id='recipe-'+key;
-    const ings=r.ingredients.map(k=>`${INGREDIENTS[k].emoji} ${INGREDIENTS[k].name}`).join(' + ');
-    const grillExtra=r.needsGrill?`<br><span style="color:#FF8A65">+ ${INGREDIENTS[r.grillIngredient].emoji} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`:'';
+    const ings=r.ingredients.map(k=>`${iconHTML(INGREDIENTS[k],16)} ${INGREDIENTS[k].name}`).join(' + ');
+    const grillExtra=r.needsGrill?`<br><span style="color:#FF8A65">+ ${iconHTML(INGREDIENTS[r.grillIngredient],16)} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`:'';
     div.innerHTML=`
       ${r.isSignature?'<div><span class="recipe-tag sig">⭐ Đặc biệt</span></div>':''}
       <div class="recipe-name">${iconHTML(r,28)} ${r.name}</div>
@@ -340,7 +340,7 @@ function renderDrinks(){
   const list=document.getElementById('drinkList');list.innerHTML='';
   keys.forEach(k=>{
     const d=DRINKS[k];
-    const ingsLabel=(d.ingredients||[]).map(ing=>INGREDIENTS[ing]?INGREDIENTS[ing].emoji+' '+INGREDIENTS[ing].name:ing).join(' + ');
+    const ingsLabel=(d.ingredients||[]).map(ing=>INGREDIENTS[ing]?iconHTML(INGREDIENTS[ing],16)+' '+INGREDIENTS[ing].name:ing).join(' + ');
     const row=document.createElement('div');row.className='drink-row';row.id='drink-row-'+k;
     row.onclick=()=>highlightDrinkRecipe(k);
     row.innerHTML=`<div style="flex:1;min-width:0;"><div style="font-weight:600;display:flex;align-items:center;gap:6px;">${iconHTML(d,26)} ${d.name} <span style="color:var(--gold);font-weight:700;">${d.price.toLocaleString('vi-VN')}đ</span></div><div class="drink-row-recipe">${ingsLabel}</div></div>`;
@@ -356,7 +356,7 @@ function renderDrinkIngredients(){
     const div=document.createElement('div');
     div.className='drink-ing';div.id='dring-'+k;
     div.onclick=()=>addDrinkIng(k);
-    div.innerHTML=`<span class="drink-ing-emoji">${ing.emoji}</span><span class="drink-ing-name">${ing.name}</span>`;
+    div.innerHTML=`<span class="drink-ing-emoji">${iconHTML(ing,24)}</span><span class="drink-ing-name">${ing.name}</span>`;
     grid.appendChild(div);
   });
 }
@@ -389,7 +389,7 @@ function addDrinkIng(key){
 function updateDrinkCup(){
   const tags=document.getElementById('drinkCupTags');tags.innerHTML='';
   G.drinkStation.ingredients.forEach(k=>{
-    const t=document.createElement('span');t.className='drink-cup-tag';t.textContent=INGREDIENTS[k].emoji;t.title=INGREDIENTS[k].name;tags.appendChild(t);
+    const t=document.createElement('span');t.className='drink-cup-tag';t.innerHTML=iconHTML(INGREDIENTS[k],18);t.title=INGREDIENTS[k].name;tags.appendChild(t);
   });
   if(!G.drinkStation.ingredients.length){
     document.getElementById('drinkStatus').textContent='Chọn nguyên liệu để pha';
@@ -498,7 +498,7 @@ function highlightRecipe(key){
 function updatePot(){
   const tags=document.getElementById('potIngredients');tags.innerHTML='';
   G.pot.ingredients.forEach(k=>{
-    const t=document.createElement('span');t.className='pot-ing-tag';t.textContent=INGREDIENTS[k].emoji;t.title=INGREDIENTS[k].name;tags.appendChild(t);
+    const t=document.createElement('span');t.className='pot-ing-tag';t.innerHTML=iconHTML(INGREDIENTS[k],18);t.title=INGREDIENTS[k].name;tags.appendChild(t);
   });
   if(!G.pot.ingredients.length){document.getElementById('potStatus').textContent='Chờ nguyên liệu';document.getElementById('cookBtn').disabled=true;highlightRecipe(null);}
   else if(!findMatch()){document.getElementById('potStatus').textContent=`${G.pot.ingredients.length} nguyên liệu — chưa khớp`;document.getElementById('cookBtn').disabled=true;}

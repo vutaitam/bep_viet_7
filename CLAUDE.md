@@ -22,7 +22,7 @@
 
 **Demo live**: https://vutaitam.github.io/bep_viet_7/ (GitHub Pages)
 
-**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.4 (Hand-drawn Icons P1)** (15 SVG hand-drawn icons cho 10 món + 5 đồ uống thay emoji ở customer-card / recipe book / drink list; Phase 2-4 còn 30 ingredients + 7 NPC + 20 UI icons)
+**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.5 (Hand-drawn Icons P2+P3)** (52 SVG hand-drawn: 10 món + 5 nước + 30 nguyên liệu + 7 NPC portrait — Phase 4 còn ~20 UI/event/achievement icons)
 
 ---
 
