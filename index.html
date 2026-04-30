@@ -360,6 +360,10 @@
   </div>
 </div>
 
+<!-- Load order matters: data (pure constants) → state (PROG/G/helpers) → game (core gameplay) → screens (UI + festival override + DOMContentLoaded init) -->
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
 <script src="js/game.js"></script>
+<script src="js/screens.js"></script>
 </body>
 </html>
