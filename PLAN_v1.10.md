@@ -1,669 +1,696 @@
-# Bep Viet: Tiem Bun So 7 - Ke Hoach Cap Nhat v1.10
+# Bếp Việt: Tiệm Bún Số 7 - Kế Hoạch Cập Nhật v1.10
 
-## 0. Dinh Huong Moi - Uu Tien Chat Luong Tuyet Doi
+## 0. Định Hướng Mới - Ưu Tiên Chất Lượng Tuyệt Đối
 
-Tu thoi diem nay, bo tat ca rang buoc va muc tieu goc neu chung lam game kem hay hon.
+Từ thời điểm này, bỏ tất cả ràng buộc và mục tiêu gốc nếu chúng làm game kém hay hơn.
 
-Muc tieu duy nhat:
+Mục tiêu duy nhất:
 
-> Lam "Bep Viet: Tiem Bun So 7" tro thanh game hay nhat, hap dan nhat, co ban sac Viet Nam ro nhat va dang choi lau dai nhat co the trong kha nang hien tai.
+> Làm “Bếp Việt: Tiệm Bún Số 7” trở thành game hay nhất, hấp dẫn nhất, có bản sắc Việt Nam rõ nhất và đáng chơi lâu dài nhất có thể trong khả năng hiện tại.
 
-Nguyen tac moi:
+Nguyên tắc mới:
 
-- Chat luong gameplay quan trong hon viec giu dung scope cu.
-- Neu mot yeu cau cu lam game lap lai, nong, thieu vui hoac kho mo rong, duoc phep bo.
-- Neu can them he thong moi de game hay hon, duoc phep them.
-- Neu mot tinh nang trong danh sach "co the lam" co the implement gon va khong pha game, hay lam luon thay vi de sau.
-- Neu can tach file de code de bao tri hon, duoc phep tach file.
-- Neu can thay doi cau truc chuong, kinh te, mon an, khach hang, nang cap, UI hoac story, duoc phep thay doi.
-- Ban sac Viet Nam, cam xuc ve quan an gia dinh va do vui khi choi la uu tien cao nhat.
-- Khong hy sinh trai nghiem nguoi choi chi de giu mot quyet dinh thiet ke cu.
-- Moi thay doi nen phuc vu mot trong ba muc tieu: vui hon, sau hon, Viet Nam hon.
-- Khong can doi den "ban sau" cho cac y tuong ro rang tot hon neu co the lam ngay trong pham vi code hien tai.
+- Chất lượng gameplay quan trọng hơn việc giữ đúng scope cũ.
+- Nếu một yêu cầu cũ làm game lặp lại, nông, thiếu vui hoặc khó mở rộng, được phép bỏ.
+- Nếu cần thêm hệ thống mới để game hay hơn, được phép thêm.
+- Nếu một tính năng trong danh sách “có thể làm” có thể triển khai gọn và không phá game, hãy làm luôn thay vì để sau.
+- Nếu cần tách file để code dễ bảo trì hơn, được phép tách file.
+- Nếu cần thay đổi cấu trúc chương, kinh tế, món ăn, khách hàng, nâng cấp, UI hoặc story, được phép thay đổi.
+- Bản sắc Việt Nam, cảm xúc về quán ăn gia đình và độ vui khi chơi là ưu tiên cao nhất.
+- Không hy sinh trải nghiệm người chơi chỉ để giữ một quyết định thiết kế cũ.
+- Mọi thay đổi nên phục vụ ít nhất một trong ba mục tiêu: vui hơn, sâu hơn, Việt Nam hơn.
 
-Nhung rang buoc cu khong con bat buoc:
+Những ràng buộc cũ không còn bắt buộc:
 
-- Khong con bi gioi han boi pham vi 3 mon, 3 chuong, 3 NPC hay vanilla one-file neu dieu do lam game kem hon.
-- Khong con bat buoc giu Bun doc mung la trung tam moi chuong neu dieu do gay lap lai.
-- Khong con bat buoc giu gameplay don gian neu viec them he thong moi lam game hap dan hon.
-- Khong con uu tien "ship nhanh" hon chat luong tong the.
+- Không còn bị giới hạn bởi 3 món, 3 chương, 3 NPC hoặc một file nếu điều đó làm game kém hơn.
+- Không còn bắt buộc giữ bún dọc mùng là trung tâm của mọi chương nếu điều đó gây lặp lại.
+- Không còn bắt buộc giữ gameplay quá đơn giản nếu thêm hệ thống mới làm game hấp dẫn hơn.
+- Không còn ưu tiên “ship nhanh” hơn chất lượng tổng thể.
 
-## 1. Muc Tieu Ban v1.10
+## 1. Mục Tiêu Bản v1.10
 
-Ban v1.10 tap trung bien v9 tu mot ban co 15 chuong co the choi duoc thanh mot ban co chieu sau hon, it lap lai hon, can bang kinh te tot hon va the hien ro ban sac Viet Nam hon.
+Bản v1.10 tập trung biến v9 từ một bản 15 chương có thể chơi được thành một bản có chiều sâu hơn, ít lặp lại hơn, cân bằng kinh tế tốt hơn và thể hiện rõ bản sắc Việt Nam hơn.
 
-Muc tieu chinh:
+Mục tiêu chính:
 
-- Can bang lai tien, chi phi va thuong de nguoi choi khong bi am tien qua som tu chuong 5.
-- Sua cac diem gameplay gay uc che: cha bi chay khong bo duoc, mon dang nau van huy duoc, trang thai bep chua ro.
-- Mo rong khach hang, khach Tay, khach bi an va cac cau chuyen phu.
-- Them mon an, nuoc uong, nguyen lieu va combo mon + nuoc.
-- Doi he thong nang cap tu mua mot lan thanh nhieu cap nho co tac dung cong don.
-- Them save/load that su bang localStorage.
-- Giam lap lai o cac chuong sau bang su kien, nhiem vu rieng, chu de vung mien va mini game nhe.
+- Cân bằng lại tiền, chi phí và thưởng để người chơi không âm tiền quá sớm từ chương 5.
+- Sửa các điểm gameplay gây ức chế: chả cháy không bỏ được, món đang nấu vẫn hủy được, trạng thái bếp chưa rõ.
+- Mở rộng khách hàng, khách Tây, khách bí ẩn và các câu chuyện phụ.
+- Thêm món ăn, nước uống, nguyên liệu và combo món + nước.
+- Đổi hệ thống nâng cấp từ mua một lần thành nhiều cấp nhỏ có tác dụng cộng dồn.
+- Thêm save/load thật sự bằng localStorage.
+- Giảm lặp lại ở các chương sau bằng sự kiện, nhiệm vụ riêng, chủ đề vùng miền và mini game nhẹ.
 
-## 2. Van De Hien Tai
+## 2. Vấn Đề Hiện Tại
 
-### 2.1 Kinh te mat can bang
+### 2.1 Kinh Tế Mất Cân Bằng
 
-Nguoi choi kiem tien it hon ve sau, trong khi chi phi co dinh tang qua manh. Tu chuong 5 da co nguy co am tien ngay ca khi nguoi choi phuc vu kha on.
+Người chơi kiếm tiền ít hơn về sau, trong khi chi phí cố định tăng quá mạnh. Từ chương 5 đã có nguy cơ âm tiền ngay cả khi người chơi phục vụ khá ổn.
 
-### 2.2 Gameplay bep chua hop ly
+Ở bản hiện tại, một phần đã được cân lại:
 
-- Cha overcook/chay khong bo di duoc de lam lai.
-- Co luc dang nau van bo mon duoc, gay mat logic.
-- Chua co trang thai ro giua chuan bi, dang nau, mon loi, mon xong.
+- Giảm thưởng cuối màn.
+- Giảm tip/bonus đồ uống và khách bí ẩn.
+- Tăng chi phí cố định.
+- Tăng giá nâng cấp.
 
-### 2.3 Khach va cau chuyen lap lai
+Tuy vậy, sau khi thêm đồ uống gameplay, nâng cấp mới hoặc event mới, cần kiểm tra lại economy.
 
-- Cu ong xuat hien/lien quan qua nhieu den bun doc mung nen bi nham.
-- Khach Tay chua da dang ten, tinh cach, khau vi.
-- Thieu khach la, khach bi an co ti le xuat hien va nhiem vu rieng.
+### 2.2 Gameplay Bếp Chưa Hợp Lý
 
-### 2.4 Noi dung Viet Nam chua du dam
+Vấn đề đã ghi nhận:
 
-Ve sau cau truc moi chuong lap lai, chua co nhieu khong khi vung mien, le hoi, cho sang, hem pho, quan via he, ky uc gia dinh.
+- Chả overcook/cháy không bỏ đi được để làm lại.
+- Có lúc đang nấu vẫn bỏ món được, gây mất logic.
+- Chưa có trạng thái rõ giữa chuẩn bị, đang nấu, món lỗi, món xong.
 
-### 2.5 Nang cap qua ngan
+Đã sửa một phần:
 
-Nang cap chi dung duoc mot lan, khong tao duong phat trien dai han.
+- Chả cháy/non/quá lửa có thể bỏ và làm lại.
+- Không thể đổ nồi khi đang nấu.
+- Món đã xong hoặc món hỏng có thể bỏ với penalty hợp lý.
 
-### 2.6 Save/load chua ro
+### 2.3 Khách Và Câu Chuyện Còn Nhạt
 
-Can co luu tien trinh that su, cho phep tiep tuc game va reset save.
+Vấn đề:
 
-## 3. Pham Vi v1.10
+- Cụ ông xuất hiện/lặp lại quanh bún dọc mùng quá nhiều nên dễ nhàm.
+- Khách Tây chưa đủ đa dạng tên, tính cách và khẩu vị.
+- Thiếu khách lạ, khách bí ẩn có tỉ lệ xuất hiện và nhiệm vụ riêng.
+- Khách hiện tại nhiều khi chỉ là avatar + món gọi + thanh kiên nhẫn.
 
-### Bat buoc co
+Mục tiêu:
 
-- Can bang lai kinh te 15 chuong de game cong bang, co tien trien va khong phat nguoi choi qua muc.
-- Sua logic bo cha chay, huy mon va trang thai bep de gameplay bot uc che.
-- Save/load that su bang localStorage hoac mot co che local tuong duong.
-- Khach hang da dang hon, co khach Tay, khach Viet, khach bi an va cau chuyen phu.
-- Giam lap Cu ong va Bun doc mung; bien Cu ong thanh yeu to cam xuc, khong phai mot noi dung bi lap.
-- Mo rong mon an, nuoc uong, nguyen lieu va combo neu giup game phong phu hon.
-- Nang cap nhieu cap, tao duong phat trien dai han.
-- Moi nhom chuong phai co chu de, su kien hoac co che rieng de khong lap lai.
-- Uu tien bat ky thay doi nao lam game hay hon, ke ca khi vuot ngoai pham vi ban dau.
+- Mỗi khách quan trọng cần có tên, vai trò, món thích/ghét, kiểu gọi món, câu thoại và phản ứng riêng.
+- Khách bí ẩn phải đáng nhớ và có phần thưởng/câu chuyện riêng.
+- Cụ ông nên là yếu tố cảm xúc/story, không phải nội dung lặp gây nhàm.
 
-### Nen co
+### 2.4 Nội Dung Việt Nam Chưa Đủ Đậm
 
-- Combo mon + nuoc.
-- Nhiem vu phu cua khach bi an.
-- Su kien theo chuong: mua, le hoi, doan du khach, ngay nong, ngay mat dien.
-- Endless Mode co ban.
-- UI/UX tot hon neu giao dien hien tai can tro trai nghiem.
-- Tach code thanh nhieu file neu index.html qua kho bao tri.
+Về sau cấu trúc mỗi chương còn lặp lại. Cần thêm không khí vùng miền, lễ hội, chợ sáng, hẻm phố, quán vỉa hè, ký ức gia đình và đời sống Việt Nam.
 
-### Co the lam neu giup game tot hon
+### 2.5 Nâng Cấp Quá Ngắn
 
-Tinh than: muc nay khong phai backlog xa. Neu lam duoc trong luc implement v1.10 ma khong gay vo game, hay lam luon.
+Nâng cấp hiện vẫn còn ít. Cần hướng tới nâng cấp nhiều cấp hoặc thêm nhiều nâng cấp có giá cao hơn để tiền có ý nghĩa lâu dài.
 
-- Challenge Mode day du.
-- Festival Mode rieng.
-- Mini game phuc tap.
+### 2.6 Đồ Uống Chưa Là Gameplay Thật
+
+Đồ uống như trà đá, trà tắc, nước mía, cà phê sữa đá, rau má hiện mới là add-on trong đơn hàng. Chúng chưa có:
+
+- Công thức.
+- Nguyên liệu.
+- Khu pha nước.
+- Trạng thái đồ uống đã pha.
+- Kiểm tra đúng/sai nước khi phục vụ.
+
+Đây là ưu tiên cao nhất cho lượt phát triển tiếp theo.
+
+## 3. Phạm Vi v1.10
+
+### Bắt Buộc Có
+
+- Cân bằng lại kinh tế 15 chương để game công bằng, có tiến triển và không phạt người chơi quá mức.
+- Sửa logic bỏ chả cháy, hủy món và trạng thái bếp để gameplay bớt ức chế.
+- Save/load thật sự bằng localStorage hoặc cơ chế local tương đương.
+- Khách hàng đa dạng hơn, có khách Tây, khách Việt, khách bí ẩn và câu chuyện phụ.
+- Giảm lặp cụ ông và bún dọc mùng; biến cụ ông thành yếu tố cảm xúc thay vì nội dung bị lặp.
+- Mở rộng món ăn, nước uống, nguyên liệu và combo nếu giúp game phong phú hơn.
+- Nâng cấp nhiều cấp hoặc nhiều nâng cấp mới để tạo đường phát triển dài hạn.
+- Mỗi nhóm chương phải có chủ đề, sự kiện hoặc cơ chế riêng để không lặp lại.
+- Ưu tiên bất kỳ thay đổi nào làm game hay hơn, kể cả khi vượt ngoài phạm vi ban đầu.
+
+### Nên Có
+
+- Combo món + nước.
+- Nhiệm vụ phụ của khách bí ẩn.
+- Sự kiện theo chương: mưa, lễ hội, đoàn du khách, ngày nóng, mất điện.
+- Endless Mode cơ bản.
+- UI/UX tốt hơn nếu giao diện hiện tại cản trở trải nghiệm.
+- Tách code thành nhiều file nếu `index.html` quá khó bảo trì.
+
+### Có Thể Làm Nếu Giúp Game Tốt Hơn
+
+Tinh thần: mục này không phải backlog xa. Nếu làm được trong lúc triển khai v1.10 mà không gây vỡ game, hãy làm luôn.
+
+- Challenge Mode đầy đủ.
+- Festival Mode riêng.
+- Mini game phức tạp hơn.
 - Achievement system.
-- Gallery ky uc.
-- He thong thanh pho/vung mien rong hon.
-- He thong danh tieng cua quan.
-- He thong nguyen lieu va ton kho.
-- He thong nhan vien/phu bep neu duoc lam gon va vui.
-- He thong do uong co gameplay rieng, khong chi la item cong tien.
-- He thong tinh cach khach hang: moi khach co cau noi, thoi quen, cam xuc, ky niem, phan ung khi vui/buon.
-- He thong tin don khu pho: khach hai long se ke ban be den, khach that vong lam giam danh tieng.
-- He thong su kien nho bat ngo trong ca choi: het da, thieu rau, mua lon, khach quen ghe tham, food blogger quay clip.
-- He thong so tay quan: ghi lai mon da mo khoa, khach da gap, cau chuyen da mo.
+- Gallery ký ức.
+- Hệ thống thành phố/vùng miền rộng hơn.
+- Hệ thống danh tiếng của quán.
+- Hệ thống nguyên liệu và tồn kho.
+- Hệ thống nhân viên/phụ bếp nếu làm gọn và vui.
+- Hệ thống đồ uống có gameplay riêng.
+- Hệ thống tính cách khách hàng: mỗi khách có câu nói, thói quen, cảm xúc, ký ức, phản ứng khi vui/buồn.
+- Hệ thống tin đồn khu phố: khách hài lòng sẽ kéo thêm khách, khách thất vọng làm giảm danh tiếng.
+- Sự kiện nhỏ bất ngờ trong ca chơi: hết đá, thiếu rau, mưa lớn, khách quen ghé thăm, food blogger quay clip.
+- Sổ tay quán: ghi lại món đã mở khóa, khách đã gặp, câu chuyện đã mở.
 
-## 4. Thiet Ke Kinh Te Moi
+## 4. Thiết Kế Kinh Tế Mới
 
-### 4.1 Nguyen tac can bang
+### 4.1 Nguyên Tắc Cân Bằng
 
-- Nguoi choi trung binh phuc vu dung 65-75% khach phai co lai nhe.
-- Nguoi choi gioi phuc vu 85-100% khach phai du tien mua nang cap.
-- Nguoi choi yeu van co the am tien, nhung khong nen thua ngay tu chuong 5.
-- Chi phi co dinh tang cham hon doanh thu tiem nang.
-- Gia mon va bonus chuong sau phai tang theo do kho.
+- Người chơi trung bình phục vụ đúng 65-75% khách phải có lãi nhẹ hoặc ít nhất không bị phạt quá nặng.
+- Người chơi giỏi phục vụ 85-100% khách phải đủ tiền mua nâng cấp.
+- Người chơi yếu vẫn có thể âm tiền, nhưng không nên thua ngay từ chương 5.
+- Chi phí cố định tăng chậm hơn doanh thu tiềm năng.
+- Giá món và bonus chương sau phải tăng theo độ khó.
+- Nâng cấp cần đủ đắt để người chơi phải lựa chọn, không mua hết quá sớm.
 
-### 4.2 Cong thuc goi y
+### 4.2 Công Thức Gợi Ý
 
-Doanh thu chuong:
+Doanh thu chương:
 
-- base dish revenue x so khach phuc vu
-- combo bonus
-- speed bonus
-- regular customer tip
-- mystery customer reward
-- chapter objective reward
+- Doanh thu món chính x số khách phục vụ.
+- Bonus combo.
+- Speed bonus.
+- Tip khách quen.
+- Reward khách bí ẩn.
+- Thưởng mục tiêu chương.
 
-Chi phi chuong:
+Chi phí chương:
 
-- rent
-- ingredient cost
-- utility cost
-- waste penalty
-- event penalty neu co
+- Chi phí cố định.
+- Chi phí nguyên liệu.
+- Penalty bỏ món/chả.
+- Penalty sự kiện nếu có.
 
-Loi nhuan:
+Lợi nhuận:
 
-- revenue - fixedCost - ingredientCost - wastePenalty + missionReward
+- Doanh thu - chi phí cố định - chi phí nguyên liệu - hao phí + thưởng nhiệm vụ.
 
-### 4.3 Dieu chinh chi phi co dinh
+### 4.3 Điều Chỉnh Chi Phí
 
-Giai doan 1, chuong 1-4:
+Giai đoạn 1, chương 1-4:
 
-- Chi phi thap, de nguoi choi hoc game.
-- Fixed cost chi nen an 35-45% doanh thu trung binh.
+- Chi phí thấp, để người chơi học game.
+- Fixed cost nên ăn khoảng 35-45% doanh thu trung bình.
 
-Giai doan 2, chuong 5-9:
+Giai đoạn 2, chương 5-9:
 
-- Chi phi tang nhung co them combo, nuoc uong, khach dac biet.
-- Fixed cost chi nen an 45-55% doanh thu trung binh.
+- Chi phí tăng nhưng có thêm combo, nước uống, khách đặc biệt.
+- Fixed cost nên ăn khoảng 45-55% doanh thu trung bình.
 
-Giai doan 3, chuong 10-15:
+Giai đoạn 3, chương 10-15:
 
-- Chi phi cao hon nhung mon dat hon, reward lon hon.
-- Fixed cost chi nen an 50-60% doanh thu trung binh.
+- Chi phí cao hơn nhưng món đắt hơn, reward lớn hơn.
+- Fixed cost nên ăn khoảng 50-60% doanh thu trung bình.
 
-### 4.4 Thuong moi
+### 4.4 Thưởng Mới
 
-- Perfect Service: phuc vu dung tat ca khach trong chuong, +20% doanh thu.
-- No Waste: khong bo mon/cha, +10% loi nhuan.
-- Combo Master: phuc vu du 3 combo, +50.000d den +200.000d theo chuong.
-- Khach Quy: phuc vu khach bi an thanh cong, thuong tien hoac mo khoa.
-- Ky Uc Cu Ong: hoan thanh nhiem vu lien quan gia truyen, mo khoa recipe bonus.
+- Perfect Service: phục vụ đúng tất cả khách trong chương.
+- No Waste: không bỏ món/chả.
+- Combo Master: phục vụ đủ số combo yêu cầu.
+- Khách Quý: phục vụ khách bí ẩn thành công.
+- Ký Ức Cụ Ông: hoàn thành nhiệm vụ liên quan gia truyền.
 
-## 5. Sua Gameplay Bep
+Các thưởng này phải được cân lại sau mỗi lần thêm món/nước/nâng cấp mới.
 
-### 5.1 Trang thai noi
+## 5. Sửa Gameplay Bếp
 
-Noi can co cac trang thai:
+### 5.1 Trạng Thái Nồi
 
-- idle: chua co nguyen lieu.
-- preparing: da co nguyen lieu, chua nau.
-- cooking: dang nau, khong cho huy truc tiep.
-- done: mon da xong, co the phuc vu hoac bo.
-- ruined: mon sai/hong, co the bo.
+Nồi cần có các trạng thái:
 
-Quy tac:
+- `idle`: chưa có nguyên liệu.
+- `preparing`: đã có nguyên liệu, chưa nấu.
+- `cooking`: đang nấu, không cho hủy trực tiếp.
+- `done`: món đã xong, có thể phục vụ hoặc bỏ.
+- `ruined`: món sai/hỏng, có thể bỏ.
 
-- Dang cooking khong duoc bo mon.
-- Neu muon huy khi cooking, hien thong bao: "Mon dang nau, khong the bo luc nay."
-- Mon done co the bo, mat chi phi nguyen lieu.
-- Mon ruined co the bo va lam lai.
+Quy tắc:
 
-### 5.2 Trang thai lo nuong cha
+- Đang `cooking` không được bỏ món.
+- Nếu muốn hủy khi đang nấu, hiện thông báo: “Món đang nấu, không thể bỏ lúc này.”
+- Món `done` có thể bỏ, mất chi phí nguyên liệu.
+- Món `ruined` có thể bỏ và làm lại.
 
-Lo nuong can co:
+### 5.2 Trạng Thái Lò Nướng Chả
 
-- idle
-- grilling
-- good
-- perfect
-- overcooked
-- burnt
+Lò nướng cần có:
 
-Quy tac:
+- `idle`
+- `grilling`
+- `good`
+- `perfect`
+- `overcooked`
+- `burnt`
+- `ruined`
 
-- Neu overcooked/burnt, nut "Bo cha" bat len.
-- Bo cha se reset lo nuong va tru chi phi nho.
-- Neu dang grilling, chi cho lat cha/tiep tuc, khong cho lay neu chua den nguong.
+Quy tắc:
 
-### 5.3 UX can them
+- Nếu overcooked/burnt/undercooked, nút gắp dùng để bỏ mẻ hỏng.
+- Bỏ chả sẽ reset lò nướng và trừ chi phí nhỏ.
+- Nếu đang grilling, chỉ cho lật/gắp theo logic mini game.
 
-- Nut "Bo mon" co icon/thong bao ro.
-- Nut "Bo cha" rieng cho lo nuong.
-- Tooltip ngan: "Mat nguyen lieu khi bo".
-- Notification khi bo thanh cong: "Da bo cha chay. Lam me moi nhe."
+### 5.3 UX Cần Có
 
-## 6. Khach Hang Va Khach Bi An
+- Nút “Bỏ món” có thông báo rõ.
+- Nút “Bỏ chả” hoặc dùng nút gắp với trạng thái rõ.
+- Tooltip ngắn: “Mất nguyên liệu khi bỏ”.
+- Notification khi bỏ thành công: “Đã bỏ chả hỏng. Làm mẻ mới nhé.”
 
-### 6.0 Muc tieu moi cho customer
+## 6. Khách Hàng Và Khách Bí Ẩn
 
-Khach hien tai bi nhat vi chu yeu la mot avatar + mon goi + thanh kien nhan. v1.10 can bien khach thanh nguoi co tinh cach, thoi quen va cau chuyen nho.
+### 6.0 Mục Tiêu Mới Cho Customer
 
-Moi khach quan trong nen co:
+Khách hiện tại bị nhạt vì chủ yếu là avatar + món gọi + thanh kiên nhẫn. v1.10 cần biến khách thành người có tính cách, thói quen và câu chuyện nhỏ.
 
-- Ten rieng.
-- Vai tro trong doi song Viet Nam: sinh vien, xe om, co giao, viet kieu, food blogger, nguoi lao dong, khach du lich.
-- Mon thich va mon ghe.
-- Kieu goi mon: noi thang, noi vong, goi combo, doi it cay, doi them rau, doi khong mam tom.
-- 2-4 cau thoai ngan theo trang thai: moi vao, sap het kien nhan, duoc phuc vu dung, bi phuc vu sai.
-- Mot "hook" ca nhan: nho nha, di lam muon, an mon cu cua me, quay review, tim ky uc cu, tiec tien, an rat kho tinh.
-- Phan thuong/anh huong neu phuc vu tot: tip, tang danh tieng, mo khoa cau chuyen, ke them khach moi.
+Mỗi khách quan trọng nên có:
 
-Khach khong nen chi khac nhau bang emoji. Moi nhom khach phai tao cam giac khac khi choi:
+- Tên riêng.
+- Vai trò trong đời sống Việt Nam: sinh viên, xe ôm, cô giáo, Việt kiều, food blogger, người lao động, khách du lịch.
+- Món thích và món ghét.
+- Kiểu gọi món: nói thẳng, nói vòng, gọi combo, đòi ít cay, đòi thêm rau, đòi không mắm tôm.
+- 2-4 câu thoại theo trạng thái: mới vào, sắp hết kiên nhẫn, được phục vụ đúng, bị phục vụ sai.
+- Một hook cá nhân: nhớ nhà, đi làm muộn, ăn món cũ của mẹ, quay review, tìm ký ức cũ, tiết kiệm, khó tính.
+- Phần thưởng/ảnh hưởng nếu phục vụ tốt: tip, tăng danh tiếng, mở khóa câu chuyện, kéo thêm khách mới.
 
-- Khach van phong: it kien nhan, thuong goi combo nhanh.
-- Sinh vien: it tien, tip thap nhung hay quay lai neu duoc doi xu tot.
-- Nguoi lao dong: thich phan nhieu, mon nong, kien nhan vua.
-- Khach du lich: tra cao hon, hay yeu cau it cay/khong mam tom.
-- Khach quen: co cau chuyen tang dan qua nhieu lan gap.
-- Khach bi an: it xuat hien nhung moi lan gap phai dang nho.
+Nhóm khách nên tạo cảm giác khác nhau khi chơi:
 
-### 6.1 Khach Tay moi
+- Khách văn phòng: ít kiên nhẫn, thường gọi combo nhanh.
+- Sinh viên: ít tiền, tip thấp nhưng hay quay lại nếu được đối xử tốt.
+- Người lao động: thích phần nhiều, món nóng, kiên nhẫn vừa.
+- Khách du lịch: trả cao hơn, hay yêu cầu ít cay/không mắm tôm.
+- Khách quen: có câu chuyện tăng dần qua nhiều lần gặp.
+- Khách bí ẩn: ít xuất hiện nhưng mỗi lần gặp phải đáng nhớ.
 
-Them danh sach khach Tay co ten va khau vi:
+### 6.1 Khách Tây Mới
 
-- Anna: thich mon it cay, uu tien pho/banh mi.
-- Marco: thich mon nuong, hay goi bun cha.
-- Sophie: thich mon thanh, hay goi goi cuon/tra da.
-- David: thich combo lon, kien nhan trung binh.
-- Kenji: thich mon nong, hay goi bun bo Hue nhung yeu cau it cay.
+Khách Tây cần đa dạng hơn, không chỉ có John.
 
-Khach Tay khong nen chi la "John" lap lai.
+Gợi ý:
 
-Them reaction rieng:
+- Anna: thích món ít cay, ưu tiên phở/bánh mì.
+- Marco: thích món nướng, hay gọi bún chả.
+- Sophie: thích món thanh, hay gọi gỏi cuốn/trà tắc.
+- David: thích combo lớn, kiên nhẫn trung bình.
+- Kenji: thích món nóng, hay gọi bún bò Huế ít cay.
 
-- Anna: hay hoi "mon nay co cay khong?", neu dung y se tang review tot.
-- Marco: thich mon nuong, neu cha perfect se tip cao.
-- Sophie: thich do uong mat va mon thanh, hop voi goi cuon/tra tac.
-- David: goi combo lon, neu cham se mat kien nhan rat nhanh.
-- Kenji: thich vi dam nhung khong an cay qua, phu hop bun bo Hue it sa te.
+Reaction riêng:
 
-### 6.2 Khach Viet moi
+- Anna hay hỏi “món này có cay không?”, nếu đúng ý sẽ tăng review tốt.
+- Marco thích món nướng, nếu chả perfect sẽ tip cao.
+- Sophie thích đồ uống mát và món thanh.
+- David gọi combo lớn, nếu chậm sẽ mất kiên nhẫn nhanh.
+- Kenji thích vị đậm nhưng không ăn cay quá.
 
-- Co ban hoa.
-- Chu xe om.
-- Bac cong nhan.
-- Sinh vien xa nha.
-- Nhan vien van phong.
-- Ba cu di cho.
-- Co giao ve huu.
+### 6.2 Khách Việt Mới
+
+Gợi ý:
+
+- Cô bán hoa.
+- Chú xe ôm.
+- Bác công nhân.
+- Sinh viên xa nhà.
+- Nhân viên văn phòng.
+- Bà cụ đi chợ.
+- Cô giáo về hưu.
 - Anh shipper.
 
-Moi nguoi co mot cau noi ngan, mon thich va muc kien nhan khac nhau.
+Chiều sâu gợi ý:
 
-Them chieu sau cho khach Viet:
+- Cô bán hoa: đến sớm, thích trà đá và bánh mì, nếu phục vụ tốt sẽ tăng khách buổi sáng.
+- Chú xe ôm: gọi nhanh, kiên nhẫn thấp, tip nhỏ nhưng xuất hiện thường.
+- Bác công nhân: thích cơm tấm/bún bò, phần nhiều, dễ tính.
+- Sinh viên xa nhà: thích món rẻ, có chuỗi câu chuyện nhỏ về nhớ nhà.
+- Nhân viên văn phòng: gọi combo, trả cao hơn, mất kiên nhẫn nhanh giờ trưa.
+- Bà cụ đi chợ: thích vị truyền thống, nếu đúng món sẽ mở ký ức về cụ ông.
+- Cô giáo về hưu: chậm rãi, kiên nhẫn cao, có thể cho lời khuyên/câu chuyện.
+- Anh shipper: gọi mang đi, cần tốc độ, nếu nhanh sẽ tăng combo delivery.
 
-- Co ban hoa: den som, thich tra da va banh mi, neu phuc vu tot se tang khach buoi sang.
-- Chu xe om: goi nhanh, kien nhan thap, tip nho nhung xuat hien thuong.
-- Bac cong nhan: thich com tam/bun bo, phan nhieu, neu sai mon tru danh tieng it vi de tinh.
-- Sinh vien xa nha: thich mon re, co chuoi cau chuyen nho ve nho nha.
-- Nhan vien van phong: goi combo, tra cao hon, rat mat kien nhan gio trua.
-- Ba cu di cho: thich vi truyen thong, neu dung mon se mo ky uc ve Cu Ong.
-- Co giao ve huu: cham rai, kien nhan cao, co the cho loi khuyen/cau chuyen.
-- Anh shipper: goi mang di, can toc do, neu nhanh se tang combo delivery.
+### 6.3 Khách Bí Ẩn
 
-### 6.3 Khach bi an
+Khách bí ẩn có tỉ lệ xuất hiện thấp, khoảng 5-12% tùy chương.
 
-Khach bi an co ti le xuat hien thap, chi 5-12% tuy chuong.
+Gợi ý:
 
-Danh sach de xuat:
+- Nhà phê bình ẩm thực: yêu cầu món đúng và nhanh, thưởng mở khóa giá món.
+- Food blogger: nếu hài lòng, chương sau tăng lượng khách.
+- Việt kiều về quê: mở khóa câu chuyện về món ăn ký ức.
+- Bạn cũ của cụ ông: mở khóa cutscene nhỏ.
+- Khách im lặng: đưa gợi ý mơ hồ, người chơi phải đoán món.
+- Người giao nguyên liệu bí mật: bán nguyên liệu đặc biệt giá rẻ nếu phục vụ đúng.
+- Đầu bếp đối thủ: thử thách làm món khó, thắng sẽ có thưởng lớn.
 
-- Nha phe binh am thuc: yeu cau mon dung va nhanh, thuong mo khoa gia mon.
-- Food blogger: neu hai long, chuong sau tang luong khach.
-- Viet kieu ve que: mo khoa cau chuyen ve mon an ky uc.
-- Ban cu cua Cu Ong: mo khoa cutscene nho.
-- Khach im lang: dua goi y mo ho, nguoi choi phai doan mon.
-- Nguoi giao nguyen lieu bi mat: ban nguyen lieu dac biet gia re neu phuc vu dung.
-- Dau bep doi thu: thu thach lam mon kho, thang se co thuong lon.
+Mỗi khách bí ẩn nên có:
 
-Moi khach bi an can co:
+- `id`
+- `name`
+- `emoji`
+- `appearRate`
+- `unlockFromChapter`
+- `preferredDish`
+- `requestText`
+- `successReward`
+- `failureConsequence`
+- `storyFlag`
 
-- id
-- name
-- emoji
-- appearRate
-- unlockFromChapter
-- preferredDish
-- requestText
-- successReward
-- failureConsequence
-- storyFlag
+## 7. Giảm Lặp Cụ Ông
 
-## 7. Giam Lap Cu Ong
+Cụ ông không nên xuất hiện như khách thường xuyên ăn một món.
 
-Cu Ong khong nen xuat hien nhu khach thuong xuyen an mot mon.
+Dùng cụ ông theo 4 cách:
 
-Dung Cu Ong theo 4 cach:
-
-- Ky uc dau chuong.
-- Loi nhan trong so tay cong thuc.
+- Ký ức đầu chương.
+- Lời nhắn trong sổ công thức.
 - Cutscene sau milestone.
-- Nhiem vu gia truyen dac biet.
+- Nhiệm vụ gia truyền đặc biệt.
 
-Neu Cu Ong co lien quan mon an, luan phien:
+Nếu cụ ông có liên quan món ăn, hãy luân phiên:
 
-- Bun doc mung.
-- Pho bo.
-- Bun rieu.
-- Banh mi.
-- Com tam.
-- Nuoc mam pha.
+- Bún dọc mùng.
+- Phở bò.
+- Bún riêu.
+- Bánh mì.
+- Cơm tấm.
+- Nước mắm pha.
 
-## 8. Mon An, Nuoc Uong, Nguyen Lieu Moi
+## 8. Món Ăn, Nước Uống, Nguyên Liệu Mới
 
-### 8.1 Nguyen lieu moi
+### 8.1 Nguyên Liệu Mới
 
-Them it nhat:
+Gợi ý:
 
-- thit bo
-- ga xe
-- nem ran
-- dau phu
-- rau thom
-- gia do
-- mam tom
-- hanh phi
-- sa te
-- chanh
-- ot
-- sua dac
-- ca phe
-- mia
+- Thịt bò.
+- Gà xé.
+- Nem rán.
+- Đậu phụ.
+- Rau thơm.
+- Giá đỗ.
+- Mắm tôm.
+- Hành phi.
+- Sa tế.
+- Chanh/tắc.
+- Ớt.
+- Sữa đặc.
+- Cà phê.
+- Mía.
+- Đá.
+- Trà.
+- Rau má.
 
-### 8.2 Mon an moi
+### 8.2 Món Ăn Mới
 
-Them it nhat 5 mon trong v1.10:
+Gợi ý:
 
-- Pho bo
-- Bun bo Hue
-- Bun rieu
-- Bun thit nuong
-- Bun dau mam tom
-- Banh mi thit
-- Com tam
-- Mi Quang
-- Cao lau
-- Hu tieu
-- Goi cuon
+- Phở bò.
+- Bún bò Huế.
+- Bún riêu.
+- Bún thịt nướng.
+- Bún đậu mắm tôm.
+- Bánh mì thịt.
+- Cơm tấm.
+- Mì Quảng.
+- Cao lầu.
+- Hủ tiếu.
+- Gỏi cuốn.
 
-Khong can them het neu gay qua tai. Uu tien 5-7 mon co gameplay khac nhau.
+Không cần thêm tất cả nếu gây quá tải. Ưu tiên 5-7 món có gameplay khác nhau.
 
-### 8.3 Nuoc uong
+### 8.3 Nước Uống
 
-Them it nhat 3:
+Đồ uống không nên chỉ là “thêm tiền”. Cần có cảm giác riêng và ảnh hưởng gameplay.
 
-- Tra da
-- Nuoc mia
-- Ca phe sua da
-- Nuoc chanh
-- Sua dau nanh
-- Rau ma
+Gợi ý đồ uống:
 
-Nuoc uong khong nen chi la "them tien". Can co cam giac rieng va anh huong gameplay.
+- Trà đá: rẻ, nhanh, đi kèm hầu hết món; tăng nhẹ kiên nhẫn khách Việt.
+- Trà tắc: hợp ngày nóng; combo tốt với bánh mì, bún thịt nướng.
+- Nước mía: bán chạy ngày nóng/lễ hội; lợi nhuận tốt nhưng mất thời gian ép.
+- Cà phê sữa đá: hợp khách văn phòng/khách Tây; nếu pha đúng tăng tip.
+- Bạc xỉu: biến thể cà phê nhẹ hơn, hợp khách trẻ.
+- Sữa đậu nành: hợp buổi sáng, khách lớn tuổi, combo với bánh mì.
+- Nước chanh: giải nhiệt, giảm tác động ngày nóng.
+- Rau má: thức uống vỉa hè, hợp khách thích đồ mát.
+- Sâm dứa: mở khóa về sau, bán tốt trong lễ hội/miền Nam.
+- Chè đậu xanh: giữa món tráng miệng và đồ uống, có thể là combo đặc biệt.
 
-Nhom nuoc uong de xuat:
+Cơ chế pha nước:
 
-- Tra da: re, nhanh, di kem hau het mon; tang nhe kien nhan khach Viet.
-- Tra tac: re-vua, hop ngay nong; combo tot voi banh mi, bun thit nuong.
-- Nuoc mia: ban chay ngay nong/le hoi; loi nhuan tot nhung mat thoi gian ep.
-- Ca phe sua da: dat hon, hop khach van phong/khach Tay; neu pha dung tang tip.
-- Bac xiu: bien the ca phe nhe hon, hop khach tre/khach it uong dang.
-- Sua dau nanh: hop buoi sang, khach lon tuoi, combo voi banh mi.
-- Nuoc chanh: giai nhiet, giam tac dong su kien ngay nong.
-- Rau ma: thuc uong dac san via he, hop khach thich do mat.
-- Sam dua: mo khoa ve sau, ban tot trong le hoi/chuong mien Nam.
-- Che dau xanh: gan giua mon trang mieng va do uong, co the la combo dac biet.
+- Đồ uống nhanh: trà đá, sữa đậu nành.
+- Đồ uống cần canh tỉ lệ: cà phê sữa đá, bạc xỉu.
+- Đồ uống cần thời gian máy: nước mía.
+- Đồ uống theo sự kiện: nước chanh, rau má, trà tắc bán mạnh ngày nóng.
 
-Co che pha nuoc:
+Trạng thái đồ uống:
 
-- Do uong nhanh: tra da, sua dau nanh - bam la xong, tien it.
-- Do uong can canh ti le: ca phe sua da, bac xiu - can chon ty le sua/ca phe/da de dat "ngon".
-- Do uong can thoi gian may: nuoc mia - bat may ep, cho tien trinh, co nguy co bi cham.
-- Do uong theo su kien: nuoc chanh/rau ma/tra tac ban manh ngay nong.
+- `normal`: dùng được.
+- `ngon`: tăng tip/combo bonus.
+- `nhạt`: khách vẫn nhận nhưng mất bonus.
+- `quá ngọt/quá đắng`: khách không vui, trừ nhẹ danh tiếng.
 
-Trang thai do uong:
+Combo món + nước nên có bản sắc:
 
-- normal: dung duoc.
-- ngon: tang tip/combo bonus.
-- nhat: khach van nhan nhung mat bonus.
-- qua ngot/qua dang: khach khong vui, tru nhe danh tieng.
+- Bánh mì + cà phê sữa đá.
+- Bún chả + trà đá.
+- Bún bò Huế + nước chanh/trà tắc.
+- Cơm tấm + trà đá/nước mía.
+- Gỏi cuốn + rau má.
+- Bún đậu mắm tôm + trà tắc.
+- Hủ tiếu + sữa đậu nành buổi sáng.
 
-Combo mon + nuoc nen co ban sac:
+Mini game đồ uống ưu tiên:
 
-- Banh mi + ca phe sua da.
-- Bun cha + tra da.
-- Bun bo Hue + nuoc chanh/tra tac.
-- Com tam + tra da/nuoc mia.
-- Goi cuon + rau ma.
-- Bun dau mam tom + tra tac.
-- Hu tieu + sua dau nanh buoi sang.
-
-Mini game do uong uu tien:
-
-- Pha ca phe sua da: canh 3 thanh ca phe/sua/da.
-- Ep nuoc mia: giu may trong vung xanh, qua lau se ket may.
-- Pha tra tac: can bang chua/ngot/da.
+- Pha cà phê sữa đá: canh 3 thanh cà phê/sữa/đá.
+- Ép nước mía: giữ máy trong vùng xanh, quá lâu sẽ kẹt máy.
+- Pha trà tắc: cân bằng chua/ngọt/đá.
 
 ### 8.4 Combo
 
-Combo gom:
+Combo gồm:
 
-- mon chinh + nuoc
-- mon chinh + mon phu
-- dac san vung mien + nuoc phu hop
+- Món chính + nước.
+- Món chính + món phụ.
+- Đặc sản vùng miền + nước phù hợp.
 
-Sai nuoc:
+Sai nước:
 
-- Khong fail don.
-- Mat combo bonus.
+- Không fail đơn.
+- Mất combo bonus/tip.
+- Có thể giảm nhẹ hài lòng.
 
-Dung combo:
+Đúng combo:
 
-- +10-20% tien.
-- +diem hai long.
+- Tăng tiền.
+- Tăng điểm hài lòng.
+- Có thể tăng danh tiếng quán.
 
-## 9. Nang Cap Nhieu Cap
+## 9. Nâng Cấp Nhiều Cấp
 
-Chuyen nang cap thanh multi-level.
+Chuyển nâng cấp thành multi-level nếu có thể.
 
-### 9.1 Danh sach nang cap
+Gợi ý nâng cấp:
 
-- Noi lon cap 1-5: giam thoi gian nau 3% moi cap.
-- Bep than cap 1-5: mo rong vung perfect grill.
-- Dao thot cap 1-5: giam thoi gian chuan bi.
-- Bang menu cap 1-5: tang gia ban 2% moi cap.
-- Ghe ngoi cap 1-5: tang kien nhan khach 3% moi cap.
-- Tu lanh cap 1-5: giam waste penalty.
-- Quat may cap 1-3: giam tac dong ngay nong.
-- Phu bep cap 1-3: tu dong ho tro mot thao tac don gian.
+- Nồi lớn cấp 1-5: giảm thời gian nấu 3% mỗi cấp.
+- Bếp than cấp 1-5: mở rộng vùng perfect grill.
+- Dao thớt cấp 1-5: giảm thời gian chuẩn bị.
+- Bảng menu cấp 1-5: tăng giá bán 2% mỗi cấp.
+- Ghế ngồi cấp 1-5: tăng kiên nhẫn khách 3% mỗi cấp.
+- Tủ lạnh cấp 1-5: giảm waste penalty.
+- Quạt máy cấp 1-3: giảm tác động ngày nóng.
+- Phụ bếp cấp 1-3: tự động hỗ trợ một thao tác đơn giản.
 
-### 9.2 Nguyen tac gia nang cap
+Nguyên tắc giá nâng cấp:
 
-- Cap sau dat hon cap truoc.
-- Tac dung moi cap nho nhung cong don.
-- Nguoi choi khong the mua het qua som.
-
-Cong thuc goi y:
-
-- cost = baseCost * levelMultiplier * chapterScale
-- effect = baseEffect * level
+- Cấp sau đắt hơn cấp trước.
+- Tác dụng mỗi cấp nhỏ nhưng cộng dồn.
+- Người chơi không thể mua hết quá sớm.
 
 ## 10. Save / Load Game
 
-### 10.1 Du lieu can luu
+### 10.1 Dữ Liệu Cần Lưu
 
-- unlockedChapters
-- currentChapter
-- totalMoney
-- upgrades
-- unlockedRecipes
-- unlockedDrinks
-- discoveredMysteryCustomers
-- completedSideQuests
-- storyFlags
-- bestScoreByChapter
-- settings
+- `unlockedChapters`
+- `currentChapter`
+- `totalMoney`
+- `upgrades`
+- `unlockedRecipes`
+- `unlockedDrinks`
+- `discoveredMysteryCustomers`
+- `completedSideQuests`
+- `storyFlags`
+- `bestScoreByChapter`
+- `settings`
 
-### 10.2 UI can co
+### 10.2 UI Cần Có
 
-Menu chinh:
+Menu chính:
 
-- Tiep tuc
-- Choi moi
-- Chon chuong
-- Xoa save
+- Tiếp tục.
+- Chơi mới.
+- Chọn chương.
+- Xóa save.
 
 Trong game:
 
-- Tu dong luu sau moi chuong.
-- Tu dong luu sau khi mua nang cap.
-- Thong bao ngan: "Da luu tien trinh".
+- Tự động lưu sau mỗi chương.
+- Tự động lưu sau khi mua nâng cấp.
+- Thông báo ngắn: “Đã lưu tiến trình”.
 
-### 10.3 Quy tac New Game
+### 10.3 Quy Tắc New Game
 
-Neu da co save, bam Choi moi phai xac nhan:
+Nếu đã có save, bấm Chơi mới phải xác nhận:
 
-"Bat dau lai se xoa tien trinh hien tai. Tiep tuc?"
+> “Bắt đầu lại sẽ xóa tiến trình hiện tại. Tiếp tục?”
 
-## 11. Giam Lap Lai Theo 15 Chuong
+## 11. Giảm Lặp Lại Theo 15 Chương
 
-### 11.1 Chu de tung cum chuong
+### 11.1 Chủ Đề Từng Cụm Chương
 
-Chuong 1-3: Giu quan gia dinh
+Chương 1-3: Giữ quán gia đình.
 
-- Hoc cong thuc co ban.
-- Khach quen khu pho.
-- Cu Ong xuat hien qua ky uc.
+- Học công thức cơ bản.
+- Khách quen khu phố.
+- Cụ ông xuất hiện qua ký ức.
 
-Chuong 4-6: Khu pho thuc su song day
+Chương 4-6: Khu phố sống dậy.
 
-- Them khach van phong, sinh vien, shipper.
-- Them combo nuoc.
-- Su kien mua/khach dong bat ngo.
+- Thêm khách văn phòng, sinh viên, shipper.
+- Thêm combo nước.
+- Sự kiện mưa/khách đông bất ngờ.
 
-Chuong 7-9: Le hoi am thuc Viet
+Chương 7-9: Lễ hội ẩm thực Việt.
 
-- Them khach Tay, food blogger.
-- Them dac san mien Trung.
-- Co mini game pha nuoc mam hoac nuong cha.
+- Thêm khách Tây, food blogger.
+- Thêm đặc sản miền Trung.
+- Có mini game pha nước mắm hoặc nướng chả.
 
-Chuong 10-12: Mo rong ba mien
+Chương 10-12: Mở rộng ba miền.
 
-- Them mon mien Nam, mien Trung.
-- Khach bi an xuat hien nhieu hon.
-- Co ngay nong, ngay mat dien, doan khach du lich.
+- Thêm món miền Nam, miền Trung.
+- Khách bí ẩn xuất hiện nhiều hơn.
+- Có ngày nóng, mất điện, đoàn khách du lịch.
 
-Chuong 13-15: Bao ve thuong hieu Bep Viet
+Chương 13-15: Bảo vệ thương hiệu Bếp Việt.
 
-- Dau bep doi thu.
-- Nha phe binh am thuc.
-- Chuong cuoi tong hop tat ca co che.
-- Ket thuc nhan manh di san Cu Ong va ban sac quan.
+- Đầu bếp đối thủ.
+- Nhà phê bình ẩm thực.
+- Chương cuối tổng hợp tất cả cơ chế.
+- Kết thúc nhấn mạnh di sản cụ ông và bản sắc quán.
 
-### 11.2 Bien the su kien
+### 11.2 Biến Thể Sự Kiện
 
-- Mua rao: khach goi mon nong nhieu hon, thoi gian di lai cham.
-- Ngay nong: khach mat kien nhan nhanh hon, nuoc uong ban chay hon.
-- Le hoi: nhieu combo, thuong cao.
-- Mat dien: thoi gian nau tang, nhung co thuong neu vuot qua.
-- Doan du khach: nhieu khach Tay, yeu cau it cay/mon signature.
-- Ngay cho sang: nguyen lieu re hon, nhung khach den som hon.
+- Mưa rào: khách gọi món nóng nhiều hơn, khách đến chậm hơn.
+- Ngày nóng: khách mất kiên nhẫn nhanh hơn, nước uống bán chạy hơn.
+- Lễ hội: nhiều combo, thưởng cao.
+- Mất điện: thời gian nấu tăng, nhưng có thưởng nếu vượt qua.
+- Đoàn du khách: nhiều khách Tây, yêu cầu ít cay/món signature.
+- Ngày chợ sáng: nguyên liệu rẻ hơn, khách đến sớm hơn.
 
-## 12. Che Do Choi Va Mini Game
+## 12. Chế Độ Chơi Và Mini Game
 
 ### 12.1 Endless Mode
 
-Mo khoa sau chuong 5.
+Mở khóa sau chương 5.
 
-Quy tac:
+Quy tắc:
 
-- Khach den vo han.
-- Moi 2 phut tang do kho.
-- Luu best score.
-- Khong can story dai.
+- Khách đến vô hạn.
+- Mỗi 2 phút tăng độ khó.
+- Lưu best score.
+- Không cần story dài.
 
 ### 12.2 Challenge Mode
 
-Mo khoa sau chuong 8.
+Mở khóa sau chương 8.
 
-Vi du:
+Ví dụ:
 
-- Chi ban bun cha trong 3 phut.
-- Khong duoc bo mon nao.
-- Tat ca khach goi combo.
-- Ngay mat dien.
+- Chỉ bán bún chả trong 3 phút.
+- Không được bỏ món nào.
+- Tất cả khách gọi combo.
+- Ngày mất điện.
 
-### 12.3 Mini game uu tien
+### 12.3 Mini Game Ưu Tiên
 
-Uu tien mini game nhe, khong bien game thanh qua phuc tap.
+Ưu tiên mini game nhẹ, không biến game thành quá phức tạp.
 
-- Nuong cha: canh lat dung luc.
-- Pha nuoc mam: can bang chua/cay/man/ngot.
-- Pha ca phe sua da: canh ty le ca phe/sua/da.
-- Goi cuon: chon dung thu tu nguyen lieu.
+- Nướng chả: canh lật đúng lúc.
+- Pha nước mắm: cân bằng chua/cay/mặn/ngọt.
+- Pha cà phê sữa đá: canh tỉ lệ cà phê/sữa/đá.
+- Gỏi cuốn: chọn đúng thứ tự nguyên liệu.
 
-Mini game chi nen xuat hien o chuong dac biet hoac de lay bonus, khong bat nguoi choi lam lien tuc.
+Mini game chỉ nên xuất hiện ở chương đặc biệt hoặc để lấy bonus, không bắt người chơi làm liên tục.
 
-## 13. Thu Tu Trien Khai
+## 13. Thứ Tự Triển Khai
 
-### Sprint 1 - Sua loi va can bang cot loi
+### Sprint 1 - Sửa Lỗi Và Cân Bằng Cốt Lõi
 
-1. Can bang lai doanh thu, gia mon, chi phi 15 chuong.
-2. Sua bo cha chay.
-3. Sua khong cho bo mon khi dang nau.
-4. Them waste penalty hop ly.
-5. Kiem tra lai chuong 1-6 de khong am tien qua som.
+1. Cân bằng lại doanh thu, giá món, chi phí 15 chương.
+2. Sửa bỏ chả cháy.
+3. Sửa không cho bỏ món khi đang nấu.
+4. Thêm waste penalty hợp lý.
+5. Kiểm tra lại chương 1-6 để không âm tiền quá sớm.
 
-### Sprint 2 - Save/load va tien trinh
+### Sprint 2 - Save/Load Và Tiến Trình
 
-1. Them save data schema.
-2. Luu unlocked chapters, money, upgrades, recipes.
-3. Them Continue/New Game/Delete Save.
-4. Luu sau moi chuong va sau nang cap.
-5. Test reload browser van tiep tuc duoc.
+1. Thêm save data schema.
+2. Lưu unlocked chapters, money, upgrades, recipes.
+3. Thêm Continue/New Game/Delete Save.
+4. Lưu sau mỗi chương và sau nâng cấp.
+5. Test reload browser vẫn tiếp tục được.
 
-### Sprint 3 - Khach moi va khach bi an
+### Sprint 3 - Khách Mới Và Khách Bí Ẩn
 
-1. Them danh sach khach Tay.
-2. Them khach Viet moi.
-3. Them he thong mystery customer appearRate.
-4. Them 3 khach bi an dau tien.
-5. Them reward va story flag.
+1. Thêm danh sách khách Tây.
+2. Thêm khách Việt mới.
+3. Thêm hệ thống mystery customer appearRate.
+4. Thêm 3 khách bí ẩn đầu tiên.
+5. Thêm reward và story flag.
 
-### Sprint 4 - Mon, nuoc, combo
+### Sprint 4 - Món, Nước, Combo
 
-1. Them 5 mon an moi.
-2. Them 6-10 nuoc uong neu co the lam gon, it nhat 3 nuoc phai co gameplay/bonus rieng.
-3. Them combo mon + nuoc co ban sac Viet, khong chi cong tien thuan tuy.
-4. Them reaction khach theo do uong dung/sai/qua cham.
-5. Cap nhat UI don hang de hien mon chinh, nuoc, yeu cau dac biet.
-6. Cap nhat scoring, tip, danh tieng va reward.
+1. Thêm 5 món ăn mới.
+2. Thêm 6-10 nước uống nếu có thể làm gọn; ít nhất 3 nước phải có gameplay/bonus riêng.
+3. Thêm combo món + nước có bản sắc Việt, không chỉ cộng tiền thuần túy.
+4. Thêm reaction khách theo đồ uống đúng/sai/quá chậm.
+5. Cập nhật UI đơn hàng để hiện món chính, nước, yêu cầu đặc biệt.
+6. Cập nhật scoring, tip, danh tiếng và reward.
 
-### Sprint 5 - Nang cap va su kien chuong
+### Sprint 5 - Nâng Cấp Và Sự Kiện Chương
 
-1. Doi upgrade thanh multi-level.
-2. Them 5 loai nang cap dau tien.
-3. Them event theo chuong.
-4. Cap nhat 15 chuong de moi cum co chu de rieng.
+1. Đổi upgrade thành multi-level.
+2. Thêm 5 loại nâng cấp đầu tiên.
+3. Thêm event theo chương.
+4. Cập nhật 15 chương để mỗi cụm có chủ đề riêng.
 
-### Sprint 6 - Che do moi
+### Sprint 6 - Chế Độ Mới
 
-1. Them Endless Mode co ban.
-2. Them 2 challenge nho.
-3. Them 1 mini game uu tien: nuong cha hoac pha nuoc mam.
-4. Neu lam duoc them ma khong vo game, lam tiep Festival Mode, Achievement, Gallery ky uc.
-5. Neu co the, them mini game do uong: pha ca phe sua da hoac ep nuoc mia.
+1. Thêm Endless Mode cơ bản.
+2. Thêm 2 challenge nhỏ.
+3. Thêm 1 mini game ưu tiên: nướng chả hoặc pha nước mắm.
+4. Nếu làm được thêm mà không vỡ game, làm tiếp Festival Mode, Achievement, Gallery ký ức.
+5. Nếu có thể, thêm mini game đồ uống: pha cà phê sữa đá hoặc ép nước mía.
 
-## 14. Tieu Chi Kiem Thu
+## 14. Tiêu Chí Kiểm Thử
 
 ### Gameplay
 
-- Cha chay bo duoc va lam lai duoc.
-- Dang nau khong bo mon duoc.
-- Mon done/ruined bo duoc.
-- Khach goi combo hien thi ro.
-- Sai nuoc khong fail don, chi mat bonus.
+- Chả cháy bỏ được và làm lại được.
+- Đang nấu không bỏ món được.
+- Món done/ruined bỏ được.
+- Khách gọi combo hiển thị rõ.
+- Sai nước không fail đơn, chỉ mất bonus.
 
-### Kinh te
+### Kinh Tế
 
-- Choi trung binh chuong 1-6 khong am tien qua nang.
-- Choi tot co du tien mua it nhat 1-2 upgrade moi 2-3 chuong.
-- Chi phi khong vuot doanh thu tiem nang o chuong 5.
+- Chơi trung bình chương 1-6 không âm tiền quá nặng.
+- Chơi tốt có đủ tiền mua ít nhất 1-2 upgrade mỗi 2-3 chương.
+- Chi phí không vượt doanh thu tiềm năng ở chương 5.
 
-### Save/load
+### Save/Load
 
-- Reload browser van giu tien trinh.
-- Continue vao dung chapter/unlocks.
-- Delete Save xoa sach tien trinh.
+- Reload browser vẫn giữ tiến trình.
+- Continue vào đúng chapter/unlocks.
+- Delete Save xóa sạch tiến trình.
 
-### Noi dung
+### Nội Dung
 
-- Khach Tay khong chi lap mot ten.
-- Cu Ong khong lap bun doc mung lien tuc.
-- It nhat 3 khach bi an co reward rieng.
-- Cac chuong 7-15 co su kien/chu de khac nhau.
+- Khách Tây không chỉ lặp một tên.
+- Cụ ông không lặp bún dọc mùng liên tục.
+- Ít nhất 3 khách bí ẩn có reward riêng.
+- Các chương 7-15 có sự kiện/chủ đề khác nhau.
 
 ## 15. Prompt Tối Ưu Cho Claude Làm Tiếp
 
