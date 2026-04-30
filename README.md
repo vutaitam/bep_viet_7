@@ -5,7 +5,7 @@
 
 **Chơi ngay**: <https://vutaitam.github.io/bep_viet_7/>
 
-[![Beta v1.11.04.1](https://img.shields.io/badge/beta-v1.11.04.1-gold)](https://vutaitam.github.io/bep_viet_7/)
+[![Demo v1.11.03](https://img.shields.io/badge/demo-v1.11.03-gold)](https://vutaitam.github.io/bep_viet_7/)
 [![Vanilla JS](https://img.shields.io/badge/stack-vanilla_HTML%2FCSS%2FJS-blue)](#)
 [![No build step](https://img.shields.io/badge/build-none-green)](#)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#)
@@ -15,6 +15,7 @@
 ## Điểm Nổi Bật
 
 - **Cốt truyện Cụ Ông**: cutscene, di nguyện, feedback cuối ngày và 3 portrait SVG tự vẽ.
+- **NPC portrait mới**: Bác Tâm, Cô Lan và John có portrait WebP tự tạo, khóa kích thước trong customer card và sổ tay.
 - **3 chương, 15 ngày**: Hà Nội -> Hội An -> Sài Gòn, kết thúc với danh hiệu "Đầu bếp 3 miền".
 - **10 món Việt**: bún dọc mùng signature, phở bò, bún bò Huế, bún chả, cơm tấm, mì Quảng, hủ tiếu, gỏi cuốn, bún riêu, bánh mì.
 - **5 đồ uống là gameplay thật**: trà đá, trà tắc, nước mía, cà phê sữa đá, rau má, có công thức, nguyên liệu, thời gian pha và logic đúng/sai.
@@ -55,13 +56,14 @@ Tutorial có thể mở lại từ menu chính hoặc pause overlay.
 │   ├── game.js             # Core gameplay: spawn, cook, grill, drink, serve, end level
 │   └── screens.js          # Menu, tutorial, cutscene, level select, shop, festival, gallery
 ├── assets/
-│   └── portraits/          # SVG portrait Cụ Ông young/old/spirit + preview
+│   └── portraits/          # SVG portrait Cụ Ông + WebP portrait Bác Tâm/Cô Lan/John
 ├── PROJECT_REQUIREMENTS_CURRENT.md
 ├── CLAUDE.md
 ├── PLAN_v1.10.md           # Tài liệu lịch sử/spec gốc
 ├── PLAN_v1.11.01.md        # Tài liệu lịch sử/patch plan đã áp dụng
 ├── MARKETING_v1.11.md      # Marketing playbook
 ├── PROMPTS_ART_v1.12.md    # Prompt pack tạo art asset
+├── GRAPHICS_PLAN_demo_v1.11.03.md
 └── README.md
 ```
 
@@ -80,7 +82,7 @@ Repo publish bằng **GitHub Pages** từ branch `main`, folder `/ (root)`. Sau 
 
 ## Trạng Thái Hiện Tại
 
-Hiện tại: **Beta v1.11.04.1 (Balance)**.
+Hiện tại: **Demo v1.11.03 (NPC Portraits)**.
 
 Commit mốc balance:
 
@@ -96,6 +98,7 @@ Các mốc gần đây:
 - **v1.11.03**: favicon, Open Graph, giấy dó texture, confetti.
 - **v1.11.04**: SVG portrait Cụ Ông + refactor 6-file.
 - **v1.11.04.1**: balance fixes round 5.
+- **Demo v1.11.03**: 3 portrait NPC chính bằng WebP, sizing cố định, kiểm tra Chromium desktop/mobile/gallery.
 
 ## Roadmap
 

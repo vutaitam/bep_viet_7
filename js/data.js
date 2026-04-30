@@ -145,11 +145,11 @@ const ACHIEVEMENTS=[
 ];
 
 const NPCS = {
-  bac_tam:{name:'Bác Tâm',emoji:'👴',favorite:'bun_doc_mung',trait:'Bạn cũ của Cụ Ông',patience:75,tip:1.3,isRegular:true,drink:'tra_da',
+  bac_tam:{name:'Bác Tâm',emoji:'👴',portrait:'assets/portraits/bac-tam.webp',favorite:'bun_doc_mung',trait:'Bạn cũ của Cụ Ông',patience:75,tip:1.3,isRegular:true,drink:'tra_da',
     quotes:{arrive:'Cho bác một tô bún dọc mùng như mọi khi nhé!',happy:'Đúng vị Cụ rồi đấy cháu...',angry:'Bác phải đi đây, hẹn lần sau...',wrong:'Cháu ơi, bác gọi bún dọc mùng cơ mà...',slow:'Lâu quá, nhưng vẫn ngon. Lần sau nhanh hơn nhé cháu.'}},
-  co_lan:{name:'Cô Lan',emoji:'👩‍💼',favorite:'banh_mi',trait:'Doanh nhân vội vàng',patience:40,tip:1.5,isRegular:true,drink:'ca_phe_sua_da',
+  co_lan:{name:'Cô Lan',emoji:'👩‍💼',portrait:'assets/portraits/co-lan.webp',favorite:'banh_mi',trait:'Doanh nhân vội vàng',patience:40,tip:1.5,isRegular:true,drink:'ca_phe_sua_da',
     quotes:{arrive:'Em ơi, một bánh mì nhanh nha, cô đang vội!',happy:'Nhanh thật! Cảm ơn em.',angry:'Lâu quá, cô đi quán khác đây!',wrong:'Cái này không phải món cô gọi đâu em...',slow:'Tý cô trễ họp rồi đấy nhé!'}},
-  john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:1.7,isRegular:true,drink:'tra_tac',
+  john:{name:'John',emoji:'🧔',portrait:'assets/portraits/john.webp',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:1.7,isRegular:true,drink:'tra_tac',
     quotes:{arrive:'Hi! Một bún chả please!',happy:'Mmm, so good! Thank you!',angry:'Sorry, I have to go...',wrong:'Excuse me, this is not what I ordered.',slow:'Slow but tasty, cảm ơn!'}},
   anna:{name:'Anna',emoji:'👱‍♀️',favorite:'pho_bo',trait:'Du khách Pháp thích món ít cay',patience:72,tip:1.45,isRegular:false,drink:'tra_tac',
     quotes:{arrive:'Món nào thơm mà không quá cay vậy?',happy:'Tuyệt quá, rất Việt Nam!',angry:'Xin lỗi, tôi phải đi tiếp...'}},

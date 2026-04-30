@@ -486,7 +486,7 @@ function renderGallery(){
       if(!met)return `<div class="gal-card locked"><div class="gal-card-emoji">❓</div><div class="gal-card-name">???</div><div class="gal-card-desc">Chưa gặp</div></div>`;
       const fav=npc.favorite&&RECIPES[npc.favorite]?RECIPES[npc.favorite].name:'';
       const drink=npc.drink&&DRINKS[npc.drink]?DRINKS[npc.drink].name:'';
-      return `<div class="gal-card"><div class="gal-card-emoji">${npc.emoji}</div><div class="gal-card-name">${npc.name}${npc.isMystery?' 🌟':''}</div><div class="gal-card-desc">${npc.trait}${fav?'<br>Thích: '+fav:''}${drink?'<br>Nước: '+drink:''}</div><div class="gal-card-meta">Đã gặp ${cnt} lần</div></div>`;
+      return `<div class="gal-card">${galleryNpcVisual(npc)}<div class="gal-card-name">${npc.name}${npc.isMystery?' 🌟':''}</div><div class="gal-card-desc">${npc.trait}${fav?'<br>Thích: '+fav:''}${drink?'<br>Nước: '+drink:''}</div><div class="gal-card-meta">Đã gặp ${cnt} lần</div></div>`;
     }).join('')+'</div>';
   } else if(_galTab==='stories'){
     const flags=PROG.storyFlags||{};
@@ -516,6 +516,14 @@ function renderGallery(){
   }
 }
 
+function galleryNpcVisual(npc){
+  if(!npc.portrait)return `<div class="gal-card-emoji">${npc.emoji}</div>`;
+  return `<div class="gal-card-visual">
+    <img class="gal-card-portrait" src="${npc.portrait}" alt="${npc.name}" loading="lazy" width="88" height="88" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="gal-card-emoji portrait-fallback">${npc.emoji}</div>
+  </div>`;
+}
+
 
 window.onerror=(msg,u,line)=>{console.error('[GAME]',msg,'line',line);return false;};
 
@@ -525,7 +533,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04.1 (Balance fix)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03 (NPC portraits)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){

@@ -170,7 +170,7 @@ function spawnCustomer(){
   // heat day: keep drink price +30% bonus, but no patience nerf — too punishing combined
   const c={
     id:Date.now()+Math.random(),npcKey,
-    name:npc.name,emoji:npc.emoji,trait:npc.trait,
+    name:npc.name,emoji:npc.emoji,portrait:npc.portrait,trait:npc.trait,
     isRegular:npc.isRegular,isBoss:npc.isBoss||false,
     failOnLeave:npc.failOnLeave||false,
     tip:npc.tip,quotes:npc.quotes,
@@ -261,7 +261,7 @@ function renderCustomers(){
     card.innerHTML=`
       ${bubble}
       ${badge}
-      <div class="customer-emoji">${c.emoji}</div>
+      ${customerVisual(c)}
       <div class="customer-name${c.isRegular?' regular':''}">${c.name}</div>
       <div class="customer-order-label">${RECIPES[c.order].emoji} ${RECIPES[c.order].name}${drinkLine}</div>
       <div class="patience-ring-wrap">
@@ -271,6 +271,14 @@ function renderCustomers(){
     list.appendChild(card);
   });
   document.getElementById('servedDisplay').textContent=G.customersServed;
+}
+
+function customerVisual(c){
+  if(!c.portrait)return `<div class="customer-emoji">${c.emoji}</div>`;
+  return `<div class="customer-emoji customer-avatar has-portrait">
+    <img class="customer-portrait" src="${c.portrait}" alt="${c.name}" loading="lazy" width="68" height="68" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';">
+    <span class="portrait-fallback">${c.emoji}</span>
+  </div>`;
 }
 
 function selectCustomer(id){
