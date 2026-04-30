@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.02</title>
+<title>Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03</title>
+<meta name="description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội. 15 ngày, 3 chương, 21 nhân vật, lễ hội mode endless. Vanilla JS, chơi trực tiếp trình duyệt.">
+<meta name="theme-color" content="#C62828">
+<!-- Open Graph (Facebook, Reddit) -->
+<meta property="og:title" content="🥢 Bếp Việt: Tiệm Bún Số 7">
+<meta property="og:description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội. 15 ngày · 3 chương · 21 nhân vật · Lễ hội endless.">
+<meta property="og:url" content="https://vutaitam.github.io/bep_viet_7/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="Bếp Việt">
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="🥢 Bếp Việt: Tiệm Bún Số 7">
+<meta name="twitter:description" content="Game cooking miễn phí về cháu kế nghiệp quán bún ngõ phố cổ Hà Nội.">
+<!-- Inline SVG favicon: red bowl + chopsticks -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%23FFD700' width='64' height='64' rx='10'/%3E%3Cline x1='14' y1='8' x2='38' y2='32' stroke='%237B4F2E' stroke-width='3.5' stroke-linecap='round'/%3E%3Cline x1='26' y1='8' x2='50' y2='32' stroke='%237B4F2E' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M10 32h44v18a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6z' fill='%23C62828' stroke='%238E0E00' stroke-width='1.5'/%3E%3Cpath d='M16 38c2-2 6-2 8 0s6 2 8 0 6-2 8 0 6 2 8 0' stroke='%23FFF8E1' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -21,12 +36,29 @@
 
 body{
   font-family:'Be Vietnam Pro','Segoe UI',sans-serif;
-  background:var(--bg-dark);
+  /* Giấy dó (Vietnamese mulberry paper) noise — subtle warm grain
+     blended on dark base, gives organic paper feel without obscuring
+     content. SVG fractalNoise inline as data URI = no extra file. */
+  background:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat,
+    var(--bg-dark);
+  background-blend-mode:overlay;
   color:var(--text);
   min-height:100vh;
   overflow-x:hidden;
   user-select:none;
   -webkit-user-select:none;
+}
+
+/* Confetti for perfect serve / combo / end-level celebration */
+.confetti{
+  position:fixed;width:8px;height:12px;border-radius:1px;
+  pointer-events:none;z-index:1500;
+  animation:confettiFall 1.6s cubic-bezier(.2,.6,.4,1) forwards;
+}
+@keyframes confettiFall{
+  0%{transform:translate(0,0) rotate(0deg) scale(1);opacity:1;}
+  100%{transform:translate(var(--tx,0),var(--ty,120vh)) rotate(var(--rot,720deg)) scale(.7);opacity:0;}
 }
 
 button{font-family:inherit;cursor:pointer;}
@@ -765,7 +797,7 @@ body.boss-active .chapter-bar{
   <span class="lantern">🏮</span>
   <span class="lantern">🏮</span>
 
-  <div class="menu-version">Demo v1.11.02 · Tutorial 17 bước · Polish patch · Lễ hội · Sổ tay quán</div>
+  <div class="menu-version">Demo v1.11.03 · Confetti · Texture giấy dó · Favicon · OG card</div>
   <div class="menu-logo">🥢 Bếp Việt 🥢</div>
   <div class="menu-sub">Tiệm Bún Số 7</div>
   <div class="menu-divider"></div>
@@ -2316,6 +2348,12 @@ function serveSelected(){
   const bonusStr=bonuses.length?' · '+bonuses.join(', '):'';
   notify(`🎉 +${earned.toLocaleString('vi-VN')}đ · +${sc}⭐${bonusStr}`,'success');
   scorePopup('+'+earned.toLocaleString('vi-VN')+'đ');
+  // Confetti burst — perfect grill or combo correct or boss/mystery served
+  if(G.grill.quality==='perfect'||drinkResult==='match'||c.isBoss||c.isMystery){
+    const card=document.querySelector('.customer-card.selected')||document.querySelector('.customer-card');
+    const rect=card?card.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:0,height:0};
+    spawnConfetti({x:rect.left+rect.width/2,y:rect.top+rect.height/2,count:c.isBoss||c.isMystery?22:14});
+  }
   // Happy quote feedback — only for noteworthy customers (regular, mystery, boss, or high-tip tourist)
   const happyWorthy=c.isRegular||c.isMystery||c.isBoss||(c.tip||1)>=1.4;
   if(happyWorthy){
@@ -2391,6 +2429,28 @@ function scorePopup(text){
   const p=document.createElement('div');p.className='score-popup';p.textContent=text;
   p.style.left=(20+Math.random()*60)+'%';p.style.top='45%';
   document.body.appendChild(p);setTimeout(()=>p.remove(),1400);
+}
+
+// Confetti — for perfect serve / combo / end-level 3-star celebration
+function spawnConfetti(opts){
+  opts=opts||{};
+  const count=opts.count||14;
+  const x=opts.x!=null?opts.x:window.innerWidth/2;
+  const y=opts.y!=null?opts.y:window.innerHeight/2;
+  const colors=['#FFD700','#C62828','#E6BE3C','#FFF8E1','#7B4F2E','#FF8A65'];
+  for(let i=0;i<count;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=x+'px';
+    c.style.top=y+'px';
+    c.style.background=colors[i%colors.length];
+    c.style.setProperty('--tx',(Math.random()-0.5)*420+'px');
+    c.style.setProperty('--ty',(80+Math.random()*120)+'vh');
+    c.style.setProperty('--rot',(360+Math.random()*720)+'deg');
+    c.style.animationDelay=(i*25)+'ms';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2200);
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -2484,6 +2544,14 @@ function endLevel(reason){
   document.getElementById('nextLevelBtn').style.display=(stars>0&&hasNext)?'block':'none';
   // Flush deferred achievement notifications (queued during gameplay)
   flushAchievementQueue();
+  // Big confetti celebration for 3-star clear
+  if(stars===3){
+    setTimeout(()=>spawnConfetti({x:window.innerWidth/2,y:window.innerHeight*0.3,count:36}),300);
+    setTimeout(()=>spawnConfetti({x:window.innerWidth*0.3,y:window.innerHeight*0.4,count:20}),700);
+    setTimeout(()=>spawnConfetti({x:window.innerWidth*0.7,y:window.innerHeight*0.4,count:20}),900);
+  } else if(stars===2){
+    setTimeout(()=>spawnConfetti({x:window.innerWidth/2,y:window.innerHeight*0.3,count:18}),300);
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -2829,7 +2897,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.02');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){
