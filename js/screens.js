@@ -525,7 +525,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04 (SVG portrait)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04.1 (Balance fix)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){

@@ -43,7 +43,7 @@ function startGame(){
   G._burnPenalty=false;
   showStoryOverlay(lv,()=>{
     setTimeout(()=>spawnCustomer(),900);
-    if(lv.event==='festival'){setTimeout(()=>spawnCustomer(),1200);setTimeout(()=>spawnCustomer(),1500);}
+    if(lv.event==='festival'){setTimeout(()=>spawnCustomer(),1500);}  // 2 customers (was 3) — first at 900ms, second at 1500ms
     else{setTimeout(()=>spawnCustomer(),4200);}
     const maxActive=3+(hasUpgrade('extra_seat')?1:0);
     const spawnMs=lv.event==='rush'||lv.event==='peak'?7000:10000;
@@ -531,7 +531,7 @@ function putOnGrill(key){
       document.getElementById('grillFlipBtn').disabled=true;
       const gb=document.getElementById('grillTakeBtn');gb.disabled=false;gb.textContent='🗑 Bỏ chả';
       notify('🔥 Chả bị cháy!','error');
-      if(G._bossNpc==='khang'){G.money=Math.max(0,G.money-100000);notify('👨‍🍳 Khang phạt: -100.000đ vì cháy chả!','error');updateUI();}
+      if(G._bossNpc==='khang'){G.money=Math.max(0,G.money-30000);notify('👨‍🍳 Khang phạt: -30.000đ vì cháy chả!','error');updateUI();}
     }
   },100);
 }
@@ -646,11 +646,10 @@ function serveSelected(){
       G.drinksServedCorrect=(G.drinksServedCorrect||0)+1;
       resetDrinkStation();
     } else if(G.drinkStation&&G.drinkStation.status==='done'&&G.drinkStation.finishedDrink){
-      // Wrong drink prepared — no bonus + ingredient cost penalty
+      // Wrong drink prepared — 0% bonus only (no extra cost penalty per round 5 expert review)
       const wrongName=DRINKS[G.drinkStation.finishedDrink].name;
-      sc-=2;
-      bonuses.push(`Sai nước: ${wrongName} không phải đơn này (-3.000đ)`);
-      G.money=Math.max(0,G.money-3000);
+      sc-=1;
+      bonuses.push(`Sai nước: ${wrongName} không phải đơn này`);
       drinkResult='wrong';
       resetDrinkStation();
     } else {

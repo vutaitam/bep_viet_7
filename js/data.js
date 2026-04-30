@@ -182,7 +182,7 @@ const NPCS = {
   anh_shipper:{name:'Anh Hải shipper',emoji:'🚴',favorite:'banh_mi',trait:'Shipper cần ăn nhanh giữa giờ giao hàng',patience:28,tip:1.1,isRegular:false,drink:'tra_da',
     quotes:{arrive:'Bánh mì nhanh nha anh còn 3 đơn!',happy:'Siêu nhanh! Cảm ơn bé ơi!',angry:'Trễ đơn rồi, thôi anh đi...'}},
   // Boss NPCs
-  tuan_pb:{name:'Nhà phê bình Tuấn',emoji:'🧐',favorite:'bun_doc_mung',trait:'Nhà phê bình ẩm thực',patience:35,tip:0,isRegular:false,isBoss:true,failOnLeave:true,
+  tuan_pb:{name:'Nhà phê bình Tuấn',emoji:'🧐',favorite:'bun_doc_mung',trait:'Nhà phê bình ẩm thực',patience:50,tip:0,isRegular:false,isBoss:true,failOnLeave:true,
     quotes:{arrive:'Tôi nghe danh quán này. Bún dọc mùng gia truyền — thật hay hư?',happy:'Xuất sắc. Tôi sẽ viết bài khen.',angry:'Thất vọng. Quán chưa xứng danh.'}},
   khang:{name:'Đầu bếp Khang',emoji:'👨‍🍳',favorite:'bun_cha',trait:'Đối thủ cũ của Cụ Ông',patience:45,tip:0,isRegular:false,isBoss:true,
     quotes:{arrive:'Hm. Xem cậu nấu có bằng Cụ không nhé.',happy:'Được rồi. Tôi công nhận tài năng.',angry:'Thua kém Cụ rồi cậu ơi.'}},
