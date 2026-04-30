@@ -1,0 +1,1803 @@
+// ─────────────────────────────────────────────
+//  DỮ LIỆU GAME
+// ─────────────────────────────────────────────
+
+const RECIPES = {
+  bun_doc_mung:{
+    name:'Bún dọc mùng',emoji:'🍜',
+    ingredients:['bun','suon','doc_mung','ca_chua'],
+    cookTime:8,needsGrill:false,price:40000,score:25,
+    isSignature:true,desc:'Đặc sản Hà Nội — Món tâm huyết của Cụ Ông'
+  },
+  banh_mi:{
+    name:'Bánh mì',emoji:'🥖',
+    ingredients:['banh_mi_loaf','pate','thit_nguoi','rau_song'],
+    cookTime:4,needsGrill:false,price:25000,score:15,
+    desc:'Bánh mì Sài Gòn — Nhanh, gọn, ngon'
+  },
+  bun_cha:{
+    name:'Bún chả',emoji:'🍢',
+    ingredients:['bun','rau_song','nuoc_cham'],
+    cookTime:6,needsGrill:true,grillIngredient:'cha',
+    price:35000,score:22,
+    desc:'Đặc sản Hà Nội — Cần nướng chả đúng độ'
+  },
+  mi_quang:{
+    name:'Mì Quảng',emoji:'🍝',
+    ingredients:['mi_quang_noodle','thit_heo','tom','rau_song'],
+    cookTime:7,needsGrill:false,price:45000,score:28,
+    availableFrom:6,
+    desc:'Đặc sản Quảng Nam — Mì vàng nghệ béo ngậy'
+  },
+  hu_tieu:{
+    name:'Hủ tiếu Nam Vang',emoji:'🍜',
+    ingredients:['hu_tieu_noodle','thit_heo','tom','nuoc_dung'],
+    cookTime:6,needsGrill:false,price:50000,score:30,
+    availableFrom:11,
+    desc:'Đặc sản Sài Gòn — Nước dùng trong ngọt thanh'
+  },
+  pho_bo:{
+    name:'Phở bò',emoji:'🍲',
+    ingredients:['pho_noodle','thit_bo','rau_thom','nuoc_dung'],
+    cookTime:7,needsGrill:false,price:60000,score:34,
+    availableFrom:4,
+    desc:'Tô phở nóng, thơm quế hồi — hợp ngày mưa và khách du lịch'
+  },
+  bun_bo_hue:{
+    name:'Bún bò Huế',emoji:'🌶️',
+    ingredients:['bun','thit_bo','sa_te','rau_thom'],
+    cookTime:8,needsGrill:false,price:65000,score:38,
+    availableFrom:8,
+    desc:'Vị cay nồng miền Trung — bán rất tốt ở chương lễ hội'
+  },
+  com_tam:{
+    name:'Cơm tấm',emoji:'🍚',
+    ingredients:['com_tam_rice','thit_heo','nuoc_cham','rau_song'],
+    cookTime:6,needsGrill:false,price:70000,score:40,
+    availableFrom:12,
+    desc:'Món Sài Gòn chắc bụng, hợp khách văn phòng và người lao động'
+  },
+  goi_cuon:{
+    name:'Gỏi cuốn',emoji:'🌯',
+    ingredients:['banh_trang','tom','rau_song','bun'],
+    cookTime:5,needsGrill:false,price:32000,score:19,
+    availableFrom:6,
+    desc:'Đặc sản miền Nam — Thanh mát, không dầu mỡ, hợp khách Tây và khách ăn chay nhẹ'
+  },
+  bun_rieu:{
+    name:'Bún riêu',emoji:'🍛',
+    ingredients:['bun','rieu_cua','ca_chua','rau_thom'],
+    cookTime:7,needsGrill:false,price:48000,score:27,
+    availableFrom:3,
+    desc:'Vị riêu cua đồng thơm ngon — Bán tốt ngày mưa và mùa lạnh'
+  }
+};
+
+const INGREDIENTS = {
+  bun:{name:'Bún tươi',emoji:'🍜'},
+  suon:{name:'Sườn heo',emoji:'🥩'},
+  doc_mung:{name:'Dọc mùng',emoji:'🌿',special:true},
+  ca_chua:{name:'Cà chua',emoji:'🍅'},
+  banh_mi_loaf:{name:'Bánh mì',emoji:'🥖'},
+  pate:{name:'Pate',emoji:'🟫'},
+  thit_nguoi:{name:'Thịt nguội',emoji:'🥓'},
+  rau_song:{name:'Rau sống',emoji:'🥬'},
+  cha:{name:'Chả (cần nướng)',emoji:'🍖',needsGrill:true},
+  nuoc_cham:{name:'Nước chấm',emoji:'🥣'},
+  mi_quang_noodle:{name:'Mì Quảng',emoji:'🍝'},
+  thit_heo:{name:'Thịt heo',emoji:'🥩'},
+  tom:{name:'Tôm',emoji:'🦐'},
+  hu_tieu_noodle:{name:'Hủ tiếu',emoji:'🍜'},
+  nuoc_dung:{name:'Nước dùng',emoji:'🫕'},
+  pho_noodle:{name:'Bánh phở',emoji:'🍜'},
+  thit_bo:{name:'Thịt bò',emoji:'🥩'},
+  rau_thom:{name:'Rau thơm',emoji:'🌿'},
+  sa_te:{name:'Sa tế',emoji:'🌶️'},
+  com_tam_rice:{name:'Cơm tấm',emoji:'🍚'},
+  banh_trang:{name:'Bánh tráng',emoji:'🫓'},
+  rieu_cua:{name:'Riêu cua',emoji:'🦀'},
+  ga_xe:{name:'Gà xé',emoji:'🍗'},
+  // ── Drink ingredients ──
+  tra_la:{name:'Trà',emoji:'🍵',isDrink:true},
+  da:{name:'Đá viên',emoji:'🧊',isDrink:true},
+  tac:{name:'Quả tắc',emoji:'🍋',isDrink:true},
+  mia:{name:'Mía',emoji:'🎋',isDrink:true},
+  ca_phe_bot:{name:'Cà phê',emoji:'☕',isDrink:true},
+  sua_dac:{name:'Sữa đặc',emoji:'🥛',isDrink:true},
+  rau_ma_la:{name:'Lá rau má',emoji:'🌿',isDrink:true}
+};
+
+const DRINKS = {
+  tra_da:{name:'Trà đá',emoji:'🧊',price:5000,score:2,patienceBoost:3,availableFrom:1,
+    ingredients:['tra_la','da'],mixTime:2,desc:'Vỉa hè Việt Nam — đơn giản mà mát'},
+  tra_tac:{name:'Trà tắc',emoji:'🍋',price:10000,score:4,patienceBoost:5,availableFrom:4,
+    ingredients:['tra_la','tac','da'],mixTime:3,desc:'Chua ngọt — hợp ngày nóng và bánh mì'},
+  nuoc_mia:{name:'Nước mía',emoji:'🥤',price:14000,score:5,patienceBoost:4,availableFrom:6,
+    ingredients:['mia','da'],mixTime:4,desc:'Ép tay — cần thời gian nhưng lợi nhuận cao'},
+  ca_phe_sua_da:{name:'Cà phê sữa đá',emoji:'☕',price:18000,score:6,patienceBoost:2,availableFrom:9,
+    ingredients:['ca_phe_bot','sua_dac','da'],mixTime:4,desc:'Đậm đà — khách Tây và dân văn phòng mê'},
+  rau_ma:{name:'Rau má',emoji:'🌿',price:12000,score:5,patienceBoost:5,availableFrom:11,
+    ingredients:['rau_ma_la','da'],mixTime:3,desc:'Mát thanh — đặc sản miền Nam'}
+};
+
+// ── ACHIEVEMENTS ──
+const ACHIEVEMENTS=[
+  {id:'first_serve',name:'Mở hàng',emoji:'🎀',desc:'Phục vụ khách đầu tiên',hidden:false},
+  {id:'first_perfect_grill',name:'Lửa nướng vàng',emoji:'🔥',desc:'Nướng PERFECT lần đầu',hidden:false},
+  {id:'first_drink_combo',name:'Quán có nước',emoji:'🥤',desc:'Phục vụ đúng món + nước lần đầu',hidden:false},
+  {id:'streak_5',name:'Đôi tay nhanh',emoji:'⚡',desc:'Streak 5 lần liên tiếp',hidden:false},
+  {id:'streak_10',name:'Bậc thầy quán nhỏ',emoji:'🌟',desc:'Streak 10 lần liên tiếp',hidden:false},
+  {id:'no_waste_chapter',name:'Tiết kiệm như Cụ',emoji:'🥢',desc:'Hoàn thành 5 ngày liên tiếp không cháy chả',hidden:false},
+  {id:'meet_all_regulars',name:'Quán quen',emoji:'⭐',desc:'Gặp đủ Bác Tâm, Cô Lan, John',hidden:false},
+  {id:'meet_food_blogger',name:'Lên sóng',emoji:'📱',desc:'Phục vụ Linh Review',hidden:false},
+  {id:'meet_viet_kieu',name:'Vị quê hương',emoji:'🧳',desc:'Phục vụ Chú Phúc Việt kiều',hidden:false},
+  {id:'meet_silent',name:'Hiểu lòng người',emoji:'🎩',desc:'Phục vụ Khách im lặng đúng món',hidden:false},
+  {id:'beat_tuan',name:'Vượt nhà phê bình',emoji:'🧐',desc:'Đánh bại Nhà phê bình Tuấn',hidden:false},
+  {id:'beat_khang',name:'Truyền nhân Cụ',emoji:'👨‍🍳',desc:'Đánh bại Đầu bếp Khang',hidden:false},
+  {id:'beat_iron_chef',name:'Đầu bếp 3 miền',emoji:'🏆',desc:'Hoàn thành Iron Chef Việt',hidden:false},
+  {id:'all_drinks_made',name:'Pha hết menu nước',emoji:'🍹',desc:'Pha thành công đủ 5 loại đồ uống',hidden:false},
+  {id:'rich_500k',name:'Có vốn liếng',emoji:'💰',desc:'Tích lũy 500.000đ',hidden:false},
+  {id:'rich_2m',name:'Quán phất lên',emoji:'💎',desc:'Tích lũy 2.000.000đ',hidden:false},
+  {id:'reputation_50',name:'Tiếng tăm khu phố',emoji:'📣',desc:'Đạt 50 điểm danh tiếng',hidden:false},
+  {id:'festival_500',name:'Vua lễ hội',emoji:'🎑',desc:'Đạt 500.000đ trong Lễ hội',hidden:false},
+  {id:'all_recipes',name:'Đầu bếp toàn năng',emoji:'📖',desc:'Mở khóa đủ 10 món chính',hidden:false},
+  {id:'no_burn_boss',name:'Tay lửa vững',emoji:'🛡️',desc:'Đánh bại Khang mà không cháy chả',hidden:true}
+];
+
+function unlockAchievement(id){
+  if(PROG.achievements[id])return false;
+  const a=ACHIEVEMENTS.find(x=>x.id===id);if(!a)return false;
+  PROG.achievements[id]=Date.now();saveProg();
+  // Defer the notify to end-of-level — popping mid-rush breaks focus
+  _sessionAchievementQueue.push(a);
+  return true;
+}
+
+function checkAchievements(ev){
+  // Generic checks
+  if(PROG.totalMoney>=500000)unlockAchievement('rich_500k');
+  if(PROG.totalMoney>=2000000)unlockAchievement('rich_2m');
+  if((PROG.reputation||0)>=50)unlockAchievement('reputation_50');
+  // Met regulars
+  if(PROG.metCustomers.bac_tam&&PROG.metCustomers.co_lan&&PROG.metCustomers.john)unlockAchievement('meet_all_regulars');
+  // All drinks pha thành công
+  if(['tra_da','tra_tac','nuoc_mia','ca_phe_sua_da','rau_ma'].every(k=>(PROG.drinksMastered||{})[k]))unlockAchievement('all_drinks_made');
+  // All recipes (10 dishes)
+  const recipeCount=Object.keys(RECIPES).length;
+  const lvIdx=PROG.levelIdx;const ovr=LEVELS[lvIdx]?.overall||1;
+  const unlockedRecipeCount=Object.values(RECIPES).filter(r=>!r.availableFrom||r.availableFrom<=ovr).length;
+  if(unlockedRecipeCount>=recipeCount)unlockAchievement('all_recipes');
+  if(!ev)return;
+  if(ev.type==='serve'){
+    unlockAchievement('first_serve');
+    if(ev.grillQuality==='perfect')unlockAchievement('first_perfect_grill');
+    if(ev.drinkResult==='match')unlockAchievement('first_drink_combo');
+    if(G.streak>=5)unlockAchievement('streak_5');
+    if(G.streak>=10)unlockAchievement('streak_10');
+    if(ev.customer.npcKey==='food_blogger')unlockAchievement('meet_food_blogger');
+    if(ev.customer.npcKey==='viet_kieu')unlockAchievement('meet_viet_kieu');
+    if(ev.customer.npcKey==='khach_im_lang')unlockAchievement('meet_silent');
+  }
+  if(ev.type==='boss_won'){
+    if(ev.bossNpc==='tuan_pb')unlockAchievement('beat_tuan');
+    if(ev.bossNpc==='khang'){unlockAchievement('beat_khang');if(G.burntGrills===0)unlockAchievement('no_burn_boss');}
+    if(ev.bossNpc==='iron_chef')unlockAchievement('beat_iron_chef');
+  }
+  if(ev.type==='chapter_clear_clean')unlockAchievement('no_waste_chapter');
+  if(ev.type==='festival_score'&&ev.score>=500000)unlockAchievement('festival_500');
+}
+
+const NPCS = {
+  bac_tam:{name:'Bác Tâm',emoji:'👴',favorite:'bun_doc_mung',trait:'Bạn cũ của Cụ Ông',patience:75,tip:1.3,isRegular:true,drink:'tra_da',
+    quotes:{arrive:'Cho bác một tô bún dọc mùng như mọi khi nhé!',happy:'Đúng vị Cụ rồi đấy cháu...',angry:'Bác phải đi đây, hẹn lần sau...',wrong:'Cháu ơi, bác gọi bún dọc mùng cơ mà...',slow:'Lâu quá, nhưng vẫn ngon. Lần sau nhanh hơn nhé cháu.'}},
+  co_lan:{name:'Cô Lan',emoji:'👩‍💼',favorite:'banh_mi',trait:'Doanh nhân vội vàng',patience:40,tip:1.5,isRegular:true,drink:'ca_phe_sua_da',
+    quotes:{arrive:'Em ơi, một bánh mì nhanh nha, cô đang vội!',happy:'Nhanh thật! Cảm ơn em.',angry:'Lâu quá, cô đi quán khác đây!',wrong:'Cái này không phải món cô gọi đâu em...',slow:'Tý cô trễ họp rồi đấy nhé!'}},
+  john:{name:'John',emoji:'🧔',favorite:'bun_cha',trait:'Khách Tây ba lô (Mỹ)',patience:90,tip:1.7,isRegular:true,drink:'tra_tac',
+    quotes:{arrive:'Hi! Một bún chả please!',happy:'Mmm, so good! Thank you!',angry:'Sorry, I have to go...',wrong:'Excuse me, this is not what I ordered.',slow:'Slow but tasty, cảm ơn!'}},
+  anna:{name:'Anna',emoji:'👱‍♀️',favorite:'pho_bo',trait:'Du khách Pháp thích món ít cay',patience:72,tip:1.45,isRegular:false,drink:'tra_tac',
+    quotes:{arrive:'Món nào thơm mà không quá cay vậy?',happy:'Tuyệt quá, rất Việt Nam!',angry:'Xin lỗi, tôi phải đi tiếp...'}},
+  marco:{name:'Marco',emoji:'🤌',favorite:'bun_cha',trait:'Khách Ý mê món nướng',patience:68,tip:1.4,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Tôi muốn thử món nướng ngon nhất của quán!',happy:'Chả nướng rất thơm, bravo!',angry:'Tôi đói quá, hẹn dịp khác.'}},
+  kenji:{name:'Kenji',emoji:'🧑‍💼',favorite:'bun_bo_hue',trait:'Khách Nhật thích vị đậm nhưng ít cay',patience:76,tip:1.35,isRegular:false,drink:'tra_tac',
+    quotes:{arrive:'Cho tôi món nóng, nhưng đừng cay quá nhé.',happy:'Nước dùng rất sâu vị. Cảm ơn!',angry:'Tôi phải quay lại đoàn rồi.'}},
+  sinh_vien:{name:'Minh',emoji:'🎒',favorite:'banh_mi',trait:'Sinh viên xa nhà, thích món rẻ mà ấm bụng',patience:58,tip:1.1,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Cho em món nào nhanh nhanh, còn kịp ca học ạ.',happy:'Ngon như ở nhà nấu vậy!',angry:'Em trễ giờ mất rồi...'}},
+  bac_cong_nhan:{name:'Bác Hòa',emoji:'👷',favorite:'com_tam',trait:'Người lao động thích phần chắc bụng',patience:70,tip:1.25,isRegular:false,drink:'nuoc_mia',
+    quotes:{arrive:'Cho bác phần nào no no chút nhé.',happy:'Đã bụng! Chiều làm khỏe rồi.',angry:'Bác phải ra công trình đây.'}},
+  food_blogger:{name:'Linh Review',emoji:'📱',favorite:'bun_bo_hue',trait:'Khách bí ẩn: quay review cho quán',patience:55,tip:1.65,isRegular:false,isMystery:true,drink:'ca_phe_sua_da',
+    quotes:{arrive:'Hôm nay mình review quán này nha mọi người!',happy:'Món này lên clip chắc viral đó!',angry:'Clip hôm nay chắc phải nói thật rồi...',wrong:'Ơ kìa, mình order cái khác mà nhỉ?',slow:'Khán giả ơi, đợi hơi lâu nhưng vẫn ngon nha!'}},
+  viet_kieu:{name:'Chú Phúc',emoji:'🧳',favorite:'pho_bo',trait:'Khách bí ẩn: Việt kiều tìm lại vị quê',patience:85,tip:1.6,isRegular:false,isMystery:true,drink:'tra_da',
+    quotes:{arrive:'Chú xa nhà lâu rồi, cho chú món nào có vị Hà Nội nhé.',happy:'Đúng rồi... vị này chú nhớ mấy chục năm.',angry:'Chắc hôm nay chưa có duyên rồi.',wrong:'Cháu ơi, chú không gọi món này đâu...',slow:'Chú đợi được, miễn là vị đúng.'}},
+  khach_im_lang:{name:'Khách im lặng',emoji:'🎩',favorite:null,trait:'Khách bí ẩn: chỉ gọi món bằng gợi ý',patience:65,tip:1.8,isRegular:false,isMystery:true,drink:'rau_ma',
+    quotes:{arrive:'Tôi muốn một món có khói bếp và ký ức phố cổ.',happy:'Bạn hiểu món ăn hơn lời nói.',angry:'Có lẽ bạn chưa hiểu ý tôi.',wrong:'Không... đây không phải thứ tôi nghĩ tới.',slow:'Lâu một chút, nhưng tôi không vội.'}},
+  khach_thuong:{name:'Khách lạ',emoji:'🧑',favorite:null,trait:'Khách qua đường',patience:60,tip:1.0,isRegular:false,
+    quotes:{arrive:'Cho tôi xem thực đơn nào.',happy:'Ngon đó, lần sau ghé lại!',angry:'Bỏ đi đây...'}},
+  sophie:{name:'Sophie',emoji:'🧣',favorite:'goi_cuon',trait:'Du khách Pháp thích món thanh đạm',patience:65,tip:1.3,isRegular:false,drink:'tra_tac',
+    quotes:{arrive:'Có món nào cuốn bánh tráng không?',happy:'Très délicieux! Rất tươi và ngon!',angry:'Pardon, tôi phải đi rồi...'}},
+  david:{name:'David',emoji:'🧢',favorite:'com_tam',trait:'Du khách Mỹ thích phần ăn đầy đặn',patience:52,tip:1.8,isRegular:false,drink:'ca_phe_sua_da',
+    quotes:{arrive:'I want the biggest and best combo you have!',happy:'Oh wow, this is amazing value!',angry:'Man, I really gotta run...'}},
+  co_ban_hoa:{name:'Cô Mai bán hoa',emoji:'💐',favorite:'banh_mi',trait:'Cô bán hoa chợ sáng, đến mỗi ngày',patience:48,tip:1.2,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Cô cần bánh mì nhanh nha, còn phải ra chợ sớm.',happy:'Ngon lắm! Sáng nào cô cũng ghé đây.',angry:'Chợ sắp tan rồi, cô đi thôi...'}},
+  chu_xe_om:{name:'Chú Tuấn xe ôm',emoji:'🛵',favorite:'bun_doc_mung',trait:'Chú xe ôm đầu ngõ, ăn nhanh trước khi đón khách',patience:35,tip:1.05,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Bún dọc mùng tô to, nhanh thôi cháu ơi!',happy:'Đã! Ăn vô là chạy xe cả ngày không mệt!',angry:'Thôi chú có khách gọi rồi, đi đây...'}},
+  ba_cu_cho:{name:'Bà Năm',emoji:'🧓',favorite:'pho_bo',trait:'Bà đi chợ sáng, nhớ vị ngày xưa',patience:82,tip:1.15,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Cho bà tô phở nóng đi cháu, đi chợ về mệt quá.',happy:'Vị này... như hồi còn trẻ vậy. Cảm ơn cháu nhiều lắm.',angry:'Thôi bà về nấu ở nhà vậy...'}},
+  anh_shipper:{name:'Anh Hải shipper',emoji:'🚴',favorite:'banh_mi',trait:'Shipper cần ăn nhanh giữa giờ giao hàng',patience:28,tip:1.1,isRegular:false,drink:'tra_da',
+    quotes:{arrive:'Bánh mì nhanh nha anh còn 3 đơn!',happy:'Siêu nhanh! Cảm ơn bé ơi!',angry:'Trễ đơn rồi, thôi anh đi...'}},
+  // Boss NPCs
+  tuan_pb:{name:'Nhà phê bình Tuấn',emoji:'🧐',favorite:'bun_doc_mung',trait:'Nhà phê bình ẩm thực',patience:35,tip:0,isRegular:false,isBoss:true,failOnLeave:true,
+    quotes:{arrive:'Tôi nghe danh quán này. Bún dọc mùng gia truyền — thật hay hư?',happy:'Xuất sắc. Tôi sẽ viết bài khen.',angry:'Thất vọng. Quán chưa xứng danh.'}},
+  khang:{name:'Đầu bếp Khang',emoji:'👨‍🍳',favorite:'bun_cha',trait:'Đối thủ cũ của Cụ Ông',patience:45,tip:0,isRegular:false,isBoss:true,
+    quotes:{arrive:'Hm. Xem cậu nấu có bằng Cụ không nhé.',happy:'Được rồi. Tôi công nhận tài năng.',angry:'Thua kém Cụ rồi cậu ơi.'}},
+  iron_chef:{name:'Iron Chef Việt',emoji:'🏆',favorite:'bun_doc_mung',trait:'Đầu bếp số 1 cả nước',patience:50,tip:3.0,isRegular:false,isBoss:true,failOnLeave:true,
+    quotes:{arrive:'Bún dọc mùng 30 năm gia truyền — thật sự đặc biệt hay chỉ là tin đồn?',happy:'Xuất sắc! Cháu của Cụ Ông xứng đáng danh hiệu "Đầu bếp 3 miền"!',angry:'Chưa đủ tốt. Tiếp tục rèn luyện.'}}
+};
+
+// ─────────────────────────────────────────────
+//  LEVEL + UPGRADE DATA
+// ─────────────────────────────────────────────
+
+const LEVELS=[
+  // ── Ch.1: HÀ NỘI ──
+  {ch:1,lv:1,overall:1,name:'Khai trương Tiệm Bún',customers:6,time:180,cost:150000,npcRate:0.45,
+    icon:'🕯️',story:'Cụ Ông vừa qua đời. Hôm nay là ngày đầu tiên bạn mở lại Tiệm Bún Số 7. Bác Tâm đứng chờ trước cổng từ sớm — ông muốn xem cháu Cụ có giữ được hương vị không.',
+    objective:'Phục vụ ít nhất 4 khách · Doanh thu > 150.000đ'},
+  {ch:1,lv:2,overall:2,name:'Khách quen trở lại',customers:7,time:190,cost:165000,npcRate:0.5,
+    icon:'👴',story:'Tin đồn lan nhanh trong ngõ phố. Bác Tâm kể với hàng xóm về tô Bún dọc mùng "đúng vị Cụ". Hôm nay có thêm Cô Lan — doanh nhân hay ăn bánh mì buổi sáng.',
+    objective:'Phục vụ ít nhất 5 khách · Phục vụ Bác Tâm 1 lần'},
+  {ch:1,lv:3,overall:3,name:'Sáng có mưa rào',customers:8,time:200,cost:180000,npcRate:0.45,event:'rain',
+    icon:'🌧️',story:'Mưa rào bất chợt ập đến. Khách ít hơn nhưng ai đến đều thật sự muốn ăn. Mưa làm bếp than khó nướng hơn — chú ý kỹ lò nướng.',
+    objective:'Phục vụ ít nhất 5 khách · Doanh thu > 200.000đ'},
+  {ch:1,lv:4,overall:4,name:'Bác Tâm dẫn bạn bè',customers:9,time:210,cost:205000,npcRate:0.6,
+    icon:'🤝',story:'Bác Tâm tự hào dẫn cả nhóm bạn cũ của Cụ Ông đến ăn. Họ đã ăn ở đây cách đây 15 năm — tiêu chuẩn cao lắm đó. Phục vụ tốt để giữ tiếng quán.',
+    objective:'Phục vụ ít nhất 6 khách · Streak >= 3 lần liên tiếp'},
+  {ch:1,lv:5,overall:5,name:'Boss: Nhà phê bình Tuấn',customers:10,time:240,cost:240000,npcRate:0.65,isBoss:true,bossNpc:'tuan_pb',
+    icon:'🧐',story:'Nhà phê bình ẩm thực Tuấn nghe tiếng. Ông ta nổi tiếng khắt khe — một bài đánh giá của ông có thể làm quán đóng cửa hoặc nổi tiếng rầm rộ. Đừng để ông chờ!',
+    objective:'Phục vụ ít nhất 7 khách · KHÔNG để Tuấn bỏ đi'},
+  // ── Ch.2: HỘI AN ──
+  {ch:2,lv:1,overall:6,name:'Hội An: Ngày đầu mở quán',customers:8,time:200,cost:300000,npcRate:0.45,
+    icon:'🏮',story:'Bác Tâm giới thiệu, bạn quyết định mang hương vị Hà Nội vào Hội An. Phố cổ nhỏ nhưng ấm áp. Khách du lịch nhiều hơn Hà Nội, họ tò mò và dễ tính hơn.',
+    objective:'Phục vụ ít nhất 5 khách · Mì Quảng mở khóa',unlocks:'mi_quang'},
+  {ch:2,lv:2,overall:7,name:'Phố Hội mùa lễ hội',customers:9,time:200,cost:330000,npcRate:0.5,event:'festival',
+    icon:'🎑',story:'Hội An đang vào mùa lễ hội Trung Thu. Đèn lồng rực rỡ khắp phố cổ. Khách đến đông hơn bình thường — chuẩn bị tốt nguyên liệu!',
+    objective:'Phục vụ ít nhất 6 khách · Doanh thu > 350.000đ'},
+  {ch:2,lv:3,overall:8,name:'Đoàn khách du lịch Hàn Quốc',customers:10,time:210,cost:360000,npcRate:0.5,
+    icon:'🌏',story:'Một đoàn 5 người Hàn Quốc đến tham quan. Họ không nói tiếng Việt nhưng dùng điện thoại dịch menu — đặt món bằng cách chỉ tay. Kiên nhẫn với họ nhé!',
+    objective:'Phục vụ ít nhất 7 khách · Speed bonus >= 3 lần'},
+  {ch:2,lv:4,overall:9,name:'Cuối tuần đông khách',customers:11,time:220,cost:400000,npcRate:0.6,event:'rush',
+    icon:'📈',story:'Cuối tuần Hội An luôn đông. Quán bún đã có tiếng — người xếp hàng dài hơn bao giờ hết. Cần phục vụ nhanh, không được để khách chờ lâu.',
+    objective:'Phục vụ ít nhất 8 khách · Streak >= 4 lần liên tiếp'},
+  {ch:2,lv:5,overall:10,name:'Boss: Đầu bếp Khang thách đấu',customers:12,time:260,cost:460000,npcRate:0.65,isBoss:true,bossNpc:'khang',
+    icon:'👨‍🍳',story:'Đầu bếp Khang — đối thủ cũ của Cụ Ông — nghe tin bạn vào Hội An. Ông thách đấu công khai. Cẩn thận: Khang rất ghét chả cháy!',
+    objective:'Phục vụ ít nhất 9 khách · KHÔNG để cháy chả · Doanh thu > 500.000đ'},
+  // ── Ch.3: SÀI GÒN ──
+  {ch:3,lv:1,overall:11,name:'Sài Gòn: Buổi sáng náo nhiệt',customers:9,time:200,cost:500000,npcRate:0.45,event:'heat',
+    icon:'🌆',story:'Sài Gòn về sáng — khói xe, tiếng còi, quán xá chen chúc. Người ta ăn nhanh để kịp đi làm. Hủ tiếu mở khóa — thêm vũ khí mới!',
+    objective:'Phục vụ ít nhất 6 khách · Hủ tiếu mở khóa · Ngày nóng — bán nước chạy hơn',unlocks:'hu_tieu'},
+  {ch:3,lv:2,overall:12,name:'Đoàn du khách Tây ba lô',customers:10,time:200,cost:540000,npcRate:0.7,event:'tour',
+    icon:'🧔',story:'John dẫn cả nhóm bạn cũ — Anna, Marco, David, Sophie, Kenji. Đoàn du khách sẽ đông và đa dạng. Họ kén món, hợp combo món + nước hơn.',
+    objective:'Phục vụ John + ít nhất 5 khách khác · Đoàn du khách — phần lớn là khách Tây'},
+  {ch:3,lv:3,overall:13,name:'Giờ cao điểm + mất điện ngắn',customers:11,time:210,cost:590000,npcRate:0.55,event:'blackout',
+    icon:'⚡',story:'12h trưa Sài Gòn vừa đông vừa nóng. Tự dưng cả khu phố cúp điện. Bếp vẫn cháy nhưng quạt đứng yên — nấu chậm hơn cho tới khi điện trở lại.',
+    objective:'Phục vụ ít nhất 8 khách · Streak >= 5 lần · Mất điện — thời gian nấu tăng'},
+  {ch:3,lv:4,overall:14,name:'Cuộc thi Ẩm thực 3 miền',customers:12,time:220,cost:650000,npcRate:0.6,event:'festival',
+    icon:'🏅',story:'Cuộc thi "Ẩm thực 3 miền" tại TP.HCM. Bạn đại diện miền Bắc với Bún dọc mùng. Ban giám khảo khắt khe, đặc biệt quan tâm đến kỹ thuật nướng chả.',
+    objective:'Phục vụ ít nhất 9 khách · 3 lần nướng PERFECT · Doanh thu > 600.000đ'},
+  {ch:3,lv:5,overall:15,name:'FINALE: Iron Chef Việt',customers:15,time:300,cost:760000,npcRate:0.7,isBoss:true,bossNpc:'iron_chef',
+    icon:'🏆',story:'Đêm chung kết. Iron Chef Việt — đầu bếp số 1 cả nước — đích thân đến thưởng thức. Cụ Ông đang nhìn từ trên cao... Đây là thời khắc quyết định sự nghiệp của bạn.',
+    objective:'Phục vụ ít nhất 11 khách · Iron Chef không được bỏ đi · Doanh thu > 800.000đ'},
+];
+
+const UPGRADES=[
+  {id:'faster_cook',name:'Bếp ga',emoji:'🔥',maxLv:3,levels:[
+    {lv:1,desc:'Thời gian nấu -15%',price:200000,ch:1},
+    {lv:2,desc:'Thời gian nấu -25%',price:360000,ch:1},
+    {lv:3,desc:'Thời gian nấu -38%',price:560000,ch:2},
+  ]},
+  {id:'price_boost',name:'Bảng menu',emoji:'📋',maxLv:3,levels:[
+    {lv:1,desc:'Giá mỗi món +8%',price:180000,ch:1},
+    {lv:2,desc:'Giá mỗi món +15%',price:360000,ch:1},
+    {lv:3,desc:'Giá mỗi món +22%',price:580000,ch:2},
+  ]},
+  {id:'extra_time',name:'Quạt mát',emoji:'🌀',maxLv:3,levels:[
+    {lv:1,desc:'Thêm 20 giây mỗi ngày',price:160000,ch:1},
+    {lv:2,desc:'Thêm 35 giây mỗi ngày',price:280000,ch:1},
+    {lv:3,desc:'Thêm 50 giây mỗi ngày',price:440000,ch:2},
+  ]},
+  {id:'extra_seat',name:'Bàn ghế',emoji:'🪑',maxLv:2,levels:[
+    {lv:1,desc:'Nhận thêm 1 khách cùng lúc',price:200000,ch:1},
+    {lv:2,desc:'Nhận thêm 2 khách cùng lúc',price:380000,ch:2},
+  ]},
+  {id:'grill_wide',name:'Lò nướng',emoji:'🏆',maxLv:2,levels:[
+    {lv:1,desc:'Vùng PERFECT: 37–63%',price:320000,ch:1},
+    {lv:2,desc:'Vùng PERFECT: 33–67%',price:520000,ch:2},
+  ]},
+  {id:'neon_sign',name:'Biển hiệu',emoji:'✨',maxLv:2,levels:[
+    {lv:1,desc:'Spawn thêm 1 khách mỗi ngày',price:430000,ch:2},
+    {lv:2,desc:'Spawn thêm 2 khách mỗi ngày',price:680000,ch:3},
+  ]},
+  {id:'loyal_card',name:'Thẻ khách quen',emoji:'💳',maxLv:3,levels:[
+    {lv:1,desc:'Khách quen kiên nhẫn +20%',price:240000,ch:1},
+    {lv:2,desc:'Khách quen kiên nhẫn +35%',price:420000,ch:2},
+    {lv:3,desc:'Khách quen kiên nhẫn +52%',price:660000,ch:3},
+  ]},
+];
+
+// ─────────────────────────────────────────────
+//  PROGRESS STATE (localStorage)
+// ─────────────────────────────────────────────
+
+const PROG_KEY='bv_prog_v111';
+const LEGACY_PROG_KEYS=['bv_prog_v110','bv_prog_v9'];
+const PROG_DEFAULT={levelIdx:0,totalMoney:0,upgradeLevels:{},levelStars:{},unlocked:1,metCustomers:{},reputation:0,achievements:{},storyFlags:{},bestFestival:0,bestEndless:0,drinksMastered:{}};
+let PROG=Object.assign({},PROG_DEFAULT);
+
+function saveProg(){try{localStorage.setItem(PROG_KEY,JSON.stringify(PROG));}catch(e){}}
+function loadProg(){
+  try{
+    let raw=localStorage.getItem(PROG_KEY);
+    if(!raw){for(const k of LEGACY_PROG_KEYS){const v=localStorage.getItem(k);if(v){raw=v;break;}}}
+    if(raw){
+      const d=JSON.parse(raw);
+      if(d.ownedUpgrades&&!d.upgradeLevels){d.upgradeLevels={};(d.ownedUpgrades||[]).forEach(id=>{d.upgradeLevels[id]=1;});delete d.ownedUpgrades;}
+      PROG=Object.assign({},PROG_DEFAULT,d);
+      // ensure object fields after deep merge gaps
+      ['upgradeLevels','levelStars','metCustomers','achievements','storyFlags','drinksMastered'].forEach(k=>{if(!PROG[k]||typeof PROG[k]!=='object')PROG[k]={};});
+      saveProg();
+    }
+  }catch(e){}
+}
+function resetProg(){PROG=createEmptyProgress();saveProg();location.reload();}
+function upgradeLevel(id){return PROG.upgradeLevels[id]||0;}
+function hasUpgrade(id){return upgradeLevel(id)>0;}
+function setStoryFlag(flag){if(!PROG.storyFlags[flag]){PROG.storyFlags[flag]=Date.now();saveProg();return true;}return false;}
+function hasStoryFlag(flag){return !!PROG.storyFlags[flag];}
+
+const DIALOGUES=[
+  {image:'🕯️',speaker:'Người kể chuyện',text:'Hà Nội, một sáng mùa thu se lạnh... Trong ngõ nhỏ phố cổ, Cụ Ông vừa qua đời sau bao năm gắn bó với quán bún.'},
+  {image:'📜',speaker:'Cháu (bạn)',text:'Cụ ơi... Cháu đã về. Cuốn sổ công thức này, Cụ đã viết suốt 30 năm để truyền lại cho cháu.'},
+  {image:'svg:cu-ong-old',speaker:'Cụ Ông (di nguyện)',text:'Cháu của ông... Quán Tiệm Bún Số 7 này đã 30 năm. Bao nhiêu khách quen, bao nhiêu kỷ niệm. Ông tin cháu sẽ giữ được hương vị...'},
+  {image:'svg:cu-ong-young',speaker:'Cụ Ông (di nguyện)',text:'Đặc biệt là Bún dọc mùng — đó là món ông tự hào nhất. Bí quyết nằm trong từng cọng dọc mùng cháu chọn, từng giờ ninh xương. Cố lên!'},
+  {image:'🏮',speaker:'Người kể chuyện',text:'Sáng mai, Tiệm Bún Số 7 sẽ mở cửa lần đầu sau khi Cụ mất. Bác Tâm và những người bạn cũ đang chờ cháu...'}
+];
+
+const TUTORIAL=[
+  {icon:'👋',section:'Bắt đầu',title:'Chào mừng đến Tiệm Bún Số 7!',
+    text:'Bạn vừa thừa kế quán bún của Cụ Ông trong ngõ phố cổ. Hành trình: 15 ngày qua 3 chương Hà Nội → Hội An → Sài Gòn. Cuối hành trình là danh hiệu "Đầu bếp 3 miền".\n\nHướng dẫn này gồm 15 phần — bạn có thể bỏ qua bất cứ lúc nào và xem lại từ menu chính.'},
+  {icon:'👀',section:'Khách hàng',title:'1. Đọc card khách',
+    text:'Mỗi khách hiện một card vàng có:\n• Tên (đỏ = khách quen) + emoji nhân vật\n• Món gọi (món chính, đôi khi + nước)\n• Vòng kiên nhẫn (số giây + màu)\n• Đặc điểm ngắn (vai trò trong đời sống Việt)\n• Badge ⭐ nếu là khách quen của Cụ Ông\n\nClick vào card để CHỌN khách trước khi phục vụ — viền vàng = đang chọn.'},
+  {icon:'⏱',section:'Khách hàng',title:'2. Vòng kiên nhẫn',
+    text:'Vòng tròn quanh số giây cho biết thời gian khách sẽ chờ:\n• 🟢 Xanh (>60%): thoải mái\n• 🟡 Vàng (30–60%): nên nhanh tay\n• 🔴 Đỏ (<30%): cấp bách — header sẽ NHÁY ĐỎ\n\nHết kiên nhẫn = khách bỏ đi, mất danh tiếng + điểm. Khách quen mất 2 danh tiếng, khách bí ẩn mất 3.'},
+  {icon:'📖',section:'Nấu ăn',title:'3. Sổ công thức',
+    text:'Panel bên phải có "Sổ công thức" liệt kê các món đã mở khóa:\n• Tên + emoji\n• Nguyên liệu cần\n• Giá bán + thời gian nấu + điểm\n\nMón "Bún dọc mùng" có ⭐ đỏ — đây là món signature gia truyền của Cụ Ông, thưởng +20% giá. Nhiều món mở dần qua chương (Phở từ ch.4, Bún bò Huế từ ch.8, Cơm tấm từ ch.12...).'},
+  {icon:'🥕',section:'Nấu ăn',title:'4. Cho nguyên liệu vào nồi',
+    text:'Bên dưới sổ công thức là nguyên liệu — chỉ hiện những thứ thuộc món đã mở khóa.\n\nCách dùng:\n• Click nguyên liệu → vào nồi (tag emoji hiện trên nồi)\n• Tối đa 5 nguyên liệu/lần, không trùng\n• Đủ + đúng công thức → nút "🔥 Nấu nồi" sáng + công thức tương ứng được highlight xanh\n• Nhấn "Nấu" → nồi bắt đầu chạy progress bar\n\n⚠️ Đang nấu KHÔNG được đổ nồi — phải đợi xong rồi mới quyết. Nếu đổ món đã nấu xong → mất 10k chi phí.'},
+  {icon:'🔥',section:'Nấu ăn',title:'5. Mini-game Nướng chả',
+    text:'Bún chả cần CẢ nồi nước chấm + chả nướng. Lò than ở bên phải nồi:\n\n1. Click 🍖 chả → vào lò (lò bốc lửa)\n2. Đợi thanh đỏ vào VÙNG XANH (40–60%) → bấm "🔄 Lật" — đúng = PERFECT, lệch = good/early/late\n3. Đợi thanh quay lại vùng xanh → bấm "✋ Gắp"\n4. Cả 2 lần đều PERFECT → chả vàng ruộm + thưởng +15% giá\n\n💀 Quá 100% = CHÁY ĐEN. Bấm "🗑 Bỏ chả" để hủy mất 8k và làm lại.\n\n💡 Tip: Nâng cấp Lò nướng làm vùng PERFECT rộng hơn (37–63% rồi 33–67%).'},
+  {icon:'🍽',section:'Phục vụ',title:'6. Phục vụ đúng cách',
+    text:'Quy trình ĐÚNG:\n1. CLICK chọn khách (viền vàng)\n2. Đảm bảo món trong nồi khớp đơn khách\n3. Pha nước nếu khách gọi (xem mục 7)\n4. Nhấn "🍽 Phục vụ"\n\nKết quả:\n• Đúng món: tiền + điểm + tip (nếu khách quen) + speed bonus (nếu kiên nhẫn còn >70%)\n• Sai món: -5 điểm, reset streak, khách báo "không phải món tôi gọi"\n• Khách bí ẩn lần đầu: +30k bonus + mở khóa câu chuyện'},
+  {icon:'🥤',section:'Pha nước',title:'7. Khu pha nước',
+    text:'Khu pha nước (gradient xanh) ở panel phải, bên dưới sổ công thức.\n\n5 công thức cơ bản:\n• Trà đá = 🍵 Trà + 🧊 Đá (2s)\n• Trà tắc = 🍵 + 🍋 Tắc + 🧊 (3s)\n• Nước mía = 🎋 Mía + 🧊 (4s)\n• Cà phê sữa đá = ☕ Cà phê + 🥛 Sữa đặc + 🧊 (4s)\n• Rau má = 🌿 Lá rau má + 🧊 (3s)\n\nMỗi nước mở khóa theo chương. Click công thức để xem nguyên liệu cần.'},
+  {icon:'🥃',section:'Pha nước',title:'8. Đúng/sai/thiếu nước',
+    text:'Khách thường gọi món + 1 nước. Cách xử lý:\n\n✅ Đúng nước (pha + match đơn): cộng giá nước + combo bonus 5% giá món + tip cao hơn. Lễ hội cộng thêm.\n❌ Sai nước (đã pha nhưng không khớp): MẤT 3.000đ chi phí, -2 điểm, KHÔNG bonus. Món chính vẫn được tính đúng.\n⚪ Thiếu nước (không pha): -1 điểm, mất bonus. Món chính vẫn OK.\n\n💡 Sai nước không fail toàn đơn — đừng panic, tiếp tục phục vụ. Tốt nhất: kiểm tra đơn khách kỹ trước khi cho nguyên liệu vào cốc.'},
+  {icon:'⭐',section:'Khách đặc biệt',title:'9. Khách quen & khách Tây',
+    text:'Khách quen có badge ⭐, tip cao + thoại riêng:\n• 👴 Bác Tâm (bún dọc mùng, ×1.3) — bạn cũ Cụ Ông\n• 👩‍💼 Cô Lan (bánh mì, ×1.5) — doanh nhân vội\n• 🧔 John (bún chả, ×1.7) — Tây ba lô Mỹ\n\nKhách Tây mở dần (Anna, Marco, Kenji, Sophie, David) — tip 1.3-1.8, có sở thích vùng miền riêng.\n\nKhách Việt vai phụ: sinh viên, công nhân, cô bán hoa, xe ôm, bà cụ chợ, shipper — mỗi người một câu chuyện nhỏ.'},
+  {icon:'🌟',section:'Khách đặc biệt',title:'10. Khách bí ẩn',
+    text:'Hiếm khi xuất hiện (5–12% rate, cao hơn ở chương sau):\n• 📱 Linh Review — food blogger, gợi ý món hot\n• 🧳 Chú Phúc — Việt kiều tìm vị quê, kiên nhẫn cao\n• 🎩 Khách im lặng — gọi món bằng câu thơ, mặc định = bún chả\n\nPhục vụ đúng LẦN ĐẦU mỗi khách → mở khóa câu chuyện riêng (xem trong Sổ tay quán) + bonus 30.000đ + 20⭐.'},
+  {icon:'⚠',section:'Khách đặc biệt',title:'11. Boss Level',
+    text:'Cuối mỗi chương có Boss với viền HỒNG nháy + ribbon "⚠️ BOSS":\n• Ch.1: 🧐 Nhà phê bình Tuấn — kén ăn, kiên nhẫn 35s\n• Ch.2: 👨‍🍳 Đầu bếp Khang — đối thủ Cụ Ông, ghét chả cháy (-100k mỗi lần cháy!)\n• Ch.3: 🏆 Iron Chef Việt — finale, tip ×3.0 nếu happy\n\n🚨 ĐỪNG để Boss bỏ đi — sẽ thua CẢ ngày bất kể đã phục vụ bao nhiêu khách khác. Khi Boss spawn: header glow hồng, ưu tiên xử lý ngay.'},
+  {icon:'🌧',section:'Sự kiện',title:'12. Sự kiện ngày',
+    text:'Một số ngày có sự kiện đặc biệt (hiện trong story overlay):\n• 🌧 Mưa rào — khách đến chậm, hợp món nóng\n• 🎑 Lễ hội — 3 khách spawn cùng lúc, combo +20%\n• ⚡ Giờ cao điểm — khách đến liên tục\n• ☀️ Peak — kiên nhẫn -20%\n• 🌡 Ngày nóng — giá nước +30% (cơ hội kiếm tiền)\n• ⚡ Mất điện — cookTime ×1.5\n• 🌏 Đoàn du khách — chủ yếu khách Tây\n\nMỗi sự kiện đòi chiến lược khác. Đọc story trước ngày để chuẩn bị.'},
+  {icon:'🛒',section:'Tiến trình',title:'13. Cửa hàng nâng cấp',
+    text:'Cuối ngày → "🛒 Cửa hàng nâng cấp". 7 nâng cấp đa cấp (2-3 cấp/loại):\n• 🔥 Bếp ga — nấu nhanh -15→38%\n• 📋 Bảng menu — giá +8→22%\n• 🌀 Quạt mát — thêm 20→50s mỗi ngày\n• 🪑 Bàn ghế — thêm 1-2 khách cùng lúc\n• 🏆 Lò nướng — vùng PERFECT rộng hơn\n• ✨ Biển hiệu — thêm khách/ngày\n• 💳 Thẻ khách quen — kiên nhẫn quen +20→52%\n\n💡 Nâng cấp cấp cao mở theo chương — đừng cố mua hết ở ch.1. Ưu tiên Bếp ga + Bảng menu trước.'},
+  {icon:'🎑',section:'Mode khác',title:'14. Lễ hội ẩm thực (endless)',
+    text:'Menu chính → "🎑 Lễ hội ẩm thực":\n• Khách đến vô hạn\n• Mỗi 60s tăng độ khó (spawn nhanh hơn)\n• Mở khóa toàn bộ món + nước\n• Combo bonus +20%\n• Khi 5 khách bỏ đi → end. Có warning ở strike 3 và 4\n• Best score được lưu, 30% doanh thu vào ngân sách\n• Khách bí ẩn xuất hiện gấp đôi (18% rate)\n\n💡 Tốt cho luyện tay + cày tiền nâng cấp + săn thành tựu "🎑 Vua lễ hội".'},
+  {icon:'📔',section:'Mode khác',title:'15. Sổ tay quán',
+    text:'Menu chính → "📔 Sổ tay quán" có 4 tab:\n• 🏅 Thành tựu — 20 thành tựu để săn (1 ẩn)\n• 👥 Khách đã gặp — 21 NPC + số lần gặp\n• 📖 Câu chuyện — mở khi phục vụ khách bí ẩn lần đầu\n• 📊 Thống kê — tổng tiền, danh tiếng, sao, nước pha đúng, etc.\n\nKhám phá để biết bạn đang đứng ở đâu trong hành trình.'},
+  {icon:'🏆',section:'Bắt đầu',title:'Bắt đầu hành trình',
+    text:'Mục tiêu Ngày 1: phục vụ ít nhất 4/6 khách. Mỗi ngày Cụ Ông nhận xét cuối ngày qua mục di nguyện.\n\nNguyên tắc vàng:\n• Khách quen + bí ẩn ưu tiên\n• Boss tuyệt đối không để bỏ đi\n• Streak liên tục cho điểm cộng\n• Sai nước không fail — đừng hoảng\n• Tiết kiệm chi phí: ít cháy chả + ít đổ nồi\n\nCụ Ông luôn dõi theo từ trên cao. Chúc may mắn cháu!'}
+];
+
+// ─────────────────────────────────────────────
+//  GAME STATE
+// ─────────────────────────────────────────────
+
+let G = {
+  money:0,score:0,timeRemaining:180,
+  customersServed:0,customersLeft:0,totalCustomers:6,customersSpawned:0,
+  customers:[],
+  pot:{ingredients:[],status:'idle',finishedDish:null},
+  grill:{status:'idle',progress:0,flipped:false,quality:null,flipQuality:null},
+  drinkStation:{ingredients:[],status:'idle',finishedDrink:null},
+  selectedCustomer:null,
+  isPaused:false,isGameOver:false,
+  perfectGrills:0,burntGrills:0,
+  streak:0,maxStreak:0,
+  drinksServedCorrect:0,
+  npcServed:{bac_tam:0,co_lan:0,john:0},
+  isFestival:false
+};
+
+let timerInterval=null,spawnInterval=null,patienceInterval=null,grillInterval=null,drinkInterval=null,blackoutInterval=null;
+let pendingNotifyTimers=[];
+let _sessionAchievementQueue=[];
+
+function notifyDelayed(ms,fn){
+  const id=setTimeout(()=>{fn();pendingNotifyTimers=pendingNotifyTimers.filter(x=>x!==id);},ms);
+  pendingNotifyTimers.push(id);
+  return id;
+}
+function clearPendingNotifyTimers(){
+  pendingNotifyTimers.forEach(id=>clearTimeout(id));
+  pendingNotifyTimers=[];
+}
+
+// Defer achievement popups to end-of-level so they don't break focus mid-rush
+function flushAchievementQueue(){
+  if(!_sessionAchievementQueue.length)return;
+  _sessionAchievementQueue.forEach((a,i)=>{
+    notifyDelayed(800+i*1100,()=>notify(`🏅 Thành tựu mới: ${a.emoji} ${a.name}`,'success'));
+  });
+  _sessionAchievementQueue=[];
+}
+
+// ─────────────────────────────────────────────
+//  TUTORIAL
+// ─────────────────────────────────────────────
+
+let tutIdx=0;
+
+function showTutorial(){
+  tutIdx=0;
+  document.getElementById('tutorialOverlay').classList.add('active');
+  renderTutorial();
+}
+
+function renderTutorial(){
+  const s=TUTORIAL[tutIdx];
+  document.getElementById('tutorialIcon').textContent=s.icon;
+  const secEl=document.getElementById('tutorialSection');
+  if(secEl){secEl.textContent=s.section||'';secEl.style.display=s.section?'':'none';}
+  const cntEl=document.getElementById('tutorialCounter');
+  if(cntEl)cntEl.textContent=`Bước ${tutIdx+1} / ${TUTORIAL.length}`;
+  document.getElementById('tutorialTitle').textContent=s.title;
+  document.getElementById('tutorialText').textContent=s.text;
+  document.getElementById('tutorialText').scrollTop=0;
+  document.getElementById('tutorialNextBtn').textContent=tutIdx===TUTORIAL.length-1?'✅ Bắt đầu chơi!':'Tiếp theo →';
+  document.getElementById('tutorialPrevBtn').style.display=tutIdx>0?'block':'none';
+  // Progress pips
+  const pBar=document.getElementById('tutorialProgress');
+  pBar.innerHTML='';
+  TUTORIAL.forEach((_,i)=>{
+    const pip=document.createElement('div');
+    pip.className='tutorial-pip'+(i<tutIdx?' done':i===tutIdx?' current':'');
+    pBar.appendChild(pip);
+  });
+}
+
+function nextTutorial(){
+  tutIdx++;
+  if(tutIdx>=TUTORIAL.length){closeTutorial();return;}
+  renderTutorial();
+}
+
+function prevTutorial(){
+  if(tutIdx>0){tutIdx--;renderTutorial();}
+}
+
+function closeTutorial(){
+  document.getElementById('tutorialOverlay').classList.remove('active');
+}
+
+// ─────────────────────────────────────────────
+//  CUTSCENE
+// ─────────────────────────────────────────────
+
+let dlgIdx=0,isTyping=false,typeTimer=null;
+
+function startStory(){
+  document.querySelectorAll('.screen,.end-screen').forEach(el=>el.classList.remove('active'));
+  document.getElementById('cutsceneScreen').classList.add('active');
+  dlgIdx=0;
+  buildDots();showDialogue();
+}
+
+function buildDots(){
+  const c=document.getElementById('dialogueDots');
+  c.innerHTML='';
+  DIALOGUES.forEach((_,i)=>{
+    const d=document.createElement('div');d.className='dialogue-dot'+(i===0?' active':'');d.id='dot'+i;c.appendChild(d);
+  });
+}
+
+function showDialogue(){
+  if(dlgIdx>=DIALOGUES.length){document.getElementById('cutsceneScreen').classList.remove('active');startGame();return;}
+  const d=DIALOGUES[dlgIdx];
+  const imgEl=document.getElementById('cutsceneImage');
+  if(d.image&&d.image.startsWith('svg:')){
+    imgEl.innerHTML=`<img src="assets/portraits/${d.image.slice(4)}.svg" alt="${d.speaker}" style="width:280px;height:280px;object-fit:contain;animation:cutsceneIn 1.5s ease-out;">`;
+  } else {
+    imgEl.textContent=d.image;
+  }
+  document.getElementById('dialogueSpeaker').textContent=d.speaker;
+  const el=document.getElementById('dialogueText');el.textContent='';
+  DIALOGUES.forEach((_,i)=>{
+    const dot=document.getElementById('dot'+i);
+    if(dot) dot.className='dialogue-dot'+(i===dlgIdx?' active':i<dlgIdx?' done':'');
+  });
+  isTyping=true;let i=0;
+  if(typeTimer)clearInterval(typeTimer);
+  typeTimer=setInterval(()=>{
+    if(i<d.text.length){el.textContent+=d.text[i++];}
+    else{clearInterval(typeTimer);isTyping=false;}
+  },28);
+}
+
+function skipCutscene(){
+  if(typeTimer)clearInterval(typeTimer);
+  document.getElementById('cutsceneScreen').classList.remove('active');
+  startGame();
+}
+
+document.getElementById('cutsceneScreen').addEventListener('click',e=>{
+  if(e.target.classList.contains('dialogue-skip'))return;
+  if(isTyping){
+    if(typeTimer)clearInterval(typeTimer);
+    document.getElementById('dialogueText').textContent=DIALOGUES[dlgIdx].text;
+    isTyping=false;
+  } else {dlgIdx++;showDialogue();}
+});
+
+// ─────────────────────────────────────────────
+//  GAME INIT
+// ─────────────────────────────────────────────
+
+function startGame(){
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  // clear old intervals + any leftover notify timers + achievement queue
+  [timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});
+  timerInterval=spawnInterval=patienceInterval=grillInterval=drinkInterval=blackoutInterval=null;
+  clearPendingNotifyTimers();
+  _sessionAchievementQueue=[];
+  // reset state
+  const tTime=lv.time+[0,20,35,50][upgradeLevel('extra_time')];
+  const tCustomers=lv.customers+upgradeLevel('extra_seat')+upgradeLevel('neon_sign');
+  G.money=0;G.score=0;G.timeRemaining=tTime;G._levelTime=tTime;G._npcRate=lv.npcRate;G._cost=lv.cost;
+  G.customersServed=0;G.customersLeft=0;G.totalCustomers=tCustomers;G.customersSpawned=0;G.customers=[];
+  G.pot={ingredients:[],status:'idle',finishedDish:null};
+  G.grill={status:'idle',progress:0,flipped:false,quality:null,flipQuality:null};
+  G.drinkStation={ingredients:[],status:'idle',finishedDrink:null};
+  G.selectedCustomer=null;G.isPaused=false;G.isGameOver=false;
+  G.perfectGrills=0;G.burntGrills=0;G.streak=0;G.maxStreak=0;
+  G.drinksServedCorrect=0;G.isFestival=false;G.recipeOverallOverride=null;
+  G.npcServed={bac_tam:0,co_lan:0,john:0};
+  // hide all, show game
+  document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));
+  document.getElementById('gameScreen').classList.add('active');
+  // update chapter bar
+  const chNames=['','🏮 Chương 1: Hà Nội','🌸 Chương 2: Hội An','⭐ Chương 3: Sài Gòn'];
+  document.getElementById('chapterBarInfo').innerHTML=`<span class="chapter-bar-name">${chNames[lv.ch]}</span> · Chương ${lv.overall||PROG.levelIdx+1}: ${lv.name}`;
+  document.getElementById('totalDisplay').textContent=tCustomers;
+  const mm=Math.floor(tTime/60),ss=tTime%60;
+  document.getElementById('timeDisplay').textContent=`${mm}:${ss.toString().padStart(2,'0')}`;
+  document.getElementById('timerBar').style.width='100%';
+  buildDayPips();resetPot();resetGrill();resetDrinkStation();
+  renderIngredients();renderRecipes();renderDrinks();renderDrinkIngredients();renderNPCList();updateUI();
+  G._event=lv.event||null;
+  G._bossNpc=lv.bossNpc||null;
+  G._bossSpawned=false;
+  G._burnPenalty=false;
+  showStoryOverlay(lv,()=>{
+    setTimeout(()=>spawnCustomer(),900);
+    if(lv.event==='festival'){setTimeout(()=>spawnCustomer(),1200);setTimeout(()=>spawnCustomer(),1500);}
+    else{setTimeout(()=>spawnCustomer(),4200);}
+    const maxActive=3+(hasUpgrade('extra_seat')?1:0);
+    const spawnMs=lv.event==='rush'||lv.event==='peak'?7000:10000;
+    spawnInterval=setInterval(()=>{
+      if(G.isPaused||G.isGameOver)return;
+      if(G.customersSpawned<G.totalCustomers&&G.customers.filter(c=>!c.served&&!c.left).length<maxActive)spawnCustomer();
+    },spawnMs);
+    timerInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickTimer();},1000);
+    patienceInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickPatience();},1000);
+  });
+}
+
+function buildDayPips(){
+  const c=document.getElementById('dayPips');c.innerHTML='';
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  const chStart=(lv.ch-1)*5;
+  for(let i=0;i<5;i++){
+    const idx=chStart+i;
+    const done=PROG.levelStars[idx]!==undefined;
+    const cur=idx===PROG.levelIdx;
+    const p=document.createElement('div');
+    p.className='day-pip'+(cur?' current':done?' done':'');
+    c.appendChild(p);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  GAME TIMER
+// ─────────────────────────────────────────────
+
+function tickTimer(){
+  G.timeRemaining--;
+  const m=Math.floor(G.timeRemaining/60),s=G.timeRemaining%60;
+  document.getElementById('timeDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
+  document.getElementById('timerBar').style.width=(G.timeRemaining/(G._levelTime||180)*100)+'%';
+  if(G.timeRemaining<=0){endLevel('timeout');return;}
+  checkEndCondition();
+}
+
+// ─────────────────────────────────────────────
+//  SPAWN CUSTOMERS
+// ─────────────────────────────────────────────
+
+function currentOverall(){
+  if(G.recipeOverallOverride)return G.recipeOverallOverride;
+  return LEVELS[PROG.levelIdx]?.overall||1;
+}
+
+function isUnlockedItem(item){
+  return !item.availableFrom||item.availableFrom<=currentOverall();
+}
+
+function availableRecipeEntries(){
+  return Object.entries(RECIPES).filter(([,r])=>isUnlockedItem(r));
+}
+
+function availableRecipeKeys(){
+  return availableRecipeEntries().map(([k])=>k);
+}
+
+function availableDrinkKeys(){
+  return Object.keys(DRINKS).filter(k=>isUnlockedItem(DRINKS[k]));
+}
+
+function visibleIngredientKeys(){
+  const keys=new Set();
+  availableRecipeEntries().forEach(([,r])=>{
+    r.ingredients.forEach(k=>keys.add(k));
+    if(r.needsGrill&&r.grillIngredient)keys.add(r.grillIngredient);
+  });
+  return [...keys].filter(k=>INGREDIENTS[k]&&!INGREDIENTS[k].isDrink);
+}
+
+function visibleDrinkIngredientKeys(){
+  const keys=new Set();
+  availableDrinkKeys().forEach(k=>{
+    (DRINKS[k].ingredients||[]).forEach(ing=>keys.add(ing));
+  });
+  return [...keys].filter(k=>INGREDIENTS[k]);
+}
+
+function chooseNpcKey(existing){
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  const r=Math.random();
+  const bossAt=Math.floor(G.totalCustomers*0.4);
+  if(G._bossNpc&&G.customersSpawned===bossAt&&!G._bossSpawned&&!existing.includes(G._bossNpc)){
+    G._bossSpawned=true;return G._bossNpc;
+  }
+  if(G.customersSpawned===0&&!G.isFestival)return 'bac_tam';
+  const mystery=['food_blogger','viet_kieu','khach_im_lang'].filter(k=>!existing.includes(k));
+  const mysteryRate=G.isFestival?0.18:lv.overall>=6?0.10:lv.overall>=3?0.05:0;
+  if(mystery.length&&r<mysteryRate)return mystery[Math.floor(Math.random()*mystery.length)];
+  const regulars=['bac_tam','co_lan','john'];
+  const locals=['sinh_vien','bac_cong_nhan','co_ban_hoa','chu_xe_om','ba_cu_cho','anh_shipper'];
+  const ovr=G.isFestival?15:lv.overall;
+  const tourists=ovr>=6?['anna','marco','kenji','sophie','david']:ovr>=4?['anna','marco','kenji']:[];
+  // Tour event: bias toward tourists
+  if(G._event==='tour'&&tourists.length&&r<0.65){
+    const pool=tourists.filter(k=>!existing.includes(k));
+    if(pool.length)return pool[Math.floor(Math.random()*pool.length)];
+  }
+  let pool=r<(G._npcRate||0.6)?regulars.concat(locals,tourists):locals.concat(tourists,'khach_thuong');
+  pool=pool.filter(k=>!existing.includes(k));
+  return pool.length?pool[Math.floor(Math.random()*pool.length)]:'khach_thuong';
+}
+
+function spawnCustomer(){
+  if(G.customersSpawned>=G.totalCustomers)return;
+  const existing=G.customers.filter(c=>!c.served&&!c.left).map(c=>c.npcKey);
+  let npcKey=chooseNpcKey(existing);
+  const npc=NPCS[npcKey];
+  // Filter recipe to available dishes for current chapter
+  const availRecipes=availableRecipeKeys();
+  let recipe=npc.favorite&&availRecipes.includes(npc.favorite)?npc.favorite:availRecipes[Math.floor(Math.random()*availRecipes.length)];
+  if(npcKey==='khach_im_lang'&&availRecipes.includes('bun_cha'))recipe='bun_cha';
+  const drinkKeys=availableDrinkKeys();
+  const wantsDrink=drinkKeys.length&&(Math.random()<0.25||npc.drink);
+  const drink=wantsDrink&&(npc.drink&&drinkKeys.includes(npc.drink)?npc.drink:drinkKeys[Math.floor(Math.random()*drinkKeys.length)]);
+  let pat=npc.patience;
+  if(drink&&DRINKS[drink]?.patienceBoost)pat+=DRINKS[drink].patienceBoost;
+  const lcLv=upgradeLevel('loyal_card');
+  if(npc.isRegular&&lcLv>0)pat=Math.floor(pat*[1,1.20,1.35,1.52][lcLv]);
+  if(G._event==='peak')pat=Math.floor(pat*0.8);  // rush/peak: shorter patience
+  // heat day: keep drink price +30% bonus, but no patience nerf — too punishing combined
+  const c={
+    id:Date.now()+Math.random(),npcKey,
+    name:npc.name,emoji:npc.emoji,trait:npc.trait,
+    isRegular:npc.isRegular,isBoss:npc.isBoss||false,
+    failOnLeave:npc.failOnLeave||false,
+    tip:npc.tip,quotes:npc.quotes,
+    order:recipe,drink:drink||null,patience:pat,maxPatience:pat,
+  };
+  PROG.metCustomers[npcKey]=(PROG.metCustomers[npcKey]||0)+1;
+  saveProg();
+  c.justSpawned=true;
+  G.customers.push(c);G.customersSpawned++;
+  renderCustomers();
+  // Boss arrival is important — keep notify for boss only + body class for visual
+  if(npc.isBoss){
+    notify(`⚠️ BOSS đến quán — ${npc.name}: "${npc.quotes.arrive}"`,'error');
+    document.body.classList.add('boss-active');
+  }
+  // Clear justSpawned cờ sau bubble fade (3.5s) để re-render không phát lại bubble
+  setTimeout(()=>{c.justSpawned=false;},3600);
+}
+
+function updateBossActiveClass(){
+  const bossStillIn=G.customers.some(c=>c.isBoss&&!c.served&&!c.left);
+  document.body.classList.toggle('boss-active',bossStillIn);
+}
+
+// ─────────────────────────────────────────────
+//  PATIENCE
+// ─────────────────────────────────────────────
+
+function tickPatience(){
+  let changed=false;
+  G.customers.forEach(c=>{
+    if(c.served||c.left)return;
+    c.patience--;changed=true;
+    if(c.patience<=0){
+      c.left=true;G.customersLeft++;
+      if(c.isBoss)updateBossActiveClass();
+      G.streak=0;updateStreak();
+      const angryLine=(c.quotes&&c.quotes.angry)||'Tôi đi quán khác đây!';
+      notify(`😡 ${c.name}: "${angryLine}"`, 'error');
+      G.score=Math.max(0,G.score-(c.isRegular?15:5));
+      PROG.reputation=Math.max(0,(PROG.reputation||0)-(c.isMystery?3:c.isRegular?2:1));
+      saveProg();
+      if(typeof checkAchievements==='function')checkAchievements({type:'leave',customer:c});
+      // Festival strike warnings
+      if(G.isFestival&&G._festivalLeftLimit){
+        const remaining=G._festivalLeftLimit-G.customersLeft;
+        if(remaining===2)notifyDelayed(800,()=>notify('⚠️ Còn 2 lần lỡ — cố lên!','warning'));
+        else if(remaining===1)notifyDelayed(800,()=>notify('🚨 Lần lỡ cuối! Đừng để khách bỏ đi nữa!','error'));
+      }
+      if(c.failOnLeave){endLevel('boss_fled');return;}
+      setTimeout(()=>{G.customers=G.customers.filter(x=>x.id!==c.id);renderCustomers();checkEndCondition();},1400);
+    }
+  });
+  if(changed)renderCustomers();
+  updateUI();
+  // Rush feedback toggle
+  const isRush=G.customers.some(c=>!c.served&&!c.left&&c.patience<=c.maxPatience*0.3);
+  document.querySelector('.game-header')?.classList.toggle('rush',isRush);
+}
+
+function checkEndCondition(){
+  if(G.customersServed+G.customersLeft>=G.totalCustomers)endLevel('done');
+}
+
+// ─────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────
+
+function renderCustomers(){
+  const list=document.getElementById('customersList');
+  const active=G.customers.filter(c=>!c.served&&!c.left);
+  if(active.length===0&&G.customersSpawned===0){list.innerHTML='<div class="customers-empty">Đang chờ khách đầu tiên...</div>';return;}
+  list.innerHTML='';
+  G.customers.forEach(c=>{
+    const card=document.createElement('div');
+    if(c.served){card.className='customer-card served';card.innerHTML=`<div class="customer-emoji">😊</div><div class="customer-name">${c.name}</div><div class="customer-order-label">"${c.quotes.happy}"</div>`;list.appendChild(card);return;}
+    if(c.left){card.className='customer-card angry';card.innerHTML=`<div class="customer-emoji">😡</div><div class="customer-name">${c.name}</div><div class="customer-order-label">"${c.quotes.angry}"</div>`;list.appendChild(card);return;}
+    card.className='customer-card'+(G.selectedCustomer===c.id?' selected':'');
+    if(c.isBoss)card.dataset.boss='1';
+    card.style.position='relative';
+    card.onclick=()=>selectCustomer(c.id);
+    const pct=(c.patience/c.maxPatience)*100;
+    const ringColor=pct>60?'#4CAF50':pct>30?'#FFC107':'#f44336';
+    const badge=c.isRegular?'<div class="customer-badge">⭐</div>':'';
+    const drinkLine=c.drink?`<br><span style="color:#1976D2">${DRINKS[c.drink].emoji} ${DRINKS[c.drink].name}</span>`:'';
+    const bubble=c.justSpawned&&c.quotes&&c.quotes.arrive?`<div class="customer-bubble">${c.quotes.arrive}</div>`:'';
+    card.innerHTML=`
+      ${bubble}
+      ${badge}
+      <div class="customer-emoji">${c.emoji}</div>
+      <div class="customer-name${c.isRegular?' regular':''}">${c.name}</div>
+      <div class="customer-order-label">${RECIPES[c.order].emoji} ${RECIPES[c.order].name}${drinkLine}</div>
+      <div class="patience-ring-wrap">
+        <div class="patience-ring" style="--ring-pct:${pct}%;--ring-color:${ringColor}" data-sec="${Math.ceil(c.patience)}s"></div>
+      </div>
+      <div class="customer-trait">${c.trait}</div>`;
+    list.appendChild(card);
+  });
+  document.getElementById('servedDisplay').textContent=G.customersServed;
+}
+
+function selectCustomer(id){
+  G.selectedCustomer=id;renderCustomers();updateServeBtn();
+  const c=G.customers.find(x=>x.id===id);
+  if(c)notify(`✓ Chọn: ${c.name} · cần ${RECIPES[c.order].name}${c.drink?' + '+DRINKS[c.drink].name:''}`,'info');
+}
+
+function renderIngredients(){
+  const grid=document.getElementById('ingredientsGrid');grid.innerHTML='';
+  visibleIngredientKeys().forEach(k=>{
+    const ing=INGREDIENTS[k];
+    const div=document.createElement('div');
+    div.className='ingredient'+(ing.special?' special':'');div.id='ing-'+k;
+    div.onclick=()=>ing.needsGrill?putOnGrill(k):addIngredient(k);
+    div.innerHTML=`<span class="ingredient-emoji">${ing.emoji}</span><div class="ingredient-name">${ing.name}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+function renderRecipes(){
+  const list=document.getElementById('recipeList');list.innerHTML='';
+  availableRecipeEntries().forEach(([key,r])=>{
+    const div=document.createElement('div');
+    div.className='recipe-item'+(r.isSignature?' signature':'');
+    div.id='recipe-'+key;
+    const ings=r.ingredients.map(k=>`${INGREDIENTS[k].emoji} ${INGREDIENTS[k].name}`).join(' + ');
+    const grillExtra=r.needsGrill?`<br><span style="color:#FF8A65">+ ${INGREDIENTS[r.grillIngredient].emoji} ${INGREDIENTS[r.grillIngredient].name} (nướng)</span>`:'';
+    div.innerHTML=`
+      ${r.isSignature?'<div><span class="recipe-tag sig">⭐ Đặc biệt</span></div>':''}
+      <div class="recipe-name">${r.emoji} ${r.name}</div>
+      <div class="recipe-ings">${ings}${grillExtra}</div>
+      <div class="recipe-stats">
+        <span class="recipe-stat">💰 ${r.price.toLocaleString('vi-VN')}đ</span>
+        <span class="recipe-stat">⏱ ${r.cookTime}s</span>
+        <span class="recipe-stat">⭐ ${r.score}đ</span>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+function renderDrinks(){
+  const keys=availableDrinkKeys();
+  const sec=document.getElementById('drinkSection');
+  sec.style.display=keys.length?'':'none';
+  const list=document.getElementById('drinkList');list.innerHTML='';
+  keys.forEach(k=>{
+    const d=DRINKS[k];
+    const ingsLabel=(d.ingredients||[]).map(ing=>INGREDIENTS[ing]?INGREDIENTS[ing].emoji+' '+INGREDIENTS[ing].name:ing).join(' + ');
+    const row=document.createElement('div');row.className='drink-row';row.id='drink-row-'+k;
+    row.onclick=()=>highlightDrinkRecipe(k);
+    row.innerHTML=`<div style="flex:1;min-width:0;"><div style="font-weight:600;">${d.emoji} ${d.name} <span style="color:var(--gold);font-weight:700;">${d.price.toLocaleString('vi-VN')}đ</span></div><div class="drink-row-recipe">${ingsLabel}</div></div>`;
+    list.appendChild(row);
+  });
+}
+
+function renderDrinkIngredients(){
+  const grid=document.getElementById('drinkIngsGrid');if(!grid)return;
+  grid.innerHTML='';
+  visibleDrinkIngredientKeys().forEach(k=>{
+    const ing=INGREDIENTS[k];
+    const div=document.createElement('div');
+    div.className='drink-ing';div.id='dring-'+k;
+    div.onclick=()=>addDrinkIng(k);
+    div.innerHTML=`<span class="drink-ing-emoji">${ing.emoji}</span><span class="drink-ing-name">${ing.name}</span>`;
+    grid.appendChild(div);
+  });
+}
+
+function highlightDrinkRecipe(key){
+  document.querySelectorAll('.drink-row').forEach(el=>el.classList.remove('drink-active'));
+  if(key)document.getElementById('drink-row-'+key)?.classList.add('drink-active');
+}
+
+function findDrinkMatch(){
+  const ings=[...G.drinkStation.ingredients].sort().join(',');
+  return availableDrinkKeys().find(k=>[...(DRINKS[k].ingredients||[])].sort().join(',')===ings)||null;
+}
+
+function addDrinkIng(key){
+  if(G.drinkStation.status==='preparing'||G.drinkStation.status==='done'){notify('Đang pha rồi!','warning');return;}
+  if(G.drinkStation.ingredients.includes(key)){notify('Đã có nguyên liệu này.','warning');return;}
+  if(G.drinkStation.ingredients.length>=4){notify('Quá nhiều nguyên liệu!','error');return;}
+  G.drinkStation.ingredients.push(key);
+  document.getElementById('dring-'+key)?.classList.add('in-cup');
+  updateDrinkCup();
+  const match=findDrinkMatch();
+  if(match){
+    document.getElementById('drinkMixBtn').disabled=false;
+    document.getElementById('drinkStatus').textContent=`✅ Đủ cho: ${DRINKS[match].name}!`;
+    highlightDrinkRecipe(match);
+  }
+}
+
+function updateDrinkCup(){
+  const tags=document.getElementById('drinkCupTags');tags.innerHTML='';
+  G.drinkStation.ingredients.forEach(k=>{
+    const t=document.createElement('span');t.className='drink-cup-tag';t.textContent=INGREDIENTS[k].emoji;t.title=INGREDIENTS[k].name;tags.appendChild(t);
+  });
+  if(!G.drinkStation.ingredients.length){
+    document.getElementById('drinkStatus').textContent='Chọn nguyên liệu để pha';
+    document.getElementById('drinkMixBtn').disabled=true;highlightDrinkRecipe(null);
+  } else if(!findDrinkMatch()){
+    document.getElementById('drinkStatus').textContent=`${G.drinkStation.ingredients.length} nguyên liệu — chưa khớp công thức`;
+    document.getElementById('drinkMixBtn').disabled=true;
+  }
+}
+
+function mixDrink(){
+  const drink=findDrinkMatch();
+  if(!drink){notify('Nguyên liệu chưa khớp công thức nước!','error');return;}
+  G.drinkStation.status='preparing';G.drinkStation.finishedDrink=drink;
+  document.getElementById('drinkStation').classList.add('preparing');
+  document.getElementById('drinkMixBtn').disabled=true;
+  document.getElementById('drinkStatus').textContent='🥤 Đang pha...';
+  const t=DRINKS[drink].mixTime||3;let e=0;
+  if(drinkInterval)clearInterval(drinkInterval);
+  drinkInterval=setInterval(()=>{
+    if(G.isPaused){return;}
+    e+=0.1;const p=Math.min(100,e/t*100);
+    document.getElementById('drinkProgressBar').style.width=p+'%';
+    if(e>=t){
+      clearInterval(drinkInterval);drinkInterval=null;
+      G.drinkStation.status='done';
+      document.getElementById('drinkStation').classList.remove('preparing');
+      document.getElementById('drinkStation').classList.add('done');
+      document.getElementById('drinkStatus').textContent=`✨ ${DRINKS[drink].name} — sẵn sàng!`;
+      notify(`✅ Pha xong ${DRINKS[drink].name}!`,'success');
+    }
+  },100);
+}
+
+function discardDrink(){
+  if(G.drinkStation.status==='preparing'){notify('Đang pha, đợi xong rồi đổ.','warning');return;}
+  if(!G.drinkStation.ingredients.length&&G.drinkStation.status==='idle'){notify('Ly đang trống.','info');return;}
+  if(G.drinkStation.status==='done'){
+    G.money=Math.max(0,G.money-3000);
+    notify('Đã đổ ly đã pha. Mất 3.000đ nguyên liệu.','warning');
+    updateUI();
+  } else {
+    notify('Đã đổ ly và làm lại.','info');
+  }
+  resetDrinkStation();
+}
+
+function resetDrinkStation(){
+  G.drinkStation={ingredients:[],status:'idle',finishedDrink:null};
+  if(drinkInterval){clearInterval(drinkInterval);drinkInterval=null;}
+  const st=document.getElementById('drinkStation');if(st){st.classList.remove('preparing','done');}
+  const bar=document.getElementById('drinkProgressBar');if(bar)bar.style.width='0%';
+  const stat=document.getElementById('drinkStatus');if(stat)stat.textContent='Chọn nguyên liệu để pha';
+  const tags=document.getElementById('drinkCupTags');if(tags)tags.innerHTML='';
+  const btn=document.getElementById('drinkMixBtn');if(btn)btn.disabled=true;
+  document.querySelectorAll('.drink-ing.in-cup').forEach(el=>el.classList.remove('in-cup'));
+  highlightDrinkRecipe(null);
+}
+
+function renderNPCList(){
+  document.getElementById('npcList').innerHTML=`
+    <div class="npc-card"><div class="npc-emoji">👴</div><div class="npc-text"><div class="npc-name">Bác Tâm</div><div class="npc-detail">Thích 🍜 Bún dọc mùng · Kiên nhẫn 75s · Tip ×1.3</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">👩‍💼</div><div class="npc-text"><div class="npc-name">Cô Lan</div><div class="npc-detail">Thích 🥖 Bánh mì · Vội (40s) · Tip ×1.5</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">🧔</div><div class="npc-text"><div class="npc-name">John</div><div class="npc-detail">Thích 🍢 Bún chả · Kiên nhẫn 90s · Tip ×2.0</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">👱‍♀️</div><div class="npc-text"><div class="npc-name">Khách du lịch</div><div class="npc-detail">Anna, Marco, Kenji · khẩu vị riêng · tip tốt hơn khách thường</div></div></div>
+    <div class="npc-card"><div class="npc-emoji">📱</div><div class="npc-text"><div class="npc-name">Khách bí ẩn</div><div class="npc-detail">Tỉ lệ thấp · thưởng danh tiếng, tiền và câu chuyện nếu phục vụ tốt</div></div></div>`;
+}
+
+// ─────────────────────────────────────────────
+//  COOKING
+// ─────────────────────────────────────────────
+
+function addIngredient(key){
+  if(G.pot.status==='cooking'||G.pot.status==='done'){notify('Đang nấu rồi!','warning');return;}
+  if(G.pot.ingredients.includes(key)){notify('Nguyên liệu đã có.','warning');return;}
+  if(G.pot.ingredients.length>=5){notify('Quá nhiều nguyên liệu!','error');return;}
+  G.pot.ingredients.push(key);
+  document.getElementById('ing-'+key).classList.add('in-pot');
+  updatePot();
+  const match=findMatch();
+  if(match){
+    document.getElementById('cookBtn').disabled=false;
+    document.getElementById('potStatus').textContent=`✅ Đủ cho: ${RECIPES[match].name}!`;
+    highlightRecipe(match);
+  }
+}
+
+function findMatch(){
+  const ings=[...G.pot.ingredients].sort().join(',');
+  return availableRecipeKeys().find(k=>[...RECIPES[k].ingredients].sort().join(',')===ings)||null;
+}
+
+function highlightRecipe(key){
+  document.querySelectorAll('.recipe-item').forEach(el=>el.classList.remove('active'));
+  if(key)document.getElementById('recipe-'+key)?.classList.add('active');
+}
+
+function updatePot(){
+  const tags=document.getElementById('potIngredients');tags.innerHTML='';
+  G.pot.ingredients.forEach(k=>{
+    const t=document.createElement('span');t.className='pot-ing-tag';t.textContent=INGREDIENTS[k].emoji;t.title=INGREDIENTS[k].name;tags.appendChild(t);
+  });
+  if(!G.pot.ingredients.length){document.getElementById('potStatus').textContent='Chờ nguyên liệu';document.getElementById('cookBtn').disabled=true;highlightRecipe(null);}
+  else if(!findMatch()){document.getElementById('potStatus').textContent=`${G.pot.ingredients.length} nguyên liệu — chưa khớp`;document.getElementById('cookBtn').disabled=true;}
+}
+
+function startCooking(){
+  const recipe=findMatch();
+  if(!recipe){notify('Nguyên liệu chưa khớp công thức!','error');return;}
+  G.pot.status='cooking';G.pot.finishedDish=recipe;
+  document.getElementById('pot').classList.add('cooking');
+  document.getElementById('cookBtn').disabled=true;
+  document.getElementById('potStatus').textContent='🔥 Đang nấu...';
+  let t=RECIPES[recipe].cookTime*[1,0.85,0.75,0.62][upgradeLevel('faster_cook')];
+  if(G._event==='blackout')t*=1.5;  // blackout: cook 50% slower
+  let e=0;
+  const iv=setInterval(()=>{
+    if(G.isPaused)return;
+    e+=0.1;const p=Math.min(100,e/t*100);
+    document.getElementById('potProgressBar').style.width=p+'%';
+    if(e>=t){
+      clearInterval(iv);G.pot.status='done';
+      document.getElementById('pot').classList.remove('cooking');document.getElementById('pot').classList.add('done');
+      document.getElementById('potStatus').textContent=`✨ ${RECIPES[recipe].name} — Sẵn sàng!`;
+      updateServeBtn();notify(`✅ Nấu xong ${RECIPES[recipe].name}!`,'success');
+    }
+  },100);
+}
+
+// ─────────────────────────────────────────────
+//  GRILL
+// ─────────────────────────────────────────────
+
+function putOnGrill(key){
+  if(G.grill.status!=='idle'){notify('Lò đang bận!','warning');return;}
+  if(key!=='cha'){notify('Chỉ chả mới cần nướng.','warning');return;}
+  G.grill.status='grilling';G.grill.progress=0;G.grill.flipped=false;
+  document.getElementById('grill').classList.add('grilling');
+  document.getElementById('grillStatus').textContent='🔥 Mặt 1 đang nướng...';
+  document.getElementById('grillHint').textContent='Nhấn "Lật" khi vào vùng XANH (40–60%)';
+  document.getElementById('grillFlipBtn').disabled=false;
+  const gwLv=upgradeLevel('grill_wide');
+  const pzW=gwLv>=2?'34%':gwLv>=1?'26%':'20%',pzL=gwLv>=2?'33%':gwLv>=1?'37%':'40%';
+  const gwLabel=gwLv>=2?'33–67%':gwLv>=1?'37–63%':'40–60%';
+  document.getElementById('grillPerfectZone').style.left=pzL;document.getElementById('grillPerfectZone').style.width=pzW;
+  document.getElementById('grillHint').textContent=`Nhấn "Lật" khi vào vùng XANH (${gwLabel})`;
+  if(grillInterval)clearInterval(grillInterval);
+  grillInterval=setInterval(()=>{
+    if(G.isPaused||G.grill.status==='idle'){clearInterval(grillInterval);return;}
+    G.grill.progress+=0.8;
+    document.getElementById('grillProgressBar').style.width=G.grill.progress+'%';
+    if(G.grill.progress>112){
+      G.grill.status='ruined';G.grill.quality='burnt';G.burntGrills++;
+      clearInterval(grillInterval);
+      document.getElementById('grill').classList.remove('grilling');
+      document.getElementById('grillStatus').textContent='💀 CHÁY ĐEN!';
+      document.getElementById('grillHint').textContent='Nhấn "Bỏ chả" để hủy và làm lại.';
+      document.getElementById('grillProgressBar').style.background='#212121';
+      document.getElementById('grillFlipBtn').disabled=true;
+      const gb=document.getElementById('grillTakeBtn');gb.disabled=false;gb.textContent='🗑 Bỏ chả';
+      notify('🔥 Chả bị cháy!','error');
+      if(G._bossNpc==='khang'){G.money=Math.max(0,G.money-100000);notify('👨‍🍳 Khang phạt: -100.000đ vì cháy chả!','error');updateUI();}
+    }
+  },100);
+}
+
+function flipGrill(){
+  if(G.grill.status!=='grilling'||G.grill.flipped)return;
+  G.grill.flipped=true;const p=G.grill.progress;
+  const gwLv2=upgradeLevel('grill_wide');
+  const gMin=gwLv2>=2?33:gwLv2>=1?37:40,gMax=gwLv2>=2?67:gwLv2>=1?63:60;
+  let q;
+  if(p>=gMin&&p<=gMax){q='perfect';notify('✨ Lật PERFECT!','success');}
+  else if(p>=30&&p<=70){q='good';notify('👍 Lật tốt','info');}
+  else if(p<30){q='too_early';notify('⚠️ Lật quá sớm','warning');}
+  else{q='too_late';notify('⚠️ Lật quá muộn','warning');}
+  G.grill.flipQuality=q;G.grill.progress=0;
+  document.getElementById('grillProgressBar').style.width='0%';
+  document.getElementById('grillStatus').textContent='🔥 Mặt 2 đang nướng...';
+  document.getElementById('grillHint').textContent='Nhấn "Gắp" khi vào vùng XANH (40–60%)';
+  document.getElementById('grillFlipBtn').disabled=true;document.getElementById('grillTakeBtn').disabled=false;
+}
+
+function takeGrill(){
+  if(G.grill.status==='ruined'){
+    G.money=Math.max(0,G.money-8000);
+    notify('Đã bỏ mẻ chả hỏng. Mất 8.000đ nguyên liệu.','warning');
+    updateUI();resetGrill();return;
+  }
+  if(G.grill.status!=='grilling'||!G.grill.flipped){notify('Chưa lật chả!','warning');return;}
+  if(grillInterval)clearInterval(grillInterval);
+  const p=G.grill.progress;
+  const gwLv3=upgradeLevel('grill_wide');
+  const tMin=gwLv3>=2?33:gwLv3>=1?37:40,tMax=gwLv3>=2?67:gwLv3>=1?63:60;
+  let tq=p>=tMin&&p<=tMax?'perfect':p>=30&&p<=70?'good':p<30?'undercooked':'overcooked';
+  const fq=G.grill.flipQuality;
+  let final;
+  if(fq==='perfect'&&tq==='perfect'){final='perfect';G.perfectGrills++;G.score+=5;notify('🌟 PERFECT! Chả vàng ruộm!','success');}
+  else if((fq==='perfect'||fq==='good')&&(tq==='perfect'||tq==='good')){final='good';G.score+=2;notify('👍 Chả nướng tốt!','success');}
+  else if(fq==='too_early'||tq==='undercooked'){final='undercooked';notify('⚠️ Chả còn sống','warning');}
+  else{final='overcooked';notify('⚠️ Chả hơi cháy','warning');}
+  G.grill.status=(final==='perfect'||final==='good')?'done':'ruined';G.grill.quality=final;
+  document.getElementById('grill').classList.remove('grilling');
+  const tb=document.getElementById('grillTakeBtn');
+  document.getElementById('grillStatus').textContent=`🍖 Chả ${final.toUpperCase()}${G.grill.status==='done'?' — sẵn sàng!':' — không đạt!'}`;
+  if(G.grill.status==='done'){
+    document.getElementById('grillHint').textContent='Tự động dùng khi phục vụ Bún chả';
+    tb.disabled=true;tb.textContent='✋ Gắp';
+  } else {
+    document.getElementById('grillHint').textContent='Nhấn "Bỏ chả" để hủy và nướng lại';
+    tb.disabled=false;tb.textContent='🗑 Bỏ chả';
+  }
+  updateUI();
+}
+
+function resetGrill(){
+  G.grill={status:'idle',progress:0,flipped:false,quality:null,flipQuality:null};
+  if(grillInterval)clearInterval(grillInterval);
+  document.getElementById('grill').classList.remove('grilling');
+  document.getElementById('grillProgressBar').style.width='0%';
+  document.getElementById('grillProgressBar').style.background='linear-gradient(90deg,#ff5722,#ff9800,#ffc107)';
+  document.getElementById('grillStatus').textContent='🔥 Lò than nguội';
+  document.getElementById('grillHint').textContent='Đặt chả vào lò để nướng';
+  const rtb=document.getElementById('grillTakeBtn');
+  document.getElementById('grillFlipBtn').disabled=true;rtb.disabled=true;rtb.textContent='✋ Gắp';
+}
+
+// ─────────────────────────────────────────────
+//  SERVE
+// ─────────────────────────────────────────────
+
+function updateServeBtn(){
+  const btn=document.getElementById('serveBtn');
+  const ready=G.pot.status==='done'&&G.selectedCustomer;
+  btn.disabled=!ready;
+  if(ready)btn.classList.add('serve-ready');else btn.classList.remove('serve-ready');
+}
+
+function serveSelected(){
+  if(G.pot.status!=='done'){notify('Chưa có món!','warning');return;}
+  if(!G.selectedCustomer){notify('Chọn khách trước!','warning');return;}
+  const c=G.customers.find(x=>x.id===G.selectedCustomer);
+  if(!c||c.served||c.left){notify('Khách không còn ở quán.','error');return;}
+  const ordered=RECIPES[c.order],finished=G.pot.finishedDish;
+  if(c.order!==finished){
+    const wrongLine=(c.quotes&&(c.quotes.wrong||c.quotes.angry))||'Không phải món tôi gọi mà...';
+    notify(`❌ ${c.name}: "${wrongLine}"`, 'error');
+    G.score=Math.max(0,G.score-5);G.streak=0;updateStreak();updateUI();return;
+  }
+  if(ordered.needsGrill&&(G.grill.status!=='done'||!G.grill.quality||G.grill.quality==='burnt'||G.grill.quality==='undercooked')){
+    notify('⚠️ Bún chả cần chả nướng tốt!','warning');return;
+  }
+  // Calculate earnings
+  let earned=ordered.price,sc=ordered.score,bonuses=[];
+  const pbLv=upgradeLevel('price_boost');
+  if(pbLv>0){const pm=[1,1.08,1.15,1.22][pbLv];earned=Math.floor(earned*pm);bonuses.push(`Menu +${[0,8,15,22][pbLv]}%`);}
+  if(ordered.isSignature){earned=Math.floor(earned*1.2);sc+=5;bonuses.push('Signature +20%');}
+  if(c.isRegular&&c.tip>1){earned=Math.floor(earned*c.tip);sc=Math.floor(sc*1.15);bonuses.push(`Tip ×${c.tip}`);}
+  // Drink check (real gameplay): match prepared drink to ordered drink
+  let drinkResult='none';
+  if(c.drink){
+    const d=DRINKS[c.drink];
+    if(G.drinkStation&&G.drinkStation.status==='done'&&G.drinkStation.finishedDrink===c.drink){
+      let drinkPrice=d.price;
+      if(G._event==='heat')drinkPrice=Math.floor(drinkPrice*1.3);  // hot day: drinks +30%
+      if(G._event==='festival')drinkPrice=Math.floor(drinkPrice*1.2);
+      earned+=drinkPrice;sc+=d.score;
+      bonuses.push(`${d.emoji} ${d.name} +${drinkPrice.toLocaleString('vi-VN')}đ`);
+      // Combo bonus
+      const comboBonus=Math.floor(ordered.price*(G._event==='festival'?0.10:0.05));
+      earned+=comboBonus;bonuses.push(`Combo +${comboBonus.toLocaleString('vi-VN')}đ`);
+      PROG.drinksMastered[c.drink]=(PROG.drinksMastered[c.drink]||0)+1;
+      drinkResult='match';
+      G.drinksServedCorrect=(G.drinksServedCorrect||0)+1;
+      resetDrinkStation();
+    } else if(G.drinkStation&&G.drinkStation.status==='done'&&G.drinkStation.finishedDrink){
+      // Wrong drink prepared — no bonus + ingredient cost penalty
+      const wrongName=DRINKS[G.drinkStation.finishedDrink].name;
+      sc-=2;
+      bonuses.push(`Sai nước: ${wrongName} không phải đơn này (-3.000đ)`);
+      G.money=Math.max(0,G.money-3000);
+      drinkResult='wrong';
+      resetDrinkStation();
+    } else {
+      // No drink prepared — silent miss, just no bonus
+      sc-=1;bonuses.push(`Thiếu ${d.name} (mất bonus)`);
+      drinkResult='miss';
+    }
+  }
+  if(c.isMystery){
+    earned=Math.floor(earned*1.15);sc+=8;PROG.reputation=(PROG.reputation||0)+2;
+    bonuses.push('Khách bí ẩn +15%');
+    // Mystery story flag — first-time bonus
+    const flagId='mystery_'+c.npcKey;
+    if(setStoryFlag(flagId)){
+      const storyBonus=30000;
+      earned+=storyBonus;sc+=20;
+      bonuses.push(`📖 Mở câu chuyện +${storyBonus.toLocaleString('vi-VN')}đ`);
+      notifyDelayed(800,()=>notify(`📖 Mở khóa câu chuyện: ${c.name}!`,'success'));
+    }
+  }
+  if(ordered.needsGrill&&G.grill.quality==='perfect'){earned=Math.floor(earned*1.15);bonuses.push('Grill PERFECT +15%');}
+  const pp=c.patience/c.maxPatience;
+  if(pp>0.7){sc+=3;bonuses.push('Nhanh +3⭐');}
+  else if(pp<0.25){
+    // Slow service — happy still but with grumble
+    const slow=(c.quotes&&c.quotes.slow)||null;
+    if(slow)notifyDelayed(400,()=>notify(`😅 ${c.name}: "${slow}"`,'warning'));
+  }
+  G.money+=earned;G.score+=sc;c.served=true;G.customersServed++;
+  G.npcServed[c.npcKey]=(G.npcServed[c.npcKey]||0)+1;
+  PROG.reputation=(PROG.reputation||0)+1;
+  if(c.isBoss)updateBossActiveClass();
+  saveProg();
+  G.streak++;if(G.streak>G.maxStreak)G.maxStreak=G.streak;
+  updateStreak();
+  const bonusStr=bonuses.length?' · '+bonuses.join(', '):'';
+  notify(`🎉 +${earned.toLocaleString('vi-VN')}đ · +${sc}⭐${bonusStr}`,'success');
+  scorePopup('+'+earned.toLocaleString('vi-VN')+'đ');
+  // Confetti burst — perfect grill or combo correct or boss/mystery served
+  if(G.grill.quality==='perfect'||drinkResult==='match'||c.isBoss||c.isMystery){
+    const card=document.querySelector('.customer-card.selected')||document.querySelector('.customer-card');
+    const rect=card?card.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:0,height:0};
+    spawnConfetti({x:rect.left+rect.width/2,y:rect.top+rect.height/2,count:c.isBoss||c.isMystery?22:14});
+  }
+  // Happy quote feedback — only for noteworthy customers (regular, mystery, boss, or high-tip tourist)
+  const happyWorthy=c.isRegular||c.isMystery||c.isBoss||(c.tip||1)>=1.4;
+  if(happyWorthy){
+    const happyLine=(c.quotes&&c.quotes.happy)||'Cảm ơn quán nhé!';
+    notifyDelayed(600,()=>notify(`😊 ${c.name}: "${happyLine}"`,'info'));
+  }
+  resetPot();if(ordered.needsGrill)resetGrill();
+  // Achievement check after each successful serve
+  if(typeof checkAchievements==='function'){
+    checkAchievements({type:'serve',customer:c,recipe:ordered,grillQuality:G.grill.quality,drinkResult,bonuses});
+    if(G._bossNpc&&c.npcKey===G._bossNpc)checkAchievements({type:'boss_won',bossNpc:G._bossNpc});
+  }
+  setTimeout(()=>{G.customers=G.customers.filter(x=>x.id!==c.id);G.selectedCustomer=null;renderCustomers();checkEndCondition();},1400);
+  updateUI();renderCustomers();
+}
+
+function discardPot(){
+  if(G.pot.status==='cooking'){
+    notify('Món đang nấu, không thể đổ lúc này. Chờ xong rồi hãy bỏ nếu cần.','warning');
+    return;
+  }
+  if(!G.pot.ingredients.length&&G.pot.status==='idle'){
+    notify('Nồi đang trống.','info');
+    return;
+  }
+  if(G.pot.status==='done'){
+    G.money=Math.max(0,G.money-10000);
+    notify('Đã bỏ món đã nấu. Mất 10.000đ nguyên liệu.','warning');
+    updateUI();
+  } else {
+    notify('Đã đổ nồi và làm lại.','info');
+  }
+  resetPot();
+}
+
+function resetPot(){
+  G.pot={ingredients:[],status:'idle',finishedDish:null};
+  document.getElementById('pot').classList.remove('cooking','done');
+  document.getElementById('potProgressBar').style.width='0%';
+  document.getElementById('cookBtn').disabled=true;
+  document.getElementById('serveBtn').disabled=true;
+  document.getElementById('serveBtn').classList.remove('serve-ready');
+  document.getElementById('potIngredients').innerHTML='';
+  document.getElementById('potStatus').textContent='Chờ nguyên liệu';
+  document.querySelectorAll('.ingredient.in-pot').forEach(el=>el.classList.remove('in-pot'));
+  highlightRecipe(null);
+}
+
+// ─────────────────────────────────────────────
+//  UI HELPERS
+// ─────────────────────────────────────────────
+
+function updateUI(){
+  document.getElementById('moneyDisplay').textContent=G.money.toLocaleString('vi-VN')+'đ';
+  document.getElementById('scoreDisplay').textContent=G.score;
+  document.getElementById('servedDisplay').textContent=G.customersServed;
+}
+
+function updateStreak(){
+  const el=document.getElementById('streakBadge');
+  const cnt=document.getElementById('streakCount');
+  if(G.streak>=2){el.classList.add('visible');cnt.textContent=G.streak;}
+  else{el.classList.remove('visible');}
+}
+
+function notify(text,type){
+  const c=document.getElementById('notifContainer');
+  const n=document.createElement('div');n.className='notif '+(type||'');n.textContent=text;
+  c.appendChild(n);setTimeout(()=>n.remove(),3000);
+}
+
+function scorePopup(text){
+  const p=document.createElement('div');p.className='score-popup';p.textContent=text;
+  p.style.left=(20+Math.random()*60)+'%';p.style.top='45%';
+  document.body.appendChild(p);setTimeout(()=>p.remove(),1400);
+}
+
+// Confetti — for perfect serve / combo / end-level 3-star celebration
+function spawnConfetti(opts){
+  opts=opts||{};
+  const count=opts.count||14;
+  const x=opts.x!=null?opts.x:window.innerWidth/2;
+  const y=opts.y!=null?opts.y:window.innerHeight/2;
+  const colors=['#FFD700','#C62828','#E6BE3C','#FFF8E1','#7B4F2E','#FF8A65'];
+  for(let i=0;i<count;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.style.left=x+'px';
+    c.style.top=y+'px';
+    c.style.background=colors[i%colors.length];
+    c.style.setProperty('--tx',(Math.random()-0.5)*420+'px');
+    c.style.setProperty('--ty',(80+Math.random()*120)+'vh');
+    c.style.setProperty('--rot',(360+Math.random()*720)+'deg');
+    c.style.animationDelay=(i*25)+'ms';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),2200);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  PAUSE
+// ─────────────────────────────────────────────
+
+function togglePause(){
+  G.isPaused=!G.isPaused;
+  const ov=document.getElementById('pauseOverlay');
+  if(G.isPaused){
+    ov.classList.add('active');
+    document.getElementById('pauseStats').innerHTML=`
+      <div class="pause-stat"><div class="pause-stat-val">${G.money.toLocaleString('vi-VN')}đ</div><div class="pause-stat-lbl">Doanh thu</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.score}</div><div class="pause-stat-lbl">Điểm số</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.customersServed}/${G.totalCustomers}</div><div class="pause-stat-lbl">Đã phục vụ</div></div>
+      <div class="pause-stat"><div class="pause-stat-val">${G.streak}</div><div class="pause-stat-lbl">Streak</div></div>`;
+  } else {ov.classList.remove('active');}
+}
+
+// ─────────────────────────────────────────────
+//  END LEVEL
+// ─────────────────────────────────────────────
+
+function endLevel(reason){
+  if(G.isGameOver)return;G.isGameOver=true;
+  [timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});
+  clearPendingNotifyTimers();
+  document.querySelector('.game-header')?.classList.remove('rush');
+  document.body.classList.remove('boss-active');
+  if(G.isFestival){endFestival(reason);return;}
+  document.getElementById('gameScreen').classList.remove('active');
+  document.getElementById('endScreen').classList.add('active');
+  const lv=LEVELS[PROG.levelIdx]||LEVELS[0];
+  const sr=G.customersServed/G.totalCustomers;
+  // Stars: 3=100%, 2=67%+, 1=50%+, 0=fail
+  let stars=0;
+  if(sr>=1)stars=3;else if(sr>=0.67)stars=2;else if(sr>=0.5)stars=1;
+  const missionReward=stars>0?Math.round((12000+(lv.overall||1)*3000)*stars):0;
+  const noWasteReward=stars>0&&G.burntGrills===0?Math.round(5000+(lv.overall||1)*1000):0;
+  const bankedProfit=stars>0?Math.max(0,G.money-lv.cost)+missionReward+noWasteReward:0;
+  // Save progress if level passed
+  if(stars>0){
+    const prev=PROG.levelStars[PROG.levelIdx]||0;
+    if(stars>prev)PROG.levelStars[PROG.levelIdx]=stars;
+    // Unlock next level
+    if(PROG.levelIdx+1>=PROG.unlocked)PROG.unlocked=PROG.levelIdx+2;
+    // Add profit and completion rewards to bank
+    PROG.totalMoney+=bankedProfit;
+    saveProg();
+  }
+  // Rating display
+  let rating,title,fb;
+  if(reason==='boss_fled'){rating='😢';title='Boss bỏ đi!';stars=0;fb='Ông biết cháu có thể làm tốt hơn. Lần sau đừng để khách quan trọng chờ nhé!';}
+  else if(stars===3){rating='⭐⭐⭐';title='🏆 Hoàn hảo!';fb=lv.isBoss?'Cháu đã vượt qua thử thách lớn nhất! Ông tự hào lắm. Hành trình tiếp tục...':'Cháu của ông... tất cả khách đều hài lòng. Ông tự hào lắm!';}
+  else if(stars===2){rating='⭐⭐';title='🎉 Rất tốt!';fb='Còn vài khách bỏ đi nhưng điều đó bình thường. Quan trọng là cháu đã có lãi!';}
+  else if(stars===1){rating='⭐';title='👍 Đạt yêu cầu';fb='Phục vụ được hơn nửa khách là khởi đầu tốt. Mai chú ý khách quen của ông nhé.';}
+  else if(sr>=0.33){rating='💔';title='😅 Cần cố gắng thêm';fb='Ông cũng từng có ngày như vậy cháu ơi. Đừng nản lòng — thử lại nhé!';}
+  else{rating='😢';title='Ngày khó khăn';fb='Cháu của ông... đừng bỏ cuộc. Mọi đầu bếp giỏi đều có ngày thất bại. Thử lại nhé!';}
+  document.getElementById('endRating').textContent=rating;
+  document.getElementById('endTitle').textContent=title;
+  document.getElementById('feedbackText').textContent=fb;
+  // Show unlock notification
+  if(stars>0&&lv.unlocks){
+    const unlockNames={mi_quang:'🍝 Mì Quảng',hu_tieu:'🍜 Hủ tiếu Nam Vang'};
+    document.getElementById('feedbackText').textContent+=`\n\n🎉 MỞ KHÓA: ${unlockNames[lv.unlocks]||lv.unlocks}!`;
+  }
+  if(stars>0&&lv.overall===15){
+    document.getElementById('feedbackText').textContent='🎉🎉🎉 CHÚC MỪNG! Cháu đã hoàn thành hành trình "Đầu bếp 3 miền"! Danh hiệu đã thuộc về cháu. Cụ Ông an nghỉ thật sự rồi...';
+    const fp=document.getElementById('feedbackPortrait');if(fp)fp.src='assets/portraits/cu-ong-spirit.svg';
+  } else {
+    const fp=document.getElementById('feedbackPortrait');if(fp)fp.src='assets/portraits/cu-ong-old.svg';
+  }
+  const npcTotal=Object.values(G.npcServed).reduce((a,b)=>a+b,0);
+  document.getElementById('endStatsServe').innerHTML=`
+    <div class="end-row"><span>👥 Đã phục vụ</span><span><b>${G.customersServed} / ${G.totalCustomers}</b></span></div>
+    <div class="end-row"><span>😡 Khách bỏ đi</span><span>${G.customersLeft}</span></div>
+    ${npcTotal?`<div class="end-row"><span>⭐ Phục vụ khách quen</span><span>${npcTotal} lần</span></div>`:''}
+    ${G.perfectGrills?`<div class="end-row"><span>🌟 Nướng PERFECT</span><span>${G.perfectGrills} lần</span></div>`:''}
+    ${G.maxStreak>=3?`<div class="end-row"><span>🔥 Chuỗi dài nhất</span><span>${G.maxStreak} lần liên tiếp</span></div>`:''}
+    <div class="end-row"><span>⭐ Điểm số</span><span><b>${G.score}</b></span></div>`;
+  const rev=G.money,cost=lv.cost,profit=rev-cost;
+  document.getElementById('endStatsFinance').innerHTML=`
+    <div class="end-row"><span>💰 Doanh thu</span><span>${rev.toLocaleString('vi-VN')}đ</span></div>
+    <div class="end-row cost"><span>💸 Chi phí cố định</span><span>−${cost.toLocaleString('vi-VN')}đ</span></div>
+    ${missionReward?`<div class="end-row"><span>🎯 Thưởng mục tiêu</span><span style="color:var(--green-light)">+${missionReward.toLocaleString('vi-VN')}đ</span></div>`:''}
+    ${noWasteReward?`<div class="end-row"><span>🥢 Thưởng ít hao phí</span><span style="color:var(--green-light)">+${noWasteReward.toLocaleString('vi-VN')}đ</span></div>`:''}
+    ${stars>0?`<div class="end-row"><span>💼 Vào ngân sách</span><span style="color:var(--gold)">+${bankedProfit.toLocaleString('vi-VN')}đ</span></div>`:''}
+    <div class="end-row total ${profit>=0?'profit-pos':'profit-neg'}">
+      <span>${profit>=0?'✅ Lợi nhuận':'❌ Thua lỗ'}</span>
+      <span>${profit.toLocaleString('vi-VN')}đ</span>
+    </div>`;
+  // Show/hide next level button
+  const hasNext=PROG.levelIdx+1<LEVELS.length;
+  document.getElementById('nextLevelBtn').style.display=(stars>0&&hasNext)?'block':'none';
+  // Flush deferred achievement notifications (queued during gameplay)
+  flushAchievementQueue();
+  // Big confetti celebration for 3-star clear
+  if(stars===3){
+    setTimeout(()=>spawnConfetti({x:window.innerWidth/2,y:window.innerHeight*0.3,count:36}),300);
+    setTimeout(()=>spawnConfetti({x:window.innerWidth*0.3,y:window.innerHeight*0.4,count:20}),700);
+    setTimeout(()=>spawnConfetti({x:window.innerWidth*0.7,y:window.innerHeight*0.4,count:20}),900);
+  } else if(stars===2){
+    setTimeout(()=>spawnConfetti({x:window.innerWidth/2,y:window.innerHeight*0.3,count:18}),300);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+//  NAVIGATION HELPERS
+// ─────────────────────────────────────────────
+
+function hideAll(){document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));}
+
+function goToMenu(){hideAll();document.getElementById('menuScreen').classList.add('active');}
+
+function showLevelSelect(){
+  hideAll();
+  lsChapter=LEVELS[PROG.levelIdx]?.ch||1;
+  document.getElementById('levelSelectScreen').classList.add('active');
+  renderLevelSelect();
+}
+
+function goToUpgradeShop(){hideAll();document.getElementById('upgradeShopScreen').classList.add('active');renderUpgradeShop();}
+
+function createEmptyProgress(){
+  return JSON.parse(JSON.stringify(PROG_DEFAULT));
+}
+
+function hasAnyProgress(){
+  return Object.keys(PROG.levelStars||{}).length>0||PROG.totalMoney>0||
+    Object.keys(PROG.upgradeLevels||{}).length>0||Object.keys(PROG.metCustomers||{}).length>0||
+    Object.keys(PROG.achievements||{}).length>0||(PROG.bestFestival||0)>0||(PROG.bestEndless||0)>0;
+}
+
+function beginFresh(skipStory){
+  if(hasAnyProgress()&&!confirm('Bắt đầu mới sẽ xóa tiến trình hiện tại. Tiếp tục?'))return;
+  PROG=createEmptyProgress();saveProg();
+  if(skipStory)startGame();else startStory();
+}
+
+function newGameWithStory(){beginFresh(false);}
+function quickStart(){beginFresh(true);}
+
+// ─────────────────────────────────────────────
+//  STORY OVERLAY
+// ─────────────────────────────────────────────
+
+let _storyCallback=null;
+function showStoryOverlay(lv,callback){
+  _storyCallback=callback;
+  const ov=document.getElementById('storyOverlay');
+  const chNames=['','Chương 1: Hà Nội','Chương 2: Hội An','Chương 3: Sài Gòn'];
+  document.getElementById('storyIcon').textContent=lv.icon||'📖';
+  document.getElementById('storyChapterLabel').textContent=`${chNames[lv.ch]} · Ngày ${lv.lv}${lv.isBoss?' · BOSS 🏆':''}`;
+  document.getElementById('storyTitleEl').textContent=lv.name;
+  document.getElementById('storyTextEl').textContent=lv.story||'Hành trình tiếp tục...';
+  const objLines=lv.objective?lv.objective.split('·').map(s=>`• ${s.trim()}`).join('\n'):'• Phục vụ khách tốt nhất có thể';
+  document.getElementById('storyObjList').style.whiteSpace='pre-line';
+  document.getElementById('storyObjList').textContent=objLines;
+  // Add event badge if applicable
+  const eventLabels={
+    rain:'🌧️ Sự kiện: Mưa rào — khách đến chậm hơn, hợp món nóng',
+    festival:'🎑 Sự kiện: Lễ hội — 3 khách xuất hiện cùng lúc, combo bonus +20%',
+    rush:'⚡ Sự kiện: Giờ cao điểm — khách đến liên tục',
+    peak:'☀️ Sự kiện: Giờ cao điểm — kiên nhẫn ngắn hơn',
+    heat:'🌡️ Sự kiện: Ngày nóng — nước uống bán giá +30% (cơ hội kiếm tiền)',
+    blackout:'⚡ Sự kiện: Mất điện — nấu chậm hơn 50%, đèn nhấp nháy',
+    tour:'🌏 Sự kiện: Đoàn du khách — chủ yếu là khách Tây, tip cao hơn'
+  };
+  if(lv.event&&eventLabels[lv.event]){document.getElementById('storyObjList').textContent+='\n'+eventLabels[lv.event];}
+  ov.classList.add('active');
+}
+function dismissStoryAndStart(){
+  document.getElementById('storyOverlay').classList.remove('active');
+  if(_storyCallback){_storyCallback();_storyCallback=null;}
+}
+
+function goNextLevel(){
+  if(PROG.levelIdx+1>=LEVELS.length){notify('Bạn đã hoàn thành tất cả levels!','success');return;}
+  PROG.levelIdx++;saveProg();showLevelSelect();
+}
+
+// ─────────────────────────────────────────────
+//  LEVEL SELECT
+// ─────────────────────────────────────────────
+
+let lsChapter=1;
+const CH_DESCS=['','Khai trương Tiệm Bún Số 7 trong ngõ phố cổ Hà Nội','Mang hương vị ra miền Trung — Phố cổ Hội An','Chinh phục Sài Gòn — Thành phố sôi động nhất'];
+
+function switchChapter(ch){lsChapter=ch;renderLevelSelect();}
+
+function renderLevelSelect(){
+  document.getElementById('lsMoneyDisplay').textContent=PROG.totalMoney.toLocaleString('vi-VN')+'đ';
+  const chLabels=['Ch.1: Hà Nội','Ch.2: Hội An','Ch.3: Sài Gòn'];
+  [1,2,3].forEach(i=>{
+    const tab=document.getElementById('chTab'+i);
+    const chUnlocked=PROG.unlocked>(i-1)*5;
+    tab.classList.toggle('active',i===lsChapter);
+    tab.classList.toggle('ch-locked',!chUnlocked);
+    tab.textContent=chLabels[i-1]+(chUnlocked?'':' 🔒');
+    tab.disabled=!chUnlocked;
+  });
+  document.getElementById('chSubtitle').textContent=CH_DESCS[lsChapter];
+  const grid=document.getElementById('chGrid');grid.innerHTML='';
+  const startIdx=(lsChapter-1)*5;
+  for(let i=0;i<5;i++){
+    const idx=startIdx+i;const lv=LEVELS[idx];
+    const isUnlocked=idx<PROG.unlocked;
+    const stars=PROG.levelStars[idx];
+    const isCurrent=idx===PROG.levelIdx;
+    const card=document.createElement('div');
+    card.className='level-card'+(lv.isBoss?' lc-boss':'')+(isCurrent&&isUnlocked?' lc-current':'')+(isUnlocked?'':' lc-locked');
+    if(isUnlocked)card.onclick=()=>startLevelByIdx(idx);
+    card.innerHTML=`<div class="level-card-num">Chương ${lv.overall||idx+1}${lv.isBoss?' · BOSS 🏆':''}</div>
+      <div class="level-card-name">${lv.name}</div>
+      <div class="level-card-stars">${stars?'⭐'.repeat(stars):(isUnlocked?'<span style="color:var(--text-mute);font-size:.72em;">Chưa chơi</span>':'🔒')}</div>`;
+    grid.appendChild(card);
+  }
+}
+
+function startLevelByIdx(idx){PROG.levelIdx=idx;saveProg();startGame();}
+
+// ─────────────────────────────────────────────
+//  UPGRADE SHOP
+// ─────────────────────────────────────────────
+
+function renderUpgradeShop(){
+  document.getElementById('usMoneyDisplay').textContent=PROG.totalMoney.toLocaleString('vi-VN')+'đ';
+  const list=document.getElementById('upgradeList');list.innerHTML='';
+  const curCh=LEVELS[PROG.levelIdx]?.ch||1;
+  UPGRADES.forEach(u=>{
+    const curLv=upgradeLevel(u.id);
+    const maxLv=u.maxLv||u.levels.length;
+    const isMaxed=curLv>=maxLv;
+    const nextLvData=!isMaxed?u.levels[curLv]:null;
+    const canBuy=nextLvData&&nextLvData.ch<=curCh;
+    const canAfford=canBuy&&PROG.totalMoney>=nextLvData.price;
+    const pips=u.levels.map((_,i)=>`<span class="upg-pip${i<curLv?' on':''}">${i<curLv?'●':'○'}</span>`).join('');
+    const curDesc=curLv>0?`<div class="upgrade-desc" style="color:#A5D6A7">✓ ${u.levels[curLv-1].desc}</div>`:'';
+    const nextDesc=nextLvData&&canBuy?`<div class="upgrade-desc" style="color:#FFF176">▶ Cấp ${nextLvData.lv}: ${nextLvData.desc}</div>`:'';
+    const lockedDesc=nextLvData&&!canBuy?`<div class="upgrade-desc" style="color:var(--text-mute)">🔒 Mở ở Chương ${nextLvData.ch}</div>`:'';
+    let actionHtml;
+    if(isMaxed) actionHtml='<span class="upgrade-owned-badge">✅ Tối đa</span>';
+    else if(canBuy) actionHtml=`<button class="upgrade-buy-btn"${!canAfford?' disabled':''} onclick="buyUpgrade('${u.id}')">Cấp ${curLv+1}<br><small>${nextLvData.price.toLocaleString('vi-VN')}đ</small></button>`;
+    else actionHtml='';
+    const card=document.createElement('div');
+    card.className='upgrade-card'+(isMaxed?' is-owned':canAfford?'':' cant-afford');
+    card.innerHTML=`<div class="upgrade-emoji">${u.emoji}</div>
+      <div class="upgrade-info">
+        <div class="upgrade-name">${u.name} <span class="upg-pips">${pips}</span></div>
+        ${curDesc}${nextDesc}${lockedDesc}
+      </div>
+      <div class="upgrade-action">${actionHtml}</div>`;
+    list.appendChild(card);
+  });
+}
+
+function buyUpgrade(id){
+  const u=UPGRADES.find(x=>x.id===id);if(!u)return;
+  const curLv=upgradeLevel(id);
+  if(curLv>=u.levels.length){notify('Đã tối đa!','warning');return;}
+  const nextLvData=u.levels[curLv];
+  if(PROG.totalMoney<nextLvData.price){notify('Không đủ tiền!','error');return;}
+  PROG.totalMoney-=nextLvData.price;
+  PROG.upgradeLevels[id]=curLv+1;
+  saveProg();
+  notify(`✅ ${u.name} — Cấp ${curLv+1}!`,'success');
+  renderUpgradeShop();
+}
+
+// ─────────────────────────────────────────────
+//  FESTIVAL MODE (endless)
+// ─────────────────────────────────────────────
+
+function showFestival(){
+  hideAll();
+  document.getElementById('festBestDisplay').textContent=(PROG.bestFestival||0).toLocaleString('vi-VN')+'đ';
+  document.getElementById('festivalScreen').classList.add('active');
+}
+
+function startFestival(){
+  // Use levelIdx 14 (the highest unlocked) so all recipes/drinks open
+  G.isFestival=true;
+  G.money=0;G.score=0;G.timeRemaining=9999;G._levelTime=9999;G._npcRate=0.55;G._cost=0;
+  G.customersServed=0;G.customersLeft=0;G.totalCustomers=9999;G.customersSpawned=0;G.customers=[];
+  G.pot={ingredients:[],status:'idle',finishedDish:null};
+  G.grill={status:'idle',progress:0,flipped:false,quality:null,flipQuality:null};
+  G.drinkStation={ingredients:[],status:'idle',finishedDrink:null};
+  G.selectedCustomer=null;G.isPaused=false;G.isGameOver=false;
+  G.perfectGrills=0;G.burntGrills=0;G.streak=0;G.maxStreak=0;
+  G.drinksServedCorrect=0;
+  G.npcServed={bac_tam:0,co_lan:0,john:0};
+  G._event='festival';G._bossNpc=null;G._bossSpawned=false;
+  G._festivalStart=Date.now();
+  // Force unlock everything via in-memory override (does not touch PROG)
+  G.recipeOverallOverride=15;
+  clearPendingNotifyTimers();
+  _sessionAchievementQueue=[];
+  [timerInterval,spawnInterval,patienceInterval,grillInterval,drinkInterval,blackoutInterval].forEach(iv=>{if(iv)clearInterval(iv);});
+  timerInterval=spawnInterval=patienceInterval=grillInterval=drinkInterval=blackoutInterval=null;
+  document.querySelectorAll('.screen,.end-screen,.cutscene').forEach(el=>el.classList.remove('active'));
+  document.getElementById('gameScreen').classList.add('active');
+  document.getElementById('chapterBarInfo').innerHTML='<span class="chapter-bar-name">🎑 Lễ hội ẩm thực</span> · Endless mode';
+  document.getElementById('totalDisplay').textContent='∞';
+  document.getElementById('timeDisplay').textContent='--:--';
+  document.getElementById('timerBar').style.width='100%';
+  buildDayPips();resetPot();resetGrill();resetDrinkStation();
+  renderIngredients();renderRecipes();renderDrinks();renderDrinkIngredients();renderNPCList();updateUI();
+  // Spawn 3 starting customers
+  setTimeout(()=>spawnCustomer(),600);
+  setTimeout(()=>spawnCustomer(),1200);
+  setTimeout(()=>spawnCustomer(),1800);
+  let spawnMs=6000;
+  spawnInterval=setInterval(()=>{
+    if(G.isPaused||G.isGameOver)return;
+    if(G.customers.filter(c=>!c.served&&!c.left).length<5)spawnCustomer();
+  },spawnMs);
+  patienceInterval=setInterval(()=>{if(!G.isPaused&&!G.isGameOver)tickPatience();},1000);
+  // Festival difficulty escalation timer
+  timerInterval=setInterval(()=>{
+    if(G.isPaused||G.isGameOver)return;
+    G._festivalElapsed=Math.floor((Date.now()-G._festivalStart)/1000);
+    const mm=Math.floor(G._festivalElapsed/60),ss=G._festivalElapsed%60;
+    document.getElementById('timeDisplay').textContent=`+${mm}:${ss.toString().padStart(2,'0')}`;
+    // Every 60s, spawn faster
+    if(G._festivalElapsed>0&&G._festivalElapsed%60===0&&spawnMs>2500){
+      spawnMs=Math.max(2500,spawnMs-700);
+      clearInterval(spawnInterval);
+      spawnInterval=setInterval(()=>{if(G.isPaused||G.isGameOver)return;if(G.customers.filter(c=>!c.served&&!c.left).length<5)spawnCustomer();},spawnMs);
+      notify('⚡ Lễ hội nóng dần — khách đến nhanh hơn!','warning');
+    }
+  },1000);
+  // Custom end condition: 5 customers leave (relaxed from 3 — endless mode should reward persistence)
+  G._festivalLeftLimit=5;
+  notify('🎑 Lễ hội bắt đầu! Phục vụ thật nhanh!','success');
+}
+
+function endFestival(reason){
+  G.isFestival=false;
+  G.recipeOverallOverride=null;
+  const earned=G.money;
+  if(earned>(PROG.bestFestival||0)){PROG.bestFestival=earned;saveProg();}
+  PROG.totalMoney+=Math.floor(earned*0.3);  // 30% of festival earnings goes to bank
+  saveProg();
+  if(typeof checkAchievements==='function')checkAchievements({type:'festival_score',score:earned});
+  document.getElementById('gameScreen').classList.remove('active');
+  document.getElementById('endScreen').classList.add('active');
+  document.getElementById('endRating').textContent='🎑';
+  document.getElementById('endTitle').textContent='Hết lễ hội!';
+  document.getElementById('feedbackText').textContent=`Bạn đã trụ ${G._festivalElapsed||0} giây và phục vụ ${G.customersServed} khách. ${earned>=(PROG.bestFestival||0)?'🏆 KỶ LỤC MỚI!':'Cố lên lần sau!'}`;
+  document.getElementById('endStatsServe').innerHTML=`
+    <div class="end-row"><span>👥 Đã phục vụ</span><span><b>${G.customersServed}</b></span></div>
+    <div class="end-row"><span>😡 Khách bỏ đi</span><span>${G.customersLeft}</span></div>
+    ${G.perfectGrills?`<div class="end-row"><span>🌟 Nướng PERFECT</span><span>${G.perfectGrills}</span></div>`:''}
+    ${G.drinksServedCorrect?`<div class="end-row"><span>🥤 Combo đúng nước</span><span>${G.drinksServedCorrect}</span></div>`:''}
+    <div class="end-row"><span>🔥 Chuỗi dài nhất</span><span>${G.maxStreak} liên tiếp</span></div>
+    <div class="end-row"><span>⭐ Điểm số</span><span><b>${G.score}</b></span></div>`;
+  document.getElementById('endStatsFinance').innerHTML=`
+    <div class="end-row"><span>💰 Doanh thu lễ hội</span><span>${earned.toLocaleString('vi-VN')}đ</span></div>
+    <div class="end-row"><span>🏆 Best</span><span>${(PROG.bestFestival||0).toLocaleString('vi-VN')}đ</span></div>
+    <div class="end-row total profit-pos"><span>💼 Vào ngân sách (30%)</span><span>+${Math.floor(earned*0.3).toLocaleString('vi-VN')}đ</span></div>`;
+  document.getElementById('nextLevelBtn').style.display='none';
+  // Flush deferred achievement notifications
+  flushAchievementQueue();
+}
+
+// Override checkEndCondition for festival mode
+const _origCheckEndCondition=checkEndCondition;
+checkEndCondition=function(){
+  if(G.isFestival){
+    if(G.customersLeft>=(G._festivalLeftLimit||3))endLevel('festival_done');
+    return;
+  }
+  return _origCheckEndCondition();
+};
+
+// ─────────────────────────────────────────────
+//  GALLERY (sổ tay quán)
+// ─────────────────────────────────────────────
+
+let _galTab='ach';
+function showGallery(){hideAll();document.getElementById('galleryScreen').classList.add('active');switchGalTab(_galTab);}
+function switchGalTab(tab){
+  _galTab=tab;
+  ['ach','cust','stories','stats'].forEach(t=>{
+    const btn=document.getElementById('galTab'+t.charAt(0).toUpperCase()+t.slice(1));
+    if(btn)btn.classList.toggle('active',t===tab);
+  });
+  renderGallery();
+}
+function renderGallery(){
+  const c=document.getElementById('galleryContent');
+  if(_galTab==='ach'){
+    c.innerHTML='<div class="gal-grid">'+ACHIEVEMENTS.map(a=>{
+      const got=PROG.achievements[a.id];
+      if(a.hidden&&!got)return `<div class="gal-card locked"><div class="gal-card-emoji">🔒</div><div class="gal-card-name">???</div><div class="gal-card-desc">Thành tựu ẩn</div></div>`;
+      return `<div class="gal-card${got?'':' locked'}"><div class="gal-card-emoji">${a.emoji}</div><div class="gal-card-name">${a.name}</div><div class="gal-card-desc">${a.desc}</div>${got?`<div class="gal-card-meta">Mở: ${new Date(got).toLocaleDateString('vi-VN')}</div>`:''}</div>`;
+    }).join('')+'</div>';
+    const total=ACHIEVEMENTS.length;
+    const got=Object.keys(PROG.achievements||{}).length;
+    c.innerHTML=`<div style="margin-bottom:12px;color:var(--text-soft);">Đã mở: <b style="color:var(--gold)">${got}/${total}</b> thành tựu</div>`+c.innerHTML;
+  } else if(_galTab==='cust'){
+    const allKeys=Object.keys(NPCS);
+    c.innerHTML='<div class="gal-grid">'+allKeys.map(k=>{
+      const npc=NPCS[k];const cnt=PROG.metCustomers[k]||0;const met=cnt>0;
+      if(!met)return `<div class="gal-card locked"><div class="gal-card-emoji">❓</div><div class="gal-card-name">???</div><div class="gal-card-desc">Chưa gặp</div></div>`;
+      const fav=npc.favorite&&RECIPES[npc.favorite]?RECIPES[npc.favorite].name:'';
+      const drink=npc.drink&&DRINKS[npc.drink]?DRINKS[npc.drink].name:'';
+      return `<div class="gal-card"><div class="gal-card-emoji">${npc.emoji}</div><div class="gal-card-name">${npc.name}${npc.isMystery?' 🌟':''}</div><div class="gal-card-desc">${npc.trait}${fav?'<br>Thích: '+fav:''}${drink?'<br>Nước: '+drink:''}</div><div class="gal-card-meta">Đã gặp ${cnt} lần</div></div>`;
+    }).join('')+'</div>';
+  } else if(_galTab==='stories'){
+    const flags=PROG.storyFlags||{};
+    const stories=[
+      {id:'mystery_food_blogger',emoji:'📱',name:'Linh Review lên sóng',unlocked:!!flags.mystery_food_blogger,text:'Linh Review đã quay clip về quán bạn. Cô ấy gọi đó là "ngôi sao ẩn của ngõ phố cổ". Hôm sau quán đông gấp đôi.'},
+      {id:'mystery_viet_kieu',emoji:'🧳',name:'Vị quê hương',unlocked:!!flags.mystery_viet_kieu,text:'Chú Phúc xa quê 30 năm. Một tô phở của bạn làm chú khóc. Chú gửi lại cuốn sổ ảnh cũ — bạn nhận ra Cụ Ông trong đó.'},
+      {id:'mystery_khach_im_lang',emoji:'🎩',name:'Khách im lặng',unlocked:!!flags.mystery_khach_im_lang,text:'Khách lạ gọi món bằng câu thơ. Bạn đoán đúng. Ông để lại một mảnh giấy: "Cụ Ông đã dạy tôi nấu cách đây 40 năm. Nay cháu xứng đáng."'}
+    ];
+    c.innerHTML='<div class="gal-grid">'+stories.map(s=>{
+      if(!s.unlocked)return `<div class="gal-card locked"><div class="gal-card-emoji">🔒</div><div class="gal-card-name">???</div><div class="gal-card-desc">Phục vụ khách bí ẩn để mở</div></div>`;
+      return `<div class="gal-card"><div class="gal-card-emoji">${s.emoji}</div><div class="gal-card-name">${s.name}</div><div class="gal-card-desc">${s.text}</div></div>`;
+    }).join('')+'</div>';
+  } else if(_galTab==='stats'){
+    const totalServed=Object.values(PROG.metCustomers||{}).reduce((a,b)=>a+b,0);
+    const totalUpgrades=Object.values(PROG.upgradeLevels||{}).reduce((a,b)=>a+b,0);
+    const totalStars=Object.values(PROG.levelStars||{}).reduce((a,b)=>a+b,0);
+    const totalDrinks=Object.values(PROG.drinksMastered||{}).reduce((a,b)=>a+b,0);
+    c.innerHTML=`
+      <div class="gal-stat-row"><span>💰 Tổng tiền tích lũy</span><span>${(PROG.totalMoney||0).toLocaleString('vi-VN')}đ</span></div>
+      <div class="gal-stat-row"><span>📣 Danh tiếng quán</span><span>${PROG.reputation||0}</span></div>
+      <div class="gal-stat-row"><span>👥 Lượt khách đã gặp</span><span>${totalServed}</span></div>
+      <div class="gal-stat-row"><span>🥤 Nước đã pha đúng</span><span>${totalDrinks}</span></div>
+      <div class="gal-stat-row"><span>⭐ Tổng sao đã đạt</span><span>${totalStars}/${LEVELS.length*3}</span></div>
+      <div class="gal-stat-row"><span>🛒 Tổng cấp nâng cấp</span><span>${totalUpgrades}</span></div>
+      <div class="gal-stat-row"><span>🏅 Thành tựu mở</span><span>${Object.keys(PROG.achievements||{}).length}/${ACHIEVEMENTS.length}</span></div>
+      <div class="gal-stat-row"><span>🎑 Best lễ hội</span><span>${(PROG.bestFestival||0).toLocaleString('vi-VN')}đ</span></div>`;
+  }
+}
+
+window.onerror=(msg,u,line)=>{console.error('[GAME]',msg,'line',line);return false;};
+
+function checkOrientation(){
+  const w=document.getElementById('rotateWarning');if(!w)return;
+  w.style.display=(window.innerWidth<=900&&window.innerWidth>window.innerHeight&&window.innerHeight<500)?'flex':'none';
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Beta v1.11.04 (SVG portrait)');
+  loadProg();
+  const hasSave=hasAnyProgress();
+  if(hasSave){
+    document.getElementById('menuBtnContinue').style.display='block';
+    document.getElementById('menuBtnReset').style.display='block';
+  }
+  // Festival + Gallery always visible
+  document.getElementById('menuBtnFestival').style.display='block';
+  document.getElementById('menuBtnGallery').style.display='block';
+  checkOrientation();
+});
+window.addEventListener('resize',checkOrientation);
+window.addEventListener('orientationchange',()=>setTimeout(checkOrientation,200));
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+document.body.style.overscrollBehavior='none';
