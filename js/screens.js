@@ -474,7 +474,7 @@ function renderGallery(){
     c.innerHTML='<div class="gal-grid">'+ACHIEVEMENTS.map(a=>{
       const got=PROG.achievements[a.id];
       if(a.hidden&&!got)return `<div class="gal-card locked"><div class="gal-card-emoji">🔒</div><div class="gal-card-name">???</div><div class="gal-card-desc">Thành tựu ẩn</div></div>`;
-      return `<div class="gal-card${got?'':' locked'}"><div class="gal-card-emoji">${a.emoji}</div><div class="gal-card-name">${a.name}</div><div class="gal-card-desc">${a.desc}</div>${got?`<div class="gal-card-meta">Mở: ${new Date(got).toLocaleDateString('vi-VN')}</div>`:''}</div>`;
+      return `<div class="gal-card${got?'':' locked'}"><div class="gal-card-emoji">${a.image?`<img class="gal-card-img" src="${a.image}" alt="${a.name}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${a.emoji}'}))">`:a.emoji}</div><div class="gal-card-name">${a.name}</div><div class="gal-card-desc">${a.desc}</div>${got?`<div class="gal-card-meta">Mở: ${new Date(got).toLocaleDateString('vi-VN')}</div>`:''}</div>`;
     }).join('')+'</div>';
     const total=ACHIEVEMENTS.length;
     const got=Object.keys(PROG.achievements||{}).length;
@@ -533,7 +533,7 @@ function checkOrientation(){
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
-  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.5 (Hand-drawn Icons Phase 2+3)');
+  console.log('🥢 Bếp Việt: Tiệm Bún Số 7 — Demo v1.11.03.6 (Hand-drawn Icons Phase 4)');
   loadProg();
   const hasSave=hasAnyProgress();
   if(hasSave){

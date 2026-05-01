@@ -122,26 +122,26 @@ const DRINKS = {
 
 // ── ACHIEVEMENTS ──
 const ACHIEVEMENTS=[
-  {id:'first_serve',name:'Mở hàng',emoji:'🎀',desc:'Phục vụ khách đầu tiên',hidden:false},
-  {id:'first_perfect_grill',name:'Lửa nướng vàng',emoji:'🔥',desc:'Nướng PERFECT lần đầu',hidden:false},
-  {id:'first_drink_combo',name:'Quán có nước',emoji:'🥤',desc:'Phục vụ đúng món + nước lần đầu',hidden:false},
-  {id:'streak_5',name:'Đôi tay nhanh',emoji:'⚡',desc:'Streak 5 lần liên tiếp',hidden:false},
-  {id:'streak_10',name:'Bậc thầy quán nhỏ',emoji:'🌟',desc:'Streak 10 lần liên tiếp',hidden:false},
-  {id:'no_waste_chapter',name:'Tiết kiệm như Cụ',emoji:'🥢',desc:'Hoàn thành 5 ngày liên tiếp không cháy chả',hidden:false},
-  {id:'meet_all_regulars',name:'Quán quen',emoji:'⭐',desc:'Gặp đủ Bác Tâm, Cô Lan, John',hidden:false},
-  {id:'meet_food_blogger',name:'Lên sóng',emoji:'📱',desc:'Phục vụ Linh Review',hidden:false},
-  {id:'meet_viet_kieu',name:'Vị quê hương',emoji:'🧳',desc:'Phục vụ Chú Phúc Việt kiều',hidden:false},
-  {id:'meet_silent',name:'Hiểu lòng người',emoji:'🎩',desc:'Phục vụ Khách im lặng đúng món',hidden:false},
-  {id:'beat_tuan',name:'Vượt nhà phê bình',emoji:'🧐',desc:'Đánh bại Nhà phê bình Tuấn',hidden:false},
-  {id:'beat_khang',name:'Truyền nhân Cụ',emoji:'👨‍🍳',desc:'Đánh bại Đầu bếp Khang',hidden:false},
-  {id:'beat_iron_chef',name:'Đầu bếp 3 miền',emoji:'🏆',desc:'Hoàn thành Iron Chef Việt',hidden:false},
-  {id:'all_drinks_made',name:'Pha hết menu nước',emoji:'🍹',desc:'Pha thành công đủ 5 loại đồ uống',hidden:false},
-  {id:'rich_500k',name:'Có vốn liếng',emoji:'💰',desc:'Tích lũy 500.000đ',hidden:false},
-  {id:'rich_2m',name:'Quán phất lên',emoji:'💎',desc:'Tích lũy 2.000.000đ',hidden:false},
-  {id:'reputation_50',name:'Tiếng tăm khu phố',emoji:'📣',desc:'Đạt 50 điểm danh tiếng',hidden:false},
-  {id:'festival_500',name:'Vua lễ hội',emoji:'🎑',desc:'Đạt 500.000đ trong Lễ hội',hidden:false},
-  {id:'all_recipes',name:'Đầu bếp toàn năng',emoji:'📖',desc:'Mở khóa đủ 10 món chính',hidden:false},
-  {id:'no_burn_boss',name:'Tay lửa vững',emoji:'🛡️',desc:'Đánh bại Khang mà không cháy chả',hidden:true}
+  {id:'first_serve',name:'Mở hàng',emoji:'🎀',image:'assets/icons/achievements/first_serve.svg',desc:'Phục vụ khách đầu tiên',hidden:false},
+  {id:'first_perfect_grill',name:'Lửa nướng vàng',emoji:'🔥',image:'assets/icons/achievements/first_perfect_grill.svg',desc:'Nướng PERFECT lần đầu',hidden:false},
+  {id:'first_drink_combo',name:'Quán có nước',emoji:'🥤',image:'assets/icons/achievements/first_drink_combo.svg',desc:'Phục vụ đúng món + nước lần đầu',hidden:false},
+  {id:'streak_5',name:'Đôi tay nhanh',emoji:'⚡',image:'assets/icons/achievements/streak_5.svg',desc:'Streak 5 lần liên tiếp',hidden:false},
+  {id:'streak_10',name:'Bậc thầy quán nhỏ',emoji:'🌟',image:'assets/icons/achievements/streak_10.svg',desc:'Streak 10 lần liên tiếp',hidden:false},
+  {id:'no_waste_chapter',name:'Tiết kiệm như Cụ',emoji:'🥢',image:'assets/icons/achievements/no_waste_chapter.svg',desc:'Hoàn thành 5 ngày liên tiếp không cháy chả',hidden:false},
+  {id:'meet_all_regulars',name:'Quán quen',emoji:'⭐',image:'assets/icons/achievements/meet_all_regulars.svg',desc:'Gặp đủ Bác Tâm, Cô Lan, John',hidden:false},
+  {id:'meet_food_blogger',name:'Lên sóng',emoji:'📱',image:'assets/portraits/food-blogger.svg',desc:'Phục vụ Linh Review',hidden:false},
+  {id:'meet_viet_kieu',name:'Vị quê hương',emoji:'🧳',image:'assets/portraits/viet-kieu.svg',desc:'Phục vụ Chú Phúc Việt kiều',hidden:false},
+  {id:'meet_silent',name:'Hiểu lòng người',emoji:'🎩',image:'assets/portraits/khach-im-lang.svg',desc:'Phục vụ Khách im lặng đúng món',hidden:false},
+  {id:'beat_tuan',name:'Vượt nhà phê bình',emoji:'🧐',image:'assets/portraits/tuan-pb.svg',desc:'Đánh bại Nhà phê bình Tuấn',hidden:false},
+  {id:'beat_khang',name:'Truyền nhân Cụ',emoji:'👨‍🍳',image:'assets/portraits/khang.svg',desc:'Đánh bại Đầu bếp Khang',hidden:false},
+  {id:'beat_iron_chef',name:'Đầu bếp 3 miền',emoji:'🏆',image:'assets/portraits/iron-chef.svg',desc:'Hoàn thành Iron Chef Việt',hidden:false},
+  {id:'all_drinks_made',name:'Pha hết menu nước',emoji:'🍹',image:'assets/icons/achievements/all_drinks_made.svg',desc:'Pha thành công đủ 5 loại đồ uống',hidden:false},
+  {id:'rich_500k',name:'Có vốn liếng',emoji:'💰',image:'assets/icons/achievements/rich_500k.svg',desc:'Tích lũy 500.000đ',hidden:false},
+  {id:'rich_2m',name:'Quán phất lên',emoji:'💎',image:'assets/icons/achievements/rich_2m.svg',desc:'Tích lũy 2.000.000đ',hidden:false},
+  {id:'reputation_50',name:'Tiếng tăm khu phố',emoji:'📣',image:'assets/icons/achievements/reputation_50.svg',desc:'Đạt 50 điểm danh tiếng',hidden:false},
+  {id:'festival_500',name:'Vua lễ hội',emoji:'🎑',image:'assets/icons/achievements/festival_500.svg',desc:'Đạt 500.000đ trong Lễ hội',hidden:false},
+  {id:'all_recipes',name:'Đầu bếp toàn năng',emoji:'📖',image:'assets/icons/achievements/all_recipes.svg',desc:'Mở khóa đủ 10 món chính',hidden:false},
+  {id:'no_burn_boss',name:'Tay lửa vững',emoji:'🛡️',image:'assets/icons/achievements/no_burn_boss.svg',desc:'Đánh bại Khang mà không cháy chả',hidden:true}
 ];
 
 const NPCS = {

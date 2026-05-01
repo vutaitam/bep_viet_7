@@ -22,7 +22,7 @@
 
 **Demo live**: https://vutaitam.github.io/bep_viet_7/ (GitHub Pages)
 
-**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.5 (Hand-drawn Icons P2+P3)** (52 SVG hand-drawn: 10 món + 5 nước + 30 nguyên liệu + 7 NPC portrait — Phase 4 còn ~20 UI/event/achievement icons)
+**Phiên bản hiện tại**: 🎨 **Demo v1.11.03.6 (Hand-drawn Icons P4)** (66+ SVG hand-drawn: 10 món + 5 nước + 30 nguyên liệu + 7 NPC + 14 thành tựu mới + 6 thành tựu reuse NPC portrait)
 
 ---
 

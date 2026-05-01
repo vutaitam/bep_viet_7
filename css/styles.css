@@ -608,6 +608,7 @@ body.boss-active .chapter-bar{
 .icon-wrap .icon-fallback{display:none;font-size:1.1em;line-height:1;}
 .icon-wrap.img-fail{font-size:1.1em;}
 .icon-wrap.img-fail .icon-fallback{display:inline-block;}
+.gal-card-img{width:48px;height:48px;object-fit:contain;display:inline-block;}
 .npc-text{flex:1;}
 .npc-name{font-weight:700;font-size:.88em;color:var(--gold);}
 .npc-detail{font-size:.72em;color:var(--text-mute);line-height:1.4;}
