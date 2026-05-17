@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Transfer Market — Marusys FC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <div class="auth-hdr">
+      <div class="auth-logo">Transfer<span>Market</span></div>
+      <div class="auth-sub">Marusys FC · Mùa 2025/26</div>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Đăng nhập</button>
+      <button class="auth-tab" onclick="switchTab('register')">Tạo tài khoản</button>
+    </div>
+    <div class="auth-body">
+      <div class="auth-panel show" id="panelLogin">
+        <div class="form-group"><label class="form-label">Tên đăng nhập</label><input class="form-input" id="lUser" placeholder="Username" autocomplete="username"></div>
+        <div class="form-group"><label class="form-label">Mật khẩu</label><input class="form-input" id="lPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="btn-auth" onclick="doLogin()">Đăng nhập</button>
+        <div id="lMsg"></div>
+      </div>
+      <div class="auth-panel" id="panelRegister">
+        <div class="form-group"><label class="form-label">Tên đăng nhập</label><input class="form-input" id="rUser" placeholder="Username (3+ ký tự)"></div>
+        <div class="form-group"><label class="form-label">Mật khẩu</label><input class="form-input" id="rPass" type="password" placeholder="Mật khẩu (6+ ký tự)"></div>
+        <div class="form-group"><label class="form-label">Xác nhận mật khẩu</label><input class="form-input" id="rPass2" type="password" placeholder="Nhập lại mật khẩu"></div>
+        <button class="btn-auth" onclick="doRegister()">Tạo tài khoản</button>
+        <div id="rMsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" id="mainApp" style="display:none">
+  <div class="hdr-top">
+    <div class="logo">Transfer<span>Market</span></div>
+    <div style="font-size:12px;color:rgba(255,255,255,.4);margin-left:4px">Marusys FC</div>
+    <div class="user-pill">
+      <button onclick="if(window._fbReady)loadFromFirebase()" title="Đồng bộ" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);padding:4px 8px;border-radius:3px;font-size:13px;cursor:pointer">⟳</button>
+      <button id="btnReqAdmin" onclick="reqAdminFn()" style="display:none;background:#e8a317;color:#000;border:none;padding:4px 10px;border-radius:3px;font-size:12px;cursor:pointer;font-weight:600">Xin lên Admin</button>
+      <span id="hBadge" class="ubadge"></span>
+      <span id="hName" style="font-size:12px;color:rgba(255,255,255,.7)"></span>
+      <button class="btn-logout" onclick="doLogout()">Đăng xuất</button>
+    </div>
+  </div>
+  <nav class="hdr-nav">
+    <div class="nav-item active" onclick="showPage('Market')">Thị trường</div>
+    <div class="nav-item" onclick="showPage('Bonus')">Thưởng sau trận</div>
+    <div class="nav-item" id="navAdmin" style="display:none" onclick="showPage('Admin')">Admin</div>
+  </nav>
+</header>
+
+<div class="container" id="appCont" style="display:none">
+  <div id="pageMarket">
+    <div class="page-title-bar">
+      <h1>Thị trường chuyển nhượng</h1>
+      <span class="pbadge">Mùa 2025/26</span>
+      <div style="margin-left:auto"><button class="btn-cancel" onclick="exportData()" style="font-size:12px;padding:5px 11px">Xuất CSV</button></div>
+    </div>
+    <div class="stats-row" id="statsRow"></div>
+    <div class="sugg-sect" id="suggPlayerSection" style="display:none">
+      <div class="sugg-hdr">💡 Đề xuất thêm cầu thủ mới</div>
+      <div class="sugg-body">
+        <div class="sugg-note">Điền thông tin và gửi đề xuất — Admin sẽ xem xét và duyệt.</div>
+        <div class="sugg-form">
+          <div class="form-group" style="margin:0"><label class="form-label">Tên cầu thủ</label><input class="form-input" id="spTen" placeholder="Tên"></div>
+          <div class="form-group" style="margin:0"><label class="form-label">Số áo</label><input class="form-input" id="spSo" placeholder="Số áo"></div>
+        </div>
+        <div class="sugg-form">
+          <div class="form-group" style="margin:0"><label class="form-label">Đội</label><select class="form-input" id="spDoi"><option>FC Mobile</option><option>FC Bựa Dâm</option><option>FC Sĩ Gái</option></select></div>
+          <div class="form-group" style="margin:0"><label class="form-label">Giá trị đề xuất</label><input class="form-input" id="spVal" type="number" placeholder="100"></div>
+        </div>
+        <button class="btn-save" onclick="submitPlayerSugg()" style="font-size:13px;padding:8px 16px">Gửi đề xuất</button>
+        <div style="margin-top:10px" id="myPlayerSuggList"></div>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <span class="slbl">Đội:</span>
+      <button class="fb active" onclick="setFilter('all',this)">Tất cả</button>
+      <button class="fb fmob" onclick="setFilter('FC Mobile',this)">FC Mobile</button>
+      <button class="fb fbua" onclick="setFilter('FC Bựa Dâm',this)">FC Bựa Dâm</button>
+      <button class="fb fgai" onclick="setFilter('FC Sĩ Gái',this)">FC Sĩ Gái</button>
+      <div class="fsep"></div>
+      <span class="slbl">Sắp xếp:</span>
+      <button class="fb active" id="sVal" onclick="setSort('val',this)">Giá trị</button>
+      <button class="fb" id="sRat" onclick="setSort('rating',this)">Đánh giá</button>
+      <button class="fb" id="sStt" onclick="setSort('stt',this)">STT</button>
+      <button class="fb" id="sPos" onclick="setSort('pos',this)">Vị trí</button>
+    </div>
+    <div class="tbl-wrap">
+      <div class="sec-bar" id="secBar"><span class="sec-dot" style="background:var(--ac)"></span><span>Tất cả</span></div>
+      <table class="tm-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cầu thủ</th>
+            <th>Đội</th>
+            <th>Vị trí</th>
+            <th>Đánh giá</th>
+            <th>Giá trị</th>
+            <th>Nhập GT</th>
+            <th>Tăng chỉ số</th>
+            <th>Phân bổ</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="chart-sect">
+      <div class="chart-hdr">Thống kê giá trị</div>
+      <div class="chart-body">
+        <div class="chart-leg" id="chartLeg"></div>
+        <div style="position:relative;width:100%;height:180px;margin-bottom:14px"><canvas id="c1"></canvas></div>
+        <div style="position:relative;width:100%;height:290px"><canvas id="c2"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageBonus" style="display:none">
+    <div class="page-title-bar"><h1>Thưởng chỉ số sau trận đấu</h1><span class="pbadge">Live</span></div>
+    <div class="sugg-sect" id="suggBonusSection" style="display:none">
+      <div class="sugg-hdr">💡 Gửi đề xuất thưởng</div>
+      <div class="sugg-body">
+        <div class="sugg-note">Bạn là Guest — gửi đề xuất để Admin xem xét.</div>
+        <div class="sugg-form">
+          <div class="form-group" style="margin:0">
+            <label class="form-label">Loại thưởng</label>
+            <select class="form-input" id="suggBonusSel">
+              <option value="vdich">Vô địch</option>
+              <option value="vuabt">Vua bàn thắng (+50)</option>
+              <option value="vuakt">Vua kiến tạo (+25)</option>
+              <option value="cxsnhat">Cầu thủ xuất sắc nhất (+50)</option>
+              <option value="qbv">Quả bóng vàng (+50)</option>
+              <option value="puskas">Puskas (+20)</option>
+              <option value="hvtm">HV Thủ môn (+20)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0"><label class="form-label">Cầu thủ</label><select class="form-input" id="suggPlayerSel"></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Ghi chú</label><input class="form-input" id="suggNote" placeholder="Lý do..."></div>
+        <button class="btn-save" onclick="submitBonusSugg()" style="font-size:13px;padding:8px 16px">Gửi đề xuất</button>
+        <div style="margin-top:10px" id="mySuggList"></div>
+      </div>
+    </div>
+    <div class="bonus-sect">
+      <div class="bonus-hdr"><span>Các loại thưởng</span><span style="font-size:12px;opacity:.7">Chọn → Áp dụng</span></div>
+      <div class="bonus-body">
+        <div id="bonusNotice"></div>
+        <div class="bonus-grid" id="bonusGrid"></div>
+        <div class="bonus-hdr" style="background:#2c3e50;margin-top:8px;border-radius:3px 3px 0 0">Lịch sử thưởng</div>
+        <div id="bonusHist" style="background:#fff;border:1px solid var(--bd);border-top:none;padding:10px;max-height:180px;overflow-y:auto"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageAdmin" style="display:none">
+    <div class="page-title-bar" style="background:#7d1b1b"><h1>Bảng điều khiển Admin</h1><span class="pbadge" id="adminPageBadge" style="background:#ff6b6b;color:#fff">ADMIN</span></div>
+    <div class="admin-sect" id="memberMgmtSection">
+      <div class="admin-hdr">Quản lý tài khoản</div>
+      <div class="admin-body">
+        <div class="admin-grid">
+          <div class="admin-card"><h3>Guest xin lên Admin</h3><div id="pendingList"></div></div>
+          <div class="admin-card"><h3>Tất cả thành viên</h3><div id="allUsers"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="admin-sect" id="suggApproveSection">
+      <div class="admin-hdr" style="background:#2c3e50">📬 Đề xuất chờ duyệt</div>
+      <div class="admin-body">
+        <div class="admin-grid">
+          <div class="admin-card"><h3>Đề xuất thêm cầu thủ</h3><div id="suggPlayerApprove"></div></div>
+          <div class="admin-card"><h3>Đề xuất thưởng</h3><div id="suggBonusApprove"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="admin-sect">
+      <div class="admin-hdr">Thêm cầu thủ mới</div>
+      <div class="admin-body">
+        <div class="form-row" style="margin-bottom:10px">
+          <div class="form-group" style="margin:0"><label class="form-label">Tên</label><input class="form-input" id="nTen" placeholder="Tên cầu thủ"></div>
+          <div class="form-group" style="margin:0"><label class="form-label">Số áo</label><input class="form-input" id="nSo" placeholder="Số áo"></div>
+        </div>
+        <div class="form-row" style="margin-bottom:10px">
+          <div class="form-group" style="margin:0"><label class="form-label">Đội</label><select class="form-input" id="nDoi"><option>FC Mobile</option><option>FC Bựa Dâm</option><option>FC Sĩ Gái</option></select></div>
+          <div class="form-group" style="margin:0"><label class="form-label">Giá trị</label><input class="form-input" id="nVal" type="number" placeholder="100"></div>
+        </div>
+        <div class="form-row" style="margin-bottom:10px">
+          <div class="form-group" style="margin:0">
+            <label class="form-label">Vị trí</label>
+            <select class="form-input" id="nPos">
+              <option value="GK">GK</option>
+              <option value="CB">CB</option>
+              <option value="LB">LB</option>
+              <option value="RB">RB</option>
+              <option value="CDM">CDM</option>
+              <option value="CM" selected>CM</option>
+              <option value="CAM">CAM</option>
+              <option value="LM">LM</option>
+              <option value="RM">RM</option>
+              <option value="LW">LW</option>
+              <option value="RW">RW</option>
+              <option value="ST">ST</option>
+              <option value="CF">CF</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0"><label class="form-label">Đánh giá (1-5)</label><input class="form-input" id="nRat" type="number" min="1" max="5" value="3"></div>
+        </div>
+        <button class="btn-save" onclick="addPlayer()">Thêm cầu thủ</button>
+      </div>
+    </div>
+    <div class="admin-sect">
+      <div class="admin-hdr" style="background:#c0392b">Xoá cầu thủ</div>
+      <div class="admin-body">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <select class="form-input" id="delSel" style="max-width:260px"></select>
+          <button class="btn-danger" onclick="deletePlayer()">Xoá đã chọn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-ov" id="modalOv">
+  <div class="modal">
+    <div class="modal-hdr"><span class="modal-ttl" id="mTitle">Chỉnh sửa</span><button class="modal-x" onclick="closeModal()">×</button></div>
+    <div class="modal-body">
+      <div class="mpi"><div class="mav" id="mAv"></div><div><div class="mpname" id="mName"></div><div class="mpmeta" id="mMeta"></div></div></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Giá trị</label><input type="number" class="form-input" id="iVal"></div>
+        <div class="form-group">
+          <label class="form-label">Vị trí</label>
+          <select class="form-input" id="iPos">
+            <option value="GK">GK — Thủ môn</option>
+            <option value="CB">CB — Trung vệ</option>
+            <option value="LB">LB — Hậu vệ trái</option>
+            <option value="RB">RB — Hậu vệ phải</option>
+            <option value="CDM">CDM — Tiền vệ phòng ngự</option>
+            <option value="CM">CM — Tiền vệ trung tâm</option>
+            <option value="CAM">CAM — Tiền vệ tấn công</option>
+            <option value="LM">LM — Tiền vệ trái</option>
+            <option value="RM">RM — Tiền vệ phải</option>
+            <option value="LW">LW — Cánh trái</option>
+            <option value="RW">RW — Cánh phải</option>
+            <option value="ST">ST — Tiền đạo</option>
+            <option value="CF">CF — Tiền đạo cắm</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Đánh giá</label><select class="form-input" id="iRat"><option value="1">1/5 Yếu</option><option value="2">2/5 TB</option><option value="3">3/5 Khá</option><option value="4">4/5 Tốt</option><option value="5">5/5 XS</option></select></div>
+        <div></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tăng chỉ số kỳ tới</label>
+        <div class="form-row"><div><input type="number" class="form-input" id="iToc" placeholder="Tốc độ"><div class="form-hint">Tốc độ (±)</div></div><div><input type="number" class="form-input" id="iSuc" placeholder="Sức mạnh"><div class="form-hint">Sức mạnh (±)</div></div></div>
+        <div class="form-row" style="margin-top:8px"><div><input type="number" class="form-input" id="iKy" placeholder="Kỹ thuật"><div class="form-hint">Kỹ thuật (±)</div></div><div><input type="number" class="form-input" id="iTong" placeholder="Tổng"><div class="form-hint">Chỉ số tổng (±)</div></div></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal()">Huỷ</button><button class="btn-save" onclick="saveModal()">Lưu</button></div>
+  </div>
+</div>
+
+<div class="modal-ov" id="vdichModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-hdr"><span class="modal-ttl">🏆 Vô địch — <span id="vdichTeamName"></span></span><button class="modal-x" onclick="closeVdich()">×</button></div>
+    <div class="modal-body">
+      <div style="background:#fef9e7;border:1px solid #f9e79f;border-radius:3px;padding:9px 11px;font-size:12px;color:#7d6608;margin-bottom:12px">Tick chọn <b>GK/Hậu vệ</b> → <b>+35▪</b>. Còn lại → <b>+20▪</b>.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="vdichPlayerList"></div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeVdich()">Huỷ</button><button class="btn-save" onclick="confirmVdich()">Áp dụng</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script type="module" src="./assets/firebase.js"></script>
+<script src="./assets/app.js" defer></script>
+</body>
+</html>
